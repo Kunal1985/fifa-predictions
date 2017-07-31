@@ -32,4 +32,5 @@ Navigate to mongo bin directory
 NOTE: Once started, file changes would be auto-detected, just refresh the browser URL for changes to reflect
 
 ### Accessing the application
-http://localhost:3000
+http://localhost:3000 >> Index URL  
+http://localhost:3000/home >> Home Page URL
