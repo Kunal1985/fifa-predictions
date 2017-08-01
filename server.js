@@ -91,7 +91,7 @@ app.post('/register', function(req, res, next) {
       console.log("User", user);
       if (user) { 
         console.log("UserRegistered", user);
-        res.redirect('/home');
+        res.json({userRegistered: true});
       }
     })(req, res, next);
   });
