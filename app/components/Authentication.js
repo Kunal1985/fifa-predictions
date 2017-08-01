@@ -4,6 +4,7 @@ import { sideBarList } from '../utils/Constants';
 
 class Authentication extends React.Component {
   componentWillMount () {
+    // console.log("Authentication", this.props);
     // this.props.history.push('/');
   }
 }

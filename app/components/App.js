@@ -11,7 +11,10 @@ class App extends React.Component {
       <div>
         <Navbar history={this.props.history} />
         {(pathname == "/") ?
-          <Login />:
+          <div className="row">
+            {this.props.children}
+          </div>
+           :
           <div className="row">
             <div className="col col-sm-3">
               <Sidebar />
