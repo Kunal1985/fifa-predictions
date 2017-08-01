@@ -14,7 +14,7 @@ class Login extends Authentication {
   }
 
   enableRegister(){
-      this.setState({submitType: "Register"});
+    this.setState({submitType: "Register"});
   }
 
   enableLogin(){
@@ -59,6 +59,12 @@ class Login extends Authentication {
                           currObj.setState({errorObj: err});
                       });
               }}
+              validate={(values) => {
+                return {
+                    username: !values.username ? 'Please enter username' : !(values.username && values.username.trim().length > 0) ? "Please enter a valid username": undefined,
+                    password: !values.password ? 'Please enter password' : !(values.password && values.password.trim().length > 0) ? "Please enter a valid password" : undefined
+                }
+              }}
           >
               {({submitForm}) => {
                   return (
@@ -70,8 +76,8 @@ class Login extends Authentication {
                           <div className="form-group">
                               <label>Password</label>
                               <Text field='password' placeholder='Password' className="form-control" />
-                          </div>
-                          {(currObj.state && currObj.state.errorObj) ? currObj.state.errorObj.message: ""}
+                          </div>                          
+                          {(currObj.state && currObj.state.errorObj) ? <div className="alert alert-danger">currObj.state.errorObj.message</div>: ""}                            
                           <div className="text-center">
                               <button className="btn btn-primary" type='submit'>
                                   {currObj.state.submitType}
