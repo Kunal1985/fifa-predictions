@@ -1,10 +1,10 @@
 {
-  "name": "newedenfaces",
-  "description": "Character voting app for EVE Online",
+  "name": "ESDS",
+  "description": "Web Portal for Excise Department and Wineries",
   "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sahat/newedenfaces-react"
+    "url": "https://github.com/Kunal1985/project-esds"
   },
   "main": "server.js",
   "scripts": {
