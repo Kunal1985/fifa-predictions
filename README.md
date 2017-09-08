@@ -27,7 +27,7 @@ Navigate to mongo bin directory
 `gulp`
 
 ### Start the Node Server
-`node run watch`
+`npm run watch`
 
 NOTE: Once started, file changes would be auto-detected, just refresh the browser URL for changes to reflect
 
