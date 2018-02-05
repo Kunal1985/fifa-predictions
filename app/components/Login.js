@@ -82,7 +82,7 @@ class Login extends Authentication {
                           </div>
                           <div className="form-group">
                               <label>Password</label>
-                              <Text field='password' placeholder='Password' className="form-control" />
+                              <Text field='password' placeholder='Password' className="form-control" type="password" />
                           </div>                          
                           {(errorMessage) ? <div className="alert alert-danger">{errorMessage}</div>: ""}                            
                           <div className="text-center">
