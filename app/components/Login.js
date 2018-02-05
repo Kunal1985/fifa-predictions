@@ -67,6 +67,13 @@ class Login extends Authentication {
               }}
           >
               {({submitForm}) => {
+                  let errorMessage = null;
+                  if(currObj.state && currObj.state.errorObj && currObj.state.errorObj.error.message){
+                    errorMessage = currObj.state.errorObj.error.message;
+                    if(errorMessage.indexOf("E11000 duplicate key") != -1){
+                        errorMessage = "User already exists!";
+                    }
+                  }
                   return (
                       <form onSubmit={submitForm}>
                           <div className="form-group">
@@ -77,7 +84,7 @@ class Login extends Authentication {
                               <label>Password</label>
                               <Text field='password' placeholder='Password' className="form-control" />
                           </div>                          
-                          {(currObj.state && currObj.state.errorObj) ? <div className="alert alert-danger">currObj.state.errorObj.message</div>: ""}                            
+                          {(errorMessage) ? <div className="alert alert-danger">{errorMessage}</div>: ""}                            
                           <div className="text-center">
                               <button className="btn btn-primary" type='submit'>
                                   {currObj.state.submitType}

@@ -19,36 +19,36 @@ var xml2js = require('xml2js');
 var _ = require('underscore');
 
 var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
-var Strategy = require('passport-local').Strategy;
 var User = require('./models/user');
 
-passport.use(new Strategy(
-  function(username, password, cb) {
+passport.use(new LocalStrategy(
+  function(username, password, done) {
     console.log(username, password);
     let user = {};
     user.username = username;
     user.password = password;
     User.findOne(user, function(err, doc) {
       console.log("User found", err, doc)
-      if (err) { return cb(err); }
-      if (!doc) { return cb(new Error("Incorrect combination for username/password!")); }
-      return cb(null, user);
+      if (err) { return done(err); }
+      if (!doc) { return done(new Error("Incorrect combination for username/password!")); }
+      return done(null, user);
     });
   }));
 
-passport.serializeUser(function(user, cb) {
+passport.serializeUser(function(user, done) {
   console.log("serializeUser", user);
-  cb(null, user.username);
+  done(null, user.username);
 });
 
-passport.deserializeUser(function(username, cb) {
+passport.deserializeUser(function(username, done) {
   console.log("deserializeUser", username);
   User.findOne({username: username}, function(err, doc) {
-    if (err) { return cb(err); }
+    if (err) { return done(err); }
     console.log("User found");
-    return cb(null, doc);
+    return done(null, doc);
   });
 });
 
@@ -129,8 +129,10 @@ app.get('/userDetails', function(req, res, next) {
  */
 app.post('/logout', function(req, res, next) {
   req.logout();
-  delete req.session;
-  res.redirect("/");
+  req.session.destroy(function (err) {
+    console.log("Session Destroyed!!!");
+    res.redirect('/');
+  });
 });
 
 app.use(function(req, res) {
