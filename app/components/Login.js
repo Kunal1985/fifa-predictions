@@ -75,27 +75,33 @@ class Login extends Authentication {
                     }
                   }
                   return (
-                      <form onSubmit={submitForm}>
-                          <div className="form-group">
-                              <label>Username</label>
-                              <Text field='username' placeholder='Username' className="form-control" />
-                          </div>
-                          <div className="form-group">
-                              <label>Password</label>
-                              <Text field='password' placeholder='Password' className="form-control" type="password" />
-                          </div>                          
-                          {(errorMessage) ? <div className="alert alert-danger">{errorMessage}</div>: ""}                            
-                          <div className="text-center">
-                              <button className="btn btn-primary" type='submit'>
-                                  {currObj.state.submitType}
-                              </button>
-                              {currObj.state.submitType === "Login" ?
-                                <a href="#" className="padding-20" onClick={currObj.enableRegister}>Do not have a account?</a>
-                                :
-                                <a href="#" className="padding-20" onClick={currObj.enableLogin}>Continue to Login</a>
-                              }
-                          </div>
-                      </form>
+                    <div className="row">
+                        <div className="col-lg-2 col-md-2 col-sm-2"></div>
+                        <div className="col-lg-8 col-md-8 col-sm-8">
+                            <form onSubmit={submitForm}>
+                                    <div className="form-group">
+                                        <label>Username</label>
+                                        <Text field='username' placeholder='Username' className="form-control" />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Password</label>
+                                        <Text field='password' placeholder='Password' className="form-control" type="password" />
+                                    </div>                          
+                                    {(errorMessage) ? <div className="alert alert-danger">{errorMessage}</div>: ""}                            
+                                    <div className="text-center">
+                                        <button className="btn btn-primary" type='submit'>
+                                            {currObj.state.submitType}
+                                        </button>
+                                        {currObj.state.submitType === "Login" ?
+                                            <a href="#" className="padding-20" onClick={currObj.enableRegister}>Do not have a account?</a>
+                                            :
+                                            <a href="#" className="padding-20" onClick={currObj.enableLogin}>Continue to Login</a>
+                                        }
+                                    </div>
+                            </form>
+                        </div>
+                        <div className="col-lg-2 col-md-2 col-sm-2"></div>
+                    </div>
                   )
               }}
           </Form>

@@ -16,10 +16,10 @@ class App extends React.Component {
           </div>
            :
           <div className="row">
-            <div className="col col-sm-3">
+            <div className="col-lg-3 col-md-3 col-sm-3">
               <Sidebar />
             </div>
-            <div className="col col-sm-9">
+            <div className="col-lg-9 col-md-9 col-sm-9">
               {this.props.children}
             </div>
           </div>

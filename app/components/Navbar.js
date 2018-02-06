@@ -41,10 +41,10 @@ class Navbar extends React.Component {
         <div id='navbar'>
           <ul className='nav navbar-nav list-header'>
             <li className="width-50-per">
-                <img src="img/logo.jpg" className="logoImg"/>
+                {/*<img src="img/logo.jpg" className="logoImg"/>*/}
                 <span className="logoTitle">
-                  <div><strong>महाराष्ट्र राज्य उत्पादन शुल्क</strong></div>
-                  <div><strong className="text-color-red">महाराष्ट्र शासन</strong></div>
+                  {/*<div><strong>महाराष्ट्र राज्य उत्पादन शुल्क</strong></div>
+                  <div><strong className="text-color-red">महाराष्ट्र शासन</strong></div>*/}
                 </span>
             </li>
             <li className="width-50-per text-right login-links">
