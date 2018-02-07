@@ -107,8 +107,14 @@ gulp.task('browserify-watch', ['browserify-vendor'], function() {
  | Compile LESS stylesheets.
  |--------------------------------------------------------------------------
  */
+
+var paths = {
+  styles: [
+      'app/stylesheets/*.less',
+  ]
+}
 gulp.task('styles', function() {
-  return gulp.src('app/stylesheets/main.less')
+  return gulp.src(paths.styles)
     .pipe(plumber())
     .pipe(less())
     .pipe(autoprefixer())
