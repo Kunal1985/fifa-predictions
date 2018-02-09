@@ -13,10 +13,12 @@ class Sidebar extends React.Component {
     return (
         <div id="sidenav" className="sidenav">
             {sideBarList.map((item, index) => (
-                <a href={item.url} key={index}>
-                  <span className="text-color-white">{item.title1}</span><br />
-                  <span>{item.title2}</span>
-                </a>
+                <div className="step-name-container">
+                  <a href={item.url} key={index}>
+                    <span className="text-color-white">{item.title1}</span><br />
+                    <span>{item.title2}</span>
+                  </a>
+                </div>
             ))}
         </div>
     );

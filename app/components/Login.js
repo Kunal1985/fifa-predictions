@@ -89,7 +89,7 @@ class Login extends Authentication {
                                         </div>                          
                                         {(errorMessage) ? <div className="alert alert-danger">{errorMessage}</div>: ""}                            
                                         <div className="text-center">
-                                            <button className="btn btn-primary" type='submit'>
+                                            <button className="btn btn-default" type='submit'>
                                                 {currObj.state.submitType}
                                             </button>
                                         </div>
