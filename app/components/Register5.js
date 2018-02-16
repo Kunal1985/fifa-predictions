@@ -13,6 +13,7 @@ class Register5 extends Authentication {
     return (
         
       <div className="container">
+      <div className="register-heading">Bottling</div>
       <Form
           onSubmit={(values) => {
             console.log('s');

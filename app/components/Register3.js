@@ -12,6 +12,7 @@ class Register3 extends Authentication {
   render() {
     return (
       <div className="container">
+      <div className="register-heading">Fermentation</div>
       <Form
           onSubmit={(values) => {
             console.log('s');

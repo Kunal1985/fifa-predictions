@@ -19,6 +19,7 @@ class Register6 extends Authentication {
     let currObj = this;
     return (
         <div className="container">
+        <div className="register-heading">Tirage/Disgorging</div>
             <div className="container">
       <Form
           onSubmit={(values) => {

@@ -13,6 +13,7 @@ class Register4 extends Authentication {
     let currObj = this;
     return (
         <div className="container">
+        <div className="register-heading">Bulk Transfer</div>
             <div className="container">
       <Form
           onSubmit={(values) => {

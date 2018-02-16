@@ -33,7 +33,7 @@ const sideBarList =[{
 },{
     url: "/register8",
     title1: "Register8",
-    title2: "Fiished Goods/Dispatch",
+    title2: "Finished Goods/Dispatch",
 }]
 
 export { sideBarList };
