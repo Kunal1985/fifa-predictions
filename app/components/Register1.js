@@ -10,6 +10,10 @@ class Register1 extends Authentication {
     super(props);
   }
 
+  onClear() {
+    document.getElementById("register1").reset();
+  }
+
   render() {
     return (
       <div className="container">
@@ -30,12 +34,12 @@ class Register1 extends Authentication {
               return (
                 <div className="row">
                     <div className="col-lg-12 col-md-12 col-sm-12">
-                        <form onSubmit={submitForm}>
+                        <form onSubmit={submitForm} id="register1">
                             <div className="row">
                                 <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                         <label>Date of Receipt</label>
-                                        <Text field='dateofReceipt' placeholder='Date of Receipt' className="form-control" type="date"/>
+                                        <Text field='reg1DateofReceipt' placeholder='Date of Receipt' className="form-control" type="date"/>
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col-md-4 col-sm-12">
@@ -47,7 +51,7 @@ class Register1 extends Authentication {
                                 <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                         <label>Quantity of Fruit/Grapes Crushed in Kg.</label>
-                                        <Text field='grapeQuantity' placeholder='KG' className="form-control"/>
+                                        <Text field='reg1GrapeQuantity' placeholder='KG' className="form-control"/>
                                     </div>
                                 </div>
                             </div>
@@ -83,7 +87,7 @@ class Register1 extends Authentication {
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                             <label>Gat/ Survey No.</label>
-                                            <Text field='surveyNo' placeholder='Gat/ Survey No.' className="form-control"/>
+                                            <Text field='reg1SurveyNo' placeholder='Gat/ Survey No.' className="form-control"/>
                                         </div>
                                     </div>
                                 </div>
@@ -98,7 +102,7 @@ class Register1 extends Authentication {
                                 <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                         <label>Quantity of Fruit/Grapes Crushed in Kg.</label>
-                                        <Text field='grapeQuantity' placeholder='KG' className="form-control"/>
+                                        <Text field='reg1GrapeQuantityFromSupplier' placeholder='KG' className="form-control"/>
                                     </div>
                                 </div>
                             </div>
@@ -111,7 +115,21 @@ class Register1 extends Authentication {
                                     </label>
                                     </div> 
                                 </div>
-                            </div>         
+                            </div>
+                            <div className="row">
+                                <div className="button-section text-center">
+                                    <div className="text-center">
+                                        <button className="btn btn-primary" onClick={this.onClear}>
+                                            Clear
+                                        </button>
+                                    </div>
+                                    <div className="text-center">
+                                        <button className="btn btn-default" type='submit'>
+                                            Submit
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>       
                         </form>
                     </div>
                 </div>

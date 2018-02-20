@@ -9,6 +9,10 @@ class Register4 extends Authentication {
     super(props);
   }
 
+  onClear() {
+    document.getElementById("register4").reset();
+  }
+
   render() {
     let currObj = this;
     return (
@@ -33,7 +37,7 @@ class Register4 extends Authentication {
               return (
                 <div className="row">
                     <div className="col-lg-12 col-md-12 col-sm-12">
-                        <form onSubmit={submitForm}>
+                        <form onSubmit={submitForm} id="register4">
                             <div className="form-group">
                                 <label>Date</label>
                                 <Text field='date' placeholder='Date' className="form-control" type="date"/>

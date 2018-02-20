@@ -81,12 +81,23 @@ class Login extends Authentication {
                             <div className="col-lg-8 col-md-8 col-sm-8">
                                 <div className="login-form">
                                     <form onSubmit={submitForm}>
-                                        <div className="form-group"> 
-                                            <Text field='username' placeholder='Username' className="form-control" />
+                                        <div className="form-group login-group">
+                                            <div>
+                                                <i className="fa fa-user fa-2x" aria-hidden="true"></i>
+                                            </div>
+                                            <div>
+                                                <Text field='username' placeholder='Username*' className="form-control" />
+                                            </div>
                                         </div>
-                                        <div className="form-group">
-                                            <Text field='password' placeholder='Password' className="form-control" type="password" />
-                                        </div>                          
+                                        <div className="form-group login-group">
+                                            <div>
+                                                <i className="fa fa-unlock-alt fa-2x" aria-hidden="true"></i>
+                                            </div>
+                                            <div>
+                                                <Text field='password' placeholder='Password*' className="form-control" type="password" />
+                                            </div>
+                                        </div>   
+                                        <div><i>*Required field.</i></div>                       
                                         {(errorMessage) ? <div className="alert alert-danger">{errorMessage}</div>: ""}                            
                                         <div className="text-center">
                                             <button className="btn btn-default" type='submit'>

@@ -6,6 +6,18 @@ class Navbar extends React.Component {
   constructor(props) {
     super(props);
     this.logoutUser = this.logoutUser.bind(this);
+    this.editProfile = this.editProfile.bind(this);
+    this.changePassword = this.changePassword.bind(this);
+  }
+
+  editProfile() {
+    let currProps = this.props;
+    currProps.history.push("/editProfile");
+  }
+
+  changePassword() {
+    let currProps = this.props;
+    currProps.history.push("/changePassword");
   }
 
   logoutUser(){
@@ -45,7 +57,7 @@ class Navbar extends React.Component {
                 <div>
                   <strong className="text-size-16">Hello, {currObj.state.currUser.username}</strong><br />
                   <span className="text-size-16">
-                  <a href="#" onClick={this.logoutUser}>Logout</a> | <a href="#">Change Password</a> | <a href="#">Edit Profile</a>
+                  <a href="#" onClick={this.logoutUser}>Logout</a> | <a href="#" onClick={this.changePassword}>Change Password</a> | <a href="#" onClick={this.editProfile}>Edit Profile</a>
                   </span>
                 </div>
                 : 

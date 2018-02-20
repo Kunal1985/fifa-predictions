@@ -9,6 +9,10 @@ class Register5 extends Authentication {
     super(props);
   }
 
+  onClear() {
+    document.getElementById("register5").reset();
+  }
+
   render() {
     return (
         
@@ -30,52 +34,94 @@ class Register5 extends Authentication {
               return (
                 <div className="row">
                     <div className="col-lg-12 col-md-12 col-sm-12">
-                        <form onSubmit={submitForm}>
+                        <form onSubmit={submitForm} id="register5">
+                        <div className="row">
+                          <div className="col-lg-4 col-md-4 col-sm-12">
                             <div className="form-group">
                                 <label>Date</label>
-                                <Text field='date' placeholder='Date' className="form-control" type="date"/>
+                                <Text field='reg5Date' placeholder='Date' className="form-control" type="date"/>
                             </div>
+                          </div>
+                          <div className="col-lg-4 col-md-4 col-sm-12">
                             <div className="form-group">
                                 <label>Tank Number</label>
                                 <select className="form-control"></select>
                             </div>
+                          </div>
+                          <div className="col-lg-4 col-md-4 col-sm-12">
                             <div className="form-group">
                                 <label>Opening Balance</label>
-                                <Text field='openingBalance' placeholder='Opening Balance' className="form-control"/>
+                                <Text field='reg5OpeningBalance' placeholder='Opening Balance' className="form-control"/>
                             </div>
+                          </div>
+                        </div>
                             <div>
-                              <div>Quantity of Wine Bottled</div>
-                              <div className="form-group">
-                                <label>Type of Wine</label>
-                                <select className="form-control"></select>
+                            <div className="form-label-headings">Quantity of Wine Bottled</div>
+                              <div className="row">
+                                <div className="col-lg-4 col-md-4 col-sm-12">
+                                  <div className="form-group">
+                                    <label>Type of Wine</label>
+                                    <select className="form-control"></select>
+                                  </div>
+                                </div>
+                                <div className="col-lg-4 col-md-4 col-sm-12">
+                                  <div className="form-group">
+                                    <label>Bottle Size</label>
+                                    <select className="form-control"></select>
+                                  </div>
+                                </div>
+                                <div className="col-lg-4 col-md-4 col-sm-12">
+                                  <div className="form-group">
+                                    <label>Number of Bottles</label>
+                                    <Text field='reg5NoOfBottles' placeholder='Number of Bottles' className="form-control"/>
+                                  </div> 
+                                </div>
                               </div>
-                              <div className="form-group">
-                                <label>Bottle Size</label>
-                                <select className="form-control"></select>
+                              <div className="row">
+                                <div className="col-lg-4 col-md-4 col-sm-12">
+                                  <div className="form-group">
+                                  <label>Quantity in Litres</label>
+                                  <Text field='reg5QuantityLitres' placeholder='Quantity in Litres' className="form-control"/>
+                                </div>
+                                </div>
+                                <div className="col-lg-4 col-md-4 col-sm-12">
+                                  <div className="form-group">
+                                  <label>Bottling Loss</label>
+                                  <Text field='reg5BottlingLoss' placeholder='Bottling Loss' className="form-control"/>
+                              </div> 
+                                </div>
+                                <div className="col-lg-4 col-md-4 col-sm-12">
+                                  <div className="form-group">
+                                    <label>Closing Balance</label>
+                                    <Text field='reg5ClosingBalance' placeholder='Closing Balance' className="form-control"/>
+                                </div>
+                                </div>
                               </div>
-                              <div className="form-group">
-                                <label>Number of Bottles</label>
-                                <Text field='noofBottles' placeholder='Number of Bottles' className="form-control"/>
-                              </div> 
-                              <div className="form-group">
-                                <label>Quantity in Litres</label>
-                                <Text field='quantityLitres' placeholder='Quantity in Litres' className="form-control"/>
-                              </div> 
                             </div>
-                            <div className="form-group">
-                                <label>Bottling Loss</label>
-                                <Text field='bottlingLoss' placeholder='Bottling Loss' className="form-control"/>
-                            </div> 
-                            <div className="form-group">
-                                  <label>Closing Balance</label>
-                                  <Text field='closingBalance' placeholder='Closing Balance' className="form-control"/>
-                              </div>
-                            <div className="form-group">
-                              <label>
-                                Remarks:
-                                <textarea className="form-control"/>
-                              </label>
-                            </div>                    
+                            <div className="row">
+                                <div className="col-lg-4 col-md-4 col-sm-12">
+                                  <div className="form-group">
+                                    <label className="text-area-labels">
+                                      Remarks:
+                                      <textarea className="form-control"/>
+                                    </label>
+                                  </div>
+                                </div>
+                            </div>   
+                            <div className="row">
+                                <div className="button-section text-center">
+                                    <div className="text-center">
+                                        <button className="btn btn-primary" onClick={this.onClear}>
+                                            Clear
+                                        </button>
+                                    </div>
+                                    <div className="text-center">
+                                        <button className="btn btn-default" type='submit'>
+                                            Submit
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>             
                         </form>
                     </div>
                 </div>

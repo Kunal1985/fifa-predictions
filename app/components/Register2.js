@@ -9,6 +9,10 @@ class Register2 extends Authentication {
     super(props);
   }
 
+  onClear() {
+    document.getElementById("register2").reset();
+  }
+
   render() {
     return (
       <div className="container">
@@ -29,12 +33,12 @@ class Register2 extends Authentication {
               return (
                 <div className="row">
                     <div className="col-lg-12 col-md-12 col-sm-12">
-                        <form onSubmit={submitForm}>
+                        <form onSubmit={submitForm} id="register2">
                             <div className="row">
                                 <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                         <label>Date</label>
-                                        <Text field='date' placeholder='Date' className="form-control" type="date"/>
+                                        <Text field='reg2Date' placeholder='Date' className="form-control" type="date"/>
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col-md-4 col-sm-12">
@@ -46,7 +50,7 @@ class Register2 extends Authentication {
                                 <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                         <label>Quantity of Fruit/Grapes Crushed in Kg.</label>
-                                        <Text field='grapeQuantity' placeholder='KG' className="form-control"/>
+                                        <Text field='reg2GrapeQuantity' placeholder='KG' className="form-control"/>
                                     </div>
                                 </div>
                             </div>
@@ -54,19 +58,19 @@ class Register2 extends Authentication {
                                 <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                         <label>Must/Juice Obtained from Fruits/Grapes</label>
-                                        <Text field='juiceQuantity' placeholder='Litres' className="form-control"/>
+                                        <Text field='reg2JuiceQuantity' placeholder='Litres' className="form-control"/>
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                         <label>Stored/ Transferred to VAT/Tank No.</label>
-                                        <Text field='tankNumber' placeholder='Tank Number' className="form-control"/>
+                                        <Text field='reg2TankNumber' placeholder='Tank Number' className="form-control"/>
                                     </div> 
                                 </div>
                                 <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                         <label>Clarification Losses</label>
-                                        <Text field='losses' placeholder='Clarification Losses' className="form-control"/>
+                                        <Text field='reg2Losses' placeholder='Clarification Losses' className="form-control"/>
                                     </div> 
                                 </div>
                             </div>
@@ -74,7 +78,7 @@ class Register2 extends Authentication {
                                 <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                         <label>Closing Balance of Must/Juice in that particular tank</label>
-                                        <Text field='closingBalance' placeholder='Closing Balance of Must/Juice in that particular tank' className="form-control"/>
+                                        <Text field='reg2ClosingBalance' placeholder='Closing Balance of Must/Juice in that particular tank' className="form-control"/>
                                     </div>
                                 </div>
                             </div>
@@ -87,7 +91,21 @@ class Register2 extends Authentication {
                                     </label>
                                     </div> 
                                 </div>
-                            </div>                   
+                            </div>
+                            <div className="row">
+                                <div className="button-section text-center">
+                                    <div className="text-center">
+                                        <button className="btn btn-primary" onClick={this.onClear}>
+                                            Clear
+                                        </button>
+                                    </div>
+                                    <div className="text-center">
+                                        <button className="btn btn-default" type='submit'>
+                                            Submit
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>               
                         </form>
                     </div>
                 </div>

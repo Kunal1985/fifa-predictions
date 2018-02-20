@@ -10,6 +10,8 @@ import Register5 from './components/Register5';
 import Register6 from './components/Register6';
 import Register7 from './components/Register7';
 import Register8 from './components/Register8';
+import EditProfile from './components/EditProfile';
+import ChangePassword from './components/ChangePassword';
 import RouteNotFound from './components/RouteNotFound';
 import Summary from './components/Summary';
 import Login from './components/Login';
@@ -26,6 +28,8 @@ export default (
     <Route path='/register6' component={Register6} />
     <Route path='/register7' component={Register7} />
     <Route path='/register8' component={Register8} />
+    <Route path='/editProfile' component={EditProfile} />
+    <Route path='/changePassword' component={ChangePassword} />
     <Route path="*" component={RouteNotFound}/>
   </Route>
 );

@@ -4,21 +4,20 @@ import { sideBarList } from '../utils/Constants';
 import Authentication from './Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 
-class Register7 extends Authentication {
+class ChangePassword extends Authentication {
+  
   constructor(props) {
-    super(props);   
+    super(props);
   }
 
   onClear() {
-    document.getElementById("register7").reset();
+    document.getElementById("reset-password").reset();
   }
 
   render() {
-    let currObj = this;
     return (
-        <div className="container">
-        <div className="register-heading">Labelling</div>
-            <div className="container">
+      <div className="container">
+      <div className="register-heading">Change Password</div>
       <Form
           onSubmit={(values) => {
             console.log('s');
@@ -28,8 +27,6 @@ class Register7 extends Authentication {
                 
             }
           }}
-
-          handleChange
       >
           {({submitForm}) => {
               let errorMessage = null;
@@ -37,44 +34,33 @@ class Register7 extends Authentication {
               return (
                 <div className="row">
                     <div className="col-lg-12 col-md-12 col-sm-12">
-                        <form onSubmit={submitForm} id="register7">
+                        <form onSubmit={submitForm} id="reset-password">
                             <div className="row">
-                                <div className="col-lg-4 col-md-4 col-sm-12">
+                                <div className="col-lg-3 col-md-3 col-sm-2"></div>
+                                <div className="col-lg-6 col-md-6 col-sm-8">
                                     <div className="form-group">
-                                        <label>Date</label>
-                                        <Text field='reg7Date' placeholder='Date' className="form-control" type="date"/>
+                                        <Text field='oldPassword' placeholder='Old Password*' className="form-control" type="password" />
                                     </div>
                                 </div>
-                                <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
-                                        <label>Tank Number</label>
-                                        <select className="form-control"></select>
-                                    </div>
-                                </div>
-                                <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
-                                        <label>Opening Balance</label>
-                                        <Text field='reg7OpeningBalanceBulk' placeholder='Opening Balance' className="form-control"/>
-                                    </div>
-                                </div>
+                                <div className="col-lg-3 col-md-3 col-sm-2"></div>
                             </div>
                             <div className="row">
-                                <div className="col-lg-4 col-md-4 col-sm-12">
+                                <div className="col-lg-3 col-md-3 col-sm-2"></div>
+                                <div className="col-lg-6 col-md-6 col-sm-8">
                                     <div className="form-group">
-                                        <label>Closing Balance</label>
-                                        <Text field='reg7ClosingBalanceBulk' placeholder='Closing Balance' className="form-control"/>
+                                        <Text field='newPassword' placeholder='New Password*' className="form-control" type="password" />
                                     </div>
                                 </div>
+                                <div className="col-lg-3 col-md-3 col-sm-2"></div>
                             </div>
                             <div className="row">
-                                <div className="col-lg-4 col-md-4 col-sm-12">
+                                <div className="col-lg-3 col-md-3 col-sm-2"></div>
+                                <div className="col-lg-6 col-md-6 col-sm-8">
                                     <div className="form-group">
-                                        <label className="text-area-labels">
-                                            Remarks:
-                                            <textarea className="form-control"/>
-                                        </label>
-                                    </div>  
-                                </div>
+                                        <Text field='confirmPassword' placeholder='Confirm Password*' className="form-control" type="password" />
+                                    </div>
+                                    </div>
+                                <div className="col-lg-3 col-md-3 col-sm-2"></div>
                             </div>
                             <div className="row">
                                 <div className="button-section text-center">
@@ -89,7 +75,7 @@ class Register7 extends Authentication {
                                         </button>
                                     </div>
                                 </div>
-                            </div>     
+                            </div> 
                         </form>
                     </div>
                 </div>
@@ -97,9 +83,8 @@ class Register7 extends Authentication {
           }}
       </Form>
       </div>
-        </div>
     );
   }
 }
 
-export default Register7;
+export default ChangePassword;
