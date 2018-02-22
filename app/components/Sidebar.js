@@ -15,7 +15,13 @@ class Sidebar extends React.Component {
             {sideBarList.map((item, index) => (
                 <div className="step-name-container">
                   <a href={item.url} key={index}>
-                    <div><i className="fa fa-check-square-o fa-2x" aria-hidden="true"></i></div>
+                    <div><span className="fa-stack">
+                          <span className="fa fa-circle-o fa-stack-2x"></span>
+                          <strong className="fa-stack-1x">
+                              {index}  
+                          </strong>
+                      </span>
+                    </div>
                     <div className="text-bold">{item.title2}</div>
                   </a>
                 </div>
