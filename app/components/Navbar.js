@@ -51,7 +51,7 @@ class Navbar extends React.Component {
     return (
       <nav className='navbar navbar-static-top'>
         <div id='navbar'>
-          <ul className='nav navbar-nav list-header'>
+          <ul className='nav list-header'>
             <li className="text-right login-links">
               {(currObj.state && currObj.state.currUser) ?
                 <div>

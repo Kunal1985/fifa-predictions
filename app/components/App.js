@@ -16,12 +16,12 @@ class App extends React.Component {
           </div>
            :
           <div className="row">
-            <div className="col-lg-3 col-md-3 col-sm-3">
+            <div className="col-lg-3 col-md-3 col-sm-12">
               <div className="left-section">
                 <Sidebar />
               </div>
             </div>
-            <div className="col-lg-9 col-md-9 col-sm-9">
+            <div className="col-lg-9 col-md-9 col-sm-12">
               <div className="right-section">
                 {this.props.children}
               </div>

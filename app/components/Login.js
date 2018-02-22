@@ -105,11 +105,14 @@ class Login extends Authentication {
                                             </button>
                                         </div>
                                         <div className="text-center">
+                                            <span>
                                             {currObj.state.submitType === "Login" ?
                                                 <a href="#" className="padding-20" onClick={currObj.enableRegister}>Do not have a account?</a>
                                                 :
                                                 <a href="#" className="padding-20" onClick={currObj.enableLogin}>Continue to Login</a>
                                             }
+                                            </span>
+                                            <span> | <a href="#" className="padding-20">Forgot Password</a></span>
                                         </div>
                                     </form>
                                 </div>
