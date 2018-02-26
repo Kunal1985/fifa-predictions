@@ -71,7 +71,13 @@ class Register8 extends Authentication {
                                 <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                         <label>Size</label>
-                                        <Text field='reg8SizeMl' placeholder='Size in Ml' className="form-control"/>
+                                        <select field='reg8SizeMl' className="form-control">
+                                            {sizeInML.map(sizeInMLVal => {
+                                            return <option key={sizeInMLVal.id} value={sizeInMLVal.id}>
+                                                {sizeInMLVal.name}
+                                            </option>;
+                                            })}
+                                        </select>
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col-md-4 col-sm-12">

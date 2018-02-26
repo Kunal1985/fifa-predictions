@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
-import { sideBarList } from '../utils/Constants';
+import { sideBarList, grapeVariety } from '../utils/Constants';
 import Authentication from './Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 
@@ -15,6 +15,7 @@ class Register1 extends Authentication {
   }
 
   render() {
+    console.log("grapeVariety", grapeVariety);
     return (
       <div className="container">
       <div className="register-heading">Grape Receipt Transactions</div>
@@ -96,7 +97,13 @@ class Register1 extends Authentication {
                                 <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                         <label>Grape Variety</label>
-                                        <select className="form-control"></select>
+                                        <select className="form-control">
+                                            {grapeVariety.map(variety => {
+                                                return <option key={variety.id} value={variety.id}>
+                                                    {variety.name}
+                                                </option>;
+                                            })}
+                                        </select>
                                     </div> 
                                 </div>
                                 <div className="col-lg-4 col-md-4 col-sm-12">
