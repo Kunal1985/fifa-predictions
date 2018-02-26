@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
-import { sideBarList } from '../utils/Constants';
+import { sideBarList, sizeInML, bottleSize, wineType,  } from '../utils/Constants';
 import Authentication from './Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 
@@ -58,7 +58,13 @@ class Register6 extends Authentication {
                                 <div className="col-lg-4 col-md-4 col-sm-12">
                                   <div className="form-group">
                                     <label>Size in ML</label>
-                                    <select className="form-control"></select>
+                                    <select className="form-control">
+                                      {sizeInML.map(sizeInMLVal => {
+                                        return <option key={sizeInMLVal.id} value={sizeInMLVal.id}>
+                                          {sizeInMLVal.name}
+                                        </option>;
+                                      })}
+                                    </select>
                                   </div>
                                 </div>
                                 <div className="col-lg-4 col-md-4 col-sm-12">
@@ -75,7 +81,13 @@ class Register6 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Size in ML</label>
-                                      <select className="form-control"></select>
+                                      <select className="form-control">
+                                        {sizeInML.map(sizeInMLVal => {
+                                          return <option key={sizeInMLVal.id} value={sizeInMLVal.id}>
+                                            {sizeInMLVal.name}
+                                          </option>;
+                                        })}
+                                      </select>
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
@@ -92,7 +104,13 @@ class Register6 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Size in ML</label>
-                                      <select className="form-control"></select>
+                                      <select className="form-control">
+                                        {sizeInML.map(sizeInMLVal => {
+                                          return <option key={sizeInMLVal.id} value={sizeInMLVal.id}>
+                                            {sizeInMLVal.name}
+                                          </option>;
+                                        })}
+                                      </select>
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
@@ -109,7 +127,13 @@ class Register6 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Size in ML</label>
-                                      <select className="form-control"></select>
+                                      <select className="form-control">
+                                        {sizeInML.map(sizeInMLVal => {
+                                          return <option key={sizeInMLVal.id} value={sizeInMLVal.id}>
+                                            {sizeInMLVal.name}
+                                          </option>;
+                                        })}
+                                      </select>
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
@@ -141,13 +165,25 @@ class Register6 extends Authentication {
                                 <div className="col-lg-4 col-md-4 col-sm-12">
                                   <div className="form-group">
                                     <label>Type of Wine</label>
-                                    <select className="form-control"></select>
+                                    <select className="form-control">
+                                      {wineType.map(wineTypeVal => {
+                                        return <option key={wineTypeVal.id} value={wineTypeVal.id}>
+                                          {wineTypeVal.name}
+                                        </option>;
+                                      })} 
+                                    </select>
                                   </div>
                                 </div>
                                 <div className="col-lg-4 col-md-4 col-sm-12">
                                   <div className="form-group">
                                     <label>Bottle Size</label>
-                                    <select className="form-control"></select>
+                                    <select className="form-control">
+                                      {bottleSize.map(bottleSizeVal => {
+                                        return <option key={bottleSizeVal.id} value={bottleSizeVal.id}>
+                                          {bottleSizeVal.name}
+                                        </option>;
+                                      })}
+                                    </select>
                                   </div>
                                 </div>
                                 <div className="col-lg-4 col-md-4 col-sm-12">
@@ -183,7 +219,13 @@ class Register6 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Bottle Size</label>
-                                      <select className="form-control"></select>
+                                      <select className="form-control">
+                                        {bottleSize.map(bottleSizeVal => {
+                                          return <option key={bottleSizeVal.id} value={bottleSizeVal.id}>
+                                            {bottleSizeVal.name}
+                                          </option>;
+                                        })}
+                                      </select>
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
@@ -218,7 +260,13 @@ class Register6 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Size in ML</label>
-                                      <Text field='reg6SizeInMlOther' placeholder='Size in ML' className="form-control"/>
+                                      <select field='reg6SizeInMlOther' className="form-control">
+                                        {sizeInML.map(sizeInMLVal => {
+                                          return <option key={sizeInMLVal.id} value={sizeInMLVal.id}>
+                                            {sizeInMLVal.name}
+                                          </option>;
+                                        })}
+                                      </select>
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
@@ -254,13 +302,25 @@ class Register6 extends Authentication {
                                 <div className="col-lg-4 col-md-4 col-sm-12">
                                   <div className="form-group">
                                     <label>Type of Wine</label>
-                                    <select className="form-control"></select>
+                                    <select className="form-control">
+                                      {wineType.map(wineTypeVal => {
+                                        return <option key={wineTypeVal.id} value={wineTypeVal.id}>
+                                          {wineTypeVal.name}
+                                        </option>;
+                                      })} 
+                                    </select>
                                   </div>
                                 </div>
                                 <div className="col-lg-4 col-md-4 col-sm-12">
                                   <div className="form-group">
                                     <label>Bottle Size</label>
-                                    <select className="form-control"></select>
+                                    <select className="form-control">
+                                      {bottleSize.map(bottleSizeVal => {
+                                        return <option key={bottleSizeVal.id} value={bottleSizeVal.id}>
+                                          {bottleSizeVal.name}
+                                        </option>;
+                                      })}
+                                    </select>
                                   </div>
                                 </div>
                                 <div className="col-lg-4 col-md-4 col-sm-12">

@@ -36,4 +36,83 @@ const sideBarList =[{
     title2: "Finished Goods/Dispatch",
 }]
 
-export { sideBarList };
+
+const grapeVariety = [{
+    id: 1,
+    name: "Variety 1"
+}, {
+    id: 2,
+    name: "Variety 2"
+}, {
+    id: 3,
+    name: "Variety 3",
+}]
+
+const sizeInML = [{
+    id:1,
+    name: "Size 'S'"
+},{
+    id: 2,
+    name: "Size 'M'"
+},{
+    id: 3,
+    name: "Size 'L'",
+}]
+
+const bottleSize = [{
+    id: 1,
+    name: "Bottle Size 'S'"
+},{
+    id: 2,
+    name: "Bottle Size 'M'"
+},{
+    id: 3,
+    name: "Bottle Size 'L'",
+}]
+
+const wineType = [{
+    id: 1,
+    name: "Type 1"
+}, {
+    id: 2,
+    name: "Type 2"
+}, {
+    id: 3,
+    name: "Type 3",
+}]
+
+const licenseType = [{
+    id: 1,
+    name: "L Type 1"
+}, {
+    id: 2,
+    name: "L Type 2"
+}, {
+    id: 3,
+    name: "L Type 3",
+}]
+
+const purchaseType = [{
+    id: 1,
+    name: "Bulk Wine Purchased"
+}, {
+    id: 2,
+    name: "Received from Re-processing"
+}, {
+    id: 3,
+    name: "Transferred from other Tank",
+}]
+
+const saleType = [{
+    id: 1,
+    name: "Bulk Wine Sale"
+}, {
+    id: 2,
+    name: "Transferred to other Unit"
+}, {
+    id: 3,
+    name: "Transferred to other Tank",
+}]
+
+
+export { sideBarList, grapeVariety, sizeInML, bottleSize, wineType, licenseType, purchaseType, saleType };

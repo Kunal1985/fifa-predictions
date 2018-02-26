@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
-import { sideBarList } from '../utils/Constants';
+import { sideBarList, purchaseType, saleType, licenseType } from '../utils/Constants';
 import Authentication from './Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 
@@ -8,7 +8,7 @@ class Register4 extends Authentication {
   constructor(props) {
     super(props);
 
-    this.state = {bulkOpeningValue: "bulkWinePurchased", bulkClosingValue: "bulkWineSale"};
+    this.state = {bulkOpeningValue: 1, bulkClosingValue: 1};
 
     this.handleOpeningChange = this.handleOpeningChange.bind(this);
     this.handleClosingChange = this.handleClosingChange.bind(this);
@@ -78,13 +78,15 @@ class Register4 extends Authentication {
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                         <label>Type</label>
                                         <select className="form-control" value={this.state.bulkOpeningValue} onChange={currObj.handleOpeningChange}>
-                                            <option value="bulkWinePurchased">Bulk Wine Purchased</option>
-                                            <option value="receivedForReprorocessing">Received for Reprocessing</option>
-                                            <option value="tranferFromOtherTank">Tranferred from Other Tank</option>
+                                            {purchaseType.map(purchaseTypeVal => {
+                                                return <option key={purchaseTypeVal.id} value={purchaseTypeVal.id}>
+                                                    {purchaseTypeVal.name}
+                                                </option>;
+                                            })}
                                         </select>
                                     </div>
                                 </div>
-                                { currObj.state.bulkOpeningValue === "bulkWinePurchased" ?
+                                { currObj.state.bulkOpeningValue == 1 ?
                                     <div>
                                         <div className="row">
                                             <div className="col-lg-4 col-md-4 col-sm-12">
@@ -148,7 +150,7 @@ class Register4 extends Authentication {
                                         </div>
                                     </div>
                                 : <div></div> }
-                                { currObj.state.bulkOpeningValue === "receivedForReprorocessing" ?
+                                { currObj.state.bulkOpeningValue == 2 ?
                                     <div>
                                         <div className="row">
                                             <div className="col-lg-4 col-md-4 col-sm-12">
@@ -212,7 +214,7 @@ class Register4 extends Authentication {
                                         </div>
                                     </div>
                                 : <div></div> }
-                                { currObj.state.bulkOpeningValue === "tranferFromOtherTank" ?
+                                { currObj.state.bulkOpeningValue == 3 ?
                                     <div>
                                         <div className="row">
                                             <div className="col-lg-4 col-md-4 col-sm-12">
@@ -267,13 +269,15 @@ class Register4 extends Authentication {
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                         <label>Type</label>
                                         <select className="form-control" value={this.state.bulkClosingValue} onChange={currObj.handleClosingChange}>
-                                            <option value="bulkWineSale">Bulk Wine Sale</option>
-                                            <option value="tranferOtherUnit">Tranferred to Other Unit</option>
-                                            <option value="tranferOtherTank">Tranferred to Other Tank</option>
+                                            {saleType.map(saleTypeVal => {
+                                                return <option key={saleTypeVal.id} value={saleTypeVal.id}>
+                                                    {saleTypeVal.name}
+                                                </option>;
+                                            })}
                                         </select>
                                     </div>
                                 </div>
-                                { currObj.state.bulkClosingValue === "bulkWineSale" ?
+                                { currObj.state.bulkClosingValue == 1 ?
                                     <div>
                                         <div className="row">
                                             <div className="col-lg-4 col-md-4 col-sm-12">
@@ -285,7 +289,13 @@ class Register4 extends Authentication {
                                             <div className="col-lg-4 col-md-4 col-sm-12">
                                                 <div className="form-group">
                                                     <label>Kind of Liscence Held</label>
-                                                    <select className="form-control"></select>
+                                                    <select className="form-control">
+                                                    {licenseType.map(licenseTypeVal => {
+                                                        return <option key={licenseTypeVal.id} value={licenseTypeVal.id}>
+                                                            {licenseTypeVal.name}
+                                                        </option>;
+                                                    })}
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div className="col-lg-4 col-md-4 col-sm-12">
@@ -337,7 +347,7 @@ class Register4 extends Authentication {
                                         </div>
                                     </div>
                                 : <div></div> }
-                                { currObj.state.bulkClosingValue === "tranferOtherUnit" ?
+                                { currObj.state.bulkClosingValue == 2 ?
                                     <div>
                                         <div className="row">
                                             <div className="col-lg-4 col-md-4 col-sm-12">
@@ -349,7 +359,13 @@ class Register4 extends Authentication {
                                             <div className="col-lg-4 col-md-4 col-sm-12">
                                                 <div className="form-group">
                                                     <label>Kind of Liscence Held</label>
-                                                    <select className="form-control"></select>
+                                                    <select className="form-control">
+                                                        {licenseType.map(licenseTypeVal => {
+                                                            return <option key={licenseTypeVal.id} value={licenseTypeVal.id}>
+                                                                {licenseTypeVal.name}
+                                                            </option>;
+                                                        })}
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div className="col-lg-4 col-md-4 col-sm-12">
@@ -401,7 +417,7 @@ class Register4 extends Authentication {
                                         </div>
                                     </div>
                                 : <div></div> }
-                                { currObj.state.bulkClosingValue === "tranferOtherTank" ?
+                                { currObj.state.bulkClosingValue == 3 ?
                                     <div>
                                         <div className="row">
                                             <div className="col-lg-4 col-md-4 col-sm-12">
