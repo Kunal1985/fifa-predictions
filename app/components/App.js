@@ -18,7 +18,7 @@ class App extends React.Component {
           <div className="row">
             <div className="col-lg-3 col-md-3 col-sm-12">
               <div className="left-section">
-                <Sidebar />
+                <Sidebar history={this.props.history} />
               </div>
             </div>
             <div className="col-lg-9 col-md-9 col-sm-12">

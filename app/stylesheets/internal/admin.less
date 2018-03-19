@@ -1,0 +1,34 @@
+.admin-panel {
+
+    #controlled-tab {
+
+        ul {
+            background-color: #e6e7e8;
+            text-transform: uppercase;
+            font-weight: bold;
+            color: black;
+
+            li {
+                border: none;
+
+                &.active {
+                    border-bottom: 3px solid #9e0005;
+                    background-color: #efefef;
+                }
+
+                &:active, &:focus {
+                    border: none;
+                }
+
+                a {
+                    border: none;
+                    margin: 0;
+
+                    &:active, &:focus {
+                        outline: none;
+                    }
+                }
+            }
+        }
+    }
+}

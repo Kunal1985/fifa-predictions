@@ -54,7 +54,6 @@ passport.deserializeUser(function(username, done) {
 
 var config = require('./config');
 var routes = require('./app/routes');
-var Character = require('./models/character');
 
 var app = express();
 

@@ -52,13 +52,25 @@ class Navbar extends React.Component {
       <nav className='navbar navbar-static-top'>
         <div id='navbar'>
           <ul className='nav list-header'>
-            <li className="text-right login-links">
+            <li className="login-links">
               {(currObj.state && currObj.state.currUser) ?
                 <div>
-                  <strong className="text-size-16">Hello, {currObj.state.currUser.username}</strong><br />
-                  <span className="text-size-16">
-                  <a href="#" onClick={this.logoutUser}>Logout</a> | <a href="#" onClick={this.changePassword}>Change Password</a> | <a href="#" onClick={this.editProfile}>Edit Profile</a>
-                  </span>
+                  <div className="pull-left text-left">
+                    <div>
+                      <span><b>Lic. No</b> : 123</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <span><b>Name</b> : few</span>
+                    </div>
+                    <div>
+                      <span><b>District</b> : sdf</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <span><b>Under</b> : qwe</span>
+                    </div>
+                  </div>
+                  <div className="text-right pull-right">
+                    <strong className="text-size-16">Hello, {currObj.state.currUser.username}</strong><br />
+                    <span className="text-size-16">
+                    <a href="#" onClick={this.logoutUser}>Logout</a> | <a href="#" onClick={this.changePassword}>Change Password</a>
+                    </span>
+                  </div>
                 </div>
                 : 
                 <strong className="text-size-16">Please log in to proceed!</strong>

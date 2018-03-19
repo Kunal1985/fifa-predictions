@@ -1,10 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router';
-import { sideBarList } from '../utils/Constants';
-import Authentication from './Authentication';
+import { sideBarList } from '../../utils/Constants';
+import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 
-class Summary extends Authentication {
+class OpeningBalance extends Authentication {
   constructor(props) {
     super(props);
     this.sideBarList = sideBarList;
@@ -16,8 +16,9 @@ class Summary extends Authentication {
     let currProps = this.props;
     currProps.history.push(item.url);
 }
+
   render() {
-    let subSectionList = this.sideBarList[0].subSectionList;
+    let subSectionList = this.sideBarList[1].subSectionList;
     return (
       <div className="container">
         <div className="sub-sections-nav">
@@ -43,4 +44,4 @@ class Summary extends Authentication {
   }
 }
 
-export default Summary;
+export default OpeningBalance;
