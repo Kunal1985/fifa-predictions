@@ -28,6 +28,9 @@ import CreateFlavour from './components/masters/CreateFlavour';
 import Spirit from './components/masters/Spirit';
 import CreateSpirit from './components/masters/CreateSpirit';
 import OpeningBalance from './components/opening-balance/OpeningBalance';
+import FlavourOpeningEntry from './components/opening-balance/FlavourOpeningEntry';
+import SpiritOpeningEntry from './components/opening-balance/SpiritOpeningEntry';
+import CreateSpiritOpeningEntry from './components/opening-balance/CreateSpiritOpeningEntry';
 import ChangePassword from './components/masters/ChangePassword';
 import RouteNotFound from './components/RouteNotFound';
 import Summary from './components/Summary';
@@ -56,6 +59,9 @@ export default (
   <Route path='/spirit' component={ Spirit } />
   <Route path='/createSpirit' component={ CreateSpirit } />
   <Route path='/openingBalance' component={ OpeningBalance } />
+  <Route path='/flavourDetails' component={ FlavourOpeningEntry } />
+  <Route path='/spiritDetails' component={ SpiritOpeningEntry } />
+  <Route path='/createSpiritOpening' component={ CreateSpiritOpeningEntry } />
   <Route path='/changePassword' component={ ChangePassword } />
   <Route path='/LiscenseeProfile' component={ LiscenseeProfile } />
   <Route path='/Transactions' component={ Transactions } />

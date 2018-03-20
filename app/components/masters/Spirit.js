@@ -92,8 +92,8 @@ class Spirit extends Authentication {
                   <thead>
                     <tr>
                       <th>Edit</th>
-                      <th>Name</th>
-                      <th>UON</th>
+                      <th>Type of Spirit</th>
+                      <th>Brand</th>
                     </tr>
                   </thead>
                   <tbody>

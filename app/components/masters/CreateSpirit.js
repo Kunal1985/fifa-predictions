@@ -46,7 +46,7 @@ class CreateSpirit extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Name</label>
-                                      <Text field='createFlavourName' placeholder='Name' className="form-control" />
+                                      <Text field='createSpiritName' placeholder='Name' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
@@ -65,53 +65,8 @@ class CreateSpirit extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12"></div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
-                                      <label>UOM</label>
-                                      <select className="form-control"></select>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="row">
-                                  <div className="col-lg-4 col-md-4 col-sm-12"></div>
-                                  <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
-                                      <label>Is Common</label>
-                                      <div className="radio">
-                                        <label>
-                                          <input type="radio" value="option1" checked={ true } /> Yes
-                                        </label>
-                                      </div>
-                                      <div className="radio">
-                                        <label>
-                                          <input type="radio" value="option2" /> No
-                                        </label>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="row">
-                                  <div className="col-lg-4 col-md-4 col-sm-12"></div>
-                                  <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
                                       <label>Brand</label>
-                                      <select className="form-control"></select>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="row">
-                                  <div className="col-lg-4 col-md-4 col-sm-12"></div>
-                                  <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
-                                      <label>Approved</label>
-                                      <div className="radio">
-                                        <label>
-                                          <input type="radio" value="option1" checked={ true } /> Yes
-                                        </label>
-                                      </div>
-                                      <div className="radio">
-                                        <label>
-                                          <input type="radio" value="option2" /> No
-                                        </label>
-                                      </div>
+                                      <Text field='createSpiritBrand' placeholder='Brand' className="form-control" />
                                     </div>
                                   </div>
                                 </div>

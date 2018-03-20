@@ -30,7 +30,7 @@ class Register6 extends Authentication {
               <div className="register-heading">Tirage/Disgorging</div>
               <div className="container">
                 <Form onSubmit={ (values) => {
-                                     console.log('s');
+                                     console.log(values);
                                  } } validate={ (values) => {
                                                                                                                                                             return {
                                                                                                                                                         
@@ -57,13 +57,7 @@ class Register6 extends Authentication {
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                           <label>Size in ML</label>
-                                          <select className="form-control">
-                                            { sizeInML.map(sizeInMLVal => {
-                                                  return <option key={ sizeInMLVal.id } value={ sizeInMLVal.id }>
-                                                           { sizeInMLVal.name }
-                                                         </option>;
-                                              }) }
-                                          </select>
+                                          <Select className="form-control" field="reg6TirageSizeInMl" id="reg6TirageSizeInMl" options={sizeInML}/>
                                         </div>
                                       </div>
                                       <div className="col-lg-4 col-md-4 col-sm-12">
@@ -80,13 +74,7 @@ class Register6 extends Authentication {
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                           <label>Size in ML</label>
-                                          <select className="form-control">
-                                            { sizeInML.map(sizeInMLVal => {
-                                                  return <option key={ sizeInMLVal.id } value={ sizeInMLVal.id }>
-                                                           { sizeInMLVal.name }
-                                                         </option>;
-                                              }) }
-                                          </select>
+                                          <Select className="form-control" field="reg6ReceivedSizeInMl" id="reg6ReceivedSizeInMl" options={sizeInML}/>
                                         </div>
                                       </div>
                                       <div className="col-lg-4 col-md-4 col-sm-12">
@@ -103,13 +91,7 @@ class Register6 extends Authentication {
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                           <label>Size in ML</label>
-                                          <select className="form-control">
-                                            { sizeInML.map(sizeInMLVal => {
-                                                  return <option key={ sizeInMLVal.id } value={ sizeInMLVal.id }>
-                                                           { sizeInMLVal.name }
-                                                         </option>;
-                                              }) }
-                                          </select>
+                                          <Select className="form-control" field="reg6AvailableSizeInMl" id="reg6AvailableSizeInMl" options={sizeInML}/>
                                         </div>
                                       </div>
                                       <div className="col-lg-4 col-md-4 col-sm-12">
@@ -126,13 +108,7 @@ class Register6 extends Authentication {
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                           <label>Size in ML</label>
-                                          <select className="form-control">
-                                            { sizeInML.map(sizeInMLVal => {
-                                                  return <option key={ sizeInMLVal.id } value={ sizeInMLVal.id }>
-                                                           { sizeInMLVal.name }
-                                                         </option>;
-                                              }) }
-                                          </select>
+                                          <Select className="form-control" field="reg6DisgorgingIssuedSizeInMl" id="reg6DisgorgingIssuedSizeInMl" options={sizeInML}/>
                                         </div>
                                       </div>
                                       <div className="col-lg-4 col-md-4 col-sm-12">
@@ -160,13 +136,7 @@ class Register6 extends Authentication {
                                                                                          <div className="col-lg-4 col-md-4 col-sm-12">
                                                                                            <div className="form-group">
                                                                                              <label>Bottle Size</label>
-                                                                                             <select className="form-control">
-                                                                                               { bottleSize.map(bottleSizeVal => {
-                                                                                                     return <option key={ bottleSizeVal.id } value={ bottleSizeVal.id }>
-                                                                                                              { bottleSizeVal.name }
-                                                                                                            </option>;
-                                                                                                 }) }
-                                                                                             </select>
+                                                                                             <Select className="form-control" field="reg6DisgorgedSizeInMl" id="reg6DisgorgedSizeInMl" options={sizeInML}/>
                                                                                            </div>
                                                                                          </div>
                                                                                          <div className="col-lg-4 col-md-4 col-sm-12">
@@ -201,13 +171,7 @@ class Register6 extends Authentication {
                                                                                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                                                                                     <div className="form-group">
                                                                                                       <label>Size in ML</label>
-                                                                                                      <select field='reg6SizeInMlOther' className="form-control">
-                                                                                                        { sizeInML.map(sizeInMLVal => {
-                                                                                                              return <option key={ sizeInMLVal.id } value={ sizeInMLVal.id }>
-                                                                                                                       { sizeInMLVal.name }
-                                                                                                                     </option>;
-                                                                                                          }) }
-                                                                                                      </select>
+                                                                                                      <Select className="form-control" field="reg6OtherUnitSizeInMl" id="reg6OtherUnitSizeInMl" options={sizeInML}/>
                                                                                                     </div>
                                                                                                   </div>
                                                                                                   <div className="col-lg-4 col-md-4 col-sm-12">

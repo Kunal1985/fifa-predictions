@@ -9,17 +9,6 @@ class Register1 extends Authentication {
 
     constructor(props) {
         super(props);
-        this.state = {
-          selected: 'Variety 1'
-        };
-
-        this.handleChange = this.handleChange.bind(this);
-    }
-
-    handleChange(value) {
-        this.setState({
-          selected: value
-        });
     }
 
     onClear() {
@@ -105,13 +94,7 @@ class Register1 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Grape Variety</label>
-                                      <select className="form-control"></select>
-                                    </div>
-                                  </div>
-                                  <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
-                                      <label>Quantity of Fruit/Grapes Crushed in Kg.</label>
-                                      <Text field='reg1GrapeQuantityFromSupplier' placeholder='KG' className="form-control" />
+                                      <Select className="form-control" field="reg1GrapeVariety" id="reg1GrapeVariety" options={grapeVariety}/>
                                     </div>
                                   </div>
                                 </div>

@@ -18,7 +18,7 @@ class Register2 extends Authentication {
             <div className="container">
               <div className="register-heading">Crushing/Juice Processing</div>
               <Form onSubmit={ (values) => {
-                                   console.log('s');
+                                   console.log(values);
                                } } validate={ (values) => {
                                                                                                                                                       return {
                                                                                                                                                   
@@ -41,13 +41,7 @@ class Register2 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Fruit/Grape Variety</label>
-                                      <select className="form-control">
-                                        { grapeVariety.map(variety => {
-                                              return <option key={ variety.id } value={ variety.id }>
-                                                       { variety.name }
-                                                     </option>;
-                                          }) }
-                                      </select>
+                                      <Select className="form-control" field="reg2GrapeVariety" id="reg1GrapeVariety" options={grapeVariety}/>
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">

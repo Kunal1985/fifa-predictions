@@ -40,21 +40,33 @@ const sideBarList = [{
         title1: "Spirit Details",
         title2: "Spirit Details",
     }, {
-        url: "/branddetails",
-        title1: "Brand Details",
-        title2: "Brand Details",
+        url: "/grapesStock",
+        title1: "Grapes Details",
+        title2: "Grapes Details",
     }, {
-        url: "/blendingDetails",
-        title1: "Blending Details",
-        title2: "Blending Details",
+        url: "/crushedJuiceStock",
+        title1: "Crushed Juice Details",
+        title2: "Crushed Juice Details",
     }, {
-        url: "/warehouseOpeningStock",
-        title1: "Warehouse Opening Stock",
-        title2: "Warehouse Opening Stock",
+        url: "/fermentedStock",
+        title1: "Fermented Details",
+        title2: "Fermented Details",
     }, {
-        url: "/blendingAmendmentDetails",
-        title1: "Blending Amendment Details",
-        title2: "Blending Amendment Details",
+        url: "/bottledStock",
+        title1: "Bottled Details",
+        title2: "Bottled Details",
+    }, {
+        url: "/tirageDisgorgedStock",
+        title1: "Tirage/Disgorged Details",
+        title2: "Tirage/Disgorged Details",
+    }, {
+        url: "/labelledStock",
+        title1: "Labelled Details",
+        title2: "Labelled Details",
+    }, {
+        url: "/finishedGoodsStock",
+        title1: "Finished Goods Details",
+        title2: "Finished Goods Details",
     }]
 }, {
     url: "/register1",
@@ -96,58 +108,58 @@ const sideBarList = [{
 
 
 const grapeVariety = [{
-    id: 1,
-    name: "Variety 1"
+    label: 'Variety 1',
+    value: "Variety 1"
 }, {
-    id: 2,
-    name: "Variety 2"
+    label: 'Variety 2',
+    value: "Variety 2"
 }, {
-    id: 3,
-    name: "Variety 3",
+    label: 'Variety 3',
+    value: "Variety 3"
 }]
 
 const sizeInML = [{
-    id: 1,
-    name: "Size 'S'"
+    label: "Size 'S'",
+    value: "Size 'S'"
 }, {
-    id: 2,
-    name: "Size 'M'"
+    label: "Size 'M'",
+    value: "Size 'M'"
 }, {
-    id: 3,
-    name: "Size 'L'",
+    label: "Size 'L'",
+    value: "Size 'L'"
 }]
 
 const bottleSize = [{
-    id: 1,
-    name: "Bottle Size 'S'"
+    label: "Bottle Size 'S'",
+    value: "Bottle Size 'S'"
 }, {
-    id: 2,
-    name: "Bottle Size 'M'"
+    label: "Bottle Size 'M'",
+    value: "Bottle Size 'M'"
 }, {
-    id: 3,
-    name: "Bottle Size 'L'",
+    label: "Bottle Size 'L'",
+    value: "Bottle Size 'L'"
 }]
 
 const wineType = [{
-    id: 1,
-    name: "Type 1"
+    label: "Type 1",
+    value: "Type 1"
 }, {
-    id: 2,
-    name: "Type 2"
+    label: "Type 2",
+    value: "Type 2"
 }, {
-    id: 3,
-    name: "Type 3",
+    label: "Type 3",
+    value: "Type 3"
 }]
 
 const licenseType = [{
-    id: 1,
-    name: "L Type 1"
+    label: "L Type 1",
+    value: "L Type 1"
 }, {
-    id: 2,
-    name: "L Type 2"
+    label: "L Type 2",
+    value: "L Type 2"
 }, {
-    id: 3,
-    name: "L Type 3",
+    label: "L Type 3",
+    value: "L Type 3"
 }]
 
 const purchaseType = [{

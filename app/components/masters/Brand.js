@@ -91,9 +91,14 @@ class Brand extends Authentication {
                 <Table bordered hover responsive>
                   <thead>
                     <tr>
-                      <th>Edit</th>
-                      <th>Name</th>
-                      <th>UON</th>
+                      <th>Edit </th>
+                      <th>Size </th>
+                      <th>Type</th>
+                      <th>Sanction Date</th>
+                      <th>Effective From</th>
+                      <th>MRP</th>
+                      <th>Mfg. Cost</th>
+                      <th>Excise Duty</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -101,16 +106,31 @@ class Brand extends Authentication {
                       <td className="text-center" onClick={ this.editBrand }><i className="fa fa-edit"></i></td>
                       <td>Mark</td>
                       <td>Otto</td>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                      <td>Otto</td>
                     </tr>
                     <tr>
                       <td className="text-center" onClick={ this.editBrand }><i className="fa fa-edit"></i></td>
-                      <td>Jacob</td>
-                      <td>Thornton</td>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                      <td>Otto</td>
                     </tr>
                     <tr>
                       <td className="text-center" onClick={ this.editBrand }><i className="fa fa-edit"></i></td>
-                      <td>Larry the Bird</td>
-                      <td>@twitter</td>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                      <td>Otto</td>
                     </tr>
                   </tbody>
                 </Table>;

@@ -4,7 +4,7 @@ import { sideBarList } from '../../utils/Constants';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 
-class createBrand extends Authentication {
+class CreateSpiritOpeningEntry extends Authentication {
 
     constructor(props) {
         super(props);
@@ -25,7 +25,7 @@ class createBrand extends Authentication {
     render() {
         return (
             <div className="container">
-              <div className="register-heading">Brand</div>
+              <div className="register-heading">Spirit (Storage) Details</div>
               <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
               <Form onSubmit={ (values) => {
                                    console.log('s');
@@ -45,8 +45,17 @@ class createBrand extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12"></div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
-                                      <label>Name</label>
-                                      <Text field='createColourName' placeholder='Name' className="form-control" />
+                                      <label>Date</label>
+                                      <Text field='createSpiritOpeningDate' placeholder='Date' className="form-control" type="date" />
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-lg-4 col-md-4 col-sm-12"></div>
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <div className="form-group">
+                                      <label>Tank</label>
+                                      <select className="form-control"></select>
                                     </div>
                                   </div>
                                 </div>
@@ -54,17 +63,8 @@ class createBrand extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12"></div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                   <div className="form-group">
-                                      <label>Size</label>
-                                      <Text field='createBrandSize' placeholder='Size in ML' className="form-control" />
-                                  </div>
-                                  </div>
-                                </div>
-                                <div className="row">
-                                  <div className="col-lg-4 col-md-4 col-sm-12"></div>
-                                  <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
-                                        <label>Type</label>
-                                        <Text field='createBrandType' placeholder='Type' className="form-control" />
+                                      <label>Spirit type</label>
+                                      <select className="form-control"></select>
                                     </div>
                                   </div>
                                 </div>
@@ -72,8 +72,17 @@ class createBrand extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12"></div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
-                                      <label>Sanction Date</label>
-                                      <Text field='createBrandSanctionDate' placeholder='Sanction Date' className="form-control" type="date" />
+                                      <label>Strength Type</label>
+                                      <div className="radio">
+                                        <label>
+                                          <input type="radio" value="option1" checked={ true } /> Yes
+                                        </label>
+                                      </div>
+                                      <div className="radio">
+                                        <label>
+                                          <input type="radio" value="option2" /> No
+                                        </label>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
@@ -81,8 +90,8 @@ class createBrand extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12"></div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
-                                      <label>Effective From</label>
-                                      <Text field='createBrandEffectiveDate' placeholder='Effective From' className="form-control" type="date" />
+                                      <label>Quantity</label>
+                                      <Text field='createSpiritOpeningQuantity' placeholder='Quantity' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
@@ -90,8 +99,8 @@ class createBrand extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12"></div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
-                                        <label>MRP</label>
-                                        <Text field='createBrandMrp' placeholder='MRP' className="form-control" />
+                                      <label>Strength</label>
+                                      <Text field='createSpiritOpeningStrength' placeholder='Strength' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
@@ -99,17 +108,8 @@ class createBrand extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12"></div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
-                                        <label>Mfg. Cost</label>
-                                        <Text field='createBrandMfgCost' placeholder='Mfg. Cost' className="form-control" />
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="row">
-                                  <div className="col-lg-4 col-md-4 col-sm-12"></div>
-                                  <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
-                                        <label>Excise Duty</label>
-                                        <Text field='createBrandExciseDuty' placeholder='Excise Duty' className="form-control" />
+                                      <label>P.L.</label>
+                                      <Text field='createSpiritOpeningPL' placeholder='P.L.' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
@@ -138,4 +138,4 @@ class createBrand extends Authentication {
     }
 }
 
-export default createBrand;
+export default CreateSpiritOpeningEntry;

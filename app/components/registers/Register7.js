@@ -49,6 +49,7 @@ class Register7 extends Authentication {
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Opening Balace</label>
+                                        <Select className="form-control" field="reg6TirageSizeInMl" id="reg6TirageSizeInMl" options={sizeInML}/>
                                         <select field='reg7OpeningBalance' className="form-control">
                                             {OpeningBalanceType.map(OpeningBalanceTypeVal => {
                                             return <option key={OpeningBalanceType.id} value={OpeningBalanceTypeVal.id}>
