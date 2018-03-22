@@ -40,19 +40,19 @@ const sideBarList = [{
         title1: "Spirit Details",
         title2: "Spirit Details",
     }, {
-        url: "/grapesStock",
+        url: "/grapesDetails",
         title1: "Grapes Details",
         title2: "Grapes Details",
     }, {
-        url: "/crushedJuiceStock",
+        url: "/crushedJuiceDetails",
         title1: "Crushed Juice Details",
         title2: "Crushed Juice Details",
     }, {
-        url: "/fermentedStock",
+        url: "/fermentedWineDetails",
         title1: "Fermented Details",
         title2: "Fermented Details",
     }, {
-        url: "/bottledStock",
+        url: "/bottledWineDetails",
         title1: "Bottled Details",
         title2: "Bottled Details",
     }, {

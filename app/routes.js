@@ -31,6 +31,14 @@ import OpeningBalance from './components/opening-balance/OpeningBalance';
 import FlavourOpeningEntry from './components/opening-balance/FlavourOpeningEntry';
 import SpiritOpeningEntry from './components/opening-balance/SpiritOpeningEntry';
 import CreateSpiritOpeningEntry from './components/opening-balance/CreateSpiritOpeningEntry';
+import GrapesOpeningEntry from './components/opening-balance/GrapesOpeningEntry';
+import CreateGrapesOpeningEntry from './components/opening-balance/CreateGrapesOpeningEntry';
+import CrushedJuiceOpeningEntry from './components/opening-balance/CrushedJuiceOpeningEntry';
+import CreateCrushedJuiceOpeningEntry from './components/opening-balance/CreateCrushedJuiceOpeningEntry';
+import FermentedWineOpeningEntry from './components/opening-balance/FermentedWineOpeningEntry';
+import CreateFermentedWineOpeningEntry from './components/opening-balance/CreateFermentedWineOpeningEntry';
+import BottledWineOpeningEntry from './components/opening-balance/BottledWineOpeningEntry';
+import CreateBottledWineOpeningEntry from './components/opening-balance/CreateBottledWineOpeningEntry';
 import ChangePassword from './components/masters/ChangePassword';
 import RouteNotFound from './components/RouteNotFound';
 import Summary from './components/Summary';
@@ -62,6 +70,14 @@ export default (
   <Route path='/flavourDetails' component={ FlavourOpeningEntry } />
   <Route path='/spiritDetails' component={ SpiritOpeningEntry } />
   <Route path='/createSpiritOpening' component={ CreateSpiritOpeningEntry } />
+  <Route path='/grapesDetails' component={ GrapesOpeningEntry } />
+  <Route path='/createGrapesOpening' component={ CreateGrapesOpeningEntry } />
+  <Route path='/crushedJuiceDetails' component={ CrushedJuiceOpeningEntry } />
+  <Route path='/createCrushedJuiceOpening' component={ CreateCrushedJuiceOpeningEntry } />
+  <Route path='/fermentedWineDetails' component={ FermentedWineOpeningEntry } />
+  <Route path='/createFermentedWineOpening' component={ CreateFermentedWineOpeningEntry } />
+  <Route path='/bottledWineDetails' component={ BottledWineOpeningEntry } />
+  <Route path='/createBottledWineOpening' component={ CreateBottledWineOpeningEntry } />
   <Route path='/changePassword' component={ ChangePassword } />
   <Route path='/LiscenseeProfile' component={ LiscenseeProfile } />
   <Route path='/Transactions' component={ Transactions } />
