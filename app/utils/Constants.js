@@ -60,11 +60,11 @@ const sideBarList = [{
         title1: "Tirage/Disgorged Details",
         title2: "Tirage/Disgorged Details",
     }, {
-        url: "/labelledStock",
+        url: "/labelledBottleDetails",
         title1: "Labelled Details",
         title2: "Labelled Details",
     }, {
-        url: "/finishedGoodsStock",
+        url: "/finishedGoodsDetails",
         title1: "Finished Goods Details",
         title2: "Finished Goods Details",
     }]

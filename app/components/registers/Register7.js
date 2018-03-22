@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { sideBarList, OpeningBalanceType, LabellingTransType } from '../../utils/Constants';
+import { sideBarList, OpeningBalanceType, LabellingTransType, sizeInML } from '../../utils/Constants';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 

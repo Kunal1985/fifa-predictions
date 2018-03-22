@@ -39,6 +39,10 @@ import FermentedWineOpeningEntry from './components/opening-balance/FermentedWin
 import CreateFermentedWineOpeningEntry from './components/opening-balance/CreateFermentedWineOpeningEntry';
 import BottledWineOpeningEntry from './components/opening-balance/BottledWineOpeningEntry';
 import CreateBottledWineOpeningEntry from './components/opening-balance/CreateBottledWineOpeningEntry';
+import LabelledBottleOpeningEntry from './components/opening-balance/LabelledBottleOpeningEntry';
+import CreateLabelledBottleOpeningEntry from './components/opening-balance/CreateBottledWineOpeningEntry';
+import FinishedGoodsOpeningEntry from './components/opening-balance/FinishedGoodsOpeningEntry';
+import CreateFinishedGoodsOpeningEntry from './components/opening-balance/CreateFinishedGoodsOpeningEntry';
 import ChangePassword from './components/masters/ChangePassword';
 import RouteNotFound from './components/RouteNotFound';
 import Summary from './components/Summary';
@@ -78,6 +82,10 @@ export default (
   <Route path='/createFermentedWineOpening' component={ CreateFermentedWineOpeningEntry } />
   <Route path='/bottledWineDetails' component={ BottledWineOpeningEntry } />
   <Route path='/createBottledWineOpening' component={ CreateBottledWineOpeningEntry } />
+  <Route path='/labelledBottleDetails' component={ LabelledBottleOpeningEntry } />
+  <Route path='/createLabelledBottleOpening' component={ CreateLabelledBottleOpeningEntry } />
+  <Route path='/finishedGoodsDetails' component={ FinishedGoodsOpeningEntry } />
+  <Route path='/createFinishedGoodsOpening' component={ CreateFinishedGoodsOpeningEntry } />
   <Route path='/changePassword' component={ ChangePassword } />
   <Route path='/LiscenseeProfile' component={ LiscenseeProfile } />
   <Route path='/Transactions' component={ Transactions } />
