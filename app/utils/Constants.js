@@ -69,35 +69,35 @@ const sideBarList = [{
         title2: "Finished Goods Details",
     }]
 }, {
-    url: "/register1",
+    url: "/register1Summary",
     title1: "Register1",
     title2: "Grape Receipt Transactions",
 }, {
-    url: "/register2",
+    url: "/register2Summary",
     title1: "Register2",
     title2: "Crushing/Juice Processing",
 }, {
-    url: "/register3",
+    url: "/register3Summary",
     title1: "Register3",
     title2: "Fermentation",
 }, {
-    url: "/register4",
+    url: "/register4Summary",
     title1: "Register4",
     title2: "Bulk Transfer",
 }, {
-    url: "/register5",
+    url: "/register5Summary",
     title1: "Register5",
     title2: "Bottling",
 }, {
-    url: "/register6",
+    url: "/register6Summary",
     title1: "Register6",
     title2: "Tirage/Disgorging",
 }, {
-    url: "/register7",
+    url: "/register7Summary",
     title1: "Register7",
     title2: "Labelling",
 }, {
-    url: "/register8",
+    url: "/register8Summary",
     title1: "Register8",
     title2: "Finished Goods/Dispatch",
 }, {

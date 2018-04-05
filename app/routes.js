@@ -11,6 +11,14 @@ import Register5 from './components/registers/Register5';
 import Register6 from './components/registers/Register6';
 import Register7 from './components/registers/Register7';
 import Register8 from './components/registers/Register8';
+import Register1Summary from './components/registers/Register1Summary';
+import Register2Summary from './components/registers/Register2Summary';
+import Register3Summary from './components/registers/Register3Summary';
+import Register4Summary from './components/registers/Register4Summary';
+import Register5Summary from './components/registers/Register5Summary';
+import Register6Summary from './components/registers/Register6Summary';
+import Register7Summary from './components/registers/Register7Summary';
+import Register8Summary from './components/registers/Register8Summary';
 import LiscenseeProfile from './components/masters/LiscenseeProfile';
 import Transactions from './components/Transactions';
 import PendingRequests from './components/PendingRequests';
@@ -61,6 +69,14 @@ export default (
   <Route path='/register6' component={ Register6 } />
   <Route path='/register7' component={ Register7 } />
   <Route path='/register8' component={ Register8 } />
+  <Route path='/register1Summary' component={ Register1Summary } />
+  <Route path='/register2Summary' component={ Register2Summary } />
+  <Route path='/register3Summary' component={ Register3Summary } />
+  <Route path='/register4Summary' component={ Register4Summary } />
+  <Route path='/register5Summary' component={ Register5Summary } />
+  <Route path='/register6Summary' component={ Register6Summary } />
+  <Route path='/register7Summary' component={ Register7Summary } />
+  <Route path='/register8Summary' component={ Register8Summary } />
   <Route path='/profile' component={ EditProfile } />
   <Route path='/tankmaster' component={ TankMaster } />
   <Route path='/createTank' component={ CreateTank } />

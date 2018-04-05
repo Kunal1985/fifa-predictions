@@ -8,6 +8,7 @@ class Register7 extends Authentication {
     constructor(props) {
         super(props);
 
+        this.goBack = this.goBack.bind(this);
         this.state = {
           LabellingTransType: 1
       };
@@ -21,8 +22,9 @@ class Register7 extends Authentication {
         });
     }
 
-    onClear() {
-        document.getElementById("register7").reset();
+    goBack() {
+      let currProps = this.props;
+      currProps.history.goBack();
     }
 
     render() {
@@ -30,6 +32,7 @@ class Register7 extends Authentication {
         return (
             <div className="container">
               <div className="register-heading">Labelling</div>
+              <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
               <div className="container">
                 <Form onSubmit={ (values) => {
                                      console.log('s');
@@ -262,8 +265,8 @@ class Register7 extends Authentication {
                                   <div className="row">
                                     <div className="button-section text-center">
                                       <div className="text-center">
-                                        <button className="btn btn-primary" onClick={ this.onClear }>
-                                          Clear
+                                        <button className="btn btn-primary" onClick={ this.goBack }>
+                                          Back
                                         </button>
                                       </div>
                                       <div className="text-center">

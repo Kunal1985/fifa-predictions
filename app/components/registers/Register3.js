@@ -7,16 +7,20 @@ import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, 
 class Register3 extends Authentication {
     constructor(props) {
         super(props);
+
+        this.goBack = this.goBack.bind(this);
     }
 
-    onClear() {
-        document.getElementById("register3").reset();
+    goBack() {
+      let currProps = this.props;
+      currProps.history.goBack();
     }
 
     render() {
         return (
             <div className="container">
               <div className="register-heading">Fermentation</div>
+              <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
               <Form onSubmit={ (values) => {
                                    console.log('s');
                                } } validate={ (values) => {
@@ -109,8 +113,8 @@ class Register3 extends Authentication {
                                 <div className="row">
                                   <div className="button-section text-center">
                                     <div className="text-center">
-                                      <button className="btn btn-primary" onClick={ this.onClear }>
-                                        Clear
+                                      <button className="btn btn-primary" onClick={ this.goBack }>
+                                        Back
                                       </button>
                                     </div>
                                     <div className="text-center">

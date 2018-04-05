@@ -8,6 +8,8 @@ class Register4 extends Authentication {
     constructor(props) {
         super(props);
 
+        this.goBack = this.goBack.bind(this);
+        
         this.state = {
             bulkOpeningValue: 1,
             bulkClosingValue: 1
@@ -30,8 +32,9 @@ class Register4 extends Authentication {
         });
     }
 
-    onClear() {
-        document.getElementById("register4").reset();
+    goBack() {
+      let currProps = this.props;
+      currProps.history.goBack();
     }
 
     render() {
@@ -39,6 +42,7 @@ class Register4 extends Authentication {
         return (
             <div className="container">
               <div className="register-heading">Bulk Transfer</div>
+              <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
               <div className="container">
                 <Form onSubmit={ (values) => {
                                      console.log('s');
@@ -467,8 +471,8 @@ class Register4 extends Authentication {
                                   <div className="row">
                                     <div className="button-section text-center">
                                       <div className="text-center">
-                                        <button className="btn btn-primary" onClick={ this.onClear }>
-                                          Clear
+                                        <button className="btn btn-primary" onClick={ this.goBack }>
+                                          Back
                                         </button>
                                       </div>
                                       <div className="text-center">
