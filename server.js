@@ -10,6 +10,7 @@ var logger = require('morgan');
 var async = require('async');
 var colors = require('colors');
 var mongoose = require('mongoose');
+var ObjectId = mongoose.Types.ObjectId;
 var request = require('request');
 var React = require('react');
 var ReactDOM = require('react-dom/server');
@@ -148,18 +149,26 @@ app.post('/logout', function(req, res, next) {
  */
 app.post('/upsertRegister1', function(req, res, next) {
   let data = {};
-  let reqBody = req.body;;
+  let reqBody = req.body;
+  let currRecordId = reqBody._id
   data.dateOfReceipt = reqBody.reg1DateofReceipt;
   data.grapeVariety = reqBody.reg1GrapeVariety;
   data.quantity = reqBody.reg1GrapeQuantity;
-
   console.log("upsertRegister1", data);
-  var register1 = new Register1(data);
-  register1.save(function(err, register1Record) {
-    if (err) return next(err);
-    console.log("newUserCreated", register1Record);
-    res.json({upsertRegister1: true});
-  });
+  if(currRecordId){
+    Register1.update({_id: ObjectId(currRecordId)}, data, function(err, donor) {
+      if (err) return next(err);
+      console.log("Record Updated", donor);
+      res.json({ upsertRegister1: true });
+    });
+  } else {
+    var register1 = new Register1(data);
+    register1.save(function(err, register1Record) {
+      if (err) return next(err);
+      console.log("New Record Created", register1Record);
+      res.json({upsertRegister1: true});
+    });
+  }
 });
 
 /**
@@ -170,7 +179,21 @@ app.get('/getRegister1', function(req, res, next) {
   console.log("getRegister1");
   Register1.find({}, function(err, doc) {
     if (err) { throw err; }
-    console.log("User found", doc.length);
+    console.log(doc.length, "Register1 records found");
+    res.json(doc);
+  });
+});
+
+/**
+ * GET /getRegister1Record
+ * Get Register1 Record
+ */
+app.post('/getRegister1Record', function(req, res, next) {
+  let reqBody = req.body;
+  console.log("getRegister1Record", reqBody);
+  Register1.findOne({_id: ObjectId(reqBody._id)}, function(err, doc) {
+    if (err) { throw err; }
+    console.log("Register1 record found");
     res.json(doc);
   });
 });

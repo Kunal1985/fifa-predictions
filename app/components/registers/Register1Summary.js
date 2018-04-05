@@ -20,9 +20,9 @@ class Register1Summary extends Authentication {
         currProps.history.push("/register1");
     }
 
-    editFermentedWine() {
+    editFermentedWine(currId) {
       let currProps = this.props;
-      currProps.history.push("/register1");
+      currProps.history.push("/register1?upsertAction=update&id=" + currId);
   }
 
     goBack() {
@@ -130,7 +130,7 @@ class Register1Summary extends Authentication {
                 <tbody>
                   {currRecords ? currRecords.map((currRecord, index) => (
                       <tr key={currRecord._id}>
-                        <td className="text-center" onClick={ this.editFermentedWine }><i className="fa fa-edit"></i></td>
+                        <td className="text-center" onClick={ ()=>this.editFermentedWine(currRecord._id) }><i className="fa fa-edit"></i></td>
                         <td>Larry the Bird</td>
                         <td>{currRecord.quantity}</td>
                         <td>{currRecord.grapeVariety}</td>
