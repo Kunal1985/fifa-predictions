@@ -2,12 +2,14 @@ import React from 'react';
 import { Link } from 'react-router';
 import { sideBarList, searchType } from '../../utils/Constants';
 import Authentication from '../Authentication';
+import rp from 'request-promise';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 import { Table } from 'react-bootstrap';
 
 class Register1Summary extends Authentication {
     constructor(props) {
         super(props);
+        this.setState({});
         this.goBack = this.goBack.bind(this);
         this.createFermentedWine = this.createFermentedWine.bind(this);
         this.editFermentedWine = this.editFermentedWine.bind(this);
@@ -28,7 +30,28 @@ class Register1Summary extends Authentication {
         currProps.history.goBack();
     }
 
+    getRegiter1(currObj){
+      console.log("getRegiter1");
+      let options = {
+        method: 'GET',
+        uri: 'http://localhost:3000/getRegister1',
+        json: true
+      };
+      rp(options)
+          .then(function (body) {
+            console.log("getRegiter1 Response", body.length, body);
+            if(!currObj.state || currObj.state.lastCount != body.length)
+              currObj.setState({records: body, lastCount: body.length});
+          })
+          .catch(function (err) {
+              console.log("Error", err);
+          });
+    }
+
     render() {
+      this.getRegiter1(this);
+      console.log("STATE", this.state);
+      let currRecords = this.state ? this.state.records : null;
         return (
             <div className="container">
               <div className="register-heading">Grape Receipt Transactions</div>
@@ -94,7 +117,27 @@ class Register1Summary extends Authentication {
                     <td>Otto</td>
                   </tr>
                 </tbody>
-              </Table>;
+              </Table>
+              <Table bordered hover responsive>
+                <thead>
+                  <tr>
+                    <th>Edit</th>
+                    <th>Tank</th>
+                    <th>Quantity</th>
+                    <th>Variety</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {currRecords ? currRecords.map((currRecord, index) => (
+                      <tr key={currRecord._id}>
+                        <td className="text-center" onClick={ this.editFermentedWine }><i className="fa fa-edit"></i></td>
+                        <td>Larry the Bird</td>
+                        <td>{currRecord.quantity}</td>
+                        <td>{currRecord.grapeVariety}</td>
+                      </tr>
+                    )) : ""}
+                </tbody>
+              </Table>
               </div>
             </div>
             );

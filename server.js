@@ -23,6 +23,14 @@ var LocalStrategy = require('passport-local').Strategy;
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var User = require('./models/user');
+var Register1 = require('./models/register1');
+var Register2 = require('./models/register2');
+var Register3 = require('./models/register3');
+var Register4 = require('./models/register4');
+var Register5 = require('./models/register5');
+var Register6 = require('./models/register6');
+var Register7 = require('./models/register7');
+var Register8 = require('./models/register8');
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
@@ -131,6 +139,39 @@ app.post('/logout', function(req, res, next) {
   req.session.destroy(function (err) {
     console.log("Session Destroyed!!!");
     res.redirect('/');
+  });
+});
+
+/**
+ * POST /upsertRegister1
+ * Upsert Register1
+ */
+app.post('/upsertRegister1', function(req, res, next) {
+  let data = {};
+  let reqBody = req.body;;
+  data.dateOfReceipt = reqBody.reg1DateofReceipt;
+  data.grapeVariety = reqBody.reg1GrapeVariety;
+  data.quantity = reqBody.reg1GrapeQuantity;
+
+  console.log("upsertRegister1", data);
+  var register1 = new Register1(data);
+  register1.save(function(err, register1Record) {
+    if (err) return next(err);
+    console.log("newUserCreated", register1Record);
+    res.json({upsertRegister1: true});
+  });
+});
+
+/**
+ * GET /getRegister1
+ * Get Register1
+ */
+app.get('/getRegister1', function(req, res, next) {
+  console.log("getRegister1");
+  Register1.find({}, function(err, doc) {
+    if (err) { throw err; }
+    console.log("User found", doc.length);
+    res.json(doc);
   });
 });
 
