@@ -31,7 +31,7 @@ class Register8Summary extends Authentication {
     render() {
         return (
             <div className="container">
-              <div className="register-heading">Finished Goods/Dispatch</div>
+              <div className="register-heading">Labelling</div>
               <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
               <Form onSubmit={ (values) => {
                                    console.log('s');

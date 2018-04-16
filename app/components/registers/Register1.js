@@ -21,7 +21,7 @@ class Register1 extends Authentication {
     render() {
         return (
             <div className="container">
-              <div className="register-heading">Grape Receipt Transactions</div>
+              <div className="register-heading">Grape/Fruit Receipt Transactions</div>
               <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
               <Form onSubmit={ (values) => {
                                    console.log(values);
@@ -46,14 +46,14 @@ class Register1 extends Authentication {
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
-                                      <label>Name of Grape Supplier</label>
+                                      <label>Name of Grape/Fruit Supplier</label>
                                       <select className="form-control"></select>
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
-                                      <label>Quantity of Fruit/Grapes Crushed in Kg.</label>
-                                      <Text field='reg1GrapeQuantity' placeholder='KG' className="form-control" />
+                                      <label>Quantity of Fruit/Grapes Received in Kg.</label>
+                                      <Text field='reg1GrapeQuantityReceived' placeholder='KG' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
@@ -97,8 +97,14 @@ class Register1 extends Authentication {
                                 <div className="row">
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
-                                      <label>Grape Variety</label>
+                                      <label>Grape/Fruit Variety</label>
                                       <Select className="form-control" field="reg1GrapeVariety" id="reg1GrapeVariety" options={grapeVariety}/>
+                                    </div>
+                                  </div>
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <div className="form-group">
+                                      <label>Quantity of Grapes/Fruit Crushed in Kg.</label>
+                                      <Text field='reg1GrapeQuantityCrushed' placeholder='KG' className="form-control" />
                                     </div>
                                   </div>
                                 </div>

@@ -5,7 +5,7 @@ import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 import { Table } from 'react-bootstrap';
 
-class Register6Summary extends Authentication {
+class Register9Summary extends Authentication {
     constructor(props) {
         super(props);
         this.goBack = this.goBack.bind(this);
@@ -15,12 +15,12 @@ class Register6Summary extends Authentication {
 
     createFermentedWine() {
         let currProps = this.props;
-        currProps.history.push("/register6");
+        currProps.history.push("/register9");
     }
 
     editFermentedWine() {
       let currProps = this.props;
-      currProps.history.push("/register6");
+      currProps.history.push("/register9");
   }
 
     goBack() {
@@ -31,7 +31,7 @@ class Register6Summary extends Authentication {
     render() {
         return (
             <div className="container">
-              <div className="register-heading">Bottling</div>
+              <div className="register-heading">Finished Goods/Dispatch</div>
               <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
               <Form onSubmit={ (values) => {
                                    console.log('s');
@@ -101,4 +101,4 @@ class Register6Summary extends Authentication {
     }
 }
 
-export default Register6Summary
+export default Register9Summary

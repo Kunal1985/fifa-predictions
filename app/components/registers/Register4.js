@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { sideBarList, purchaseType, saleType, licenseType } from '../../utils/Constants';
+import { sideBarList } from '../../utils/Constants';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 
@@ -9,27 +9,6 @@ class Register4 extends Authentication {
         super(props);
 
         this.goBack = this.goBack.bind(this);
-        
-        this.state = {
-            bulkOpeningValue: 1,
-            bulkClosingValue: 1
-        };
-
-        this.handleOpeningChange = this.handleOpeningChange.bind(this);
-        this.handleClosingChange = this.handleClosingChange.bind(this);
-
-    }
-
-    handleOpeningChange(e) {
-        this.setState({
-            bulkOpeningValue: e.target.value
-        });
-    }
-
-    handleClosingChange(e) {
-        this.setState({
-            bulkClosingValue: e.target.value
-        });
     }
 
     goBack() {
@@ -38,457 +17,161 @@ class Register4 extends Authentication {
     }
 
     render() {
-        let currObj = this;
         return (
             <div className="container">
-              <div className="register-heading">Bulk Transfer</div>
+              <div className="register-heading">Fortification</div>
               <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
-              <div className="container">
-                <Form onSubmit={ (values) => {
-                                     console.log('s');
-                                 } } validate={ (values) => {
-                                                                                                                                                            return {
-                                                                                                                                                        
-                                                                                                                                                            }
-                                                                                                                                                        } } handleChange>
-                  { ({submitForm}) => {
-                        let errorMessage = null;
-                    
-                        return (
-                            <div className="row">
-                              <div className="col-lg-12 col-md-12 col-sm-12">
-                                <form onSubmit={ submitForm } id="register4">
+              <Form onSubmit={ (values) => {
+                                   console.log(values);
+                               } } validate={ (values) => {
+                                                                                                                                                      return {
+                                                                                                                                                  
+                                                                                                                                                      }
+                                                                                                                                                  } }>
+                { ({submitForm}) => {
+                      let errorMessage = null;
+                  
+                      return (
+                          <div className="row">
+                            <div className="col-lg-12 col-md-12 col-sm-12">
+                              <form onSubmit={ submitForm } id="register3">
+                                <div className="row">
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <div className="form-group">
+                                      <label>Date</label>
+                                      <Text field='reg3Date' placeholder='Date' className="form-control" type="date" />
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="form-label-headings">Fermented Wine</div>
+                                <div className="row">
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <div className="form-group">
+                                      <label>Tank Number</label>
+                                      <select className="form-control"></select>
+                                    </div>
+                                  </div>
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <div className="form-group">
+                                      <label>Opening Balance</label>
+                                      <Text field='reg4FermentedWineOpeningBalance' placeholder='Opening Balance' className="form-control" />
+                                    </div>
+                                  </div>
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <div className="form-group">
+                                      <label>Quantity Taken</label>
+                                      <Text field='reg4FermentedWineQuantitytaken' placeholder='Quantity Taken' className="form-control" />
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <div className="form-group">
+                                      <label>Closing Balance</label>
+                                      <Text field='reg4FermentedWineClosingBalance' placeholder='Closing Balance' className="form-control" />
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="form-label-headings">Spirit</div>
+                                <div className="row">
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <div className="form-group">
+                                      <label>Tank Number</label>
+                                      <select className="form-control"></select>
+                                    </div>
+                                  </div>
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <div className="form-group">
+                                      <label>Opening Balance</label>
+                                      <Text field='reg4SpiritOpeningBalance' placeholder='Opening Balance' className="form-control" />
+                                    </div>
+                                  </div>
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <div className="form-group">
+                                      <label>Strength</label>
+                                      <Text field='reg4Strength' placeholder='Strength' className="form-control" />
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <div className="form-group">
+                                      <label>Quantity Taken</label>
+                                      <Text field='reg4SpiritQuantitytaken' placeholder='Quantity Taken' className="form-control" />
+                                    </div>
+                                  </div>
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <div className="form-group">
+                                      <label>Closing Balance</label>
+                                      <Text field='reg4SpiritClosingBalance' placeholder='Closing Balance' className="form-control" />
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="form-label-headings">Fortified Wine Manufactured</div>
+                                <div className="row">
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <div className="form-group">
+                                      <label>Tank Number</label>
+                                      <Text field='reg3TankNumber' placeholder='Tank Number' className="form-control" />
+                                    </div>
+                                  </div>
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <div className="form-group">
+                                      <label>Quantity in Litres</label>
+                                      <Text field='reg3Quantity' placeholder='Quantity in Litres' className="form-control" />
+                                    </div>
+                                  </div>
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <div className="form-group">
+                                      <label>Alcohol %</label>
+                                      <Text field='reg3AlcoholPercent' placeholder='Alcohol %' className="form-control" />
+                                    </div>
+                                  </div>
+                                </div>
                                   <div className="row">
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
-                                        <label>Date</label>
-                                        <Text field='date' placeholder='Date' className="form-control" type="date" />
+                                        <label>Closing Balance of Fortified Wine</label>
+                                        <Text field='reg3ClosingBalance' placeholder='Closing Balance of Fortified Wine' className="form-control" />
                                       </div>
                                     </div>
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
-                                        <label>Tank Number</label>
-                                        <select className="form-control"></select>
-                                      </div>
-                                    </div>
-                                    <div className="col-lg-4 col-md-4 col-sm-12">
-                                      <div className="form-group">
-                                        <label>Opening Balance</label>
-                                        <Text field='openingBalanceBulk' placeholder='Opening Balance' className="form-control" />
+                                        <label>Fortification Loss</label>
+                                        <Text field='reg3FortificationLoss' placeholder='Fortification Loss' className="form-control" />
                                       </div>
                                     </div>
                                   </div>
-                                  <div>
-                                    <div className="form-label-headings">Bulk Wine transactions</div>
-                                    <div className="row">
-                                      <div className="col-lg-4 col-md-4 col-sm-12">
-                                        <label>Type</label>
-                                        <select className="form-control" value={ this.state.bulkOpeningValue } onChange={ currObj.handleOpeningChange }>
-                                          { purchaseType.map(purchaseTypeVal => {
-                                                return <option key={ purchaseTypeVal.id } value={ purchaseTypeVal.id }>
-                                                         { purchaseTypeVal.name }
-                                                       </option>;
-                                            }) }
-                                        </select>
-                                      </div>
-                                    </div>
-                                    { currObj.state.bulkOpeningValue == 1 ?
-                                      <div>
-                                        <div className="row">
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Party Name</label>
-                                              <Text field='reg5BulkPurchasePartyName' placeholder='Party Name' className="form-control" />
-                                            </div>
-                                          </div>
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Address of party</label>
-                                              <Text field='reg5BulkPurchasePartyAdd' placeholder='Address of party' className="form-control" />
-                                            </div>
-                                          </div>
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>T.P/E.P No.</label>
-                                              <Text field='reg5BulkPurchaseTpEpNo' placeholder='T.P/E.P No.' className="form-control" />
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div className="row">
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Quantity in Litres</label>
-                                              <Text field='reg5BulkPurchaseLitres' placeholder='Quantity in Litres' className="form-control" />
-                                            </div>
-                                          </div>
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Import Fee Paid</label>
-                                              <Text field='reg5BulkPurchaseImportFee' placeholder='Import Fee Paid' className="form-control" />
-                                            </div>
-                                          </div>
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Vend Fee Paid</label>
-                                              <Text field='reg5BulkPurchaseVendFee' placeholder='Vend Fee Paid' className="form-control" />
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div className="row">
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Excise Duty Paid</label>
-                                              <Text field='reg5BulkPurchaseExciseDuty' placeholder='Excise Duty Paid' className="form-control" />
-                                            </div>
-                                          </div>
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Special Fee Paid</label>
-                                              <Text field='regBulkPurchaseSpecialFee' placeholder='Special Fee Paid' className="form-control" />
-                                            </div>
-                                          </div>
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Losses</label>
-                                              <Text field='reg5BulkPurchaseLosses' placeholder='Losses' className="form-control" />
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      : <div></div> }
-                                    { currObj.state.bulkOpeningValue == 2 ?
-                                      <div>
-                                        <div className="row">
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Party Name</label>
-                                              <Text field='reg5BulkReprorocessingPartyName' placeholder='Party Name' className="form-control" />
-                                            </div>
-                                          </div>
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Address of party</label>
-                                              <Text field='reg5BulkReprorocessingPartyAdd' placeholder='Address of party' className="form-control" />
-                                            </div>
-                                          </div>
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>T.P/E.P No.</label>
-                                              <Text field='reg5BulkReprorocessingTpEpNo' placeholder='T.P/E.P No.' className="form-control" />
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div className="row">
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Quantity in Litres</label>
-                                              <Text field='reg5BulkReprorocessingLitres' placeholder='Quantity in Litres' className="form-control" />
-                                            </div>
-                                          </div>
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Import Fee Paid</label>
-                                              <Text field='reg5BulkReprorocessingImportFee' placeholder='Import Fee Paid' className="form-control" />
-                                            </div>
-                                          </div>
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Vend Fee Paid</label>
-                                              <Text field='reg5BulkReprorocessingVendFee' placeholder='Vend Fee Paid' className="form-control" />
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div className="row">
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Excise Duty Paid</label>
-                                              <Text field='reg5BulkReprorocessingExciseDuty' placeholder='Excise Duty Paid' className="form-control" />
-                                            </div>
-                                          </div>
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Special Fee Paid</label>
-                                              <Text field='regBulkReprorocessingSpecialFee' placeholder='Special Fee Paid' className="form-control" />
-                                            </div>
-                                          </div>
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Losses</label>
-                                              <Text field='reg5BulkReprorocessingLosses' placeholder='Losses' className="form-control" />
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      : <div></div> }
-                                    { currObj.state.bulkOpeningValue == 3 ?
-                                      <div>
-                                        <div className="row">
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Tank Number</label>
-                                              <select className="form-control"></select>
-                                            </div>
-                                          </div>
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Opening Balance</label>
-                                              <Text field='reg5TransferFromTankQty>OpeningBalance' placeholder='>Opening Balance' className="form-control" />
-                                            </div>
-                                          </div>
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Quantity Issued</label>
-                                              <Text field='reg5TransferFromTankQtyIssued' placeholder='Quantity Issued' className="form-control" />
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div className="row">
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Quantity Received</label>
-                                              <Text field='reg5TransferFromTankQtyReceived' placeholder='Quantity Received' className="form-control" />
-                                            </div>
-                                          </div>
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Losses</label>
-                                              <Text field='reg5TransferFromTankLosses' placeholder='Losses' className="form-control" />
-                                            </div>
-                                          </div>
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Closing Balance</label>
-                                              <Text field='reg5TransferFromTankClosingBalance' placeholder='Closing Balance' className="form-control" />
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      : <div></div> }
-                                  </div>
-                                  <div className="form-group">
-                                    <label>Closing Balance</label>
-                                    <Text field='closingBalanceBulk' placeholder='Closing Balance' className="form-control" />
-                                  </div>
-                                  <div>
-                                    <div className="form-label-headings">Bulk Wine transactions</div>
-                                    <div className="row">
-                                      <div className="col-lg-4 col-md-4 col-sm-12">
-                                        <label>Type</label>
-                                        <select className="form-control" value={ this.state.bulkClosingValue } onChange={ currObj.handleClosingChange }>
-                                          { saleType.map(saleTypeVal => {
-                                                return <option key={ saleTypeVal.id } value={ saleTypeVal.id }>
-                                                         { saleTypeVal.name }
-                                                       </option>;
-                                            }) }
-                                        </select>
-                                      </div>
-                                    </div>
-                                    { currObj.state.bulkClosingValue == 1 ?
-                                      <div>
-                                        <div className="row">
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Party Name</label>
-                                              <Text field='reg5BulkSalePartyName' placeholder='Party Name' className="form-control" />
-                                            </div>
-                                          </div>
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Kind of Liscence Held</label>
-                                              <select className="form-control">
-                                                { licenseType.map(licenseTypeVal => {
-                                                      return <option key={ licenseTypeVal.id } value={ licenseTypeVal.id }>
-                                                               { licenseTypeVal.name }
-                                                             </option>;
-                                                  }) }
-                                              </select>
-                                            </div>
-                                          </div>
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>T.P/E.P No.</label>
-                                              <Text field='reg5BulkSaleTpEpNo' placeholder='T.P/E.P No.' className="form-control" />
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div className="row">
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Quantity in Litres</label>
-                                              <Text field='reg5BulkSaleLitres' placeholder='Quantity in Litres' className="form-control" />
-                                            </div>
-                                          </div>
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Export Fee Paid</label>
-                                              <Text field='reg5BulkSaleExportFee' placeholder='Export Fee Paid' className="form-control" />
-                                            </div>
-                                          </div>
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Vend Fee Paid</label>
-                                              <Text field='reg5BulkSaleVendFee' placeholder='Vend Fee Paid' className="form-control" />
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div className="row">
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Excise Duty Paid</label>
-                                              <Text field='reg5BulkSaleExciseDuty' placeholder='Excise Duty Paid' className="form-control" />
-                                            </div>
-                                          </div>
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Special Fee Paid</label>
-                                              <Text field='reg5BulkSaleSpecialFee' placeholder='Special Fee Paid' className="form-control" />
-                                            </div>
-                                          </div>
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Losses</label>
-                                              <Text field='reg5BulkSaleLosses' placeholder='Losses' className="form-control" />
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      : <div></div> }
-                                    { currObj.state.bulkClosingValue == 2 ?
-                                      <div>
-                                        <div className="row">
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Party Name</label>
-                                              <Text field='reg5TransferUnitPartyName' placeholder='Party Name' className="form-control" />
-                                            </div>
-                                          </div>
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Kind of Liscence Held</label>
-                                              <select className="form-control">
-                                                { licenseType.map(licenseTypeVal => {
-                                                      return <option key={ licenseTypeVal.id } value={ licenseTypeVal.id }>
-                                                               { licenseTypeVal.name }
-                                                             </option>;
-                                                  }) }
-                                              </select>
-                                            </div>
-                                          </div>
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>T.P/E.P No.</label>
-                                              <Text field='reg5TransferUnitTpEpNo' placeholder='T.P/E.P No.' className="form-control" />
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div className="row">
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Quantity in Litres</label>
-                                              <Text field='reg5TransferUnitLitres' placeholder='Quantity in Litres' className="form-control" />
-                                            </div>
-                                          </div>
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Export Fee Paid</label>
-                                              <Text field='reg5TransferUnitExportFee' placeholder='Export Fee Paid' className="form-control" />
-                                            </div>
-                                          </div>
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Vend Fee Paid</label>
-                                              <Text field='reg5TransferUnitVendFee' placeholder='Vend Fee Paid' className="form-control" />
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div className="row">
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Excise Duty Paid</label>
-                                              <Text field='reg5TransferUnitExciseDuty' placeholder='Excise Duty Paid' className="form-control" />
-                                            </div>
-                                          </div>
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Special Fee Paid</label>
-                                              <Text field='reg5TransferUnitSpecialFee' placeholder='Special Fee Paid' className="form-control" />
-                                            </div>
-                                          </div>
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Losses</label>
-                                              <Text field='reg5TransferUnitLosses' placeholder='Losses' className="form-control" />
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      : <div></div> }
-                                    { currObj.state.bulkClosingValue == 3 ?
-                                      <div>
-                                        <div className="row">
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Tank Number</label>
-                                              <select className="form-control"></select>
-                                            </div>
-                                          </div>
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Quantity Tranferred</label>
-                                              <Text field='reg5TransferTankQtyTransferred' placeholder='Quantity Tranferred' className="form-control" />
-                                            </div>
-                                          </div>
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Quantity Received</label>
-                                              <Text field='reg5TransferTankQtyReceived' placeholder='Quantity Received' className="form-control" />
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div className="row">
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Losses</label>
-                                              <Text field='reg5TransferTankLosses' placeholder='Losses' className="form-control" />
-                                            </div>
-                                          </div>
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Closing Balance</label>
-                                              <Text field='reg5TransferTankClosingBalance' placeholder='Closing Balance' className="form-control" />
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      : <div></div> }
-                                  </div>
-                                  <div className="form-group">
-                                    <label>
-                                      Remarks:
-                                      <textarea className="form-control" />
-                                    </label>
-                                  </div>
-                                  <div className="row">
-                                    <div className="button-section text-center">
-                                      <div className="text-center">
-                                        <button className="btn btn-primary" onClick={ this.goBack }>
-                                          Back
-                                        </button>
-                                      </div>
-                                      <div className="text-center">
-                                        <button className="btn btn-default" type='submit'>
-                                          Submit
-                                        </button>
-                                      </div>
+                                <div className="row">
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <div className="form-group">
+                                      <label>
+                                        Remarks:
+                                        <textarea className="form-control" />
+                                      </label>
                                     </div>
                                   </div>
-                                </form>
-                              </div>
+                                </div>
+                                <div className="row">
+                                  <div className="button-section text-center">
+                                    <div className="text-center">
+                                      <button className="btn btn-primary" onClick={ this.goBack }>
+                                        Back
+                                      </button>
+                                    </div>
+                                    <div className="text-center">
+                                      <button className="btn btn-default" type='submit'>
+                                        Submit
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </form>
                             </div>
-                        )
-                    } }
-                </Form>
-              </div>
+                          </div>
+                      )
+                  } }
+              </Form>
             </div>
             );
     }

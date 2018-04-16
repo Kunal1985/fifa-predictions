@@ -23,7 +23,7 @@ class EditProfile extends Authentication {
     render() {
         return (
             <div className="container">
-              <div className="register-heading">Liscensee Master</div>
+              <div className="register-heading">Liscensee Profile</div>
               <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
               <Form onSubmit={ (values) => {
                                    console.log('s');
@@ -44,6 +44,12 @@ class EditProfile extends Authentication {
                                     <div className="form-group">
                                       <label>Name</label>
                                       <Text field='editProfileWineryName' placeholder='Winery Name' className="form-control" />
+                                    </div>
+                                  </div>
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <div className="form-group">
+                                      <label>Liscense Number</label>
+                                      <Text field='editProfileLiscenseNumber' placeholder='Liscense Number' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
@@ -68,6 +74,12 @@ class EditProfile extends Authentication {
                                       <Text field='editProfileOwnerName1' placeholder='Winery Name' className="form-control" />
                                     </div>
                                   </div>
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <div className="form-group">
+                                      <label>Address</label>
+                                      <Text field='editProfileOwner1Address' placeholder='Address' className="form-control" />
+                                    </div>
+                                  </div>
                                 </div>
                                 <div className="row">
                                   <div className="col-lg-4 col-md-4 col-sm-12">
@@ -76,12 +88,24 @@ class EditProfile extends Authentication {
                                       <Text field='editProfileOwnerName2' placeholder='Winery Name' className="form-control" />
                                     </div>
                                   </div>
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <div className="form-group">
+                                      <label>Address</label>
+                                      <Text field='editProfileOwner2Address' placeholder='Address' className="form-control" />
+                                    </div>
+                                  </div>
                                 </div>
                                 <div className="row">
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Owner Name 3</label>
                                       <Text field='editProfileOwnerName3' placeholder='Winery Name' className="form-control" />
+                                    </div>
+                                  </div>
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <div className="form-group">
+                                      <label>Address</label>
+                                      <Text field='editProfileOwner3Address' placeholder='Address' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
@@ -118,8 +142,16 @@ class EditProfile extends Authentication {
                                 <div className="row">
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
+                                      <label>Website</label>
+                                      <Text field='editProfileWebAdd' placeholder='Website' className="form-control"/>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <div className="form-group">
                                       <label>Date of Grant</label>
-                                      <Text field='reg1DateofGrant' placeholder='Date of Receipt' className="form-control" type="date" />
+                                      <Text field='editProfileDateofGrant' placeholder='Date of Grant' className="form-control" type="date" />
                                     </div>
                                   </div>
                                 </div>

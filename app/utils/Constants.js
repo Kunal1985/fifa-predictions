@@ -11,6 +11,14 @@ const sideBarList = [{
         title1: "Tank Master",
         title2: "Tank Master",
     }, {
+        url: "/wineType",
+        title1: "Type of Wine Master",
+        title2: "Type of Wine Master",
+    }, {
+        url: "/variety",
+        title1: "Variety of Grape/Fruit Master",
+        title2: "Variety of Grape/Fruit Master",
+    }, {
         url: "/brand",
         title1: "Brand Master",
         title2: "Brand Master",
@@ -22,10 +30,6 @@ const sideBarList = [{
         url: "/spirit",
         title1: "Spirit Master",
         title2: "Spirit Master",
-    }, {
-        url: "/changePassword",
-        title1: "Change Password",
-        title2: "Change Password",
     }]
 }, {
     url: "/openingBalance",
@@ -71,11 +75,11 @@ const sideBarList = [{
 }, {
     url: "/register1Summary",
     title1: "Register1",
-    title2: "Grape Receipt Transactions",
+    title2: "Grape/Fruit Receipt Transactions",
 }, {
     url: "/register2Summary",
     title1: "Register2",
-    title2: "Crushing/Juice Processing",
+    title2: "Juice Processing",
 }, {
     url: "/register3Summary",
     title1: "Register3",
@@ -83,22 +87,26 @@ const sideBarList = [{
 }, {
     url: "/register4Summary",
     title1: "Register4",
-    title2: "Bulk Transfer",
+    title2: "Fortification",
 }, {
     url: "/register5Summary",
     title1: "Register5",
-    title2: "Bottling",
+    title2: "Bulk Transfer",
 }, {
     url: "/register6Summary",
     title1: "Register6",
-    title2: "Tirage/Disgorging",
+    title2: "Bottling",
 }, {
     url: "/register7Summary",
     title1: "Register7",
-    title2: "Labelling",
+    title2: "Tirage/Disgorging",
 }, {
     url: "/register8Summary",
     title1: "Register8",
+    title2: "Labelling",
+}, {
+    url: "/register9Summary",
+    title1: "Register9",
     title2: "Finished Goods/Dispatch",
 }, {
     url: "/Admin",
@@ -164,13 +172,30 @@ const licenseType = [{
 
 const purchaseType = [{
     id: 1,
-    name: "Bulk Wine Purchased"
+    name: "Own Unit"
 }, {
     id: 2,
-    name: "Received from Re-processing"
+    name: "Other Unit"
+}]
+
+const bulkTransferOtherUnitType = [{
+    id: 1,
+    name: "Purchase from within State"
+}, {
+    id: 2,
+    name: "Purchase from out of State"
 }, {
     id: 3,
-    name: "Transferred from other Tank",
+    name: "Overseas Purchase"
+}, {
+    id: 4,
+    name: "Sale within State"
+}, {
+    id: 5,
+    name: "Sale out of State"
+}, {
+    id: 6,
+    name: "Overseas Sale"
 }]
 
 const saleType = [{
@@ -186,10 +211,18 @@ const saleType = [{
 
 const searchType = [{
     id: 1,
-    name: "Name"
+    name: "Number"
 }, {
     id: 2,
     name: "Type"
+}]
+
+const tankType = [{
+    label: "SS Tank",
+    value: 1
+}, {
+    label: "Oak Wine Barrel Tank",
+    value: 2
 }]
 
 const TransferType = [{
@@ -226,4 +259,4 @@ const LabellingTransType = [{
 }]
 
 
-export { sideBarList, grapeVariety, sizeInML, bottleSize, wineType, licenseType, purchaseType, saleType, searchType, TransferType, OpeningBalanceType, LabellingTransType };
+export { sideBarList, grapeVariety, sizeInML, bottleSize, wineType, licenseType, purchaseType, saleType, searchType, tankType, TransferType, bulkTransferOtherUnitType, OpeningBalanceType, LabellingTransType };

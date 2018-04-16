@@ -1,267 +1,291 @@
 import React from 'react';
-import {Link} from 'react-router';
-import { sideBarList, sizeInML, TransferType } from '../../utils/Constants';
+import { Link } from 'react-router';
+import { sideBarList, OpeningBalanceType, LabellingTransType, sizeInML } from '../../utils/Constants';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 
 class Register8 extends Authentication {
-  constructor(props) {
-    super(props);
-    this.goBack = this.goBack.bind(this);
-  }
+    constructor(props) {
+        super(props);
 
-  goBack() {
-    let currProps = this.props;
-    currProps.history.goBack();
-  }
+        this.goBack = this.goBack.bind(this);
+        this.state = {
+          LabellingTransType: 1
+      };
 
-  render() {
-    return (
-      <div className="container">
-      <div className="register-heading">Finished Goods/Dispatch</div>
-      <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
-          <div className="container">
-    <Form
-        onSubmit={(values) => {
-          console.log('s');
-        }}
-        validate={(values) => {
-          return {
-              
-          }
-        }}
+      this.handleLabellingTrans = this.handleLabellingTrans.bind(this);
+    }
 
-        handleChange
-    >
-        {({submitForm}) => {
-            let errorMessage = null;
-            
-            return (
-              <div className="row">
-                  <div className="col-lg-12 col-md-12 col-sm-12">
-                      <form onSubmit={submitForm} id="register8">
-                        <div className="row">
-                            <div className="col-lg-4 col-md-4 col-sm-12">
-                                <div className="form-group">
-                                    <label>Date</label>
-                                    <Text field='reg8Date' placeholder='Date' className="form-control" type="date"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div className="form-label-headings">Opening Balance of Wine</div>
+    handleLabellingTrans(e) {
+        this.setState({
+          LabellingTransType: e.target.value
+        });
+    }
+
+    goBack() {
+      let currProps = this.props;
+      currProps.history.goBack();
+    }
+
+    render() {
+        let currObj = this;
+        return (
+            <div className="container">
+              <div className="register-heading">Labelling</div>
+              <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
+              <div className="container">
+                <Form onSubmit={ (values) => {
+                                     console.log('s');
+                                 } } validate={ (values) => {
+                                                                                                                                                            return {
+                                                                                                                                                        
+                                                                                                                                                            }
+                                                                                                                                                        } } handleChange>
+                  { ({submitForm}) => {
+                        let errorMessage = null;
+                    
+                        return (
                             <div className="row">
-                                <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
-                                        <label>Brand Name</label>
-                                        <Text field='reg8BrandName' placeholder='Brand Name' className="form-control"/>
-                                    </div>
-                                </div>
-                                <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
-                                        <label>Strength</label>
-                                        <Text field='reg8Strength' placeholder='Strength' className="form-control"/>
-                                    </div>
-                                </div>
-                                <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
-                                        <label>Batch No.</label>
-                                        <Text field='reg8BatchNo' placeholder='Batch No.' className="form-control"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
-                                        <label>Size</label>
-                                        <select field='reg8SizeMl' className="form-control">
-                                        {sizeInML.map(sizeInMLVal => {
-                                          return <option key={sizeInMLVal.id} value={sizeInMLVal.id}>
-                                            {sizeInMLVal.name}
-                                          </option>;
-                                        })}
-                                        </select>
-                                    </div>
-                                </div>
-                                <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
-                                        <label>Number of Bottles</label>
-                                        <Text field='reg8NumberOfBottles' placeholder='Number of Bottles' className="form-control"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-lg-4 col-md-4 col-sm-12">
-                                <div className="form-group">
-                                    <label>Quantity of Wine Dispatched from Finished Goods</label>
-                                        <select field='reg8dispatchType' className="form-control">
-                                            {TransferType.map(TransferTypeVal => {
-                                            return <option key={TransferTypeVal.id} value={TransferTypeVal.id}>
-                                                {TransferTypeVal.name}
+                              <div className="col-lg-12 col-md-12 col-sm-12">
+                                <form onSubmit={ submitForm } id="register7">
+                                <div className="row">
+                                    <div className="col-lg-4 col-md-4 col-sm-12">
+                                      <div className="form-group">
+                                        <label>Opening Balace</label>
+                                        <Select className="form-control" field="reg6TirageSizeInMl" id="reg6TirageSizeInMl" options={sizeInML}/>
+                                        <select field='reg7OpeningBalance' className="form-control">
+                                            {OpeningBalanceType.map(OpeningBalanceTypeVal => {
+                                            return <option key={OpeningBalanceType.id} value={OpeningBalanceTypeVal.id}>
+                                                {OpeningBalanceTypeVal.name}
                                             </option>;
                                             })}
                                         </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-lg-4 col-md-4 col-sm-12">
-                                <div className="form-group">
-                                    <label>Party Name</label>
-                                    <Text field='reg8PartyName' placeholder='Party Name' className="form-control" />
-                                </div>
-                            </div>
-                            <div className="col-lg-4 col-md-4 col-sm-12">
-                                <div className="form-group">
-                                    <label>Kind of Liscense Held</label>
-                                    <Text field='reg5BulkPurchasePartyAdd' placeholder='Address of party' className="form-control" />
-                                </div>
-                            </div>
-                            <div className="col-lg-4 col-md-4 col-sm-12">
-                            <div className="form-group">
-                                <label>Size in ML</label>
-                                <Text field='reg8SizeinML' placeholder='Size in ML' className="form-control" />
-                            </div>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-lg-4 col-md-4 col-sm-12">
-                            <div className="form-group">
-                                <label>Number of Bottles</label>
-                                <Text field='reg8NumberofBottles' placeholder='Number of Bottles' className="form-control" />
-                            </div>
-                            </div>
-                            <div className="col-lg-4 col-md-4 col-sm-12">
-                            <div className="form-group">
-                                <label>T.P/E.P</label>
-                                <Text field='reg8TpEp' placeholder='T.P/E.P' className="form-control" />
-                            </div>
-                            </div>
-                            <div className="col-lg-4 col-md-4 col-sm-12">
-                            <div className="form-group">
-                                <label>Vend/Export Fee</label>
-                                <Text field='reg8VendExportFee' placeholder='Vend/Export Fee' className="form-control" />
-                            </div>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-lg-4 col-md-4 col-sm-12">
-                            <div className="form-group">
-                                <label>Excise Duty</label>
-                                <Text field='reg8ExciseDuty' placeholder='Excise Duty' className="form-control" />
-                            </div>
-                            </div>
-                            <div className="col-lg-4 col-md-4 col-sm-12">
-                            <div className="form-group">
-                                <label>Total Amount</label>
-                                <Text field='reg8TotalAmount' placeholder='Total Amount' className="form-control" />
-                            </div>
-                            </div>
-                            <div className="col-lg-4 col-md-4 col-sm-12">
-                            <div className="form-group">
-                                <label>Chalan Number</label>
-                                <Text field='reg8ChalanNumber' placeholder='Chalan Number' className="form-control" />
-                            </div>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-lg-4 col-md-4 col-sm-12">
-                            <div className="form-group">
-                                <label>Chalan Date</label>
-                                <Text field='reg8ChalanDate' placeholder='Chalan Date' className="form-control" type="date"/>
-                            </div>
-                            </div>
-                            <div className="col-lg-4 col-md-4 col-sm-12">
-                                <div className="form-group">
-                                    <label>Mfg. Cost</label>
-                                    <Text field='reg8MfgCost' placeholder='Mfg. Cost' className="form-control" />
-                                </div>
-                            </div>
-                            <div className="col-lg-4 col-md-4 col-sm-12">
-                                <div className="form-group">
-                                    <label>Approved MRP</label>
-                                    <Text field='reg8ApprovedMrp' placeholder='Approved MRP' className="form-control" />
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div className="form-label-headings">Closing Balance of Wine</div>
-                            <div className="row">
-                                <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
-                                        <label>Brand Name</label>
-                                        <Text field='reg8ClosingBrandName' placeholder='Brand Name' className="form-control"/>
+                                      </div>
                                     </div>
-                                </div>
-                                <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
-                                        <label>Strength</label>
-                                        <Text field='reg8ClosingStrength' placeholder='Strength' className="form-control"/>
+                                  </div>
+                                  <div className="row">
+                                    <div className="col-lg-4 col-md-4 col-sm-12">
+                                      <div className="form-group">
+                                        <label>Size in ML</label>
+                                        <Text field='reg7OpeningBalanceSizeinML' placeholder='Size in ML' className="form-control" />
+                                      </div>
                                     </div>
-                                </div>
-                                <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
-                                        <label>Batch No.</label>
-                                        <Text field='reg8ClosingBatchNo' placeholder='Batch No.' className="form-control"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
-                                        <label>Size</label>
-                                        <select field='reg8ClosingSizeMl' className="form-control">
-                                        {sizeInML.map(sizeInMLVal => {
-                                          return <option key={sizeInMLVal.id} value={sizeInMLVal.id}>
-                                            {sizeInMLVal.name}
-                                          </option>;
-                                        })}
-                                        </select>
-                                    </div>
-                                </div>
-                                <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
+                                    <div className="col-lg-4 col-md-4 col-sm-12">
+                                      <div className="form-group">
                                         <label>Number of Bottles</label>
-                                        <Text field='reg8ClosingNumberOfBottles' placeholder='Number of Bottles' className="form-control"/>
+                                        <Text field='reg7OpeningBalanceNumberofBottles' placeholder='Number of Bottles' className="form-control" />
+                                      </div>
                                     </div>
-                                </div>
+                                  </div>
+                                  <div>
+                                    <div className="form-label-headings">Wine Bottles Received</div>
+                                    <div className="row">
+                                      <div className="col-lg-4 col-md-4 col-sm-12">
+                                        <div className="form-group">
+                                          <label>Name of the Unit</label>
+                                          <Text field='reg7BottlesReceivedUnitName' placeholder='Name of the Unit' className="form-control" />
+                                        </div>
+                                      </div>
+                                      <div className="col-lg-4 col-md-4 col-sm-12">
+                                        <div className="form-group">
+                                          <label>T.P Number</label>
+                                          <Text field='reg7BottlesReceivedTpNo' placeholder='T.P Number' className="form-control" />
+                                        </div>
+                                      </div>
+                                      <div className="col-lg-4 col-md-4 col-sm-12">
+                                        <div className="form-group">
+                                          <label>Size in ML</label>
+                                          <Text field='reg7BottlesReceivedSize' placeholder='Size in ML' className="form-control" />
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div className="row">
+                                      <div className="col-lg-4 col-md-4 col-sm-12">
+                                        <div className="form-group">
+                                          <label>Number of Bottles</label>
+                                          <Text field='reg7BottlesReceivedNumberofBottles' placeholder='Number of Bottles' className="form-control" />
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div className="row">
+                                    <div className="col-lg-4 col-md-4 col-sm-12">
+                                      <div className="form-group">
+                                        <label>Labelling</label>
+                                        <select field='reg7LabellingTransType' className="form-control"  value={ this.state.LabellingTransType } onChange={ currObj.handleLabellingTrans }>
+                                            {LabellingTransType.map(LabellingTransTypeVal => {
+                                            return <option key={LabellingTransTypeVal.id} value={LabellingTransTypeVal.id}>
+                                                {LabellingTransTypeVal.name}
+                                            </option>;
+                                            })}
+                                        </select>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  { currObj.state.LabellingTransType == 1 ?
+                                  <div>
+                                    <div className="row">
+                                      <div className="col-lg-4 col-md-4 col-sm-12">
+                                        <div className="form-group">
+                                          <label>Brand Name</label>
+                                          <Text field='reg7LabellingBrandName' placeholder='Brand Name' className="form-control" />
+                                        </div>
+                                      </div>
+                                      <div className="col-lg-4 col-md-4 col-sm-12">
+                                        <div className="form-group">
+                                          <label>Strength</label>
+                                          <Text field='reg7LabellingStrength' placeholder='Strength' className="form-control" />
+                                        </div>
+                                      </div>
+                                      <div className="col-lg-4 col-md-4 col-sm-12">
+                                        <div className="form-group">
+                                          <label>Batch No.</label>
+                                          <Text field='reg7LabellingBatchNo' placeholder='Batch No' className="form-control" />
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div className="row">
+                                      <div className="col-lg-4 col-md-4 col-sm-12">
+                                        <div className="form-group">
+                                          <label>Mfg. Date</label>
+                                          <Text field='reg7LabellingMfgDate' placeholder='Mfg. Date' className="form-control" type="date"/>
+                                        </div>
+                                      </div>
+                                      <div className="col-lg-4 col-md-4 col-sm-12">
+                                        <div className="form-group">
+                                          <label>Size in ML</label>
+                                          <Text field='reg7LabellingSizeinML' placeholder='Size in ML' className="form-control" />
+                                        </div>
+                                      </div>
+                                      <div className="col-lg-4 col-md-4 col-sm-12">
+                                        <div className="form-group">
+                                          <label>No. of Bottles</label>
+                                          <Text field='reg7LabellingNoOfBottles' placeholder='No. of Bottles' className="form-control" />
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div> : 
+                                  <div>
+                                    <div className="row">
+                                      <div className="col-lg-4 col-md-4 col-sm-12">
+                                        <div className="form-group">
+                                          <label>Name of Unit</label>
+                                          <Text field='reg7TransferredUnitName' placeholder='Name of Unit' className="form-control" />
+                                        </div>
+                                      </div>
+                                      <div className="col-lg-4 col-md-4 col-sm-12">
+                                        <div className="form-group">
+                                          <label>T.P No.</label>
+                                          <Text field='reg7TransferredTpNo' placeholder='T.P No.' className="form-control" />
+                                        </div>
+                                      </div>
+                                      <div className="col-lg-4 col-md-4 col-sm-12">
+                                        <div className="form-group">
+                                          <label>Size in ML</label>
+                                          <Text field='reg7TransferredSizeinMl' placeholder='Size in ML' className="form-control" />
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div className="row">
+                                      <div className="col-lg-4 col-md-4 col-sm-12">
+                                        <div className="form-group">
+                                          <label>Number of Bottles</label>
+                                          <Text field='reg7TransferredNoOfBottles' placeholder='Number of Bottles' className="form-control" />
+                                        </div>
+                                      </div>
+                                      <div className="col-lg-4 col-md-4 col-sm-12">
+                                        <div className="form-group">
+                                          <label>Vend Fee</label>
+                                          <Text field='reg7TransferredVendFee' placeholder='Vend Fee' className="form-control" />
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div> }
+                                  <div>
+                                    <div className="form-label-headings">Sampling</div>
+                                    <div className="row">
+                                      <div className="col-lg-4 col-md-4 col-sm-12">
+                                        <div className="form-group">
+                                          <label>Size in Ml</label>
+                                          <Text field='reg7SamlingSize' placeholder='Size in Ml' className="form-control" />
+                                        </div>
+                                      </div>
+                                      <div className="col-lg-4 col-md-4 col-sm-12">
+                                        <div className="form-group">
+                                          <label>No. of Bottles</label>
+                                          <Text field='reg7SamlingNoOfBottles' placeholder='No. of Bottles' className="form-control" />
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div>
+                                    <div className="form-label-headings">Breakages</div>
+                                    <div className="row">
+                                      <div className="col-lg-4 col-md-4 col-sm-12">
+                                        <div className="form-group">
+                                          <label>Size in Ml</label>
+                                          <Text field='reg7BreakagesSize' placeholder='Size in Ml' className="form-control" />
+                                        </div>
+                                      </div>
+                                      <div className="col-lg-4 col-md-4 col-sm-12">
+                                        <div className="form-group">
+                                          <label>No. of Bottles</label>
+                                          <Text field='reg7BreakagesNoOfBottles' placeholder='No. of Bottles' className="form-control" />
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div>
+                                    <div className="form-label-headings">Closing Balance</div>
+                                    <div className="row">
+                                      <div className="col-lg-4 col-md-4 col-sm-12">
+                                        <div className="form-group">
+                                          <label>Size in Ml</label>
+                                          <Text field='reg7ClosingBalanceSize' placeholder='Size in Ml' className="form-control" />
+                                        </div>
+                                      </div>
+                                      <div className="col-lg-4 col-md-4 col-sm-12">
+                                        <div className="form-group">
+                                          <label>No. of Bottles</label>
+                                          <Text field='reg7ClosingBalanceNoOfBottles' placeholder='No. of Bottles' className="form-control" />
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div className="row">
+                                    <div className="col-lg-4 col-md-4 col-sm-12">
+                                      <div className="form-group">
+                                        <label className="text-area-labels">
+                                          Remarks:
+                                          <textarea className="form-control" />
+                                        </label>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div className="row">
+                                    <div className="button-section text-center">
+                                      <div className="text-center">
+                                        <button className="btn btn-primary" onClick={ this.goBack }>
+                                          Back
+                                        </button>
+                                      </div>
+                                      <div className="text-center">
+                                        <button className="btn btn-default" type='submit'>
+                                          Submit
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </form>
+                              </div>
                             </div>
-                        </div>
-                          <div className="row">
-                            <div className="col-lg-4 col-md-4 col-sm-12">
-                                <div className="form-group">
-                                    <label className="text-area-labels">
-                                    Remarks:
-                                    <textarea className="form-control"/>
-                                    </label>
-                                </div> 
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="button-section text-center">
-                                <div className="text-center">
-                                    <button className="btn btn-primary" onClick={this.goBack}>
-                                        Back
-                                    </button>
-                                </div>
-                                <div className="text-center">
-                                    <button className="btn btn-default" type='submit'>
-                                        Submit
-                                    </button>
-                                </div>
-                            </div>
-                        </div>           
-                      </form>
-                  </div>
+                        )
+                    } }
+                </Form>
               </div>
-            )
-        }}
-    </Form>
-    </div>
-      </div>
-  );
-  }
+            </div>
+            );
+    }
 }
 
 export default Register8;

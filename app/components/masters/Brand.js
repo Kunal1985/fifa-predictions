@@ -92,43 +92,55 @@ class Brand extends Authentication {
                   <thead>
                     <tr>
                       <th>Edit </th>
-                      <th>Size </th>
-                      <th>Type</th>
-                      <th>Sanction Date</th>
-                      <th>Effective From</th>
-                      <th>MRP</th>
-                      <th>Mfg. Cost</th>
+                      <th>Name </th>
+                      <th>Size in ML</th>
+                      <th>Mfg. Cost Declared</th>
                       <th>Excise Duty</th>
+                      <th>Sales Tax</th>
+                      <th>MRP</th>
+                      <th>Label Approved Order No.</th>
+                      <th>MRP Approval Date</th>
+                      <th>MRP Effective From</th>
+                      <th>MRP Change Date</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <td className="text-center" onClick={ this.editBrand }><i className="fa fa-edit"></i></td>
                       <td>Mark</td>
-                      <td>Otto</td>
                       <td>Mark</td>
                       <td>Otto</td>
                       <td>Mark</td>
+                      <td>Otto</td>
+                      <td>Otto</td>
+                      <td>Mark</td>
+                      <td>Otto</td>
                       <td>Otto</td>
                       <td>Otto</td>
                     </tr>
                     <tr>
                       <td className="text-center" onClick={ this.editBrand }><i className="fa fa-edit"></i></td>
                       <td>Mark</td>
-                      <td>Otto</td>
                       <td>Mark</td>
                       <td>Otto</td>
                       <td>Mark</td>
+                      <td>Otto</td>
+                      <td>Otto</td>
+                      <td>Mark</td>
+                      <td>Otto</td>
                       <td>Otto</td>
                       <td>Otto</td>
                     </tr>
                     <tr>
                       <td className="text-center" onClick={ this.editBrand }><i className="fa fa-edit"></i></td>
                       <td>Mark</td>
-                      <td>Otto</td>
                       <td>Mark</td>
                       <td>Otto</td>
                       <td>Mark</td>
+                      <td>Otto</td>
+                      <td>Otto</td>
+                      <td>Mark</td>
+                      <td>Otto</td>
                       <td>Otto</td>
                       <td>Otto</td>
                     </tr>

@@ -5,33 +5,33 @@ import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 import { Table } from 'react-bootstrap';
 
-class TankMaster extends Authentication {
+class WineVariety extends Authentication {
     constructor(props) {
         super(props);
-        this.createTank = this.createTank.bind(this);
+        this.createBrand = this.createBrand.bind(this);
         this.goBack = this.goBack.bind(this);
-        this.editTank = this.editTank.bind(this);
+        this.editBrand = this.editBrand.bind(this);
     }
 
-    createTank() {
+    createBrand() {
         let currProps = this.props;
-        currProps.history.push("/createTank");
+        currProps.history.push("/createWineVariety");
     }
 
-    editTank() {
-      let currProps = this.props;
-      currProps.history.push("/createTank");
-  }
+    editBrand() {
+        let currProps = this.props;
+        currProps.history.push("/createWineVariety");
+    }
 
     goBack() {
-      let currProps = this.props;
-      currProps.history.push("/home");
-  }
+        let currProps = this.props;
+        currProps.history.push("/home");
+    }
 
     render() {
         return (
             <div className="container">
-              <div className="register-heading">Tank Master</div>
+              <div className="register-heading">Variety of Grape/Fruit</div>
               <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
               <Form onSubmit={ (values) => {
                                    console.log('s');
@@ -52,16 +52,16 @@ class TankMaster extends Authentication {
                                     <div className="search-section">
                                       <div>Search By</div>
                                       <div>
-                                                                                  <select className="form-control">
-                                                                                      { searchType.map(searchBy => {
-                                                                                            return <option key={ searchBy.id } value={ searchBy.id }>
-                                                                                                    { searchBy.name }
-                                                                                                  </option>;
-                                                                                        }) }
-                                                                                    </select>
-                                                                                  </div>
+                                        <select className="form-control">
+                                          { searchType.map(searchBy => {
+                                                return <option key={ searchBy.id } value={ searchBy.id }>
+                                                         { searchBy.name }
+                                                       </option>;
+                                            }) }
+                                        </select>
+                                      </div>
                                       <div>
-                                          <Text field='searchName' placeholder='Search' className="form-control"/>
+                                        <Text field='searchName' placeholder='Search' className="form-control" />
                                       </div>
                                       <div>
                                         <button className="btn btn-default" type='submit'>
@@ -74,7 +74,7 @@ class TankMaster extends Authentication {
                                         </button>
                                       </div>
                                       <div>
-                                        <button className="btn btn-default" onClick={ this.createTank }>
+                                        <button className="btn btn-default" onClick={ this.createBrand }>
                                           Add New
                                         </button>
                                       </div>
@@ -88,48 +88,36 @@ class TankMaster extends Authentication {
                   } }
               </Form>
               <div>
-              <Table bordered hover responsive>
-                <thead>
-                  <tr>
-                    <th>Edit</th>
-                    <th>Number</th>
-                    <th>Type</th>
-                    <th>Capacity</th>
-                    <th>Guging Date</th>
-                    <th>Installation Date</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="text-center" onClick={ this.editTank }><i className="fa fa-edit"></i></td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <td className="text-center" onClick={ this.editTank }><i className="fa fa-edit"></i></td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <td className="text-center" onClick={ this.editTank }><i className="fa fa-edit"></i></td>
-                    <td>Larry the Bird</td>
-                    <td>@twitter</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                  </tr>
-                </tbody>
-              </Table>;
+                <Table bordered hover responsive>
+                  <thead>
+                    <tr>
+                      <th>Edit </th>
+                      <th>Date </th>
+                      <th>Name</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="text-center" onClick={ this.editBrand }><i className="fa fa-edit"></i></td>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                    </tr>
+                    <tr>
+                      <td className="text-center" onClick={ this.editBrand }><i className="fa fa-edit"></i></td>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                    </tr>
+                    <tr>
+                      <td className="text-center" onClick={ this.editBrand }><i className="fa fa-edit"></i></td>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                    </tr>
+                  </tbody>
+                </Table>;
               </div>
             </div>
             );
     }
 }
 
-export default TankMaster
+export default WineVariety

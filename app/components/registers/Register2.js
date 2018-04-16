@@ -7,6 +7,7 @@ import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, 
 class Register2 extends Authentication {
     constructor(props) {
         super(props);
+        this.state = { tanks: ['tank-0'], quantities: ['quantity-0'] };
 
         this.goBack = this.goBack.bind(this);
     }
@@ -15,6 +16,12 @@ class Register2 extends Authentication {
       let currProps = this.props;
       currProps.history.goBack();
     }
+
+    appendInput() {
+      var newTank = `tank-${this.state.tanks.length}`;
+      var newQuantity = `quantity-${this.state.quantities.length}`;
+      this.setState({ tanks: this.state.tanks.concat([newTank]), quantities: this.state.quantities.concat([newQuantity]) });
+  }
 
     render() {
         return (
@@ -64,12 +71,6 @@ class Register2 extends Authentication {
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
-                                      <label>Stored/ Transferred to VAT/Tank No.</label>
-                                      <Text field='reg2TankNumber' placeholder='Tank Number' className="form-control" />
-                                    </div>
-                                  </div>
-                                  <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
                                       <label>Clarification Losses</label>
                                       <Text field='reg2Losses' placeholder='Clarification Losses' className="form-control" />
                                     </div>
@@ -77,10 +78,23 @@ class Register2 extends Authentication {
                                 </div>
                                 <div className="row">
                                   <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
-                                      <label>Closing Balance of Must/Juice in that particular tank</label>
-                                      <Text field='reg2ClosingBalance' placeholder='Closing Balance of Must/Juice in that particular tank' className="form-control" />
-                                    </div>
+                                  <div id="dynamicTankInput" className="form-group">
+                                    <label>Tank Number</label>
+                                      {this.state.tanks.map(input => <Text placeholder='Tank Number' className="form-control" field={input} />)}
+                                  </div>
+                                  </div>
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                  <div id="dynamicQuantityInput" className="form-group">
+                                    <label>Transferred Quantity</label>
+                                      {this.state.quantities.map(input => <Text placeholder='Transferred Quantity' className="form-control" field={input} />)}
+                                  </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <button className="btn btn-default" onClick={ () => this.appendInput() }>
+                                      Add Tank
+                                    </button>
                                   </div>
                                 </div>
                                 <div className="row">

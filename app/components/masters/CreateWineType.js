@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { sideBarList, tankType } from '../../utils/Constants';
+import { sideBarList } from '../../utils/Constants';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 
-class CreateTank extends Authentication {
+class CreateWineType extends Authentication {
 
     constructor(props) {
         super(props);
@@ -25,7 +25,7 @@ class CreateTank extends Authentication {
     render() {
         return (
             <div className="container">
-              <div className="register-heading">Tank Master</div>
+              <div className="register-heading">Type of Wine</div>
               <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
               <Form onSubmit={ (values) => {
                                    console.log('s');
@@ -45,8 +45,8 @@ class CreateTank extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12"></div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
-                                      <label>Tank Number</label>
-                                      <Text field='createTankNumber' placeholder='Tank Number' className="form-control" />
+                                      <label>Name</label>
+                                      <Text field='createWineTypeName' placeholder='Name' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
@@ -54,35 +54,10 @@ class CreateTank extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12"></div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
-                                      <label>Type</label>
-                                      <Select className="form-control" field="createTankType" id="createTankType" options={tankType}/>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="row">
-                                  <div className="col-lg-4 col-md-4 col-sm-12"></div>
-                                  <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
-                                      <label>Guging Date</label>
-                                      <Text field='createTankGugingDate' placeholder='Guging Date' className="form-control" type="date" />
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="row">
-                                  <div className="col-lg-4 col-md-4 col-sm-12"></div>
-                                  <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
-                                      <label>Capacity</label>
-                                      <Text field='createTankCapacity' placeholder='Capacity' className="form-control" />
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="row">
-                                  <div className="col-lg-4 col-md-4 col-sm-12"></div>
-                                  <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
-                                      <label>Installation Date</label>
-                                      <Text field='createTankInstallationDate' placeholder='Installation Date' className="form-control" type="date" />
+                                      <label className="text-area-labels">
+                                        Desc:
+                                        <textarea className="form-control" />
+                                      </label>
                                     </div>
                                   </div>
                                 </div>
@@ -111,4 +86,4 @@ class CreateTank extends Authentication {
     }
 }
 
-export default CreateTank;
+export default CreateWineType;

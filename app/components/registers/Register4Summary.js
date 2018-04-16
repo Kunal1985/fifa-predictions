@@ -31,7 +31,7 @@ class Register4Summary extends Authentication {
     render() {
         return (
             <div className="container">
-              <div className="register-heading">Bulk Transfer</div>
+              <div className="register-heading">Fortification</div>
               <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
               <Form onSubmit={ (values) => {
                                    console.log('s');

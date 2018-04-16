@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { sideBarList, OpeningBalanceType, LabellingTransType, sizeInML } from '../../utils/Constants';
+import { sideBarList, sizeInML, bottleSize, wineType, } from '../../utils/Constants';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 
@@ -10,15 +10,14 @@ class Register7 extends Authentication {
 
         this.goBack = this.goBack.bind(this);
         this.state = {
-          LabellingTransType: 1
-      };
-
-      this.handleLabellingTrans = this.handleLabellingTrans.bind(this);
+            transferType: "ownUnitTransfer"
+        };
+        this.handleChange = this.handleChange.bind(this);
     }
 
-    handleLabellingTrans(e) {
+    handleChange(e) {
         this.setState({
-          LabellingTransType: e.target.value
+            transferType: e.target.value
         });
     }
 
@@ -31,11 +30,11 @@ class Register7 extends Authentication {
         let currObj = this;
         return (
             <div className="container">
-              <div className="register-heading">Labelling</div>
+              <div className="register-heading">Disgorging</div>
               <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
               <div className="container">
                 <Form onSubmit={ (values) => {
-                                     console.log('s');
+                                     console.log(values);
                                  } } validate={ (values) => {
                                                                                                                                                             return {
                                                                                                                                                         
@@ -47,207 +46,159 @@ class Register7 extends Authentication {
                         return (
                             <div className="row">
                               <div className="col-lg-12 col-md-12 col-sm-12">
-                                <form onSubmit={ submitForm } id="register7">
-                                <div className="row">
-                                    <div className="col-lg-4 col-md-4 col-sm-12">
-                                      <div className="form-group">
-                                        <label>Opening Balace</label>
-                                        <Select className="form-control" field="reg6TirageSizeInMl" id="reg6TirageSizeInMl" options={sizeInML}/>
-                                        <select field='reg7OpeningBalance' className="form-control">
-                                            {OpeningBalanceType.map(OpeningBalanceTypeVal => {
-                                            return <option key={OpeningBalanceType.id} value={OpeningBalanceTypeVal.id}>
-                                                {OpeningBalanceTypeVal.name}
-                                            </option>;
-                                            })}
-                                        </select>
-                                      </div>
-                                    </div>
-                                  </div>
+                                <form onSubmit={ submitForm } id="register6">
                                   <div className="row">
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
-                                        <label>Size in ML</label>
-                                        <Text field='reg7OpeningBalanceSizeinML' placeholder='Size in ML' className="form-control" />
-                                      </div>
-                                    </div>
-                                    <div className="col-lg-4 col-md-4 col-sm-12">
-                                      <div className="form-group">
-                                        <label>Number of Bottles</label>
-                                        <Text field='reg7OpeningBalanceNumberofBottles' placeholder='Number of Bottles' className="form-control" />
+                                        <label>Date</label>
+                                        <Text field='reg6Date' placeholder='Date' className="form-control" type="date" />
                                       </div>
                                     </div>
                                   </div>
                                   <div>
-                                    <div className="form-label-headings">Wine Bottles Received</div>
+                                    <div className="form-label-headings">Quantity of Wine Transferred for Labelling</div>
+                                    <div className="form-group">
+                                      <div className="row">
+                                        <div className="col-lg-4 col-md-4 col-sm-12">
+                                          <label>Disgorging Type</label>
+                                          <select className="form-control" value={ this.state.value } onChange={ currObj.handleChange }>
+                                            <option value="ownUnitTransfer" selected>Transfer to Own Unit</option>
+                                            <option value="otherUnitTransfer">Tranfer to Other Unit</option>
+                                          </select>
+                                        </div>
+                                      </div>
+                                      { currObj.state.transferType === "ownUnitTransfer" ? <div>
+                                                                                       <div className="row">
+                                                                                         <div className="col-lg-4 col-md-4 col-sm-12">
+                                                                                           <div className="form-group">
+                                                                                             <label>Bottle Size</label>
+                                                                                             <Select className="form-control" field="reg6DisgorgedSizeInMl" id="reg6DisgorgedSizeInMl" options={sizeInML}/>
+                                                                                           </div>
+                                                                                         </div>
+                                                                                         <div className="col-lg-4 col-md-4 col-sm-12">
+                                                                                           <div className="form-group">
+                                                                                             <label>Number of Bottles</label>
+                                                                                             <Text field='reg6NoofBottlesDisgorged' placeholder='Number of Bottles' className="form-control" />
+                                                                                           </div>
+                                                                                         </div>
+                                                                                       </div>
+                                                                                     </div> : <div>
+                                                                                                <div className="row">
+                                                                                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                                                                                    <div className="form-group">
+                                                                                                      <label>Name of Party</label>
+                                                                                                      <Text field='reg6NameofPartyOther' placeholder='Name of Party' className="form-control" />
+                                                                                                    </div>
+                                                                                                  </div>
+                                                                                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                                                                                    <div className="form-group">
+                                                                                                      <label>Address of Party</label>
+                                                                                                      <Text field='reg6AddressofPartyOther' placeholder='Address of Party' className="form-control" />
+                                                                                                    </div>
+                                                                                                  </div>
+                                                                                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                                                                                    <div className="form-group">
+                                                                                                      <label>T.P/E.P No.</label>
+                                                                                                      <Text field='reg6TpepNoOther' placeholder='T.P/E.P  No.' className="form-control" />
+                                                                                                    </div>
+                                                                                                  </div>
+                                                                                                </div>
+                                                                                                <div className="row">
+                                                                                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                                                                                    <div className="form-group">
+                                                                                                      <label>Size in ML</label>
+                                                                                                      <Select className="form-control" field="reg6OtherUnitSizeInMl" id="reg6OtherUnitSizeInMl" options={sizeInML}/>
+                                                                                                    </div>
+                                                                                                  </div>
+                                                                                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                                                                                    <div className="form-group">
+                                                                                                      <label>Number of Bottles</label>
+                                                                                                      <Text field='reg6NoofBottlesTransferOther' placeholder='Number of Bottles' className="form-control" />
+                                                                                                    </div>
+                                                                                                  </div>
+                                                                                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                                                                                    <div className="form-group">
+                                                                                                      <label>Vend Fee Paid</label>
+                                                                                                      <Text field='reg6VendorFeePaidOther' placeholder='Vendor Fee Paid' className="form-control" />
+                                                                                                    </div>
+                                                                                                  </div>
+                                                                                                </div>
+                                                                                                <div className="row">
+                                                                                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                                                                                    <div className="form-group">
+                                                                                                      <label>Excise Duty Paid</label>
+                                                                                                      <Text field='reg6ExciseeDutyPaidOther' placeholder='Excise Duty Paid' className="form-control" />
+                                                                                                    </div>
+                                                                                                  </div>
+                                                                                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                                                                                    <div className="form-group">
+                                                                                                      <label>Special Fee Paid</label>
+                                                                                                      <Text field='reg6SpecialFeePaidOther' placeholder='Special Fee Paid' className="form-control" />
+                                                                                                    </div>
+                                                                                                  </div>
+                                                                                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                                                                                    <div className="form-group">
+                                                                                                      <label>Kind of Liscense</label>
+                                                                                                      <Text field='reg6KindofLiscense' placeholder='Kind of Liscense' className="form-control" />
+                                                                                                    </div>
+                                                                                                  </div>
+                                                                                                </div>
+                                                                                              </div> }
+                                    </div>
+                                  </div>
+                                  <div>
+                                    <div className="form-label-headings">Disgorging Loss</div>
                                     <div className="row">
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
-                                          <label>Name of the Unit</label>
-                                          <Text field='reg7BottlesReceivedUnitName' placeholder='Name of the Unit' className="form-control" />
+                                          <label>No. of Bottles</label>
+                                          <Text field='reg7DisgorgingLossNoOfBottles' placeholder='No. of Bottles' className="form-control" />
                                         </div>
                                       </div>
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
-                                          <label>T.P Number</label>
-                                          <Text field='reg7BottlesReceivedTpNo' placeholder='T.P Number' className="form-control" />
+                                          <label>Quantity in Litres</label>
+                                          <Text field='reg7DisgorgingLossQuantity' placeholder='Quantity in Litres' className="form-control" />
                                         </div>
                                       </div>
+                                    </div>
+                                  </div>
+                                  <div>
+                                    <div className="form-label-headings">Closing Balance of Disgorged Bottles</div>
+                                    <div className="row">
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                           <label>Size in ML</label>
-                                          <Text field='reg7BottlesReceivedSize' placeholder='Size in ML' className="form-control" />
+                                          <Text field='reg7DisgorgingClosingBalanceSize' placeholder='Size in ML' className="form-control" />
                                         </div>
                                       </div>
-                                    </div>
-                                    <div className="row">
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
-                                          <label>Number of Bottles</label>
-                                          <Text field='reg7BottlesReceivedNumberofBottles' placeholder='Number of Bottles' className="form-control" />
+                                          <label>No. of Bottles</label>
+                                          <Text field='reg7DisgorgingClosingBalanceNoOfBottles' placeholder='No. of Bottles' className="form-control" />
                                         </div>
                                       </div>
                                     </div>
                                   </div>
-                                  <div className="row">
-                                    <div className="col-lg-4 col-md-4 col-sm-12">
-                                      <div className="form-group">
-                                        <label>Labelling</label>
-                                        <select field='reg7LabellingTransType' className="form-control"  value={ this.state.LabellingTransType } onChange={ currObj.handleLabellingTrans }>
-                                            {LabellingTransType.map(LabellingTransTypeVal => {
-                                            return <option key={LabellingTransTypeVal.id} value={LabellingTransTypeVal.id}>
-                                                {LabellingTransTypeVal.name}
-                                            </option>;
-                                            })}
-                                        </select>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  { currObj.state.LabellingTransType == 1 ?
                                   <div>
+                                    <div className="form-label-headings">Closing Balance of Tirage Bottles</div>
                                     <div className="row">
-                                      <div className="col-lg-4 col-md-4 col-sm-12">
-                                        <div className="form-group">
-                                          <label>Brand Name</label>
-                                          <Text field='reg7LabellingBrandName' placeholder='Brand Name' className="form-control" />
-                                        </div>
-                                      </div>
-                                      <div className="col-lg-4 col-md-4 col-sm-12">
-                                        <div className="form-group">
-                                          <label>Strength</label>
-                                          <Text field='reg7LabellingStrength' placeholder='Strength' className="form-control" />
-                                        </div>
-                                      </div>
-                                      <div className="col-lg-4 col-md-4 col-sm-12">
-                                        <div className="form-group">
-                                          <label>Batch No.</label>
-                                          <Text field='reg7LabellingBatchNo' placeholder='Batch No' className="form-control" />
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div className="row">
-                                      <div className="col-lg-4 col-md-4 col-sm-12">
-                                        <div className="form-group">
-                                          <label>Mfg. Date</label>
-                                          <Text field='reg7LabellingMfgDate' placeholder='Mfg. Date' className="form-control" type="date"/>
-                                        </div>
-                                      </div>
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                           <label>Size in ML</label>
-                                          <Text field='reg7LabellingSizeinML' placeholder='Size in ML' className="form-control" />
+                                          <Text field='reg7TirageClosingBalanceSize' placeholder='Size in ML' className="form-control" />
                                         </div>
                                       </div>
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                           <label>No. of Bottles</label>
-                                          <Text field='reg7LabellingNoOfBottles' placeholder='No. of Bottles' className="form-control" />
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div> : 
-                                  <div>
-                                    <div className="row">
-                                      <div className="col-lg-4 col-md-4 col-sm-12">
-                                        <div className="form-group">
-                                          <label>Name of Unit</label>
-                                          <Text field='reg7TransferredUnitName' placeholder='Name of Unit' className="form-control" />
+                                          <Text field='reg7TirageClosingBalanceNoOfBottles' placeholder='No. of Bottles' className="form-control" />
                                         </div>
                                       </div>
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
-                                          <label>T.P No.</label>
-                                          <Text field='reg7TransferredTpNo' placeholder='T.P No.' className="form-control" />
-                                        </div>
-                                      </div>
-                                      <div className="col-lg-4 col-md-4 col-sm-12">
-                                        <div className="form-group">
-                                          <label>Size in ML</label>
-                                          <Text field='reg7TransferredSizeinMl' placeholder='Size in ML' className="form-control" />
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div className="row">
-                                      <div className="col-lg-4 col-md-4 col-sm-12">
-                                        <div className="form-group">
-                                          <label>Number of Bottles</label>
-                                          <Text field='reg7TransferredNoOfBottles' placeholder='Number of Bottles' className="form-control" />
-                                        </div>
-                                      </div>
-                                      <div className="col-lg-4 col-md-4 col-sm-12">
-                                        <div className="form-group">
-                                          <label>Vend Fee</label>
-                                          <Text field='reg7TransferredVendFee' placeholder='Vend Fee' className="form-control" />
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div> }
-                                  <div>
-                                    <div className="form-label-headings">Sampling</div>
-                                    <div className="row">
-                                      <div className="col-lg-4 col-md-4 col-sm-12">
-                                        <div className="form-group">
-                                          <label>Size in Ml</label>
-                                          <Text field='reg7SamlingSize' placeholder='Size in Ml' className="form-control" />
-                                        </div>
-                                      </div>
-                                      <div className="col-lg-4 col-md-4 col-sm-12">
-                                        <div className="form-group">
-                                          <label>No. of Bottles</label>
-                                          <Text field='reg7SamlingNoOfBottles' placeholder='No. of Bottles' className="form-control" />
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div>
-                                    <div className="form-label-headings">Breakages</div>
-                                    <div className="row">
-                                      <div className="col-lg-4 col-md-4 col-sm-12">
-                                        <div className="form-group">
-                                          <label>Size in Ml</label>
-                                          <Text field='reg7BreakagesSize' placeholder='Size in Ml' className="form-control" />
-                                        </div>
-                                      </div>
-                                      <div className="col-lg-4 col-md-4 col-sm-12">
-                                        <div className="form-group">
-                                          <label>No. of Bottles</label>
-                                          <Text field='reg7BreakagesNoOfBottles' placeholder='No. of Bottles' className="form-control" />
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div>
-                                    <div className="form-label-headings">Closing Balance</div>
-                                    <div className="row">
-                                      <div className="col-lg-4 col-md-4 col-sm-12">
-                                        <div className="form-group">
-                                          <label>Size in Ml</label>
-                                          <Text field='reg7ClosingBalanceSize' placeholder='Size in Ml' className="form-control" />
-                                        </div>
-                                      </div>
-                                      <div className="col-lg-4 col-md-4 col-sm-12">
-                                        <div className="form-group">
-                                          <label>No. of Bottles</label>
-                                          <Text field='reg7ClosingBalanceNoOfBottles' placeholder='No. of Bottles' className="form-control" />
+                                          <label>Loss</label>
+                                          <Text field='reg7TirageLoss' placeholder='Loss' className="form-control" />
                                         </div>
                                       </div>
                                     </div>

@@ -8,6 +8,8 @@ class Register3 extends Authentication {
     constructor(props) {
         super(props);
 
+        this.state = { tanks: ['tank-0'], openings: ['opening-0'], quantities: ['quantity-0'] };
+
         this.goBack = this.goBack.bind(this);
     }
 
@@ -16,13 +18,22 @@ class Register3 extends Authentication {
       currProps.history.goBack();
     }
 
+    appendInput() {
+      var newTank = `tank-${this.state.tanks.length}`;
+      var newOpening = `opening-${this.state.openings.length}`;
+      var newQuantity = `quantity-${this.state.quantities.length}`;
+      this.setState({ tanks: this.state.tanks.concat([newTank]),
+        quantities: this.state.quantities.concat([newQuantity]),
+        openings: this.state.openings.concat([newOpening]) });
+  }
+
     render() {
         return (
             <div className="container">
               <div className="register-heading">Fermentation</div>
               <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
               <Form onSubmit={ (values) => {
-                                   console.log('s');
+                                   console.log(values);
                                } } validate={ (values) => {
                                                                                                                                                       return {
                                                                                                                                                   
@@ -58,48 +69,53 @@ class Register3 extends Authentication {
                                 <div className="row">
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
-                                      <label>Racking Loss</label>
-                                      <Text field='reg3RackingLoss' placeholder='Racking Loss' className="form-control" />
-                                    </div>
-                                  </div>
-                                  <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
                                       <label>Base Wine obtained</label>
                                       <Text field='reg3BaseWine' placeholder='Base Wine obtained' className="form-control" />
                                     </div>
                                   </div>
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <div className="form-group">
+                                      <label>Racking Loss</label>
+                                      <Text field='reg3RackingLoss' placeholder='Racking Loss' className="form-control" />
+                                    </div>
+                                  </div>
                                 </div>
-                                <div>
                                   <div className="form-label-headings">Details of Wine Transfer</div>
                                   <div className="row">
                                     <div className="col-lg-4 col-md-4 col-sm-12">
-                                      <div className="form-group">
+                                      <div id="dynamicTankInput" className="form-group">
                                         <label>Tank Number</label>
-                                        <select className="form-control"></select>
+                                          {this.state.tanks.map(input => <Text placeholder='Tank Number' className="form-control" field={input} />)}
                                       </div>
                                     </div>
                                     <div className="col-lg-4 col-md-4 col-sm-12">
-                                      <div className="form-group">
+                                      <div id="dynamicOpeningInput" className="form-group">
                                         <label>Opening Balance</label>
-                                        <Text field='reg3openingBalanceTransfer' placeholder='Opening Balance' className="form-control" />
+                                          {this.state.openings.map(input => <Text placeholder='Opening Balance' className="form-control" field={input} />)}
                                       </div>
                                     </div>
                                     <div className="col-lg-4 col-md-4 col-sm-12">
-                                      <div className="form-group">
+                                      <div id="dynamicTransferQuantityInput" className="form-group">
                                         <label>Transferred Quantity</label>
-                                        <Text field='reg3TransferredQuantity' placeholder='Transferred Quantity' className="form-control" />
+                                          {this.state.quantities.map(input => <Text placeholder='Transferred Quantity' className="form-control" field={input} />)}
                                       </div>
                                     </div>
                                   </div>
                                   <div className="row">
                                     <div className="col-lg-4 col-md-4 col-sm-12">
+                                      <button className="btn btn-default" onClick={ () => this.appendInput() }>
+                                        Add Tank
+                                      </button>
+                                    </div>
+                                  </div>
+                                  <div className="row">
+                                    <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
-                                        <label>Closing Balance</label>
-                                        <Text field='reg3ClosingBalance' placeholder='Closing Balance' className="form-control" />
+                                        <label>Transfer Loss</label>
+                                        <Text field='reg3TransferLoss' placeholder='Transfer Loss' className="form-control" />
                                       </div>
                                     </div>
                                   </div>
-                                </div>
                                 <div className="row">
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">

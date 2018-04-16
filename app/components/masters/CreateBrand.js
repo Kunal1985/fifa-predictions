@@ -46,7 +46,7 @@ class createBrand extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Name</label>
-                                      <Text field='createColourName' placeholder='Name' className="form-control" />
+                                      <Text field='createBrandName' placeholder='Name' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
@@ -54,45 +54,9 @@ class createBrand extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12"></div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                   <div className="form-group">
-                                      <label>Size</label>
+                                      <label>Size in ML</label>
                                       <Text field='createBrandSize' placeholder='Size in ML' className="form-control" />
                                   </div>
-                                  </div>
-                                </div>
-                                <div className="row">
-                                  <div className="col-lg-4 col-md-4 col-sm-12"></div>
-                                  <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
-                                        <label>Type</label>
-                                        <Text field='createBrandType' placeholder='Type' className="form-control" />
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="row">
-                                  <div className="col-lg-4 col-md-4 col-sm-12"></div>
-                                  <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
-                                      <label>Sanction Date</label>
-                                      <Text field='createBrandSanctionDate' placeholder='Sanction Date' className="form-control" type="date" />
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="row">
-                                  <div className="col-lg-4 col-md-4 col-sm-12"></div>
-                                  <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
-                                      <label>Effective From</label>
-                                      <Text field='createBrandEffectiveDate' placeholder='Effective From' className="form-control" type="date" />
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="row">
-                                  <div className="col-lg-4 col-md-4 col-sm-12"></div>
-                                  <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
-                                        <label>MRP</label>
-                                        <Text field='createBrandMrp' placeholder='MRP' className="form-control" />
-                                    </div>
                                   </div>
                                 </div>
                                 <div className="row">
@@ -110,6 +74,60 @@ class createBrand extends Authentication {
                                     <div className="form-group">
                                         <label>Excise Duty</label>
                                         <Text field='createBrandExciseDuty' placeholder='Excise Duty' className="form-control" />
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-lg-4 col-md-4 col-sm-12"></div>
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <div className="form-group">
+                                        <label>Sales Tax</label>
+                                        <Text field='createBrandSalesTax' placeholder='Sales Tax' className="form-control" />
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-lg-4 col-md-4 col-sm-12"></div>
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <div className="form-group">
+                                        <label>MRP</label>
+                                        <Text field='createBrandMrp' placeholder='MRP' className="form-control" />
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-lg-4 col-md-4 col-sm-12"></div>
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <div className="form-group">
+                                        <label>Label Approved Order Number</label>
+                                        <Text field='createBrandApprovedLabel' placeholder='Label Approved Order Number' className="form-control" />
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-lg-4 col-md-4 col-sm-12"></div>
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <div className="form-group">
+                                        <label>MRP Approval Date</label>
+                                        <Text field='createBrandMrpApprovalDate' placeholder='MRP Approval Date' className="form-control" type="date"/>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-lg-4 col-md-4 col-sm-12"></div>
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <div className="form-group">
+                                      <label>MRP Effective From</label>
+                                      <Text field='createBrandMrpEffectiveDate' placeholder='MRP Effective From' className="form-control" type="date" />
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-lg-4 col-md-4 col-sm-12"></div>
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <div className="form-group">
+                                      <label>MRP Change Date</label>
+                                      <Text field='createBrandMrpChangeDate' placeholder='MRP Change Date' className="form-control" type="date" />
                                     </div>
                                   </div>
                                 </div>
