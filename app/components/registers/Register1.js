@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { sideBarList, grapeVariety } from '../../utils/Constants';
+import rp from 'request-promise';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 import { InputGroup } from 'react-bootstrap';
@@ -9,7 +10,6 @@ class Register1 extends Authentication {
 
     constructor(props) {
         super(props);
-
         this.goBack = this.goBack.bind(this);
     }
 
@@ -18,18 +18,70 @@ class Register1 extends Authentication {
       currProps.history.goBack();
     }
 
+    getCurrRecord(queryParams){
+      let currObj = this;
+      if(queryParams.upsertAction === 'update' && queryParams.id){
+        let options = {
+          method: 'POST',
+          uri: 'http://localhost:3000/getRegister1Record',
+          body: {_id: queryParams.id},
+          json: true
+        };
+        rp(options)
+            .then(function (body) {
+              console.log("getRegister1Record Response", body);
+              if(!currObj.state || !currObj.state.currRecord)
+                currObj.setState({currRecord: {
+                    _id: body._id,
+                    reg1DateofReceipt: body.dateOfReceipt,
+                    reg1GrapeVariety: body.grapeVariety,
+                    reg1GrapeQuantity: body.quantity
+                  }
+                });
+            })
+            .catch(function (err) {
+                console.log("Error", err);
+            });
+      }
+    }
+
     render() {
+      let queryParams = this.props.location.query;
+      this.getCurrRecord(queryParams);
+      let thisVar = this;
         return (
             <div className="container">
               <div className="register-heading">Grape/Fruit Receipt Transactions</div>
               <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
-              <Form onSubmit={ (values) => {
-                                   console.log(values);
-                               } } validate={ (values) => {
-                                                                                                                                                         return {
-                                                                                                                                                     
-                                                                                                                                                         }
-                                                                                                                                                     } }>
+              <Form 
+                defaultValues = {thisVar.state? thisVar.state.currRecord ? thisVar.state.currRecord: {} : {}}
+                onSubmit={ (values) => {
+                    if(thisVar.state && thisVar.state.currRecord)
+                      values._id = thisVar.state.currRecord._id;
+                    let options = {
+                      method: 'POST',
+                      uri: 'http://localhost:3000/upsertRegister1',
+                      body: values,
+                      json: true
+                    };
+                    rp(options)
+                        .then(function (body) {
+                          console.log("Response", body);
+                          thisVar.goBack();
+                        })
+                        .catch(function (err) {
+                            console.log("Error", err);
+                        });
+                  } 
+                }
+                validate={ (values) => {
+                    return {
+                      reg1DateofReceipt: !values.reg1DateofReceipt ? 'Please select the Date of Receipt' : undefined,
+                      reg1GrapeVariety: !values.reg1GrapeVariety ? 'Please select the Grape Variety' : undefined,
+                      reg1GrapeQuantity: !values.reg1GrapeQuantity ? 'Please enter Quantity of Fruit/Grapes Crushed in Kg.' : undefined
+                    }
+                  } 
+                }>
                 { ({submitForm}) => {
                       let errorMessage = null;
                   

@@ -10,6 +10,7 @@ var logger = require('morgan');
 var async = require('async');
 var colors = require('colors');
 var mongoose = require('mongoose');
+var ObjectId = mongoose.Types.ObjectId;
 var request = require('request');
 var React = require('react');
 var ReactDOM = require('react-dom/server');
@@ -23,6 +24,14 @@ var LocalStrategy = require('passport-local').Strategy;
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var User = require('./models/user');
+var Register1 = require('./models/register1');
+var Register2 = require('./models/register2');
+var Register3 = require('./models/register3');
+var Register4 = require('./models/register4');
+var Register5 = require('./models/register5');
+var Register6 = require('./models/register6');
+var Register7 = require('./models/register7');
+var Register8 = require('./models/register8');
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
@@ -131,6 +140,61 @@ app.post('/logout', function(req, res, next) {
   req.session.destroy(function (err) {
     console.log("Session Destroyed!!!");
     res.redirect('/');
+  });
+});
+
+/**
+ * POST /upsertRegister1
+ * Upsert Register1
+ */
+app.post('/upsertRegister1', function(req, res, next) {
+  let data = {};
+  let reqBody = req.body;
+  let currRecordId = reqBody._id
+  data.dateOfReceipt = reqBody.reg1DateofReceipt;
+  data.grapeVariety = reqBody.reg1GrapeVariety;
+  data.quantity = reqBody.reg1GrapeQuantity;
+  console.log("upsertRegister1", data);
+  if(currRecordId){
+    Register1.update({_id: ObjectId(currRecordId)}, data, function(err, donor) {
+      if (err) return next(err);
+      console.log("Record Updated", donor);
+      res.json({ upsertRegister1: true });
+    });
+  } else {
+    var register1 = new Register1(data);
+    register1.save(function(err, register1Record) {
+      if (err) return next(err);
+      console.log("New Record Created", register1Record);
+      res.json({upsertRegister1: true});
+    });
+  }
+});
+
+/**
+ * GET /getRegister1
+ * Get Register1
+ */
+app.get('/getRegister1', function(req, res, next) {
+  console.log("getRegister1");
+  Register1.find({}, function(err, doc) {
+    if (err) { throw err; }
+    console.log(doc.length, "Register1 records found");
+    res.json(doc);
+  });
+});
+
+/**
+ * GET /getRegister1Record
+ * Get Register1 Record
+ */
+app.post('/getRegister1Record', function(req, res, next) {
+  let reqBody = req.body;
+  console.log("getRegister1Record", reqBody);
+  Register1.findOne({_id: ObjectId(reqBody._id)}, function(err, doc) {
+    if (err) { throw err; }
+    console.log("Register1 record found");
+    res.json(doc);
   });
 });
 
