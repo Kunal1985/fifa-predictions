@@ -34,7 +34,7 @@ class Register1Summary extends Authentication {
       console.log("getRegiter1");
       let options = {
         method: 'GET',
-        uri: 'http://localhost:3000/getRegister1',
+        uri: 'http://159.89.165.136:3000/getRegister1',
         json: true
       };
       rp(options)

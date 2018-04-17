@@ -24,7 +24,7 @@ class Navbar extends React.Component {
     let currProps = this.props;
     let options = {
         method: 'POST',
-        uri: 'http://localhost:3000/logout',
+        uri: 'http://159.89.165.136:3000/logout',
         json: true
     };
     rp(options)
@@ -40,7 +40,7 @@ class Navbar extends React.Component {
   render() {
     let currObj = this;
     if(!currObj.state || (currObj.state && !currObj.state.currUser)){
-      rp("http://localhost:3000/userDetails")
+      rp("http://159.89.165.136:3000/userDetails")
         .then(function (body) {
             currObj.setState({currUser: JSON.parse(body)});
         })

@@ -23,7 +23,7 @@ class Register1 extends Authentication {
       if(queryParams.upsertAction === 'update' && queryParams.id){
         let options = {
           method: 'POST',
-          uri: 'http://localhost:3000/getRegister1Record',
+          uri: 'http://159.89.165.136:3000/getRegister1Record',
           body: {_id: queryParams.id},
           json: true
         };
@@ -60,7 +60,7 @@ class Register1 extends Authentication {
                       values._id = thisVar.state.currRecord._id;
                     let options = {
                       method: 'POST',
-                      uri: 'http://localhost:3000/upsertRegister1',
+                      uri: 'http://159.89.165.136:3000/upsertRegister1',
                       body: values,
                       json: true
                     };
