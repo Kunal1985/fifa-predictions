@@ -199,6 +199,8 @@ app.post('/getRegister1Record', function(req, res, next) {
 });
 
 app.use(function(req, res) {
+  res.header("Access-Control-Allow-Origin", "*"); 
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   if(!req.session.passport && req.url != "/"){
     res.redirect("/");
   } else{
@@ -224,6 +226,8 @@ app.use(function(req, res) {
 });
 
 app.use(function(err, req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*"); 
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   console.log(err.stack.red);
   res.status(err.status || 500);
   res.send({ message: err.message });
