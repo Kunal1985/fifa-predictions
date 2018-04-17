@@ -36,7 +36,7 @@ var Register8 = require('./models/register8');
 passport.use(new LocalStrategy(
   function(username, password, done) {
     console.log(username, password);
-    let user = {};
+    var user = {};
     user.username = username;
     user.password = password;
     User.findOne(user, function(err, doc) {
@@ -118,7 +118,7 @@ app.post('/login', passport.authenticate('local', { failureRedirect: '/login' })
  * Logged-In User details
  */
 app.get('/userDetails', function(req, res, next) {
-  let currPassport = req.session.passport;
+  var currPassport = req.session.passport;
   if(currPassport){
     console.log("userDetails", currPassport);
     User.findOne({username: currPassport.user}, function(err, doc) {
@@ -148,9 +148,9 @@ app.post('/logout', function(req, res, next) {
  * Upsert Register1
  */
 app.post('/upsertRegister1', function(req, res, next) {
-  let data = {};
-  let reqBody = req.body;
-  let currRecordId = reqBody._id
+  var data = {};
+  var reqBody = req.body;
+  var currRecordId = reqBody._id
   data.dateOfReceipt = reqBody.reg1DateofReceipt;
   data.grapeVariety = reqBody.reg1GrapeVariety;
   data.quantity = reqBody.reg1GrapeQuantity;
@@ -189,7 +189,7 @@ app.get('/getRegister1', function(req, res, next) {
  * Get Register1 Record
  */
 app.post('/getRegister1Record', function(req, res, next) {
-  let reqBody = req.body;
+  var reqBody = req.body;
   console.log("getRegister1Record", reqBody);
   Register1.findOne({_id: ObjectId(reqBody._id)}, function(err, doc) {
     if (err) { throw err; }
