@@ -4,7 +4,7 @@ import { sideBarList } from '../../utils/Constants';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 
-class CreateLabelledBottleOpeningEntry extends Authentication {
+class CreateFlavourOpeningEntry extends Authentication {
 
     constructor(props) {
         super(props);
@@ -25,7 +25,7 @@ class CreateLabelledBottleOpeningEntry extends Authentication {
     render() {
         return (
             <div className="container">
-              <div className="register-heading">Labelled Bottle Details</div>
+              <div className="register-heading">Flavour</div>
               <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
               <Form onSubmit={ (values) => {
                                    console.log('s');
@@ -54,17 +54,17 @@ class CreateLabelledBottleOpeningEntry extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12"></div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
-                                      <label>Type</label>
-                                      <select className="form-control" field="type" id="type"></select>
+                                      <label>Tank</label>
+                                      <select className="form-control" field="tank" id="tank"></select>
                                     </div>
                                   </div>
                                 </div>
                                 <div className="row">
                                   <div className="col-lg-4 col-md-4 col-sm-12"></div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
-                                      <label>Bottle Size</label>
-                                      <select className="form-control" field="bottleSize" id="bottleSize"></select>
+                                  <div className="form-group">
+                                      <label>Flavour</label>
+                                      <select className="form-control" field="flavour" id="flavour"></select>
                                     </div>
                                   </div>
                                 </div>
@@ -102,4 +102,4 @@ class CreateLabelledBottleOpeningEntry extends Authentication {
     }
 }
 
-export default CreateLabelledBottleOpeningEntry;
+export default CreateFlavourOpeningEntry;

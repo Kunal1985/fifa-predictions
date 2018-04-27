@@ -33,6 +33,14 @@ var Register6 = require('./models/registers/register6');
 var Register7 = require('./models/registers/register7');
 var Register8 = require('./models/registers/register8');
 var Register9 = require('./models/registers/register9');
+var FlavourdDetails = require('./models/opening-balance/flavourDetails');
+var SpiritDetails = require('./models/opening-balance/spiritDetails');
+var GrapesDetails = require('./models/opening-balance/grapesDetails');
+var CrushedJuiceDetails = require('./models/opening-balance/crushedJuiceDetails');
+var FermentedDetails = require('./models/opening-balance/fermentedDetails');
+var BottledDetails = require('./models/opening-balance/bottledDetails');
+var TirageDisgorgedDetails = require('./models/opening-balance/tirageDisgorgedDetails');
+var LabelledDetails = require('./models/opening-balance/labelledDetails');
 
 passport.use(new LocalStrategy(
   function(username, password, done) {

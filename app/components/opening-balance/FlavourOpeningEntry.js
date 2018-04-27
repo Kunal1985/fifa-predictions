@@ -9,7 +9,19 @@ class FlavourOpeningEntry extends Authentication {
     constructor(props) {
         super(props);
         this.goBack = this.goBack.bind(this);
+        this.createFlavour = this.createFlavour.bind(this);
+        this.editFlavour = this.editFlavour.bind(this);
     }
+    
+    createFlavour() {
+        let currProps = this.props;
+        currProps.history.push("/createFlavourOpening");
+    }
+
+    editFlavour() {
+      let currProps = this.props;
+      currProps.history.push("/createFlavourOpening");
+  }
 
     goBack() {
         let currProps = this.props;
@@ -32,71 +44,62 @@ class FlavourOpeningEntry extends Authentication {
                       let errorMessage = null;
                   
                       return (
-                          <div className="row">
-                            <div className="col-lg-12 col-md-12 col-sm-12">
-                              <form onSubmit={ submitForm } id="tankmaster">
-                              <div className="row">
-                                <div className="form-group">
-                                    <div className="col-lg-4 col-md-4 col-sm-12">
-                                        <label>Date<i className="fa fa-calendar"></i></label>
-                                        <Text field='flavourOpeningEntryDate' placeholder='Date' className="form-control" type="date" />
-                                    </div>
-                                </div>
-                              </div>
-                                <div className="row">
-                                    <div><label>Opening Entry</label></div>
-                                    <div>
-                                        <Table bordered hover responsive>
-                                        <thead>
-                                            <tr>
-                                            <th>Sr No</th>
-                                            <th>Flavour</th>
-                                            <th>UOM</th>
-                                            <th>Quantity</th>
-                                            <th>Verify</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td><Text field='flavourOpeningEntryQuantity' placeholder='Quantity' className="form-control" /></td>
-                                            <td>Otto</td>
-                                            </tr>
-                                            <tr>
-                                            <td>1</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td><Text field='flavourOpeningEntryQuantity' placeholder='Quantity' className="form-control" /></td>
-                                            <td>Otto</td>
-                                            </tr>
-                                            <tr>
-                                            <td>1</td>
-                                            <td>Larry the Bird</td>
-                                            <td>@twitter</td>
-                                            <td><Text field='flavourOpeningEntryQuantity' placeholder='Quantity' className="form-control" /></td>
-                                            <td>Otto</td>
-                                            </tr>
-                                        </tbody>
-                                        </Table>;
-                                    </div>
-                                </div>
-                                <div className="row">
-                                  <div className="button-section text-center">
-                                    <div className="text-center">
-                                      <button className="btn btn-primary" onClick={ this.goBack }>
-                                        Cancel
-                                      </button>
-                                    </div>
+                        <div className="row">
+                        <div className="col-lg-12 col-md-12 col-sm-12">
+                          <form onSubmit={ submitForm } id="tankmaster">
+                            <div className="row">
+                              <div className="col-lg-12 col-md-12 col-sm-12">
+                                <div className="search-section">
+                                  <div>
+                                    <button className="btn btn-default" onClick={ this.createFlavour }>
+                                      Add New
+                                    </button>
                                   </div>
                                 </div>
-                              </form>
+                              </div>
                             </div>
-                          </div>
+                          </form>
+                        </div>
+                      </div>
                       )
                   } }
               </Form>
+              <div>
+              <Table bordered hover responsive>
+                <thead>
+                  <tr>
+                    <th>Edit</th>
+                    <th>Tank</th>
+                    <th>Flavour</th>
+                    <th>Quantity</th>
+                    <th>Verify</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="text-center" onClick={ this.editFlavour }><i className="fa fa-edit"></i></td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>Otto</td>
+                  </tr>
+                  <tr>
+                    <td className="text-center" onClick={ this.editFlavour }><i className="fa fa-edit"></i></td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    <td>Otto</td>
+                  </tr>
+                  <tr>
+                    <td className="text-center" onClick={ this.editFlavour }><i className="fa fa-edit"></i></td>
+                    <td>Larry the Bird</td>
+                    <td>@twitter</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                  </tr>
+                </tbody>
+              </Table>;
+              </div>
             </div>
             );
     }

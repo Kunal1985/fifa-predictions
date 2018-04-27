@@ -46,7 +46,7 @@ class CreateCrushedJuiceOpeningEntry extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Date</label>
-                                      <Text field='createCrushedJuiceOpeningDate' placeholder='Date' className="form-control" type="date" />
+                                      <Text field='date' placeholder='Date' className="form-control" type="date" />
                                     </div>
                                   </div>
                                 </div>
@@ -55,7 +55,7 @@ class CreateCrushedJuiceOpeningEntry extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Tank</label>
-                                      <select className="form-control"></select>
+                                      <select className="form-control" field="tank" id="tank"></select>
                                     </div>
                                   </div>
                                 </div>
@@ -64,7 +64,7 @@ class CreateCrushedJuiceOpeningEntry extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                   <div className="form-group">
                                       <label>Grape Variety</label>
-                                      <select className="form-control"></select>
+                                      <select className="form-control" field="grapeVariety" id="grapeVariety"></select>
                                     </div>
                                   </div>
                                 </div>
@@ -73,7 +73,7 @@ class CreateCrushedJuiceOpeningEntry extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Quantity</label>
-                                      <Text field='createCrushedJuiceOpeningQuantity' placeholder='Quantity' className="form-control" />
+                                      <Text field='quantity' placeholder='Quantity' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
