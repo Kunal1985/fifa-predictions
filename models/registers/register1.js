@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var register1Schema = mongoose.Schema({
     dateOfReceipt: String,
     supplierName: String,
+    supplierQty: Number,
     quantity: Number,
     state: String,
     district: String,

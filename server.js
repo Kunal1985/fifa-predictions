@@ -149,12 +149,8 @@ app.post('/logout', function(req, res, next) {
  * Upsert Register1
  */
 app.post('/upsertRegister1', function(req, res, next) {
-  var data = {};
-  var reqBody = req.body;
-  var currRecordId = reqBody._id
-  data.dateOfReceipt = reqBody.reg1DateofReceipt;
-  data.grapeVariety = reqBody.reg1GrapeVariety;
-  data.quantity = reqBody.reg1GrapeQuantity;
+  var data = req.body;
+  var currRecordId = data._id;
   console.log("upsertRegister1", data);
   if(currRecordId){
     Register1.update({_id: ObjectId(currRecordId)}, data, function(err, donor) {
@@ -194,7 +190,7 @@ app.post('/getRegister1Record', function(req, res, next) {
   console.log("getRegister1Record", reqBody);
   Register1.findOne({_id: ObjectId(reqBody._id)}, function(err, doc) {
     if (err) { throw err; }
-    console.log("Register1 record found");
+    console.log("Register1 record found", doc);
     res.json(doc);
   });
 });
