@@ -30,14 +30,14 @@ class Login extends Authentication {
                 onSubmit={(values) => {
                     let options = {
                         method: 'POST',
-                        uri: 'http://159.89.165.136:3000/' + currObj.state.submitType.toLowerCase(),
+                        uri: 'http://localhost:3000/' + currObj.state.submitType.toLowerCase(),
                         body: values,
                         json: true
                     };
                     rp(options)
                         .then(function (body) {
                                 if(body.userRegistered){
-                                    options.uri = 'http://159.89.165.136:3000/login'
+                                    options.uri = 'http://localhost:3000/login'
                                     rp(options)
                                         .then(function (body) {
                                             currObj.props.history.push("/home");

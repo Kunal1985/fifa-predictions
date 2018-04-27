@@ -3,41 +3,16 @@ var mongoose = require('mongoose');
 // define the schema for our user model
 var register6Schema = mongoose.Schema({
     date: String,
-    openingBalance: {
-        sizeInML: Number,
-        bottlesQty: Number
-    },
-    wineReceived: {
-        sizeInML: Number,
-        bottlesQty: Number
-    },
-    totalWineAvailable: {
-        sizeInML: Number,
-        bottlesQty: Number
-    },
-    issuedForDisgorging: {
-        tankNumber: String,
-        sizeInML: Number,
-        bottlesQty: Number,
-        openingBalance: Number
-    },
-    wineBottled: {
-        wineType: String,
-        bottleSize: String,
-        bottlesQty: Number,
-        quantity: Number
-    },
-    labelling: {
-        type: String,
-        bottleSize: Number,
-        bottlesQty: Number
-    },
+    tankNumber: String,
+    wineVariety: String,
+    openingBalance: Number,
     wineType: String,
-    bottleSize: Number,
-    bottlesQty: Number,
-    disgorgingLoss: Number,
-    dbClosingBalance: Number,
-    tbClosingBalance: Number,
+    brandName: String,
+    bottleSize: String,
+    bottleQty: Number,
+	qtyInLitres: Number,
+	bottlingLoss: Number,
+	closingBalance: Number,
     remarks: String
 });
 

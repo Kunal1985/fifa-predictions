@@ -39,7 +39,7 @@ class Register4 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Date</label>
-                                      <Text field='reg3Date' placeholder='Date' className="form-control" type="date" />
+                                      <Text field='date' placeholder='Date' className="form-control" type="date" />
                                     </div>
                                   </div>
                                 </div>
@@ -48,19 +48,19 @@ class Register4 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Tank Number</label>
-                                      <select className="form-control"></select>
+                                      <select className="form-control" field="fermentedWine.tankNumber" id="fermentedWine.tankNumber"></select>
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Opening Balance</label>
-                                      <Text field='reg4FermentedWineOpeningBalance' placeholder='Opening Balance' className="form-control" />
+                                      <Text field='fermentedWine.openingBalance' placeholder='Opening Balance' className="form-control" />
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Quantity Taken</label>
-                                      <Text field='reg4FermentedWineQuantitytaken' placeholder='Quantity Taken' className="form-control" />
+                                      <Text field='fermentedWine.quantity' placeholder='Quantity Taken' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
@@ -68,7 +68,7 @@ class Register4 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Closing Balance</label>
-                                      <Text field='reg4FermentedWineClosingBalance' placeholder='Closing Balance' className="form-control" />
+                                      <Text field='fermentedWine.closingBalance' placeholder='Closing Balance' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
@@ -77,19 +77,19 @@ class Register4 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Tank Number</label>
-                                      <select className="form-control"></select>
+                                      <select className="form-control" field="spirit.tankNumber" id="spirit.tankNumber"></select>
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Opening Balance</label>
-                                      <Text field='reg4SpiritOpeningBalance' placeholder='Opening Balance' className="form-control" />
+                                      <Text field='spirit.openingBalance' placeholder='Opening Balance' className="form-control" />
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Strength</label>
-                                      <Text field='reg4Strength' placeholder='Strength' className="form-control" />
+                                      <Text field='spirit.strength' placeholder='Strength' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
@@ -97,13 +97,13 @@ class Register4 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Quantity Taken</label>
-                                      <Text field='reg4SpiritQuantitytaken' placeholder='Quantity Taken' className="form-control" />
+                                      <Text field='spirit.quantity' placeholder='Quantity Taken' className="form-control" />
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Closing Balance</label>
-                                      <Text field='reg4SpiritClosingBalance' placeholder='Closing Balance' className="form-control" />
+                                      <Text field='spirit.closingBalance' placeholder='Closing Balance' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
@@ -112,19 +112,19 @@ class Register4 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Tank Number</label>
-                                      <Text field='reg3TankNumber' placeholder='Tank Number' className="form-control" />
+                                      <select className="form-control" field="fortifiedWine.tankNumber" id="fortifiedWine.tankNumber"></select>
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Quantity in Litres</label>
-                                      <Text field='reg3Quantity' placeholder='Quantity in Litres' className="form-control" />
+                                      <Text field='fortifiedWine.quantity' placeholder='Quantity in Litres' className="form-control" />
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Alcohol %</label>
-                                      <Text field='reg3AlcoholPercent' placeholder='Alcohol %' className="form-control" />
+                                      <Text field='fortifiedWine.alcoholPercentage' placeholder='Alcohol %' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
@@ -132,13 +132,13 @@ class Register4 extends Authentication {
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Closing Balance of Fortified Wine</label>
-                                        <Text field='reg3ClosingBalance' placeholder='Closing Balance of Fortified Wine' className="form-control" />
+                                        <Text field='fortifiedWine.closingBalance' placeholder='Closing Balance of Fortified Wine' className="form-control" />
                                       </div>
                                     </div>
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Fortification Loss</label>
-                                        <Text field='reg3FortificationLoss' placeholder='Fortification Loss' className="form-control" />
+                                        <Text field='fortifiedWine.fortificationLoss' placeholder='Fortification Loss' className="form-control" />
                                       </div>
                                     </div>
                                   </div>
@@ -147,7 +147,7 @@ class Register4 extends Authentication {
                                     <div className="form-group">
                                       <label>
                                         Remarks:
-                                        <textarea className="form-control" />
+                                        <textarea className="form-control" field='remarks'/>
                                       </label>
                                     </div>
                                   </div>

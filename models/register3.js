@@ -9,6 +9,7 @@ var register3Schema = mongoose.Schema({
     baseWineObtained: Number,
     transferredQty: Number,
     closingBalance: Number,
+    transferLoss: Number,
     remarks: String
 });
 

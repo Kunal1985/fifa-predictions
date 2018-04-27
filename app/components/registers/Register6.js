@@ -40,19 +40,19 @@ class Register6 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Date</label>
-                                      <Text field='reg5Date' placeholder='Date' className="form-control" type="date" />
+                                      <Text field='date' placeholder='Date' className="form-control" type="date" />
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Tank Number</label>
-                                      <select className="form-control"></select>
+                                      <select className="form-control" field="tankNumber" id="tankNumber"></select>
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Wine Variety</label>
-                                      <Text field='reg5WineVariety' placeholder='Wine Variety' className="form-control" />
+                                      <Text field='wineVariety' placeholder='Wine Variety' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
@@ -60,7 +60,7 @@ class Register6 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Opening Balance</label>
-                                      <Text field='reg5OpeningBalance' placeholder='Opening Balance' className="form-control" />
+                                      <Text field='openingBalance' placeholder='Opening Balance' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
@@ -70,7 +70,7 @@ class Register6 extends Authentication {
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Type of Wine</label>
-                                        <select className="form-control">
+                                        <select className="form-control" field="wineType" id="wineType">
                                           { wineType.map(wineTypeVal => {
                                                 return <option key={ wineTypeVal.id } value={ wineTypeVal.id }>
                                                          { wineTypeVal.name }
@@ -82,13 +82,13 @@ class Register6 extends Authentication {
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Name of Brand</label>
-                                        <select className="form-control"></select>
+                                        <select className="form-control" field="brandName" id="brandName"></select>
                                       </div>
                                     </div>
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Bottle Size in ML</label>
-                                        <select className="form-control">
+                                        <select className="form-control" field="bottleSize" id="bottleSize">
                                           { bottleSize.map(bottleSizeVal => {
                                                 return <option key={ bottleSizeVal.id } value={ bottleSizeVal.id }>
                                                          { bottleSizeVal.name }
@@ -102,19 +102,19 @@ class Register6 extends Authentication {
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Number of Bottles</label>
-                                        <Text field='reg5NoOfBottles' placeholder='Number of Bottles' className="form-control" />
+                                        <Text field='bottleQty' placeholder='Number of Bottles' className="form-control" />
                                       </div>
                                     </div>
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Quantity in Litres</label>
-                                        <Text field='reg5QuantityLitres' placeholder='Quantity in Litres' className="form-control" />
+                                        <Text field='qtyInLitres' placeholder='Quantity in Litres' className="form-control" />
                                       </div>
                                     </div>
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Bottling Loss</label>
-                                        <Text field='reg5BottlingLoss' placeholder='Bottling Loss' className="form-control" />
+                                        <Text field='bottlingLoss' placeholder='Bottling Loss' className="form-control" />
                                       </div>
                                     </div>
                                   </div>
@@ -122,7 +122,7 @@ class Register6 extends Authentication {
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Closing Balance</label>
-                                        <Text field='reg5ClosingBalance' placeholder='Closing Balance' className="form-control" />
+                                        <Text field='closingBalance' placeholder='Closing Balance' className="form-control" />
                                       </div>
                                     </div>
                                   </div>
@@ -132,7 +132,7 @@ class Register6 extends Authentication {
                                     <div className="form-group">
                                       <label className="text-area-labels">
                                         Remarks:
-                                        <textarea className="form-control" />
+                                        <textarea className="form-control" field='remarks'/>
                                       </label>
                                     </div>
                                   </div>

@@ -50,19 +50,19 @@ class Register3 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Date</label>
-                                      <Text field='reg3Date' placeholder='Date' className="form-control" type="date" />
+                                      <Text field='date' placeholder='Date' className="form-control" type="date" />
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Tank Number</label>
-                                      <select className="form-control"></select>
+                                      <select className="form-control" field="tankNumber" id="tankNumber"></select>
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Opening Balance</label>
-                                      <Text field='reg3OpeningBalance' placeholder='Opening Balance' className="form-control" />
+                                      <Text field='openingBalance' placeholder='Opening Balance' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
@@ -70,13 +70,13 @@ class Register3 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Base Wine obtained</label>
-                                      <Text field='reg3BaseWine' placeholder='Base Wine obtained' className="form-control" />
+                                      <Text field='baseWineObtained' placeholder='Base Wine obtained' className="form-control" />
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Racking Loss</label>
-                                      <Text field='reg3RackingLoss' placeholder='Racking Loss' className="form-control" />
+                                      <Text field='rackingLoss' placeholder='Racking Loss' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
@@ -112,7 +112,7 @@ class Register3 extends Authentication {
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Transfer Loss</label>
-                                        <Text field='reg3TransferLoss' placeholder='Transfer Loss' className="form-control" />
+                                        <Text field='transferLoss' placeholder='Transfer Loss' className="form-control" />
                                       </div>
                                     </div>
                                   </div>
@@ -121,7 +121,7 @@ class Register3 extends Authentication {
                                     <div className="form-group">
                                       <label>
                                         Remarks:
-                                        <textarea className="form-control" />
+                                        <textarea className="form-control" field='remarks'/>
                                       </label>
                                     </div>
                                   </div>

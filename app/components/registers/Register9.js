@@ -44,7 +44,7 @@ class Register9 extends Authentication {
                             <div className="col-lg-4 col-md-4 col-sm-12">
                                 <div className="form-group">
                                     <label>Date</label>
-                                    <Text field='reg8Date' placeholder='Date' className="form-control" type="date"/>
+                                    <Text field='date' placeholder='Date' className="form-control" type="date"/>
                                 </div>
                             </div>
                         </div>
@@ -54,19 +54,19 @@ class Register9 extends Authentication {
                                 <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                         <label>Brand Name</label>
-                                        <Text field='reg8BrandName' placeholder='Brand Name' className="form-control"/>
+                                        <Text field='brandName' placeholder='Brand Name' className="form-control"/>
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                         <label>Strength</label>
-                                        <Text field='reg8Strength' placeholder='Strength' className="form-control"/>
+                                        <Text field='strength' placeholder='Strength' className="form-control"/>
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                         <label>Batch No.</label>
-                                        <Text field='reg8BatchNo' placeholder='Batch No.' className="form-control"/>
+                                        <Text field='batchNumber' placeholder='Batch No.' className="form-control"/>
                                     </div>
                                 </div>
                             </div>
@@ -74,7 +74,7 @@ class Register9 extends Authentication {
                                 <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                         <label>Size</label>
-                                        <select field='reg8SizeMl' className="form-control">
+                                        <select field='reg8SizeMl' className="form-control" field="size" id="size">
                                         {sizeInML.map(sizeInMLVal => {
                                           return <option key={sizeInMLVal.id} value={sizeInMLVal.id}>
                                             {sizeInMLVal.name}
@@ -86,7 +86,7 @@ class Register9 extends Authentication {
                                 <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                         <label>Number of Bottles</label>
-                                        <Text field='reg8NumberOfBottles' placeholder='Number of Bottles' className="form-control"/>
+                                        <Text field='bottleQty' placeholder='Number of Bottles' className="form-control"/>
                                     </div>
                                 </div>
                             </div>
@@ -191,19 +191,19 @@ class Register9 extends Authentication {
                                 <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                         <label>Brand Name</label>
-                                        <Text field='reg8ClosingBrandName' placeholder='Brand Name' className="form-control"/>
+                                        <Text field='closingWineBalance.brandName' placeholder='Brand Name' className="form-control"/>
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                         <label>Strength</label>
-                                        <Text field='reg8ClosingStrength' placeholder='Strength' className="form-control"/>
+                                        <Text field='closingWineBalance.strength' placeholder='Strength' className="form-control"/>
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                         <label>Batch No.</label>
-                                        <Text field='reg8ClosingBatchNo' placeholder='Batch No.' className="form-control"/>
+                                        <Text field='closingWineBalance.batchNumber' placeholder='Batch No.' className="form-control"/>
                                     </div>
                                 </div>
                             </div>
@@ -211,7 +211,7 @@ class Register9 extends Authentication {
                                 <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                         <label>Size</label>
-                                        <select field='reg8ClosingSizeMl' className="form-control">
+                                        <select field='reg8ClosingSizeMl' className="form-control" field="closingWineBalance.size" id="closingWineBalance.size">
                                         {sizeInML.map(sizeInMLVal => {
                                           return <option key={sizeInMLVal.id} value={sizeInMLVal.id}>
                                             {sizeInMLVal.name}
@@ -223,7 +223,7 @@ class Register9 extends Authentication {
                                 <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                         <label>Number of Bottles</label>
-                                        <Text field='reg8ClosingNumberOfBottles' placeholder='Number of Bottles' className="form-control"/>
+                                        <Text field='closingWineBalance.bottleQty' placeholder='Number of Bottles' className="form-control"/>
                                     </div>
                                 </div>
                             </div>
@@ -233,7 +233,7 @@ class Register9 extends Authentication {
                                 <div className="form-group">
                                     <label className="text-area-labels">
                                     Remarks:
-                                    <textarea className="form-control"/>
+                                    <textarea className="form-control" field='remarks'/>
                                     </label>
                                 </div> 
                             </div>

@@ -8,7 +8,6 @@ var register2Schema = mongoose.Schema({
     juiceObtained: Number,
     tankNumber: String,
     clarificationLoss: String,
-    closingBalance: Number,
     remarks: String
 });
 

@@ -51,7 +51,7 @@ class Register7 extends Authentication {
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Date</label>
-                                        <Text field='reg6Date' placeholder='Date' className="form-control" type="date" />
+                                        <Text field='date' placeholder='Date' className="form-control" type="date" />
                                       </div>
                                     </div>
                                   </div>
@@ -72,13 +72,13 @@ class Register7 extends Authentication {
                                                                                          <div className="col-lg-4 col-md-4 col-sm-12">
                                                                                            <div className="form-group">
                                                                                              <label>Bottle Size</label>
-                                                                                             <Select className="form-control" field="reg6DisgorgedSizeInMl" id="reg6DisgorgedSizeInMl" options={sizeInML}/>
+                                                                                             <Select className="form-control" field="ownUnit.sizeInML" id="ownUnit.sizeInML" options={sizeInML}/>
                                                                                            </div>
                                                                                          </div>
                                                                                          <div className="col-lg-4 col-md-4 col-sm-12">
                                                                                            <div className="form-group">
                                                                                              <label>Number of Bottles</label>
-                                                                                             <Text field='reg6NoofBottlesDisgorged' placeholder='Number of Bottles' className="form-control" />
+                                                                                             <Text field='ownUnit.bottlesQty' placeholder='Number of Bottles' className="form-control" />
                                                                                            </div>
                                                                                          </div>
                                                                                        </div>
@@ -87,19 +87,19 @@ class Register7 extends Authentication {
                                                                                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                                                                                     <div className="form-group">
                                                                                                       <label>Name of Party</label>
-                                                                                                      <Text field='reg6NameofPartyOther' placeholder='Name of Party' className="form-control" />
+                                                                                                      <Text field='otherUnit.name' placeholder='Name of Party' className="form-control" />
                                                                                                     </div>
                                                                                                   </div>
                                                                                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                                                                                     <div className="form-group">
                                                                                                       <label>Address of Party</label>
-                                                                                                      <Text field='reg6AddressofPartyOther' placeholder='Address of Party' className="form-control" />
+                                                                                                      <Text field='otherUnit.address' placeholder='Address of Party' className="form-control" />
                                                                                                     </div>
                                                                                                   </div>
                                                                                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                                                                                     <div className="form-group">
                                                                                                       <label>T.P/E.P No.</label>
-                                                                                                      <Text field='reg6TpepNoOther' placeholder='T.P/E.P  No.' className="form-control" />
+                                                                                                      <Text field='otherUnit.tpEpNumber' placeholder='T.P/E.P  No.' className="form-control" />
                                                                                                     </div>
                                                                                                   </div>
                                                                                                 </div>
@@ -107,19 +107,19 @@ class Register7 extends Authentication {
                                                                                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                                                                                     <div className="form-group">
                                                                                                       <label>Size in ML</label>
-                                                                                                      <Select className="form-control" field="reg6OtherUnitSizeInMl" id="reg6OtherUnitSizeInMl" options={sizeInML}/>
+                                                                                                      <Select className="form-control" field="otherUnit.size" id="otherUnit.size" options={sizeInML}/>
                                                                                                     </div>
                                                                                                   </div>
                                                                                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                                                                                     <div className="form-group">
                                                                                                       <label>Number of Bottles</label>
-                                                                                                      <Text field='reg6NoofBottlesTransferOther' placeholder='Number of Bottles' className="form-control" />
+                                                                                                      <Text field='otherUnit.bottlesQty' placeholder='Number of Bottles' className="form-control" />
                                                                                                     </div>
                                                                                                   </div>
                                                                                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                                                                                     <div className="form-group">
                                                                                                       <label>Vend Fee Paid</label>
-                                                                                                      <Text field='reg6VendorFeePaidOther' placeholder='Vendor Fee Paid' className="form-control" />
+                                                                                                      <Text field='otherUnit.vendFee' placeholder='Vendor Fee Paid' className="form-control" />
                                                                                                     </div>
                                                                                                   </div>
                                                                                                 </div>
@@ -127,19 +127,19 @@ class Register7 extends Authentication {
                                                                                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                                                                                     <div className="form-group">
                                                                                                       <label>Excise Duty Paid</label>
-                                                                                                      <Text field='reg6ExciseeDutyPaidOther' placeholder='Excise Duty Paid' className="form-control" />
+                                                                                                      <Text field='otherUnit.exciseDuty' placeholder='Excise Duty Paid' className="form-control" />
                                                                                                     </div>
                                                                                                   </div>
                                                                                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                                                                                     <div className="form-group">
                                                                                                       <label>Special Fee Paid</label>
-                                                                                                      <Text field='reg6SpecialFeePaidOther' placeholder='Special Fee Paid' className="form-control" />
+                                                                                                      <Text field='otherUnit.specialFee' placeholder='Special Fee Paid' className="form-control" />
                                                                                                     </div>
                                                                                                   </div>
                                                                                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                                                                                     <div className="form-group">
                                                                                                       <label>Kind of Liscense</label>
-                                                                                                      <Text field='reg6KindofLiscense' placeholder='Kind of Liscense' className="form-control" />
+                                                                                                      <Text field='otherUnit.liscenseType' placeholder='Kind of Liscense' className="form-control" />
                                                                                                     </div>
                                                                                                   </div>
                                                                                                 </div>
@@ -152,13 +152,13 @@ class Register7 extends Authentication {
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                           <label>No. of Bottles</label>
-                                          <Text field='reg7DisgorgingLossNoOfBottles' placeholder='No. of Bottles' className="form-control" />
+                                          <Text field='disgorgingLoss.bottlesQty' placeholder='No. of Bottles' className="form-control" />
                                         </div>
                                       </div>
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                           <label>Quantity in Litres</label>
-                                          <Text field='reg7DisgorgingLossQuantity' placeholder='Quantity in Litres' className="form-control" />
+                                          <Text field='disgorgingLoss.quantity' placeholder='Quantity in Litres' className="form-control" />
                                         </div>
                                       </div>
                                     </div>
@@ -169,13 +169,13 @@ class Register7 extends Authentication {
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                           <label>Size in ML</label>
-                                          <Text field='reg7DisgorgingClosingBalanceSize' placeholder='Size in ML' className="form-control" />
+                                          <Text field='closingBalanceDisgorged.sizeInML' placeholder='Size in ML' className="form-control" />
                                         </div>
                                       </div>
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                           <label>No. of Bottles</label>
-                                          <Text field='reg7DisgorgingClosingBalanceNoOfBottles' placeholder='No. of Bottles' className="form-control" />
+                                          <Text field='closingBalanceDisgorged.bottlesQty' placeholder='No. of Bottles' className="form-control" />
                                         </div>
                                       </div>
                                     </div>
@@ -186,19 +186,19 @@ class Register7 extends Authentication {
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                           <label>Size in ML</label>
-                                          <Text field='reg7TirageClosingBalanceSize' placeholder='Size in ML' className="form-control" />
+                                          <Text field='closingBalanceTirage.bottleSize' placeholder='Size in ML' className="form-control" />
                                         </div>
                                       </div>
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                           <label>No. of Bottles</label>
-                                          <Text field='reg7TirageClosingBalanceNoOfBottles' placeholder='No. of Bottles' className="form-control" />
+                                          <Text field='closingBalanceTirage.bottlesQty' placeholder='No. of Bottles' className="form-control" />
                                         </div>
                                       </div>
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                           <label>Loss</label>
-                                          <Text field='reg7TirageLoss' placeholder='Loss' className="form-control" />
+                                          <Text field='closingBalanceTirage.loss' placeholder='Loss' className="form-control" />
                                         </div>
                                       </div>
                                     </div>
@@ -208,7 +208,7 @@ class Register7 extends Authentication {
                                       <div className="form-group">
                                         <label className="text-area-labels">
                                           Remarks:
-                                          <textarea className="form-control" />
+                                          <textarea className="form-control" field='remarks'/>
                                         </label>
                                       </div>
                                     </div>

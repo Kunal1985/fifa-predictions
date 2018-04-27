@@ -3,9 +3,34 @@ var mongoose = require('mongoose');
 // define the schema for our user model
 var register7Schema = mongoose.Schema({
     date: String,
-    tankNumber: String,
-    openingBalance: Number,
-    closingBalance: Number,
+    ownUnit: {
+        sizeInML: Number,
+        bottlesQty: Number
+    },
+    otherUnit: {
+        name: String,
+        address: String,
+        tpEpNumber: String,
+        size: Number,
+        bottlesQty: Number,
+        vendFee: Number,
+        exciseDuty: Number,
+        specialFee: Number,
+        liscenseType: String
+    },
+    disgorgingLoss: {
+        bottlesQty: Number,
+        quantity: Number
+    },
+    closingBalanceDisgorged: {
+        sizeInML: Number,
+        bottlesQty: Number,
+    },
+    closingBalanceTirage: {
+        bottleSize: String,
+        bottlesQty: Number,
+        loss: Number
+    },
     remarks: String
 });
 

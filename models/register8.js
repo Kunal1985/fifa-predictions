@@ -4,13 +4,8 @@ var mongoose = require('mongoose');
 var register8Schema = mongoose.Schema({
     date: String,
     tankNumber: String,
-    brandName: String,
-    strength: Number,
-    batchNumber: String,
-    size: String,
-    bottleQty: Number,
-	openingBalance: Number,
-	closingBalance: Number,
+    openingBalance: Number,
+    closingBalance: Number,
     remarks: String
 });
 

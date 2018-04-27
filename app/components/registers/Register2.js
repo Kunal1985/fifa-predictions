@@ -46,19 +46,19 @@ class Register2 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Date</label>
-                                      <Text field='reg2Date' placeholder='Date' className="form-control" type="date" />
+                                      <Text field='date' placeholder='Date' className="form-control" type="date" />
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Fruit/Grape Variety</label>
-                                      <Select className="form-control" field="reg2GrapeVariety" id="reg1GrapeVariety" options={grapeVariety}/>
+                                      <Select className="form-control" field="grapeVariety" id="reg1GrapeVariety" options={grapeVariety}/>
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Quantity of Fruit/Grapes Crushed in Kg.</label>
-                                      <Text field='reg2GrapeQuantity' placeholder='KG' className="form-control" />
+                                      <Text field='quantity' placeholder='KG' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
@@ -66,13 +66,13 @@ class Register2 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Must/Juice Obtained from Fruits/Grapes</label>
-                                      <Text field='reg2JuiceQuantity' placeholder='Litres' className="form-control" />
+                                      <Text field='juiceObtained' placeholder='Litres' className="form-control" />
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Clarification Losses</label>
-                                      <Text field='reg2Losses' placeholder='Clarification Losses' className="form-control" />
+                                      <Text field='clarificationLoss' placeholder='Clarification Losses' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
@@ -102,7 +102,7 @@ class Register2 extends Authentication {
                                     <div className="form-group">
                                       <label className="text-area-labels">
                                         Remarks:
-                                        <textarea className="form-control" />
+                                        <textarea className="form-control" field='remarks'/>
                                       </label>
                                     </div>
                                   </div>

@@ -76,13 +76,13 @@ class Register5 extends Authentication {
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Tank Number</label>
-                                        <select className="form-control"></select>
+                                        <select className="form-control" field="tankNumber" id="tankNumber"></select>
                                       </div>
                                     </div>
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Opening Balance</label>
-                                        <Text field='openingBalanceBulk' placeholder='Opening Balance' className="form-control" />
+                                        <Text field='openingBalance' placeholder='Opening Balance' className="form-control" />
                                       </div>
                                     </div>
                                   </div>
@@ -106,19 +106,19 @@ class Register5 extends Authentication {
                                         <div className="col-lg-4 col-md-4 col-sm-12">
                                           <div className="form-group">
                                             <label>Tank Number</label>
-                                            <select className="form-control"></select>
+                                            <select className="form-control" field="ownUnit.tankNumber" id="ownUnit.tankNumber"></select>
                                           </div>
                                         </div>
                                         <div className="col-lg-4 col-md-4 col-sm-12">
                                           <div className="form-group">
                                             <label>Opening Balance</label>
-                                            <Text field='reg5TransferFromTankQty>OpeningBalance' placeholder='Opening Balance' className="form-control" />
+                                            <Text field='ownUnit.openingBalance' placeholder='Opening Balance' className="form-control" />
                                           </div>
                                         </div>
                                         <div className="col-lg-4 col-md-4 col-sm-12">
                                           <div className="form-group">
                                             <label>Wine Variety</label>
-                                            <select className="form-control"></select>
+                                            <select className="form-control" field="ownUnit.wineVariety" id="ownUnit.wineVariety"></select>
                                           </div>
                                         </div>
                                       </div>
@@ -126,19 +126,19 @@ class Register5 extends Authentication {
                                         <div className="col-lg-4 col-md-4 col-sm-12">
                                           <div className="form-group">
                                             <label>Quantity Issued</label>
-                                            <Text field='reg5TransferFromTankQtyIssued' placeholder='Quantity Issued' className="form-control" />
+                                            <Text field='ownUnit.quantityIssued' placeholder='Quantity Issued' className="form-control" />
                                           </div>
                                         </div>
                                         <div className="col-lg-4 col-md-4 col-sm-12">
                                           <div className="form-group">
                                             <label>Quantity Received</label>
-                                            <Text field='reg5TransferFromTankQtyReceived' placeholder='Quantity Received' className="form-control" />
+                                            <Text field='ownUnit.quantityReceived' placeholder='Quantity Received' className="form-control" />
                                           </div>
                                         </div>
                                         <div className="col-lg-4 col-md-4 col-sm-12">
                                           <div className="form-group">
                                             <label>Losses</label>
-                                            <Text field='reg5TransferFromTankLosses' placeholder='Losses' className="form-control" />
+                                            <Text field='ownUnit.loss' placeholder='Losses' className="form-control" />
                                           </div>
                                         </div>
                                       </div>
@@ -255,7 +255,7 @@ class Register5 extends Authentication {
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Closing Balance</label>
-                                        <Text field='closingBalanceBulk' placeholder='Closing Balance' className="form-control" />
+                                        <Text field='closingBalance' placeholder='Closing Balance' className="form-control" />
                                       </div>
                                     </div>
                                   </div>
