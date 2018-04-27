@@ -91,7 +91,7 @@ class Register5 extends Authentication {
                                     <div className="row">
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <label>Type</label>
-                                        <select className="form-control" value={ this.state.bulkOpeningValue } onChange={ currObj.handleOpeningChange }>
+                                        <select className="form-control" field="trasnferType" id="trasnferType" value={ this.state.bulkOpeningValue } onChange={ currObj.handleOpeningChange }>
                                           { purchaseType.map(purchaseTypeVal => {
                                                 return <option key={ purchaseTypeVal.id } value={ purchaseTypeVal.id }>
                                                          { purchaseTypeVal.name }
@@ -162,28 +162,28 @@ class Register5 extends Authentication {
                                           <div className="col-lg-4 col-md-4 col-sm-12">
                                             <div className="form-group">
                                               <label>Party Name</label>
-                                              <Text field='reg5BulkReprorocessingPartyName' placeholder='Party Name' className="form-control" />
+                                              <Text field='otherUnit.partyName' placeholder='Party Name' className="form-control" />
                                             </div>
                                           </div>
                                           <div className="col-lg-4 col-md-4 col-sm-12">
                                             <div className="form-group">
                                               <label>Address of party</label>
-                                              <Text field='reg5BulkReprorocessingPartyAdd' placeholder='Address of party' className="form-control" />
+                                              <Text field='otherUnit.partyAddress' placeholder='Address of party' className="form-control" />
                                             </div>
                                           </div>
                                           <div className="col-lg-4 col-md-4 col-sm-12">
                                             { currObj.state.bulkOtherUnitValue == 1 || currObj.state.bulkOtherUnitValue == 2 || currObj.state.bulkOtherUnitValue == 4 || currObj.state.bulkOtherUnitValue == 5 ?
                                               <div className="form-group"><label>T.P No.</label>
-                                              <Text field='reg5BulkReprorocessingTpEpIpNo' placeholder='T.P No.' className="form-control" />
+                                              <Text field='otherUnit.tpepipNumber' placeholder='T.P No.' className="form-control" />
                                             </div> : <div></div> }
                                             { currObj.state.bulkOtherUnitValue == 6 ?
                                             <div className="form-group"><label>E.P No.</label>
-                                              <Text field='reg5BulkReprorocessingTpEpIpNo' placeholder='E.P No.' className="form-control" />
+                                              <Text field='otherUnit.tpepipNumber' placeholder='E.P No.' className="form-control" />
                                             </div> : <div></div>
                                           }
                                           { currObj.state.bulkOtherUnitValue == 3 ?
                                             <div className="form-group"><label>I.P No.</label>
-                                              <Text field='reg5BulkReprorocessingTpEpIpNo' placeholder='I.P No.' className="form-control" />
+                                              <Text field='otherUnit.tpepipNumber' placeholder='I.P No.' className="form-control" />
                                             </div> : <div></div>
                                           }
                                           </div>
@@ -192,13 +192,13 @@ class Register5 extends Authentication {
                                           <div className="col-lg-4 col-md-4 col-sm-12">
                                             <div className="form-group">
                                               <label>Kind of Liscense</label>
-                                              <Text field='reg5KindofLiscense' placeholder='Kind of Liscense' className="form-control" />
+                                              <Text field='otherUnit.liscenseType' placeholder='Kind of Liscense' className="form-control" />
                                             </div>
                                           </div>
                                           <div className="col-lg-4 col-md-4 col-sm-12">
                                             <div className="form-group">
                                               <label>Wine Variety</label>
-                                              <select className="form-control"></select>
+                                              <select className="form-control" field="otherUnit.wineVariety" id="otherUnit.wineVariety"></select>
                                             </div>
                                           </div>
                                         </div>
@@ -206,25 +206,25 @@ class Register5 extends Authentication {
                                           <div className="col-lg-4 col-md-4 col-sm-12">
                                             <div className="form-group">
                                               <label>Quantity in Litres</label>
-                                              <Text field='reg5BulkReprorocessingLitres' placeholder='Quantity in Litres' className="form-control" />
+                                              <Text field='qtyInLitres' placeholder='Quantity in Litres' className="form-control" />
                                             </div>
                                           </div>
                                           { currObj.state.bulkOtherUnitValue == 3 ?
                                             <div className="col-lg-4 col-md-4 col-sm-12">
                                             <div className="form-group">
                                               <label>Import Fee Paid</label>
-                                              <Text field='reg5BulkReprorocessingImportFee' placeholder='Import Fee Paid' className="form-control" />
+                                              <Text field='otherUnit.importExportFeePaid' placeholder='Import Fee Paid' className="form-control" />
                                             </div></div> : <div></div> }
                                             { currObj.state.bulkOtherUnitValue == 6 ?
                                             <div className="col-lg-4 col-md-4 col-sm-12">
                                             <div className="form-group">
                                               <label>Export Fee Paid</label>
-                                              <Text field='reg5BulkReprorocessingExportFee' placeholder='Export Fee Paid' className="form-control" />
+                                              <Text field='otherUnit.importExportFeePaid' placeholder='Export Fee Paid' className="form-control" />
                                             </div> </div>: <div></div> }
                                           <div className="col-lg-4 col-md-4 col-sm-12">
                                             <div className="form-group">
                                               <label>Vend Fee Paid</label>
-                                              <Text field='reg5BulkReprorocessingVendFee' placeholder='Vend Fee Paid' className="form-control" />
+                                              <Text field='otherUnit.vendFeePaid' placeholder='Vend Fee Paid' className="form-control" />
                                             </div>
                                           </div>
                                         </div>
@@ -232,19 +232,19 @@ class Register5 extends Authentication {
                                           <div className="col-lg-4 col-md-4 col-sm-12">
                                             <div className="form-group">
                                               <label>Excise Duty Paid</label>
-                                              <Text field='reg5BulkReprorocessingExciseDuty' placeholder='Excise Duty Paid' className="form-control" />
+                                              <Text field='otherUnit.exciseDutyPaid' placeholder='Excise Duty Paid' className="form-control" />
                                             </div>
                                           </div>
                                           <div className="col-lg-4 col-md-4 col-sm-12">
                                             <div className="form-group">
                                               <label>Special Fee Paid</label>
-                                              <Text field='regBulkReprorocessingSpecialFee' placeholder='Special Fee Paid' className="form-control" />
+                                              <Text field='otherUnit.specialFeePaid' placeholder='Special Fee Paid' className="form-control" />
                                             </div>
                                           </div>
                                           <div className="col-lg-4 col-md-4 col-sm-12">
                                             <div className="form-group">
                                               <label>Losses</label>
-                                              <Text field='reg5BulkReprorocessingLosses' placeholder='Losses' className="form-control" />
+                                              <Text field='otherUnit.losses' placeholder='Losses' className="form-control" />
                                             </div>
                                           </div>
                                         </div>
@@ -264,7 +264,7 @@ class Register5 extends Authentication {
                                       <div className="form-group">
                                         <label>
                                           Remarks:
-                                          <textarea className="form-control" />
+                                          <textarea field='remarks' className="form-control" />
                                         </label>
                                       </div>
                                     </div>

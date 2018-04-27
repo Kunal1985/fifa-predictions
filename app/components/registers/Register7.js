@@ -61,7 +61,7 @@ class Register7 extends Authentication {
                                       <div className="row">
                                         <div className="col-lg-4 col-md-4 col-sm-12">
                                           <label>Disgorging Type</label>
-                                          <select className="form-control" value={ this.state.value } onChange={ currObj.handleChange }>
+                                          <select className="form-control" field="disgorgingType" id="disgorgingType" value={ this.state.value } onChange={ currObj.handleChange }>
                                             <option value="ownUnitTransfer" selected>Transfer to Own Unit</option>
                                             <option value="otherUnitTransfer">Tranfer to Other Unit</option>
                                           </select>

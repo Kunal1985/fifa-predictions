@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 // define the schema for our user model
 var register7Schema = mongoose.Schema({
     date: String,
+    disgorgingType: String,
     ownUnit: {
         sizeInML: Number,
         bottlesQty: Number

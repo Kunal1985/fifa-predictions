@@ -24,14 +24,14 @@ var LocalStrategy = require('passport-local').Strategy;
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var User = require('./models/user');
-var Register1 = require('./models/register1');
-var Register2 = require('./models/register2');
-var Register3 = require('./models/register3');
-var Register4 = require('./models/register4');
-var Register5 = require('./models/register5');
-var Register6 = require('./models/register6');
-var Register7 = require('./models/register7');
-var Register8 = require('./models/register8');
+var Register1 = require('./models/registers/register1');
+var Register2 = require('./models/registers/register2');
+var Register3 = require('./models/registers/register3');
+var Register4 = require('./models/registers/register4');
+var Register5 = require('./models/registers/register5');
+var Register6 = require('./models/registers/register6');
+var Register7 = require('./models/registers/register7');
+var Register8 = require('./models/registers/register8');
 
 passport.use(new LocalStrategy(
   function(username, password, done) {

@@ -17,7 +17,13 @@ var register9Schema = mongoose.Schema({
     dispatchedSize: Number,
     dispatchedBottleQty: Number,
     tpEpNumber: String,
-    
+    vendExportFee: Number,
+    exciseDuty: Number,
+    totalAmount: Number,
+    chalanNumber: String,
+    chalanDate: String,
+    mfgCost: Number,
+    approvedMrp: Number,
     closingWineBalance: {
         brandName: String,
         strength: Number,

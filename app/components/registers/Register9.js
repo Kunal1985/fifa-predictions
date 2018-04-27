@@ -95,7 +95,7 @@ class Register9 extends Authentication {
                             <div className="col-lg-4 col-md-4 col-sm-12">
                                 <div className="form-group">
                                     <label>Quantity of Wine Dispatched from Finished Goods</label>
-                                        <select field='reg8dispatchType' className="form-control">
+                                        <select field="dispatchType" id="dispatchType" className="form-control">
                                             {TransferType.map(TransferTypeVal => {
                                             return <option key={TransferTypeVal.id} value={TransferTypeVal.id}>
                                                 {TransferTypeVal.name}
@@ -109,19 +109,19 @@ class Register9 extends Authentication {
                             <div className="col-lg-4 col-md-4 col-sm-12">
                                 <div className="form-group">
                                     <label>Party Name</label>
-                                    <Text field='reg8PartyName' placeholder='Party Name' className="form-control" />
+                                    <Text field='partyName' placeholder='Party Name' className="form-control" />
                                 </div>
                             </div>
                             <div className="col-lg-4 col-md-4 col-sm-12">
                                 <div className="form-group">
                                     <label>Kind of Liscense Held</label>
-                                    <Text field='reg5BulkPurchasePartyAdd' placeholder='Address of party' className="form-control" />
+                                    <Text field='liscenseType' placeholder='Address of party' className="form-control" />
                                 </div>
                             </div>
                             <div className="col-lg-4 col-md-4 col-sm-12">
                             <div className="form-group">
                                 <label>Size in ML</label>
-                                <Text field='reg8SizeinML' placeholder='Size in ML' className="form-control" />
+                                <Text field='dispatchedSize' placeholder='Size in ML' className="form-control" />
                             </div>
                             </div>
                         </div>
@@ -129,19 +129,19 @@ class Register9 extends Authentication {
                             <div className="col-lg-4 col-md-4 col-sm-12">
                             <div className="form-group">
                                 <label>Number of Bottles</label>
-                                <Text field='reg8NumberofBottles' placeholder='Number of Bottles' className="form-control" />
+                                <Text field='dispatchedBottleQty' placeholder='Number of Bottles' className="form-control" />
                             </div>
                             </div>
                             <div className="col-lg-4 col-md-4 col-sm-12">
                             <div className="form-group">
                                 <label>T.P/E.P</label>
-                                <Text field='reg8TpEp' placeholder='T.P/E.P' className="form-control" />
+                                <Text field='tpEpNumber' placeholder='T.P/E.P' className="form-control" />
                             </div>
                             </div>
                             <div className="col-lg-4 col-md-4 col-sm-12">
                             <div className="form-group">
                                 <label>Vend/Export Fee</label>
-                                <Text field='reg8VendExportFee' placeholder='Vend/Export Fee' className="form-control" />
+                                <Text field='vendExportFee' placeholder='Vend/Export Fee' className="form-control" />
                             </div>
                             </div>
                         </div>
@@ -149,19 +149,19 @@ class Register9 extends Authentication {
                             <div className="col-lg-4 col-md-4 col-sm-12">
                             <div className="form-group">
                                 <label>Excise Duty</label>
-                                <Text field='reg8ExciseDuty' placeholder='Excise Duty' className="form-control" />
+                                <Text field='exciseDuty' placeholder='Excise Duty' className="form-control" />
                             </div>
                             </div>
                             <div className="col-lg-4 col-md-4 col-sm-12">
                             <div className="form-group">
                                 <label>Total Amount</label>
-                                <Text field='reg8TotalAmount' placeholder='Total Amount' className="form-control" />
+                                <Text field='totalAmount' placeholder='Total Amount' className="form-control" />
                             </div>
                             </div>
                             <div className="col-lg-4 col-md-4 col-sm-12">
                             <div className="form-group">
                                 <label>Chalan Number</label>
-                                <Text field='reg8ChalanNumber' placeholder='Chalan Number' className="form-control" />
+                                <Text field='chalanNumber' placeholder='Chalan Number' className="form-control" />
                             </div>
                             </div>
                         </div>
@@ -169,19 +169,19 @@ class Register9 extends Authentication {
                             <div className="col-lg-4 col-md-4 col-sm-12">
                             <div className="form-group">
                                 <label>Chalan Date</label>
-                                <Text field='reg8ChalanDate' placeholder='Chalan Date' className="form-control" type="date"/>
+                                <Text field='chalanDate' placeholder='Chalan Date' className="form-control" type="date"/>
                             </div>
                             </div>
                             <div className="col-lg-4 col-md-4 col-sm-12">
                                 <div className="form-group">
                                     <label>Mfg. Cost</label>
-                                    <Text field='reg8MfgCost' placeholder='Mfg. Cost' className="form-control" />
+                                    <Text field='mfgCost' placeholder='Mfg. Cost' className="form-control" />
                                 </div>
                             </div>
                             <div className="col-lg-4 col-md-4 col-sm-12">
                                 <div className="form-group">
                                     <label>Approved MRP</label>
-                                    <Text field='reg8ApprovedMrp' placeholder='Approved MRP' className="form-control" />
+                                    <Text field='approvedMrp' placeholder='Approved MRP' className="form-control" />
                                 </div>
                             </div>
                         </div>

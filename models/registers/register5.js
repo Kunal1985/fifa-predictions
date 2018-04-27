@@ -6,6 +6,7 @@ var register5Schema = mongoose.Schema({
     tankNumber: String,
     openingBalance: Number,
     closingBalance: Number,
+    trasnferType: String,
     ownUnit: {
         tankNumber: Number,
         openingBalance: Number,
@@ -14,32 +15,22 @@ var register5Schema = mongoose.Schema({
         quantityReceived: Number,
         loss: Number
     },
-    bulkPurchase: {
-        txnType: Number,
+    otherUnit: {
+        bulkTransactionType: String,
         partyName: String,
         partyAddress: String,
-        tpepNumber: Number,
+        tpepipNumber: Number,
+        liscenseType: String,
+        wineVariety: String,
         qtyInLitres: Number,
-        importFeePaid: Number,
+        importExportFeePaid: Number,
         vendFeePaid: Number,
-        exciseFeePaid: Number,
+        exciseDutyPaid: Number,
         specialFeePaid: Number,
-        losses: Number,
-        closingBalance: Number
+        losses: Number
     },
-    bulkSale: {
-        txnType: Number,
-        partyName: String,
-        licenseType: String,
-        tpepNumber: Number,
-        qtyInLitres: Number,
-        exportFeePaid: Number,
-        vendFeePaid: Number,
-        exciseFeePaid: Number,
-        specialFeePaid: Number,
-        losses: Number,
-        remarks: String
-    }
+    closingBalance: Number,
+    remarks:String
 });
 
 // create the model for users and expose it to our app
