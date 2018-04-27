@@ -32,6 +32,7 @@ var Register5 = require('./models/registers/register5');
 var Register6 = require('./models/registers/register6');
 var Register7 = require('./models/registers/register7');
 var Register8 = require('./models/registers/register8');
+var Register9 = require('./models/registers/register9');
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
