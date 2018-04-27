@@ -46,7 +46,7 @@ class CreateSpirit extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Name</label>
-                                      <Text field='createSpiritName' placeholder='Name' className="form-control" />
+                                      <Text field='name' placeholder='Name' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
@@ -56,7 +56,7 @@ class CreateSpirit extends Authentication {
                                     <div className="form-group">
                                       <label className="text-area-labels">
                                         Desc:
-                                        <textarea className="form-control" />
+                                        <textarea className="form-control" field="desc" />
                                       </label>
                                     </div>
                                   </div>
@@ -66,7 +66,7 @@ class CreateSpirit extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Brand</label>
-                                      <Text field='createSpiritBrand' placeholder='Brand' className="form-control" />
+                                      <Text field='String' placeholder='Brand' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
