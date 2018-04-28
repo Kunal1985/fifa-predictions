@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { sideBarList, grapeVariety } from '../../utils/Constants';
+import { sideBarList, grapeVariety, suppliers } from '../../utils/Constants';
 import rp from 'request-promise';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
@@ -33,14 +33,7 @@ class Register1 extends Authentication {
                 .then(function(body) {
                     console.log("getRegister1Record Response", body);
                     if (!currObj.state || !currObj.state.currRecord)
-                        currObj.setState({
-                            currRecord: {
-                                _id: body._id,
-                                reg1DateofReceipt: body.dateOfReceipt,
-                                reg1GrapeVariety: body.grapeVariety,
-                                reg1GrapeQuantity: body.quantity
-                            }
-                        });
+                        currObj.setState({ currRecord: body });
                 })
                 .catch(function(err) {
                     console.log("Error", err);
@@ -84,7 +77,9 @@ class Register1 extends Authentication {
                       dateOfReceipt: !values.dateOfReceipt ? 'Please select the Date of Receipt' : undefined,
                       grapeVariety: !values.grapeVariety ? 'Please select the Grape Variety' : undefined,
                       quantity: !values.quantity ? 'Please enter Quantity of Fruit/Grapes Crushed in Kg.' : undefined,
-                      supplierQty: !values.supplierQty ? 'Please enter Quantity of Fruit/Grapes Crushed in Kg.' : undefined
+                      supplierQty: !values.supplierQty ? 'Please enter Quantity of Fruit/Grapes Crushed in Kg.' : undefined,
+                      supplierName: !values.supplierName ? 'Please select the Grape/Fruit Supplier' : undefined,
+                      gatNumber: !values.gatNumber ? 'Please enter a valid GAT/Survey No..' : undefined
                     }
                   } 
                 }>
@@ -105,7 +100,7 @@ class Register1 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Name of Grape/Fruit Supplier</label>
-                                      <select className="form-control" field="supplierName" id="supplierName"></select>
+                                      <Select className="form-control" field="supplierName" id="supplierName" options={ suppliers }/>
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">

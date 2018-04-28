@@ -258,5 +258,18 @@ const LabellingTransType = [{
     name: "Transferred to Other Unit"
 }]
 
+const suppliers = [{
+    label: "Supplier 1",
+    value: "Supplier 1"
+}, {
+    label: "Supplier 2",
+    value: "Supplier 2"
+}]
 
-export { sideBarList, grapeVariety, sizeInML, bottleSize, wineType, licenseType, purchaseType, saleType, searchType, tankType, TransferType, bulkTransferOtherUnitType, OpeningBalanceType, LabellingTransType };
+
+export { 
+    sideBarList, grapeVariety, sizeInML, bottleSize, 
+    wineType, licenseType, purchaseType, saleType, 
+    searchType, tankType, TransferType, 
+    bulkTransferOtherUnitType, OpeningBalanceType, 
+    LabellingTransType, suppliers };
