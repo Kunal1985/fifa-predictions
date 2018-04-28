@@ -46,7 +46,7 @@ class CreateSpiritOpeningEntry extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Date</label>
-                                      <Text field='createSpiritOpeningDate' placeholder='Date' className="form-control" type="date" />
+                                      <Text field='date' placeholder='Date' className="form-control" type="date" />
                                     </div>
                                   </div>
                                 </div>
@@ -55,7 +55,7 @@ class CreateSpiritOpeningEntry extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Tank</label>
-                                      <select className="form-control"></select>
+                                      <select className="form-control" field="tankNumber" id="tankNumber"></select>
                                     </div>
                                   </div>
                                 </div>
@@ -64,25 +64,7 @@ class CreateSpiritOpeningEntry extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                   <div className="form-group">
                                       <label>Spirit type</label>
-                                      <select className="form-control"></select>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="row">
-                                  <div className="col-lg-4 col-md-4 col-sm-12"></div>
-                                  <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
-                                      <label>Strength Type</label>
-                                      <div className="radio">
-                                        <label>
-                                          <input type="radio" value="option1" checked={ true } /> Yes
-                                        </label>
-                                      </div>
-                                      <div className="radio">
-                                        <label>
-                                          <input type="radio" value="option2" /> No
-                                        </label>
-                                      </div>
+                                      <select className="form-control" field="spiritType" id="spiritType"></select>
                                     </div>
                                   </div>
                                 </div>
@@ -91,7 +73,7 @@ class CreateSpiritOpeningEntry extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Quantity</label>
-                                      <Text field='createSpiritOpeningQuantity' placeholder='Quantity' className="form-control" />
+                                      <Text field='quantity' placeholder='Quantity' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
@@ -100,7 +82,7 @@ class CreateSpiritOpeningEntry extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Strength</label>
-                                      <Text field='createSpiritOpeningStrength' placeholder='Strength' className="form-control" />
+                                      <Text field='strength' placeholder='Strength' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
@@ -109,7 +91,7 @@ class CreateSpiritOpeningEntry extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>P.L.</label>
-                                      <Text field='createSpiritOpeningPL' placeholder='P.L.' className="form-control" />
+                                      <Text field='pl' placeholder='P.L.' className="form-control" />
                                     </div>
                                   </div>
                                 </div>

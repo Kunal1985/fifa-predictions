@@ -46,7 +46,7 @@ class CreateLabelledBottleOpeningEntry extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Date</label>
-                                      <Text field='createLabelledBottleOpeningDate' placeholder='Date' className="form-control" type="date" />
+                                      <Text field='date' placeholder='Date' className="form-control" type="date" />
                                     </div>
                                   </div>
                                 </div>
@@ -55,7 +55,7 @@ class CreateLabelledBottleOpeningEntry extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Type</label>
-                                      <select className="form-control"></select>
+                                      <select className="form-control" field="type" id="type"></select>
                                     </div>
                                   </div>
                                 </div>
@@ -64,7 +64,7 @@ class CreateLabelledBottleOpeningEntry extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Bottle Size</label>
-                                      <select className="form-control"></select>
+                                      <select className="form-control" field="bottleSize" id="bottleSize"></select>
                                     </div>
                                   </div>
                                 </div>
@@ -73,7 +73,7 @@ class CreateLabelledBottleOpeningEntry extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Quantity</label>
-                                      <Text field='createLabelledBottleOpeningQuantity' placeholder='Quantity' className="form-control" />
+                                      <Text field='quantity' placeholder='Quantity' className="form-control" />
                                     </div>
                                   </div>
                                 </div>

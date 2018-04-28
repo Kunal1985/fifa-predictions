@@ -46,7 +46,7 @@ class CreateTank extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Tank Number</label>
-                                      <Text field='createTankNumber' placeholder='Tank Number' className="form-control" />
+                                      <Text field='number' placeholder='Tank Number' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
@@ -55,7 +55,7 @@ class CreateTank extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Type</label>
-                                      <Select className="form-control" field="createTankType" id="createTankType" options={tankType}/>
+                                      <Select className="form-control" field="type" id="type" options={tankType}/>
                                     </div>
                                   </div>
                                 </div>
@@ -64,7 +64,7 @@ class CreateTank extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Guging Date</label>
-                                      <Text field='createTankGugingDate' placeholder='Guging Date' className="form-control" type="date" />
+                                      <Text field='gugingDate' placeholder='Guging Date' className="form-control" type="date" />
                                     </div>
                                   </div>
                                 </div>
@@ -73,7 +73,7 @@ class CreateTank extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Capacity</label>
-                                      <Text field='createTankCapacity' placeholder='Capacity' className="form-control" />
+                                      <Text field='capacity' placeholder='Capacity' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
@@ -82,7 +82,7 @@ class CreateTank extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Installation Date</label>
-                                      <Text field='createTankInstallationDate' placeholder='Installation Date' className="form-control" type="date" />
+                                      <Text field='installationDate' placeholder='Installation Date' className="form-control" type="date" />
                                     </div>
                                   </div>
                                 </div>

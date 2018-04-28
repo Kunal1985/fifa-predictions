@@ -43,6 +43,7 @@ import Spirit from './components/masters/Spirit';
 import CreateSpirit from './components/masters/CreateSpirit';
 import OpeningBalance from './components/opening-balance/OpeningBalance';
 import FlavourOpeningEntry from './components/opening-balance/FlavourOpeningEntry';
+import CreateFlavourOpeningEntry from './components/opening-balance/CreateFlavourOpeningEntry';
 import SpiritOpeningEntry from './components/opening-balance/SpiritOpeningEntry';
 import CreateSpiritOpeningEntry from './components/opening-balance/CreateSpiritOpeningEntry';
 import GrapesOpeningEntry from './components/opening-balance/GrapesOpeningEntry';
@@ -100,6 +101,7 @@ export default (
   <Route path='/createSpirit' component={ CreateSpirit } />
   <Route path='/openingBalance' component={ OpeningBalance } />
   <Route path='/flavourDetails' component={ FlavourOpeningEntry } />
+  <Route path='/createFlavourOpening' component={ CreateFlavourOpeningEntry } />
   <Route path='/spiritDetails' component={ SpiritOpeningEntry } />
   <Route path='/createSpiritOpening' component={ CreateSpiritOpeningEntry } />
   <Route path='/grapesDetails' component={ GrapesOpeningEntry } />
