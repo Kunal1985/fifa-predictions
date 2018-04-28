@@ -96,7 +96,8 @@ class Register1Summary extends Authentication {
                     <tr>
                       <th>Edit</th>
                       <th>Tank</th>
-                      <th>Quantity</th>
+                      <th>Quantity Received</th>
+                      <th>Quantity Crushed</th>
                       <th>Variety</th>
                     </tr>
                   </thead>
@@ -106,7 +107,10 @@ class Register1Summary extends Authentication {
                             <td className="text-center" onClick={ () => this.editFermentedWine(currRecord._id) }><i className="fa fa-edit"></i></td>
                             <td>{ currRecord.supplierName }</td>
                             <td>
-                              { currRecord.quantity }
+                              { currRecord.qtyReceived }
+                            </td>
+                            <td>
+                              { currRecord.qtyCrushed }
                             </td>
                             <td>
                               { currRecord.grapeVariety }

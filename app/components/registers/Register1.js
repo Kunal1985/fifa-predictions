@@ -76,8 +76,8 @@ class Register1 extends Authentication {
                     return {
                       dateOfReceipt: !values.dateOfReceipt ? 'Please select the Date of Receipt' : undefined,
                       grapeVariety: !values.grapeVariety ? 'Please select the Grape Variety' : undefined,
-                      quantity: !values.quantity ? 'Please enter Quantity of Fruit/Grapes Crushed in Kg.' : undefined,
-                      supplierQty: !values.supplierQty ? 'Please enter Quantity of Fruit/Grapes Crushed in Kg.' : undefined,
+                      qtyCrushed: !values.qtyCrushed ? 'Please enter Quantity of Fruit/Grapes Crushed in Kg.' : undefined,
+                      qtyReceived: !values.qtyReceived ? 'Please enter Quantity of Fruit/Grapes Received in Kg.' : undefined,
                       supplierName: !values.supplierName ? 'Please select the Grape/Fruit Supplier' : undefined,
                       gatNumber: !values.gatNumber ? 'Please enter a valid GAT/Survey No..' : undefined
                     }
@@ -106,7 +106,7 @@ class Register1 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Quantity of Fruit/Grapes Received in Kg.</label>
-                                      <Text field='supplierQty' placeholder='KG' className="form-control" />
+                                      <Text field='qtyReceived' placeholder='KG' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
@@ -157,7 +157,7 @@ class Register1 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Quantity of Grapes/Fruit Crushed in Kg.</label>
-                                      <Text field='quantity' placeholder='KG' className="form-control" />
+                                      <Text field='qtyCrushed' placeholder='KG' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
