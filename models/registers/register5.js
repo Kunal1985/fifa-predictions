@@ -6,7 +6,7 @@ var register5Schema = mongoose.Schema({
     tankNumber: String,
     openingBalance: Number,
     closingBalance: Number,
-    trasnferType: String,
+    transferType: String,
     ownUnit: {
         tankNumber: Number,
         openingBalance: Number,
@@ -29,7 +29,6 @@ var register5Schema = mongoose.Schema({
         specialFeePaid: Number,
         losses: Number
     },
-    closingBalance: Number,
     remarks:String
 });
 

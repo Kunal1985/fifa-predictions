@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { sideBarList, searchType } from '../../utils/Constants';
+import { getAllRecords } from '../../utils/Functions';
 import Authentication from '../Authentication';
 import rp from 'request-promise';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
@@ -30,66 +31,25 @@ class Register1Summary extends Authentication {
         currProps.history.goBack();
     }
 
-    getRegiter1(currObj) {
-        console.log("getRegiter1");
-        let options = {
-            method: 'GET',
-            uri: 'http://localhost:3000/getRegister1',
-            json: true
-        };
-        rp(options)
-            .then(function(body) {
-                console.log("getRegiter1 Response", body.length, body);
-                if (!currObj.state || currObj.state.lastCount != body.length)
-                    currObj.setState({
-                        records: body,
-                        lastCount: body.length
-                    });
-            })
-            .catch(function(err) {
-                console.log("Error", err);
-            });
-    }
-
     render() {
-        this.getRegiter1(this);
+        getAllRecords(this, "Register1");
         console.log("STATE", this.state);
         let currRecords = this.state ? this.state.records : null;
         return (
             <div className="container">
               <div className="register-heading">Grape Receipt Transactions</div>
               <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
-              <Form onSubmit={ (values) => {
-                                   console.log('s');
-                               } } validate={ (values) => {
-                                                                                                                                                      return {
-                                                                                                                                                  
-                                                                                                                                                      }
-                                                                                                                                                  } }>
-                { ({submitForm}) => {
-                      let errorMessage = null;
-                  
-                      return (
-                          <div className="row">
-                            <div className="col-lg-12 col-md-12 col-sm-12">
-                              <form onSubmit={ submitForm } id="tankmaster">
-                                <div className="row">
-                                  <div className="col-lg-12 col-md-12 col-sm-12">
-                                    <div className="search-section">
-                                      <div>
-                                        <button className="btn btn-default" onClick={ this.createFermentedWine }>
-                                          Add New
-                                        </button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </form>
-                            </div>
-                          </div>
-                      )
-                  } }
-              </Form>
+              <div className="row">
+                <div className="col-lg-12 col-md-12 col-sm-12">
+                  <div className="search-section">
+                    <div>
+                      <button className="btn btn-default" onClick={ this.createFermentedWine }>
+                        Add New
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div>
                 <Table bordered hover responsive>
                   <thead>

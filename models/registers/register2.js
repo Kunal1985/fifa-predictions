@@ -6,8 +6,8 @@ var register2Schema = mongoose.Schema({
     grapeVariety: String,
     quantity: Number,
     juiceObtained: Number,
-    tankNumber: String,
     clarificationLoss: String,
+    tankNumber: String,
     remarks: String
 });
 

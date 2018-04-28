@@ -91,7 +91,7 @@ class Register5 extends Authentication {
                                     <div className="row">
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <label>Type</label>
-                                        <select className="form-control" field="trasnferType" id="trasnferType" value={ this.state.bulkOpeningValue } onChange={ currObj.handleOpeningChange }>
+                                        <select className="form-control" field="transferType" id="transferType" value={ this.state.bulkOpeningValue } onChange={ currObj.handleOpeningChange }>
                                           { purchaseType.map(purchaseTypeVal => {
                                                 return <option key={ purchaseTypeVal.id } value={ purchaseTypeVal.id }>
                                                          { purchaseTypeVal.name }

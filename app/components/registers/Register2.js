@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { sideBarList, grapeVariety } from '../../utils/Constants';
+import rp from 'request-promise';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 
@@ -23,18 +24,71 @@ class Register2 extends Authentication {
       this.setState({ tanks: this.state.tanks.concat([newTank]), quantities: this.state.quantities.concat([newQuantity]) });
   }
 
+  getCurrRecord(queryParams) {
+    let currObj = this;
+    if (queryParams.upsertAction === 'update' && queryParams.id) {
+      let options = {
+          method: 'POST',
+          uri: 'http://localhost:3000/getRegister2Record',
+          body: {
+              _id: queryParams.id
+          },
+          json: true
+      };
+      rp(options)
+          .then(function(body) {
+              console.log("getRegister2Record Response", body);
+              if (!currObj.state || !currObj.state.currRecord)
+                  currObj.setState({ currRecord: body });
+          })
+          .catch(function(err) {
+              console.log("Error", err);
+          });
+    }
+}
+
+
     render() {
+      let queryParams = this.props.location.query;
+      this.getCurrRecord(queryParams);
+      let thisVar = this;
         return (
             <div className="container">
               <div className="register-heading">Crushing/Juice Processing</div>
               <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
-              <Form onSubmit={ (values) => {
-                                   console.log(values);
-                               } } validate={ (values) => {
-                                                                                                                                                      return {
-                                                                                                                                                  
-                                                                                                                                                      }
-                                                                                                                                                  } }>
+              <Form 
+                defaultValues = {thisVar.state? thisVar.state.currRecord ? thisVar.state.currRecord: {} : {}}
+                onSubmit={ (values) => {
+                    let data = values;
+                    if(thisVar.state && thisVar.state.currRecord)
+                      data._id = thisVar.state.currRecord._id;
+                    console.log("ValuestoSend", data);  
+                    let options = {
+                      method: 'POST',
+                      uri: 'http://localhost:3000/upsertRegister2',
+                      body: data,
+                      json: true
+                    };
+                    rp(options)
+                        .then(function (body) {
+                          console.log("Response", body);
+                          thisVar.goBack();
+                        })
+                        .catch(function (err) {
+                            console.log("Error", err);
+                        });
+                  } 
+                }
+                validate={ (values) => {
+                    return {
+                      date: !values.date ? 'Please select the Date' : undefined,
+                      grapeVariety: !values.grapeVariety ? 'Please select the Grape Variety' : undefined,
+                      quantity: !values.quantity ? 'Please enter Quantity of Fruit/Grapes Crushed in Kg.' : undefined,
+                      juiceObtained: !values.juiceObtained ? 'Please enter Must/Juice Obtained from Fruits/Grapes.' : undefined,
+                      clarificationLoss: !values.clarificationLoss ? 'Please enter the Clarification Losses' : undefined
+                    }
+                  } 
+                }>
                 { ({submitForm}) => {
                       let errorMessage = null;
                   
