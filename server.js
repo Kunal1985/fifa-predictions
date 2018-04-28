@@ -163,23 +163,7 @@ app.post('/logout', function(req, res, next) {
  * Upsert Register1
  */
 app.post('/upsertRegister1', function(req, res, next) {
-  var data = req.body;
-  var currRecordId = data._id;
-  console.log("upsertRegister1", data);
-  if(currRecordId){
-    Register1.update({_id: ObjectId(currRecordId)}, data, function(err, donor) {
-      if (err) return next(err);
-      console.log("Record Updated", donor);
-      res.json({ upsertRegister1: true });
-    });
-  } else {
-    var register1 = new Register1(data);
-    register1.save(function(err, register1Record) {
-      if (err) return next(err);
-      console.log("New Record Created", register1Record);
-      res.json({upsertRegister1: true});
-    });
-  }
+  upsertRecord(req, res, next, "Register1");
 });
 
 /**
@@ -187,12 +171,7 @@ app.post('/upsertRegister1', function(req, res, next) {
  * Get Register1
  */
 app.get('/getRegister1', function(req, res, next) {
-  console.log("getRegister1");
-  Register1.find({}, function(err, doc) {
-    if (err) { throw err; }
-    console.log(doc.length, "Register1 records found");
-    res.json(doc);
-  });
+  getAllRecords(req, res, next, "Register1");
 });
 
 /**
@@ -200,14 +179,279 @@ app.get('/getRegister1', function(req, res, next) {
  * Get Register1 Record
  */
 app.post('/getRegister1Record', function(req, res, next) {
-  var reqBody = req.body;
-  console.log("getRegister1Record", reqBody);
-  Register1.findOne({_id: ObjectId(reqBody._id)}, function(err, doc) {
-    if (err) { throw err; }
-    console.log("Register1 record found", doc);
-    res.json(doc);
-  });
+  getRecordById(req, res, next, "Register1");
 });
+
+/**
+ * POST /upsertRegister2
+ * Upsert Register2
+ */
+app.post('/upsertRegister2', function(req, res, next) {
+  upsertRecord(req, res, next, "Register2");
+});
+
+/**
+ * GET /getRegister2
+ * Get Register2
+ */
+app.get('/getRegister2', function(req, res, next) {
+  getAllRecords(req, res, next, "Register2");
+});
+
+/**
+ * GET /getRegister2Record
+ * Get Register2 Record
+ */
+app.post('/getRegister2Record', function(req, res, next) {
+  getRecordById(req, res, next, "Register2");
+});
+
+/**
+ * POST /upsertRegister3
+ * Upsert Register3
+ */
+app.post('/upsertRegister3', function(req, res, next) {
+  upsertRecord(req, res, next, "Register3");
+});
+
+/**
+ * GET /getRegister3
+ * Get Register3
+ */
+app.get('/getRegister3', function(req, res, next) {
+  getAllRecords(req, res, next, "Register3");
+});
+
+/**
+ * GET /getRegister3Record
+ * Get Register3 Record
+ */
+app.post('/getRegister3Record', function(req, res, next) {
+  getRecordById(req, res, next, "Register3");
+});
+
+/**
+ * POST /upsertRegister4
+ * Upsert Register4
+ */
+app.post('/upsertRegister4', function(req, res, next) {
+  upsertRecord(req, res, next, "Register4");
+});
+
+/**
+ * GET /getRegister4
+ * Get Register4
+ */
+app.get('/getRegister4', function(req, res, next) {
+  getAllRecords(req, res, next, "Register4");
+});
+
+/**
+ * GET /getRegister4Record
+ * Get Register4 Record
+ */
+app.post('/getRegister4Record', function(req, res, next) {
+  getRecordById(req, res, next, "Register4");
+});
+
+/**
+ * POST /upsertRegister5
+ * Upsert Register5
+ */
+app.post('/upsertRegister5', function(req, res, next) {
+  upsertRecord(req, res, next, "Register5");
+});
+
+/**
+ * GET /getRegister5
+ * Get Register5
+ */
+app.get('/getRegister5', function(req, res, next) {
+  getAllRecords(req, res, next, "Register5");
+});
+
+/**
+ * GET /getRegister5Record
+ * Get Register5 Record
+ */
+app.post('/getRegister5Record', function(req, res, next) {
+  getRecordById(req, res, next, "Register5");
+});
+
+/**
+ * POST /upsertRegister6
+ * Upsert Register6
+ */
+app.post('/upsertRegister6', function(req, res, next) {
+  upsertRecord(req, res, next, "Register6");
+});
+
+/**
+ * GET /getRegister6
+ * Get Register6
+ */
+app.get('/getRegister6', function(req, res, next) {
+  getAllRecords(req, res, next, "Register6");
+});
+
+/**
+ * GET /getRegister6Record
+ * Get Register6 Record
+ */
+app.post('/getRegister6Record', function(req, res, next) {
+  getRecordById(req, res, next, "Register6");
+});
+
+/**
+ * POST /upsertRegister7
+ * Upsert Register7
+ */
+app.post('/upsertRegister7', function(req, res, next) {
+  upsertRecord(req, res, next, "Register7");
+});
+
+/**
+ * GET /getRegister7
+ * Get Register7
+ */
+app.get('/getRegister7', function(req, res, next) {
+  getAllRecords(req, res, next, "Register7");
+});
+
+/**
+ * GET /getRegister7Record
+ * Get Register7 Record
+ */
+app.post('/getRegister7Record', function(req, res, next) {
+  getRecordById(req, res, next, "Register7");
+});
+
+/**
+ * POST /upsertRegister8
+ * Upsert Register8
+ */
+app.post('/upsertRegister8', function(req, res, next) {
+  upsertRecord(req, res, next, "Register8");
+});
+
+/**
+ * GET /getRegister8
+ * Get Register8
+ */
+app.get('/getRegister8', function(req, res, next) {
+  getAllRecords(req, res, next, "Register8");
+});
+
+/**
+ * GET /getRegister8Record
+ * Get Register8 Record
+ */
+app.post('/getRegister8Record', function(req, res, next) {
+  getRecordById(req, res, next, "Register8");
+});
+
+/**
+ * POST /upsertRegister9
+ * Upsert Register9
+ */
+app.post('/upsertRegister9', function(req, res, next) {
+  upsertRecord(req, res, next, "Register9");
+});
+
+/**
+ * GET /getRegister9
+ * Get Register9
+ */
+app.get('/getRegister9', function(req, res, next) {
+  getAllRecords(req, res, next, "Register9");
+});
+
+/**
+ * GET /getRegister9Record
+ * Get Register9 Record
+ */
+app.post('/getRegister9Record', function(req, res, next) {
+  getRecordById(req, res, next, "Register9");
+});
+
+/**
+ * Method to upsert Record for a model.
+ * 
+ */
+upsertRecord = function(req, res, next, modelName){
+  var data = req.body;
+  var currRecordId = data._id;
+  var modelObj = getModelObject(modelName);
+  if(modelObj){
+    console.log("upsertRecord for", modelName, currRecordId);
+    if(currRecordId){
+      modelObj.update({_id: ObjectId(currRecordId)}, data, function(err, modelRecord) {
+        if (err) return next(err);
+        console.log("Record Updated for", modelName, modelRecord);
+        res.json({ recordUpdated: true });
+      });
+    } else {
+      var modelObjCreated = new modelObj(data);
+      modelObjCreated.save(function(err, modelRecord) {
+        if (err) return next(err);
+        console.log("New Record Created for", modelName, modelRecord);
+        res.json({ recordCreated: true });
+      });
+    }
+  } else{
+    throw new Error("Model not found!");
+  }
+} 
+
+/**
+ * Method to fetch all records for a model.
+ * 
+ */
+getAllRecords = function(req, res, next, modelName){
+  var modelObj = getModelObject(modelName);
+  if(modelObj){
+    console.log("getAllRecords for", modelName);
+    modelObj.find({}, function(err, doc) {
+      if (err) { throw err; }
+      console.log(doc.length, modelName, "records found");
+      res.json(doc);
+    });
+  } else{
+    throw new Error("Model not found!");
+  }
+} 
+
+/**
+ * Method to fetch Record by ID for a model.
+ * 
+ */
+getRecordById = function(req, res, next, modelName){
+  var reqBody = req.body;
+  var modelObj = getModelObject(modelName);
+  if(modelObj){
+    console.log("getRecordById for", modelName, reqBody);
+    modelObj.findOne({_id: ObjectId(reqBody._id)}, function(err, doc) {
+      if (err) { throw err; }
+      console.log(modelName, "record found", doc);
+      res.json(doc);
+    });
+  } else{
+    throw new Error("Model not found!");
+  }
+}
+
+/**
+ * Method to fetch Record by ID for a model.
+ * 
+ */
+getModelObject = function(modelName){
+  var modelObj = null;
+  switch(modelName){
+    case "Register1": modelObj = Register1; break;
+    default: break;
+  }
+  return modelObj;
+}
 
 app.use(function(req, res) {
   res.header("Access-Control-Allow-Origin", "*"); 
