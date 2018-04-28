@@ -375,6 +375,30 @@ app.post('/getRegister9Record', function(req, res, next) {
 });
 
 /**
+ * POST /upsertTankMaster
+ * Upsert TankMaster
+ */
+app.post('/upsertTankMaster', function(req, res, next) {
+  upsertRecord(req, res, next, "TankMaster");
+});
+
+/**
+ * GET /getTankMaster
+ * Get TankMaster
+ */
+app.get('/getTankMaster', function(req, res, next) {
+  getAllRecords(req, res, next, "TankMaster");
+});
+
+/**
+ * GET /getTankMasterRecord
+ * Get TankMaster Record
+ */
+app.post('/getTankMasterRecord', function(req, res, next) {
+  getRecordById(req, res, next, "TankMaster");
+});
+
+/**
  * Method to upsert Record for a model.
  * 
  */
@@ -448,6 +472,15 @@ getModelObject = function(modelName){
   var modelObj = null;
   switch(modelName){
     case "Register1": modelObj = Register1; break;
+    case "Register2": modelObj = Register2; break;
+    case "Register3": modelObj = Register3; break;
+    case "Register4": modelObj = Register4; break;
+    case "Register5": modelObj = Register5; break;
+    case "Register6": modelObj = Register6; break;
+    case "Register7": modelObj = Register7; break;
+    case "Register8": modelObj = Register8; break;
+    case "Register9": modelObj = Register9; break;
+    case "TankMaster": modelObj = TankMaster; break;
     default: break;
   }
   return modelObj;

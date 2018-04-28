@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { sideBarList } from '../../utils/Constants';
+import { sideBarList, tankNumbers } from '../../utils/Constants';
+import { getCurrRecord, upsertRecord, validateForm } from '../../utils/Functions';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 
 class Register4 extends Authentication {
     constructor(props) {
         super(props);
-
+        this.modelName = "Register4";
         this.goBack = this.goBack.bind(this);
     }
 
@@ -17,17 +18,26 @@ class Register4 extends Authentication {
     }
 
     render() {
+      let queryParams = this.props.location.query;
+      let thisVar = this;
+      getCurrRecord(queryParams, this, thisVar.modelName);
         return (
             <div className="container">
               <div className="register-heading">Fortification</div>
               <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
-              <Form onSubmit={ (values) => {
-                                   console.log(values);
-                               } } validate={ (values) => {
-                                                                                                                                                      return {
-                                                                                                                                                  
-                                                                                                                                                      }
-                                                                                                                                                  } }>
+              <Form defaultValues = {thisVar.state? thisVar.state.currRecord ? thisVar.state.currRecord: {} : {}}
+                onSubmit={ (values) => {
+                    let data = values;
+                    if(thisVar.state && thisVar.state.currRecord)
+                      data._id = thisVar.state.currRecord._id;
+                    console.log("ValuestoSend", data);
+                    upsertRecord(data, thisVar, thisVar.modelName);
+                  } 
+                }
+                validate={ (values) => {
+                    return validateForm(values, thisVar.modelName);
+                  } 
+                }>
                 { ({submitForm}) => {
                       let errorMessage = null;
                   
@@ -48,19 +58,19 @@ class Register4 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Tank Number</label>
-                                      <select className="form-control" field="fermentedWine.tankNumber" id="fermentedWine.tankNumber"></select>
+                                      <Select className="form-control" field="fermentedWine.tankNumber" id="fermentedWine.tankNumber" options={ tankNumbers } />
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Opening Balance</label>
-                                      <Text field='fermentedWine.openingBalance' placeholder='Opening Balance' className="form-control" />
+                                      <Text field='fermentedWine.openingBalance' id='fermentedWine.openingBalance' placeholder='Opening Balance' className="form-control" />
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Quantity Taken</label>
-                                      <Text field='fermentedWine.quantity' placeholder='Quantity Taken' className="form-control" />
+                                      <Text field='fermentedWine.quantity' id='fermentedWine.quantity' placeholder='Quantity Taken' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
@@ -77,7 +87,7 @@ class Register4 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Tank Number</label>
-                                      <select className="form-control" field="spirit.tankNumber" id="spirit.tankNumber"></select>
+                                      <Select className="form-control" field="spirit.tankNumber" id="spirit.tankNumber" options={ tankNumbers } />
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
@@ -112,7 +122,7 @@ class Register4 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Tank Number</label>
-                                      <select className="form-control" field="fortifiedWine.tankNumber" id="fortifiedWine.tankNumber"></select>
+                                      <Select className="form-control" field="fortifiedWine.tankNumber" id="fortifiedWine.tankNumber" options={ tankNumbers } />
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">

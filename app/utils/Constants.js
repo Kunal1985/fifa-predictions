@@ -266,10 +266,25 @@ const suppliers = [{
     value: "Supplier 2"
 }]
 
+const tankNumbers = [{
+    label: "Tank 1",
+    value: "Tank 1"
+}, {
+    label: "Tank 2",
+    value: "Tank 2"
+}]
+
+const brandList = [{
+    label: "Brand 1",
+    value: "Brand 1"
+}, {
+    label: "Brand 2",
+    value: "Brand 2"
+}]
 
 export { 
     sideBarList, grapeVariety, sizeInML, bottleSize, 
     wineType, licenseType, purchaseType, saleType, 
     searchType, tankType, TransferType, 
     bulkTransferOtherUnitType, OpeningBalanceType, 
-    LabellingTransType, suppliers };
+    LabellingTransType, suppliers, tankNumbers, brandList };

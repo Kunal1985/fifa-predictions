@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { sideBarList, bottleSize, wineType } from '../../utils/Constants';
+import { sideBarList, bottleSize, wineType, tankNumbers, brandList } from '../../utils/Constants';
+import { getCurrRecord, upsertRecord, validateForm } from '../../utils/Functions';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 
 class Register6 extends Authentication {
     constructor(props) {
         super(props);
-
+        this.modelName = "Register6";
         this.goBack = this.goBack.bind(this);
     }
 
@@ -17,18 +18,27 @@ class Register6 extends Authentication {
     }
 
     render() {
+      let queryParams = this.props.location.query;
+      let thisVar = this;
+      getCurrRecord(queryParams, this, thisVar.modelName);
         return (
-
             <div className="container">
               <div className="register-heading">Bottling</div>
               <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
-              <Form onSubmit={ (values) => {
-                                   console.log('s');
-                               } } validate={ (values) => {
-                                                                                                                                                      return {
-                                                                                                                                                  
-                                                                                                                                                      }
-                                                                                                                                                  } }>
+              <Form 
+                defaultValues = {thisVar.state? thisVar.state.currRecord ? thisVar.state.currRecord: {} : {}}
+                onSubmit={ (values) => {
+                    let data = values;
+                    if(thisVar.state && thisVar.state.currRecord)
+                      data._id = thisVar.state.currRecord._id;
+                    console.log("ValuestoSend", data);
+                    upsertRecord(data, thisVar, thisVar.modelName);
+                  } 
+                }
+                validate={ (values) => {
+                    return validateForm(values, thisVar.modelName);
+                  } 
+                }>
                 { ({submitForm}) => {
                       let errorMessage = null;
                   
@@ -46,7 +56,7 @@ class Register6 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Tank Number</label>
-                                      <select className="form-control" field="tankNumber" id="tankNumber"></select>
+                                      <Select className="form-control" field="tankNumber" id="tankNumber" options={tankNumbers} />
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
@@ -70,31 +80,19 @@ class Register6 extends Authentication {
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Type of Wine</label>
-                                        <select className="form-control" field="wineType" id="wineType">
-                                          { wineType.map(wineTypeVal => {
-                                                return <option key={ wineTypeVal.id } value={ wineTypeVal.id }>
-                                                         { wineTypeVal.name }
-                                                       </option>;
-                                            }) }
-                                        </select>
+                                        <Select className="form-control" field="wineType" id="wineType" options={wineType} />
                                       </div>
                                     </div>
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Name of Brand</label>
-                                        <select className="form-control" field="brandName" id="brandName"></select>
+                                        <Select className="form-control" field="brandName" id="brandName" options={brandList} />
                                       </div>
                                     </div>
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Bottle Size in ML</label>
-                                        <select className="form-control" field="bottleSize" id="bottleSize">
-                                          { bottleSize.map(bottleSizeVal => {
-                                                return <option key={ bottleSizeVal.id } value={ bottleSizeVal.id }>
-                                                         { bottleSizeVal.name }
-                                                       </option>;
-                                            }) }
-                                        </select>
+                                        <Select className="form-control" field="bottleSize" id="bottleSize" options={bottleSize} />
                                       </div>
                                     </div>
                                   </div>

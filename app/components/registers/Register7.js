@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { sideBarList, sizeInML, bottleSize, wineType, } from '../../utils/Constants';
+import { getCurrRecord, upsertRecord, validateForm } from '../../utils/Functions';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 
 class Register7 extends Authentication {
     constructor(props) {
         super(props);
-
+        this.modelName = "Register7";
         this.goBack = this.goBack.bind(this);
         this.state = {
             transferType: "ownUnitTransfer"
@@ -27,19 +28,28 @@ class Register7 extends Authentication {
     }
 
     render() {
-        let currObj = this;
+      let queryParams = this.props.location.query;
+      let thisVar = this;
+      getCurrRecord(queryParams, this, thisVar.modelName);
         return (
             <div className="container">
               <div className="register-heading">Disgorging</div>
               <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
               <div className="container">
-                <Form onSubmit={ (values) => {
-                                     console.log(values);
-                                 } } validate={ (values) => {
-                                                                                                                                                            return {
-                                                                                                                                                        
-                                                                                                                                                            }
-                                                                                                                                                        } } handleChange>
+                <Form 
+                  defaultValues = {thisVar.state? thisVar.state.currRecord ? thisVar.state.currRecord: {} : {}}
+                  onSubmit={ (values) => {
+                      let data = values;
+                      if(thisVar.state && thisVar.state.currRecord)
+                        data._id = thisVar.state.currRecord._id;
+                      console.log("ValuestoSend", data);
+                      upsertRecord(data, thisVar, thisVar.modelName);
+                    } 
+                  }
+                  validate={ (values) => {
+                      return validateForm(values, thisVar.modelName);
+                    } 
+                  }>
                   { ({submitForm}) => {
                         let errorMessage = null;
                     
@@ -61,13 +71,13 @@ class Register7 extends Authentication {
                                       <div className="row">
                                         <div className="col-lg-4 col-md-4 col-sm-12">
                                           <label>Disgorging Type</label>
-                                          <select className="form-control" field="disgorgingType" id="disgorgingType" value={ this.state.value } onChange={ currObj.handleChange }>
+                                          <select className="form-control" field="disgorgingType" id="disgorgingType" value={ this.state.value } onChange={ thisVar.handleChange }>
                                             <option value="ownUnitTransfer" selected>Transfer to Own Unit</option>
                                             <option value="otherUnitTransfer">Tranfer to Other Unit</option>
                                           </select>
                                         </div>
                                       </div>
-                                      { currObj.state.transferType === "ownUnitTransfer" ? <div>
+                                      { thisVar.state.transferType === "ownUnitTransfer" ? <div>
                                                                                        <div className="row">
                                                                                          <div className="col-lg-4 col-md-4 col-sm-12">
                                                                                            <div className="form-group">

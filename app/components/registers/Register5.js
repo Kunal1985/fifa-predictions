@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { sideBarList, purchaseType, saleType, licenseType, bulkTransferOtherUnitType } from '../../utils/Constants';
+import { sideBarList, purchaseType, saleType, licenseType, bulkTransferOtherUnitType, tankNumbers } from '../../utils/Constants';
+import { getCurrRecord, upsertRecord, validateForm } from '../../utils/Functions';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 
 class Register5 extends Authentication {
     constructor(props) {
         super(props);
-
+        this.modelName = "Register5";
         this.goBack = this.goBack.bind(this);
         
         this.state = {
@@ -46,19 +47,28 @@ class Register5 extends Authentication {
     }
 
     render() {
-        let currObj = this;
+        let queryParams = this.props.location.query;
+        let thisVar = this;
+        getCurrRecord(queryParams, this, thisVar.modelName);
         return (
             <div className="container">
               <div className="register-heading">Bulk Transfer</div>
               <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
               <div className="container">
-                <Form onSubmit={ (values) => {
-                                     console.log('s');
-                                 } } validate={ (values) => {
-                                                                                                                                                            return {
-                                                                                                                                                        
-                                                                                                                                                            }
-                                                                                                                                                        } } handleChange>
+                <Form 
+                  defaultValues = {thisVar.state? thisVar.state.currRecord ? thisVar.state.currRecord: {} : {}}
+                  onSubmit={ (values) => {
+                      let data = values;
+                      if(thisVar.state && thisVar.state.currRecord)
+                        data._id = thisVar.state.currRecord._id;
+                      console.log("ValuestoSend", data);
+                      upsertRecord(data, thisVar, thisVar.modelName);
+                    } 
+                  }
+                  validate={ (values) => {
+                      return validateForm(values, thisVar.modelName);
+                    } 
+                  }>
                   { ({submitForm}) => {
                         let errorMessage = null;
                     
@@ -76,7 +86,7 @@ class Register5 extends Authentication {
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Tank Number</label>
-                                        <select className="form-control" field="tankNumber" id="tankNumber"></select>
+                                        <Select className="form-control" field="tankNumber" id="tankNumber" options={ tankNumbers }/>
                                       </div>
                                     </div>
                                     <div className="col-lg-4 col-md-4 col-sm-12">
@@ -91,7 +101,7 @@ class Register5 extends Authentication {
                                     <div className="row">
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <label>Type</label>
-                                        <select className="form-control" field="transferType" id="transferType" value={ this.state.bulkOpeningValue } onChange={ currObj.handleOpeningChange }>
+                                        <select className="form-control" field="transferType" id="transferType" value={ this.state.bulkOpeningValue } onChange={ thisVar.handleOpeningChange }>
                                           { purchaseType.map(purchaseTypeVal => {
                                                 return <option key={ purchaseTypeVal.id } value={ purchaseTypeVal.id }>
                                                          { purchaseTypeVal.name }
@@ -100,13 +110,13 @@ class Register5 extends Authentication {
                                         </select>
                                       </div>
                                     </div>
-                                    { currObj.state.bulkOpeningValue == 1 ?
+                                    { thisVar.state.bulkOpeningValue == 1 ?
                                       <div>
                                       <div className="row">
                                         <div className="col-lg-4 col-md-4 col-sm-12">
                                           <div className="form-group">
                                             <label>Tank Number</label>
-                                            <select className="form-control" field="ownUnit.tankNumber" id="ownUnit.tankNumber"></select>
+                                            <Select className="form-control" field="ownUnit.tankNumber" id="ownUnit.tankNumber" options={ tankNumbers }/>
                                           </div>
                                         </div>
                                         <div className="col-lg-4 col-md-4 col-sm-12">
@@ -144,12 +154,12 @@ class Register5 extends Authentication {
                                       </div>
                                     </div>
                                       : <div></div> }
-                                    { currObj.state.bulkOpeningValue == 2 ?
+                                    { thisVar.state.bulkOpeningValue == 2 ?
                                       <div>
                                         <div className="row">
                                           <div className="col-lg-4 col-md-4 col-sm-12">
                                             <label>Bulk Transaction Type</label>
-                                            <select className="form-control" value={ this.state.bulkOtherUnitValue } onChange={ currObj.handleOtherUnitChange }>
+                                            <select className="form-control" value={ this.state.bulkOtherUnitValue } onChange={ thisVar.handleOtherUnitChange }>
                                               { bulkTransferOtherUnitType.map(purchaseTypeVal => {
                                                     return <option key={ purchaseTypeVal.id } value={ purchaseTypeVal.id }>
                                                             { purchaseTypeVal.name }
@@ -172,16 +182,16 @@ class Register5 extends Authentication {
                                             </div>
                                           </div>
                                           <div className="col-lg-4 col-md-4 col-sm-12">
-                                            { currObj.state.bulkOtherUnitValue == 1 || currObj.state.bulkOtherUnitValue == 2 || currObj.state.bulkOtherUnitValue == 4 || currObj.state.bulkOtherUnitValue == 5 ?
+                                            { thisVar.state.bulkOtherUnitValue == 1 || thisVar.state.bulkOtherUnitValue == 2 || thisVar.state.bulkOtherUnitValue == 4 || thisVar.state.bulkOtherUnitValue == 5 ?
                                               <div className="form-group"><label>T.P No.</label>
                                               <Text field='otherUnit.tpepipNumber' placeholder='T.P No.' className="form-control" />
                                             </div> : <div></div> }
-                                            { currObj.state.bulkOtherUnitValue == 6 ?
+                                            { thisVar.state.bulkOtherUnitValue == 6 ?
                                             <div className="form-group"><label>E.P No.</label>
                                               <Text field='otherUnit.tpepipNumber' placeholder='E.P No.' className="form-control" />
                                             </div> : <div></div>
                                           }
-                                          { currObj.state.bulkOtherUnitValue == 3 ?
+                                          { thisVar.state.bulkOtherUnitValue == 3 ?
                                             <div className="form-group"><label>I.P No.</label>
                                               <Text field='otherUnit.tpepipNumber' placeholder='I.P No.' className="form-control" />
                                             </div> : <div></div>
@@ -209,13 +219,13 @@ class Register5 extends Authentication {
                                               <Text field='qtyInLitres' placeholder='Quantity in Litres' className="form-control" />
                                             </div>
                                           </div>
-                                          { currObj.state.bulkOtherUnitValue == 3 ?
+                                          { thisVar.state.bulkOtherUnitValue == 3 ?
                                             <div className="col-lg-4 col-md-4 col-sm-12">
                                             <div className="form-group">
                                               <label>Import Fee Paid</label>
                                               <Text field='otherUnit.importExportFeePaid' placeholder='Import Fee Paid' className="form-control" />
                                             </div></div> : <div></div> }
-                                            { currObj.state.bulkOtherUnitValue == 6 ?
+                                            { thisVar.state.bulkOtherUnitValue == 6 ?
                                             <div className="col-lg-4 col-md-4 col-sm-12">
                                             <div className="form-group">
                                               <label>Export Fee Paid</label>

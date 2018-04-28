@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { sideBarList, grapeVariety, suppliers } from '../../utils/Constants';
+import { getCurrRecord, upsertRecord, validateForm } from '../../utils/Functions';
 import rp from 'request-promise';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
@@ -10,6 +11,7 @@ class Register1 extends Authentication {
 
     constructor(props) {
         super(props);
+        this.modelName = "Register1";
         this.goBack = this.goBack.bind(this);
     }
 
@@ -18,33 +20,10 @@ class Register1 extends Authentication {
         currProps.history.goBack();
     }
 
-    getCurrRecord(queryParams) {
-        let currObj = this;
-        if (queryParams.upsertAction === 'update' && queryParams.id) {
-            let options = {
-                method: 'POST',
-                uri: 'http://localhost:3000/getRegister1Record',
-                body: {
-                    _id: queryParams.id
-                },
-                json: true
-            };
-            rp(options)
-                .then(function(body) {
-                    console.log("getRegister1Record Response", body);
-                    if (!currObj.state || !currObj.state.currRecord)
-                        currObj.setState({ currRecord: body });
-                })
-                .catch(function(err) {
-                    console.log("Error", err);
-                });
-        }
-    }
-
     render() {
         let queryParams = this.props.location.query;
-        this.getCurrRecord(queryParams);
         let thisVar = this;
+        getCurrRecord(queryParams, this, thisVar.modelName);
         return (
             <div className="container">
               <div className="register-heading">Grape/Fruit Receipt Transactions</div>
@@ -55,32 +34,12 @@ class Register1 extends Authentication {
                     let data = values;
                     if(thisVar.state && thisVar.state.currRecord)
                       data._id = thisVar.state.currRecord._id;
-                    console.log("ValuestoSend", data);  
-                    let options = {
-                      method: 'POST',
-                      uri: 'http://localhost:3000/upsertRegister1',
-                      body: data,
-                      json: true
-                    };
-                    rp(options)
-                        .then(function (body) {
-                          console.log("Response", body);
-                          thisVar.goBack();
-                        })
-                        .catch(function (err) {
-                            console.log("Error", err);
-                        });
+                    console.log("ValuestoSend", data);
+                    upsertRecord(data, thisVar, thisVar.modelName);
                   } 
                 }
                 validate={ (values) => {
-                    return {
-                      dateOfReceipt: !values.dateOfReceipt ? 'Please select the Date of Receipt' : undefined,
-                      grapeVariety: !values.grapeVariety ? 'Please select the Grape Variety' : undefined,
-                      qtyCrushed: !values.qtyCrushed ? 'Please enter Quantity of Fruit/Grapes Crushed in Kg.' : undefined,
-                      qtyReceived: !values.qtyReceived ? 'Please enter Quantity of Fruit/Grapes Received in Kg.' : undefined,
-                      supplierName: !values.supplierName ? 'Please select the Grape/Fruit Supplier' : undefined,
-                      gatNumber: !values.gatNumber ? 'Please enter a valid GAT/Survey No..' : undefined
-                    }
+                    return validateForm(values, thisVar.modelName);
                   } 
                 }>
                 { ({submitForm}) => {

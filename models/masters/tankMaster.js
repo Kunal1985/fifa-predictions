@@ -4,8 +4,8 @@ var mongoose = require('mongoose');
 var tankMasterSchema = mongoose.Schema({
     number: String,
     type: String,
-    gugingDate: String,
     capacity: Number,
+    gugingDate: String,
     installationDate: String
 });
 

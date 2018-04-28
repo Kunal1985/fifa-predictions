@@ -54,7 +54,6 @@ class Register4Summary extends Authentication {
                   <thead>
                     <tr>
                       <th>Edit</th>
-                      <th>Tank</th>
                       <th>Fermented Wine</th>
                       <th>Spirit</th>
                       <th>Fortified Wine Manufactured</th>
@@ -64,15 +63,14 @@ class Register4Summary extends Authentication {
                     { currRecords ? currRecords.map((currRecord, index) => (
                         <tr key={ currRecord._id }>
                           <td className="text-center" onClick={ () => this.editFermentedWine(currRecord._id) }><i className="fa fa-edit"></i></td>
-                          <td>{ currRecord.tankNumber }</td>
                           <td>
-                            { currRecord.fermentedWine.quantity }
+                            { currRecord.fermentedWine.tankNumber } -- { currRecord.fermentedWine.quantity }
                           </td>
                           <td>
-                            { currRecord.spirit.quantity }
+                            { currRecord.spirit.tankNumber } -- { currRecord.spirit.quantity }
                           </td>
                           <td>
-                            { currRecord.fortifiedWine.quantity }
+                            { currRecord.fortifiedWine.tankNumber } -- { currRecord.fortifiedWine.quantity }
                           </td>
                         </tr>
                       )) : "" }
