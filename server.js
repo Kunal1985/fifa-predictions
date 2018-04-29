@@ -47,6 +47,10 @@ var FermentedDetails = require('./models/opening-balance/fermentedDetails');
 var BottledDetails = require('./models/opening-balance/bottledDetails');
 var TirageDisgorgedDetails = require('./models/opening-balance/tirageDisgorgedDetails');
 var LabelledDetails = require('./models/opening-balance/labelledDetails');
+var States = require('./models/geography/states');
+var Districts = require('./models/geography/districts');
+var SubDistricts = require('./models/geography/subDistricts');
+var Villages = require('./models/geography/villages');
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
@@ -519,6 +523,39 @@ app.post('/getSpiritMasterRecord', function(req, res, next) {
 });
 
 /**
+* GET /getStates
+* Get States
+*/
+app.post('/getStatesByQuery', function(req, res, next) {
+  getAllRecords(req, res, next, "States");
+});
+
+/**
+* GET /getDistricts
+* Get Districts
+*/
+app.post('/getDistrictsByQuery', function(req, res, next) {
+  getAllRecords(req, res, next, "Districts", req.body.query);
+});
+
+/**
+* GET /getSubDistricts
+* Get SubDistricts
+*/
+app.post('/getSubDistrictsByQuery', function(req, res, next) {
+  getAllRecords(req, res, next, "SubDistricts", req.body.query);
+});
+
+/**
+* GET /getVillages
+* Get Villages
+*/
+app.post('/getVillagesByQuery', function(req, res, next) {
+  getAllRecords(req, res, next, "Villages", req.body.query);
+});
+
+
+/**
  * Method to upsert Record for a model.
  * 
  */
@@ -551,11 +588,13 @@ upsertRecord = function(req, res, next, modelName){
  * Method to fetch all records for a model.
  * 
  */
-getAllRecords = function(req, res, next, modelName){
+getAllRecords = function(req, res, next, modelName, query){
   var modelObj = getModelObject(modelName);
+  if(!query)
+    query = {};
   if(modelObj){
-    console.log("getAllRecords for", modelName);
-    modelObj.find({}, function(err, doc) {
+    console.log("getAllRecords for", modelName, query);
+    modelObj.find(query, function(err, doc) {
       if (err) { throw err; }
       console.log(doc.length, modelName, "records found");
       res.json(doc);
@@ -606,6 +645,10 @@ getModelObject = function(modelName){
     case "BrandMaster": modelObj = BrandMaster; break;
     case "FlavourMaster": modelObj = FlavourMaster; break;
     case "SpiritMaster": modelObj = SpiritMaster; break;
+    case "States": modelObj = States; break;
+    case "Districts": modelObj = Districts; break;
+    case "SubDistricts": modelObj = SubDistricts; break;
+    case "Villages": modelObj = Villages; break;
     default: break;
   }
   return modelObj;
