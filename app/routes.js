@@ -33,8 +33,8 @@ import TankMaster from './components/masters/TankMaster';
 import CreateTank from './components/masters/CreateTank';
 import WineType from './components/masters/WineType';
 import CreateWineType from './components/masters/CreateWineType';
-import WineVariety from './components/masters/WineVariety';
-import CreateWineVariety from './components/masters/CreateWineVariety';
+import GrapeVariety from './components/masters/GrapeVariety';
+import CreateGrapeVariety from './components/masters/CreateGrapeVariety';
 import Brand from './components/masters/Brand';
 import CreateBrand from './components/masters/CreateBrand';
 import Flavour from './components/masters/Flavour';
@@ -91,8 +91,8 @@ export default (
   <Route path='/createTank' component={ CreateTank } />
   <Route path='/wineType' component={ WineType } />
   <Route path='/createWineType' component={ CreateWineType } />
-  <Route path='/variety' component={ WineVariety } />
-  <Route path='/createWineVariety' component={ CreateWineVariety } />
+  <Route path='/variety' component={ GrapeVariety } />
+  <Route path='/createGrapeVariety' component={ CreateGrapeVariety } />
   <Route path='/brand' component={ Brand } />
   <Route path='/createBrand' component={ CreateBrand } />
   <Route path='/flavour' component={ Flavour } />

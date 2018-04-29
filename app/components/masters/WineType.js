@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { sideBarList, searchType } from '../../utils/Constants';
+import { getAllRecords } from '../../utils/Functions';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 import { Table } from 'react-bootstrap';
@@ -8,19 +9,20 @@ import { Table } from 'react-bootstrap';
 class WineType extends Authentication {
     constructor(props) {
         super(props);
-        this.createBrand = this.createBrand.bind(this);
+        this.setState({});
+        this.createWineType = this.createWineType.bind(this);
         this.goBack = this.goBack.bind(this);
-        this.editBrand = this.editBrand.bind(this);
+        this.editWineType = this.editWineType.bind(this);
     }
 
-    createBrand() {
+    createWineType() {
         let currProps = this.props;
         currProps.history.push("/createWineType");
     }
 
-    editBrand() {
+    editWineType(currId) {
         let currProps = this.props;
-        currProps.history.push("/createWineType");
+        currProps.history.push("/createWineType?upsertAction=update&id=" + currId);
     }
 
     goBack() {
@@ -29,6 +31,9 @@ class WineType extends Authentication {
     }
 
     render() {
+      getAllRecords(this, "WineTypeMaster");
+      console.log("STATE", this.state);
+      let currRecords = this.state ? this.state.records : null;
         return (
             <div className="container">
               <div className="register-heading">Type of Wine</div>
@@ -74,7 +79,7 @@ class WineType extends Authentication {
                                         </button>
                                       </div>
                                       <div>
-                                        <button className="btn btn-default" onClick={ this.createBrand }>
+                                        <button className="btn btn-default" onClick={ this.createWineType }>
                                           Add New
                                         </button>
                                       </div>
@@ -97,21 +102,13 @@ class WineType extends Authentication {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td className="text-center" onClick={ this.editBrand }><i className="fa fa-edit"></i></td>
-                      <td>Mark</td>
-                      <td>Otto</td>
+                  { currRecords ? currRecords.map((currRecord, index) => (
+                      <tr key={ currRecord._id }>
+                      <td className="text-center" onClick={ () => this.editWineType(currRecord._id) }><i className="fa fa-edit"></i></td>
+                      <td>{ currRecord.date }</td>
+                      <td>{ currRecord.name }</td>
                     </tr>
-                    <tr>
-                      <td className="text-center" onClick={ this.editBrand }><i className="fa fa-edit"></i></td>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                    </tr>
-                    <tr>
-                      <td className="text-center" onClick={ this.editBrand }><i className="fa fa-edit"></i></td>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                    </tr>
+                    )) : "" }
                   </tbody>
                 </Table>;
               </div>

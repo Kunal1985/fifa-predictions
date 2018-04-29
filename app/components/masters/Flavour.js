@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { sideBarList, searchType } from '../../utils/Constants';
+import { getAllRecords } from '../../utils/Functions';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 import { Table } from 'react-bootstrap';
@@ -8,6 +9,7 @@ import { Table } from 'react-bootstrap';
 class Flavour extends Authentication {
     constructor(props) {
         super(props);
+        this.setState({});
         this.createFlavour = this.createFlavour.bind(this);
         this.goBack = this.goBack.bind(this);
         this.editFlavour = this.editFlavour.bind(this);
@@ -18,9 +20,9 @@ class Flavour extends Authentication {
         currProps.history.push("/createFlavour");
     }
 
-    editFlavour() {
+    editFlavour(currId) {
         let currProps = this.props;
-        currProps.history.push("/createFlavour");
+        currProps.history.push("/createFlavour?upsertAction=update&id=" + currId);
     }
 
     goBack() {
@@ -29,6 +31,9 @@ class Flavour extends Authentication {
     }
 
     render() {
+      getAllRecords(this, "FlavourMaster");
+      console.log("STATE", this.state);
+      let currRecords = this.state ? this.state.records : null;
         return (
             <div className="container">
               <div className="register-heading">Flavour</div>
@@ -97,21 +102,13 @@ class Flavour extends Authentication {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td className="text-center" onClick={ this.editFlavour }><i className="fa fa-edit"></i></td>
-                      <td>Mark</td>
-                      <td>Otto</td>
+                  { currRecords ? currRecords.map((currRecord, index) => (
+                      <tr key={ currRecord._id }>
+                      <td className="text-center" onClick={ () => this.editFlavour(currRecord._id) }><i className="fa fa-edit"></i></td>
+                      <td>{ currRecord.name }</td>
+                      <td>{ currRecord.uon }</td>
                     </tr>
-                    <tr>
-                      <td className="text-center" onClick={ this.editFlavour }><i className="fa fa-edit"></i></td>
-                      <td>Jacob</td>
-                      <td>Thornton</td>
-                    </tr>
-                    <tr>
-                      <td className="text-center" onClick={ this.editFlavour }><i className="fa fa-edit"></i></td>
-                      <td>Larry the Bird</td>
-                      <td>@twitter</td>
-                    </tr>
+                    )) : "" }
                   </tbody>
                 </Table>;
               </div>

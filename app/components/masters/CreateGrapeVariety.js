@@ -1,13 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { sideBarList } from '../../utils/Constants';
+import { getCurrRecord, upsertRecord, validateForm } from '../../utils/Functions';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 
-class CreateWineVariety extends Authentication {
+class CreateGrapeVariety extends Authentication {
 
     constructor(props) {
         super(props);
+        this.modelName = "GrapeVarietyMaster";
         this.onCancel = this.onCancel.bind(this);
         this.goBack = this.goBack.bind(this);
     }
@@ -23,17 +25,24 @@ class CreateWineVariety extends Authentication {
     }
 
     render() {
+      let queryParams = this.props.location.query;
+      let thisVar = this;
+      getCurrRecord(queryParams, this, thisVar.modelName);
         return (
             <div className="container">
               <div className="register-heading">Variety of Grape/Fruit</div>
               <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
-              <Form onSubmit={ (values) => {
-                                   console.log('s');
-                               } } validate={ (values) => {
-                                                                                                                                                      return {
-                                                                                                                                                  
-                                                                                                                                                      }
-                                                                                                                                                  } }>
+              <Form 
+              defaultValues = {thisVar.state? thisVar.state.currRecord ? thisVar.state.currRecord: {} : {}}
+              onSubmit={ (values) => {
+                let data = values;
+                if(thisVar.state && thisVar.state.currRecord)
+                  data._id = thisVar.state.currRecord._id;
+                console.log("ValuestoSend", data);
+                upsertRecord(data, thisVar, thisVar.modelName);
+              } } validate={ (values) => {
+                return validateForm(values, thisVar.modelName);
+                } }>
                 { ({submitForm}) => {
                       let errorMessage = null;
                   
@@ -86,4 +95,4 @@ class CreateWineVariety extends Authentication {
     }
 }
 
-export default CreateWineVariety;
+export default CreateGrapeVariety;

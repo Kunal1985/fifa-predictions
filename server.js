@@ -399,6 +399,126 @@ app.post('/getTankMasterRecord', function(req, res, next) {
 });
 
 /**
+ * POST /upsertWineTypeMaster
+ * Upsert WineTypeMaster
+ */
+app.post('/upsertWineTypeMaster', function(req, res, next) {
+  upsertRecord(req, res, next, "WineTypeMaster");
+});
+
+/**
+ * GET /getWineTypeMaster
+ * Get WineTypeMaster
+ */
+app.get('/getWineTypeMaster', function(req, res, next) {
+  getAllRecords(req, res, next, "WineTypeMaster");
+});
+
+/**
+ * GET /getWineTypeMasterRecord
+ * Get WineTypeMaster Record
+ */
+app.post('/getWineTypeMasterRecord', function(req, res, next) {
+  getRecordById(req, res, next, "WineTypeMaster");
+});
+
+/**
+ * POST /upsertGrapeVarietyMaster
+ * Upsert GrapeVarietyMaster
+ */
+app.post('/upsertGrapeVarietyMaster', function(req, res, next) {
+  upsertRecord(req, res, next, "GrapeVarietyMaster");
+});
+
+/**
+ * GET /getGrapeVarietyMaster
+ * Get GrapeVarietyMaster
+ */
+app.get('/getGrapeVarietyMaster', function(req, res, next) {
+  getAllRecords(req, res, next, "GrapeVarietyMaster");
+});
+
+/**
+ * GET /getGrapeVarietyMasterRecord
+ * Get GrapeVarietyMaster Record
+ */
+app.post('/getGrapeVarietyMasterRecord', function(req, res, next) {
+  getRecordById(req, res, next, "GrapeVarietyMaster");
+});
+
+/**
+ * POST /upsertBrandMaster
+ * Upsert BrandMaster
+ */
+app.post('/upsertBrandMaster', function(req, res, next) {
+  upsertRecord(req, res, next, "BrandMaster");
+});
+
+/**
+ * GET /getBrandMaster
+ * Get BrandMaster
+ */
+app.get('/getBrandMaster', function(req, res, next) {
+  getAllRecords(req, res, next, "BrandMaster");
+});
+
+/**
+ * GET /getBrandMasterRecord
+ * Get BrandMaster Record
+ */
+app.post('/getBrandMasterRecord', function(req, res, next) {
+  getRecordById(req, res, next, "BrandMaster");
+});
+
+/**
+ * POST /upsertFlavourMaster
+ * Upsert FlavourMaster
+ */
+app.post('/upsertFlavourMaster', function(req, res, next) {
+  upsertRecord(req, res, next, "FlavourMaster");
+});
+
+/**
+ * GET /getFlavourMaster
+ * Get FlavourMaster
+ */
+app.get('/getFlavourMaster', function(req, res, next) {
+  getAllRecords(req, res, next, "FlavourMaster");
+});
+
+/**
+ * GET /getFlavourMasterRecord
+ * Get FlavourMaster Record
+ */
+app.post('/getFlavourMasterRecord', function(req, res, next) {
+  getRecordById(req, res, next, "FlavourMaster");
+});
+
+/**
+ * POST /upsertSpiritMaster
+ * Upsert SpiritMaster
+ */
+app.post('/upsertSpiritMaster', function(req, res, next) {
+  upsertRecord(req, res, next, "SpiritMaster");
+});
+
+/**
+ * GET /getSpiritMaster
+ * Get SpiritMaster
+ */
+app.get('/getSpiritMaster', function(req, res, next) {
+  getAllRecords(req, res, next, "SpiritMaster");
+});
+
+/**
+ * GET /getSpiritMasterRecord
+ * Get SpiritMaster Record
+ */
+app.post('/getSpiritMasterRecord', function(req, res, next) {
+  getRecordById(req, res, next, "SpiritMaster");
+});
+
+/**
  * Method to upsert Record for a model.
  * 
  */
@@ -481,6 +601,11 @@ getModelObject = function(modelName){
     case "Register8": modelObj = Register8; break;
     case "Register9": modelObj = Register9; break;
     case "TankMaster": modelObj = TankMaster; break;
+    case "WineTypeMaster": modelObj = WineTypeMaster; break;
+    case "GrapeVarietyMaster": modelObj = GrapeVarietyMaster; break;
+    case "BrandMaster": modelObj = BrandMaster; break;
+    case "FlavourMaster": modelObj = FlavourMaster; break;
+    case "SpiritMaster": modelObj = SpiritMaster; break;
     default: break;
   }
   return modelObj;

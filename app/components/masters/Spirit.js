@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { sideBarList, searchType } from '../../utils/Constants';
+import { getAllRecords } from '../../utils/Functions';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 import { Table } from 'react-bootstrap';
@@ -8,6 +9,7 @@ import { Table } from 'react-bootstrap';
 class Spirit extends Authentication {
     constructor(props) {
         super(props);
+        this.setState({});
         this.createSpirit = this.createSpirit.bind(this);
         this.goBack = this.goBack.bind(this);
         this.editSpirit = this.editSpirit.bind(this);
@@ -18,9 +20,9 @@ class Spirit extends Authentication {
         currProps.history.push("/createSpirit");
     }
 
-    editSpirit() {
+    editSpirit(currId) {
         let currProps = this.props;
-        currProps.history.push("/createSpirit");
+        currProps.history.push("/createSpirit?upsertAction=update&id=" + currId);
     }
 
     goBack() {
@@ -29,6 +31,9 @@ class Spirit extends Authentication {
     }
 
     render() {
+      getAllRecords(this, "SpiritMaster");
+      console.log("STATE", this.state);
+      let currRecords = this.state ? this.state.records : null;
         return (
             <div className="container">
               <div className="register-heading">Spirit</div>
@@ -97,21 +102,13 @@ class Spirit extends Authentication {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td className="text-center" onClick={ this.editSpirit }><i className="fa fa-edit"></i></td>
-                      <td>Mark</td>
-                      <td>Otto</td>
+                  { currRecords ? currRecords.map((currRecord, index) => (
+                      <tr key={ currRecord._id }>
+                      <td className="text-center" onClick={ () => this.editSpirit(currRecord._id) }><i className="fa fa-edit"></i></td>
+                      <td>{ currRecord.type }</td>
+                      <td>{ currRecord.brand }</td>
                     </tr>
-                    <tr>
-                      <td className="text-center" onClick={ this.editSpirit }><i className="fa fa-edit"></i></td>
-                      <td>Jacob</td>
-                      <td>Thornton</td>
-                    </tr>
-                    <tr>
-                      <td className="text-center" onClick={ this.editSpirit }><i className="fa fa-edit"></i></td>
-                      <td>Larry the Bird</td>
-                      <td>@twitter</td>
-                    </tr>
+                    )) : "" }
                   </tbody>
                 </Table>;
               </div>

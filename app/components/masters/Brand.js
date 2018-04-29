@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { sideBarList, searchType } from '../../utils/Constants';
+import { getAllRecords } from '../../utils/Functions';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 import { Table } from 'react-bootstrap';
@@ -8,6 +9,7 @@ import { Table } from 'react-bootstrap';
 class Brand extends Authentication {
     constructor(props) {
         super(props);
+        this.setState({});
         this.createBrand = this.createBrand.bind(this);
         this.goBack = this.goBack.bind(this);
         this.editBrand = this.editBrand.bind(this);
@@ -18,9 +20,9 @@ class Brand extends Authentication {
         currProps.history.push("/createBrand");
     }
 
-    editBrand() {
+    editBrand(currId) {
         let currProps = this.props;
-        currProps.history.push("/createBrand");
+        currProps.history.push("/createBrand?upsertAction=update&id=" + currId);
     }
 
     goBack() {
@@ -29,6 +31,9 @@ class Brand extends Authentication {
     }
 
     render() {
+      getAllRecords(this, "BrandMaster");
+      console.log("STATE", this.state);
+      let currRecords = this.state ? this.state.records : null;
         return (
             <div className="container">
               <div className="register-heading">Brand</div>
@@ -105,45 +110,21 @@ class Brand extends Authentication {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td className="text-center" onClick={ this.editBrand }><i className="fa fa-edit"></i></td>
-                      <td>Mark</td>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>Otto</td>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>Otto</td>
-                      <td>Otto</td>
+                  { currRecords ? currRecords.map((currRecord, index) => (
+                      <tr key={ currRecord._id }>
+                      <td className="text-center" onClick={ () => this.editBrand(currRecord._id) }><i className="fa fa-edit"></i></td>
+                      <td>{ currRecord.name }</td>
+                      <td>{ currRecord.size }</td>
+                      <td>{ currRecord.mfgCost }</td>
+                      <td>{ currRecord.exciseDuty }</td>
+                      <td>{ currRecord.salesTax }</td>
+                      <td>{ currRecord.mrp }</td>
+                      <td>{ currRecord.labelAppOrderNo }</td>
+                      <td>{ currRecord.mrpApprovalDate }</td>
+                      <td>{ currRecord.mrpEffectiveDate }</td>
+                      <td>{ currRecord.mrpChangeDate }</td>
                     </tr>
-                    <tr>
-                      <td className="text-center" onClick={ this.editBrand }><i className="fa fa-edit"></i></td>
-                      <td>Mark</td>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>Otto</td>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>Otto</td>
-                      <td>Otto</td>
-                    </tr>
-                    <tr>
-                      <td className="text-center" onClick={ this.editBrand }><i className="fa fa-edit"></i></td>
-                      <td>Mark</td>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>Otto</td>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>Otto</td>
-                      <td>Otto</td>
-                    </tr>
+                    )) : "" }
                   </tbody>
                 </Table>;
               </div>
