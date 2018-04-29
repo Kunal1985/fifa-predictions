@@ -20,6 +20,44 @@ exports.getAllRecords = function(currObj, modelName) {
         });
 }
 
+exports.getRecordsByQuery = function(currObj, modelName, query) {
+    console.log("getAllRecords for", modelName);
+    var options = {
+        method: 'POST',
+        uri: `http://localhost:3000/get${modelName}ByQuery`,
+        body: {
+            query: query
+        },
+        json: true
+    };
+    rp(options)
+        .then(function(body) {
+            console.log("getAllRecordsGeneric Response for", modelName, body.length, body);
+            var stateChangeVar = currObj.state;
+            if(!stateChangeVar)
+                stateChangeVar = {};
+            var fieldName;
+            switch(modelName){
+                case "States": fieldName = "state"; break;
+                case "Districts": fieldName = "district"; break;
+                case "SubDistricts": fieldName = "subDistrict"; break;
+                case "Villages": fieldName = "village"; break;
+                default: break;
+            }
+            stateChangeVar[modelName.toLowerCase()] = body.map(function(currRecord){
+                return {
+                    label: currRecord[fieldName + "NameInEnglish"],
+                    value: currRecord[fieldName + "Code"] + "",
+                    selected: true
+                }
+            });
+            currObj.setState(stateChangeVar);
+        })
+        .catch(function(err) {
+            console.log("Error", err);
+        });
+}
+
 exports.getCurrRecord = function(queryParams, currObj, modelName) {
     if (queryParams.upsertAction === 'update' && queryParams.id) {
         var options = {
@@ -69,7 +107,11 @@ exports.validateForm = function(values, modelName){
                 qtyCrushed: !values.qtyCrushed ? 'Please enter Quantity of Fruit/Grapes Crushed in Kg.' : undefined,
                 qtyReceived: !values.qtyReceived ? 'Please enter Quantity of Fruit/Grapes Received in Kg.' : undefined,
                 supplierName: !values.supplierName ? 'Please select the Grape/Fruit Supplier' : undefined,
-                gatNumber: !values.gatNumber ? 'Please enter a valid GAT/Survey No..' : undefined
+                gatNumber: !values.gatNumber ? 'Please enter a valid GAT/Survey No.' : undefined,
+                state: !values.state ? 'Please select a State.' : undefined,
+                district: !values.district ? 'Please select a District.' : undefined,
+                taluka: !values.taluka ? 'Please select a Taluka.' : undefined,
+                village: !values.village ? 'Please select a Village.' : undefined
             };
             break;
         case "Register2":
