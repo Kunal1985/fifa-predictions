@@ -89,7 +89,7 @@ exports.getCurrRecord = function(queryParams, currObj, modelName) {
         };
         rp(options)
             .then(function(body) {
-                console.log("getRegister2Record Response", body);
+                console.log("getCurrRecord Response for", modelName, body);
                 if (!currObj.state || !currObj.state.currRecord)
                     currObj.setState({ currRecord: body });
             })

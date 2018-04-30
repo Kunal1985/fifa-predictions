@@ -219,10 +219,10 @@ const searchType = [{
 
 const tankType = [{
     label: "SS Tank",
-    value: 1
+    value: "1"
 }, {
     label: "Oak Wine Barrel Tank",
-    value: 2
+    value: "2"
 }]
 
 const TransferType = [{
