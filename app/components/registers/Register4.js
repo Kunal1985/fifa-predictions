@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { sideBarList, tankNumbers } from '../../utils/Constants';
-import { getCurrRecord, upsertRecord, validateForm } from '../../utils/Functions';
+import { getCurrRecord, upsertRecord, validateForm, getRecordsByQuery } from '../../utils/Functions';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 
@@ -10,6 +10,7 @@ class Register4 extends Authentication {
         super(props);
         this.modelName = "Register4";
         this.goBack = this.goBack.bind(this);
+        getRecordsByQuery(this, "TankMaster");
     }
 
     goBack() {
@@ -20,6 +21,7 @@ class Register4 extends Authentication {
     render() {
       let queryParams = this.props.location.query;
       let thisVar = this;
+      let tankList = (this.state && this.state["tankmaster"]) ? this.state["tankmaster"] : [];
       getCurrRecord(queryParams, this, thisVar.modelName);
         return (
             <div className="container">
@@ -58,7 +60,7 @@ class Register4 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Tank Number</label>
-                                      <Select className="form-control" field="fermentedWine.tankNumber" id="fermentedWine.tankNumber" options={ tankNumbers } />
+                                      <Select className="form-control" field="fermentedWine.tankNumber" id="fermentedWine.tankNumber" options={ tankList } />
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
@@ -87,7 +89,7 @@ class Register4 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Tank Number</label>
-                                      <Select className="form-control" field="spirit.tankNumber" id="spirit.tankNumber" options={ tankNumbers } />
+                                      <Select className="form-control" field="spirit.tankNumber" id="spirit.tankNumber" options={ tankList } />
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
@@ -122,7 +124,7 @@ class Register4 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Tank Number</label>
-                                      <Select className="form-control" field="fortifiedWine.tankNumber" id="fortifiedWine.tankNumber" options={ tankNumbers } />
+                                      <Select className="form-control" field="fortifiedWine.tankNumber" id="fortifiedWine.tankNumber" options={ tankList } />
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">

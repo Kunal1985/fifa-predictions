@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { sideBarList, purchaseType, saleType, licenseType, bulkTransferOtherUnitType, tankNumbers } from '../../utils/Constants';
-import { getCurrRecord, upsertRecord, validateForm } from '../../utils/Functions';
+import { getCurrRecord, upsertRecord, validateForm, getRecordsByQuery } from '../../utils/Functions';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 
@@ -20,7 +20,7 @@ class Register5 extends Authentication {
         this.handleOpeningChange = this.handleOpeningChange.bind(this);
         this.handleClosingChange = this.handleClosingChange.bind(this);
         this.handleOtherUnitChange = this.handleOtherUnitChange.bind(this);
-
+        getRecordsByQuery(this, "TankMaster");
     }
 
     handleOpeningChange(e) {
@@ -50,6 +50,7 @@ class Register5 extends Authentication {
         let queryParams = this.props.location.query;
         let thisVar = this;
         getCurrRecord(queryParams, this, thisVar.modelName);
+        let tankList = (this.state && this.state["tankmaster"]) ? this.state["tankmaster"] : [];
         return (
             <div className="container">
               <div className="register-heading">Bulk Transfer</div>
@@ -86,7 +87,7 @@ class Register5 extends Authentication {
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Tank Number</label>
-                                        <Select className="form-control" field="tankNumber" id="tankNumber" options={ tankNumbers }/>
+                                        <Select className="form-control" field="tankNumber" id="tankNumber" options={ tankList }/>
                                       </div>
                                     </div>
                                     <div className="col-lg-4 col-md-4 col-sm-12">
@@ -116,7 +117,7 @@ class Register5 extends Authentication {
                                         <div className="col-lg-4 col-md-4 col-sm-12">
                                           <div className="form-group">
                                             <label>Tank Number</label>
-                                            <Select className="form-control" field="ownUnit.tankNumber" id="ownUnit.tankNumber" options={ tankNumbers }/>
+                                            <Select className="form-control" field="ownUnit.tankNumber" id="ownUnit.tankNumber" options={ tankList }/>
                                           </div>
                                         </div>
                                         <div className="col-lg-4 col-md-4 col-sm-12">
