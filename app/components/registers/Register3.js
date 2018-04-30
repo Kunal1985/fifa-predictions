@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { sideBarList, tankNumbers } from '../../utils/Constants';
-import { getCurrRecord, upsertRecord, validateForm } from '../../utils/Functions';
+import { getCurrRecord, upsertRecord, validateForm, getRecordsByQuery } from '../../utils/Functions';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 
@@ -11,6 +11,7 @@ class Register3 extends Authentication {
         this.modelName = "Register3";
         this.state = { tanks: ['tank-0'], openings: ['opening-0'], quantities: ['quantity-0'] };
         this.goBack = this.goBack.bind(this);
+        getRecordsByQuery(this, "TankMaster");
     }
 
     goBack() {
@@ -30,6 +31,7 @@ class Register3 extends Authentication {
     render() {
       let queryParams = this.props.location.query;
       let thisVar = this;
+      let tankList = (this.state && this.state["tankmaster"]) ? this.state["tankmaster"] : [];
       getCurrRecord(queryParams, this, thisVar.modelName);
         return (
             <div className="container">
@@ -66,7 +68,7 @@ class Register3 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Tank Number</label>
-                                      <Select className="form-control" field="tankNumber" id="tankNumber" options={ tankNumbers }/>
+                                      <Select className="form-control" field="tankNumber" id="tankNumber" options={ tankList }/>
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">

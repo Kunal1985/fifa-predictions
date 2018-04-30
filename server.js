@@ -523,32 +523,32 @@ app.post('/getSpiritMasterRecord', function(req, res, next) {
 });
 
 /**
-* GET /getStates
-* Get States
+* POST /getStates
+* Get States by specified Query
 */
 app.post('/getStatesByQuery', function(req, res, next) {
   getAllRecords(req, res, next, "States");
 });
 
 /**
-* GET /getDistricts
-* Get Districts
+* POST /getDistricts
+* Get Districts by specified Query
 */
 app.post('/getDistrictsByQuery', function(req, res, next) {
   getAllRecords(req, res, next, "Districts", req.body.query);
 });
 
 /**
-* GET /getSubDistricts
-* Get SubDistricts
+* POST /getSubDistricts
+* Get SubDistricts by specified Query
 */
 app.post('/getSubDistrictsByQuery', function(req, res, next) {
   getAllRecords(req, res, next, "SubDistricts", req.body.query);
 });
 
 /**
-* GET /getVillages
-* Get Villages
+* POST /getVillages
+* Get Villages by specified Query
 */
 app.post('/getVillagesByQuery', function(req, res, next) {
   getAllRecords(req, res, next, "Villages", req.body.query);

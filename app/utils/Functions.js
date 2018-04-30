@@ -22,9 +22,18 @@ exports.getAllRecords = function(currObj, modelName) {
 
 exports.getRecordsByQuery = function(currObj, modelName, query) {
     console.log("getAllRecords for", modelName);
+    var enpointUrl;
+    var httpMethod;
+    if(["States", "Districts", "SubDistricts", "Villages"].indexOf(modelName) != -1){
+        enpointUrl = `http://localhost:3000/get${modelName}ByQuery`;
+        httpMethod = "POST";
+    } else{
+        enpointUrl = `http://localhost:3000/get${modelName}`;
+        httpMethod = "GET";
+    }
     var options = {
-        method: 'POST',
-        uri: `http://localhost:3000/get${modelName}ByQuery`,
+        method: httpMethod,
+        uri: enpointUrl,
         body: {
             query: query
         },
@@ -42,13 +51,23 @@ exports.getRecordsByQuery = function(currObj, modelName, query) {
                 case "Districts": fieldName = "district"; break;
                 case "SubDistricts": fieldName = "subDistrict"; break;
                 case "Villages": fieldName = "village"; break;
+                case "TankMaster": fieldName = "tankmaster"; break;
                 default: break;
             }
             stateChangeVar[modelName.toLowerCase()] = body.map(function(currRecord){
-                return {
-                    label: currRecord[fieldName + "NameInEnglish"],
-                    value: currRecord[fieldName + "Code"] + "",
-                    selected: true
+                switch(modelName){
+                    case "TankMaster": return {
+                        label: currRecord.number,
+                        value: currRecord.number,
+                        selected: true
+                    }
+                    break;
+                    default: return {
+                        label: currRecord[fieldName + "NameInEnglish"],
+                        value: currRecord[fieldName + "Code"] + "",
+                        selected: true
+                    }
+                    break;
                 }
             });
             currObj.setState(stateChangeVar);
