@@ -171,31 +171,31 @@ const licenseType = [{
 }]
 
 const purchaseType = [{
-    id: 1,
-    name: "Own Unit"
+    value: "1",
+    label: "Own Unit"
 }, {
-    id: 2,
-    name: "Other Unit"
+    value: "2",
+    label: "Other Unit"
 }]
 
 const bulkTransferOtherUnitType = [{
-    id: 1,
-    name: "Purchase from within State"
+    value: "1",
+    label: "Purchase from within State"
 }, {
-    id: 2,
-    name: "Purchase from out of State"
+    value: "2",
+    label: "Purchase from out of State"
 }, {
-    id: 3,
-    name: "Overseas Purchase"
+    value: "3",
+    label: "Overseas Purchase"
 }, {
-    id: 4,
-    name: "Sale within State"
+    value: "4",
+    label: "Sale within State"
 }, {
-    id: 5,
-    name: "Sale out of State"
+    value: "5",
+    label: "Sale out of State"
 }, {
-    id: 6,
-    name: "Overseas Sale"
+    value: "6",
+    label: "Overseas Sale"
 }]
 
 const saleType = [{

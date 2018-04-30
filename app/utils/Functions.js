@@ -150,25 +150,25 @@ exports.validateForm = function(values, modelName){
                 rackingLoss: !values.rackingLoss ? 'Please Racking Loss.' : undefined
             };
             break;
-        // case "Register4":
-        //     validators = {
-        //         date: !values.date ? 'Please select the Date' : undefined,
-        //         "fermentedWine.tankNumber": !values.fermentedWine || !values.fermentedWine.tankNumber ? 'Please select the Tank Number' : undefined,
-        //         "fermentedWine.openingBalance": !values.fermentedWine || !values.fermentedWine.openingBalance ? 'Please enter the Opening Balance' : undefined,
-        //         "fermentedWine.quantity": !values.fermentedWine || !values.fermentedWine.quantity ? 'Please enter the Quantity Taken' : undefined,
-        //         "fermentedWine.closingBalance": !values.fermentedWine || !values.fermentedWine.closingBalance ? 'Please enter the Closing Balance' : undefined,
-        //         "spirit.tankNumber": !values.spirit || !values.spirit.tankNumber ? 'Please select the Tank Number' : undefined,
-        //         "spirit.openingBalance": !values.spirit || !values.spirit.openingBalance ? 'Please enter the Opening Balance' : undefined,
-        //         "spirit.strength": !values.spirit || !values.spirit.strength ? 'Please enter the Strength' : undefined,
-        //         "spirit.quantity": !values.spirit || !values.spirit.quantity ? 'Please enter the Quantity Taken' : undefined,
-        //         "spirit.closingBalance": !values.spirit || !values.spirit.closingBalance ? 'Please enter the Closing Balance' : undefined,
-        //         "fortifiedWine.tankNumber": !values.fortifiedWine || !values.fortifiedWine.tankNumber ? 'Please select the Tank Number' : undefined,
-        //         "fortifiedWine.quantity": !values.fortifiedWine || !values.fortifiedWine.quantity ? 'Please enter the Quantity in Litres' : undefined,
-        //         "fortifiedWine.alcoholPercentage": !values.fortifiedWine || !values.fortifiedWine.alcoholPercentage ? 'Please enter the Alcohol%' : undefined,
-        //         "fortifiedWine.closingBalance": !values.fortifiedWine || !values.fortifiedWine.closingBalance ? 'Please enter the Closing Balance' : undefined,
-        //         "fortifiedWine.fortificationLoss": !values.fortifiedWine || !values.fortifiedWine.fortificationLoss ? 'Please enter the Fortification Loss' : undefined,
-        //     };
-        //     break;
+        case "Register4":
+            validators = {
+                date: !values.date ? 'Please select the Date' : undefined,
+                "fermentedWineTankNumber": !values.fermentedWine || !values.fermentedWine.tankNumber ? 'Please select the Tank Number' : undefined,
+                "fermentedWineOpeningBalance": !values.fermentedWine || !values.fermentedWine.openingBalance ? 'Please enter the Opening Balance' : undefined,
+                "fermentedWineQuantity": !values.fermentedWine || !values.fermentedWine.quantity ? 'Please enter the Quantity Taken' : undefined,
+                "fermentedWineClosingBalance": !values.fermentedWine || !values.fermentedWine.closingBalance ? 'Please enter the Closing Balance' : undefined,
+                "spiritTankNumber": !values.spirit || !values.spirit.tankNumber ? 'Please select the Tank Number' : undefined,
+                "spiritOpeningBalance": !values.spirit || !values.spirit.openingBalance ? 'Please enter the Opening Balance' : undefined,
+                "spiritStrength": !values.spirit || !values.spirit.strength ? 'Please enter the Strength' : undefined,
+                "spiritQuantity": !values.spirit || !values.spirit.quantity ? 'Please enter the Quantity Taken' : undefined,
+                "spiritClosingBalance": !values.spirit || !values.spirit.closingBalance ? 'Please enter the Closing Balance' : undefined,
+                "fortifiedWineTankNumber": !values.fortifiedWine || !values.fortifiedWine.tankNumber ? 'Please select the Tank Number' : undefined,
+                "fortifiedWineQuantity": !values.fortifiedWine || !values.fortifiedWine.quantity ? 'Please enter the Quantity in Litres' : undefined,
+                "fortifiedWineAlcoholPercentage": !values.fortifiedWine || !values.fortifiedWine.alcoholPercentage ? 'Please enter the Alcohol%' : undefined,
+                "fortifiedWineClosingBalance": !values.fortifiedWine || !values.fortifiedWine.closingBalance ? 'Please enter the Closing Balance' : undefined,
+                "fortifiedWineFortificationLoss": !values.fortifiedWine || !values.fortifiedWine.fortificationLoss ? 'Please enter the Fortification Loss' : undefined,
+            };
+            break;
         case "Register6":
             validators = {
                 date: !values.date ? 'Please select the Date' : undefined,
