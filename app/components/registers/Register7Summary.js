@@ -67,16 +67,16 @@ class Register7Summary extends Authentication {
                           <td className="text-center" onClick={ () => this.editFermentedWine(currRecord._id) }><i className="fa fa-edit"></i></td>
                           <td>{ currRecord.disgorgingType }</td>
                           <td>
-                            { currRecord.ownUnit.bottlesQty + currRecord.otherUnit.bottlesQty }
+                            { currRecord.ownUnit ? currRecord.ownUnit.bottlesQty : currRecord.otherUnit ? currRecord.otherUnit.bottlesQty : "-----" }
                           </td>
                           <td>
-                            { currRecord.disgorgingLoss.bottlesQty }
+                            { currRecord.disgorgingLoss ? currRecord.disgorgingLoss.bottlesQty : "-----" }
                           </td>
                           <td>
-                            { currRecord.closingBalanceDisgorged.bottlesQty }
+                            { currRecord.closingBalanceDisgorged ? currRecord.closingBalanceDisgorged.bottlesQty : "-----" }
                           </td>
                           <td>
-                            { currRecord.closingBalanceTirage.bottlesQty }
+                            { currRecord.closingBalanceTirage ? currRecord.closingBalanceTirage.bottlesQty : "-----" }
                           </td>
                         </tr>
                       )) : "" }

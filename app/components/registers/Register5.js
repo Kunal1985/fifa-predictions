@@ -17,30 +17,8 @@ class Register5 extends Authentication {
             bulkOtherUnitValue: 1
             
         };
-
-        this.handleOpeningChange = this.handleOpeningChange.bind(this);
-        this.handleClosingChange = this.handleClosingChange.bind(this);
-        this.handleOtherUnitChange = this.handleOtherUnitChange.bind(this);
         getRecordsByQuery(this, "TankMaster");
     }
-
-    handleOpeningChange(e) {
-        this.setState({
-            bulkOpeningValue: e.target.value
-        });
-    }
-
-    handleClosingChange(e) {
-        this.setState({
-            bulkClosingValue: e.target.value
-        });
-    }
-
-    handleOtherUnitChange(e) {
-      this.setState({
-        bulkOtherUnitValue: e.target.value
-      });
-  }
 
     goBack() {
       let currProps = this.props;
@@ -294,7 +272,7 @@ class Register5 extends Authentication {
                                       <div className="form-group">
                                         <label>
                                           Remarks:
-                                          <Textarea field='remarks' className="form-control" />
+                                          <Textarea className="form-control" field='remarks' />
                                         </label>
                                       </div>
                                     </div>

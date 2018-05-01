@@ -133,7 +133,7 @@ class Register3 extends Authentication {
                                     <div className="form-group">
                                       <label>
                                         Remarks:
-                                        <textarea className="form-control" field='remarks'/>
+                                        <Textarea className="form-control" field='remarks'/>
                                       </label>
                                     </div>
                                   </div>

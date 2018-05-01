@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { sideBarList, OpeningBalanceType, LabellingTransType, sizeInML } from '../../utils/Constants';
+import { sideBarList, OpeningBalanceType, labellingWineType, labellingTransType, sizeInML } from '../../utils/Constants';
 import { getCurrRecord, upsertRecord, validateForm } from '../../utils/Functions';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
@@ -11,16 +11,8 @@ class Register8 extends Authentication {
         this.modelName = "Register8";
         this.goBack = this.goBack.bind(this);
         this.state = {
-          LabellingTransType: 1
+          transferType: 1
       };
-
-      this.handleLabellingTrans = this.handleLabellingTrans.bind(this);
-    }
-
-    handleLabellingTrans(e) {
-        this.setState({
-          LabellingTransType: e.target.value
-        });
     }
 
     goBack() {
@@ -32,22 +24,30 @@ class Register8 extends Authentication {
       let queryParams = this.props.location.query;
       let thisVar = this;
       getCurrRecord(queryParams, this, thisVar.modelName);
+      let currRecord = (this.state && this.state.currRecord) ? this.state.currRecord : null;
+      let transferTypeInDB = currRecord ? currRecord.transferType : null;
         return (
             <div className="container">
               <div className="register-heading">Labelling</div>
               <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
               <div className="container">
                 <Form 
-                  defaultValues = {thisVar.state? thisVar.state.currRecord ? thisVar.state.currRecord: {} : {}}
+                  defaultValues = {currRecord}
                   onSubmit={ (values) => {
                       let data = values;
-                      if(thisVar.state && thisVar.state.currRecord)
+                      if(currRecord)
                         data._id = thisVar.state.currRecord._id;
                       console.log("ValuestoSend", data);
                       upsertRecord(data, thisVar, thisVar.modelName);
                     } 
                   }
                   validate={ (values) => {
+                      let currTransferType = values.transferType;
+                      if(thisVar.state && thisVar.state.selectedTransferType != currTransferType){
+                        thisVar.setState({selectedTransferType: currTransferType});
+                        if(currTransferType)
+                          thisVar.setState({transferType: parseInt(currTransferType)});
+                      }
                       return validateForm(values, thisVar.modelName);
                     } 
                   }>
@@ -61,15 +61,11 @@ class Register8 extends Authentication {
                                 <div className="row">
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
-                                        <label>Opening Balace</label>
-                                        <Select className="form-control" field="reg6TirageSizeInMl" id="reg6TirageSizeInMl" options={sizeInML}/>
-                                        <select field='reg7OpeningBalance' className="form-control">
-                                            {OpeningBalanceType.map(OpeningBalanceTypeVal => {
-                                            return <option key={OpeningBalanceType.id} value={OpeningBalanceTypeVal.id}>
-                                                {OpeningBalanceTypeVal.name}
-                                            </option>;
-                                            })}
-                                        </select>
+                                        <label>Opening Balance</label>
+                                        <Select className="form-control" field="openingBalance.sizeInML" id="openingBalance.sizeInML" options={sizeInML}/>
+                                        <Text field='openingBalanceSizeInML' type='hidden' className="form-control" />
+                                        <Select className="form-control" field='openingBalance.wineType' options={labellingWineType} />
+                                        <Text field='openingBalanceWineType' type='hidden' className="form-control" />
                                       </div>
                                     </div>
                                   </div>
@@ -77,13 +73,13 @@ class Register8 extends Authentication {
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Size in ML</label>
-                                        <Text field='reg7OpeningBalanceSizeinML' placeholder='Size in ML' className="form-control" />
+                                        <Text field='sizeinML' placeholder='Size in ML' className="form-control" />
                                       </div>
                                     </div>
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Number of Bottles</label>
-                                        <Text field='reg7OpeningBalanceNumberofBottles' placeholder='Number of Bottles' className="form-control" />
+                                        <Text field='numberofBottles' type="number" placeholder='Number of Bottles' className="form-control" />
                                       </div>
                                     </div>
                                   </div>
@@ -93,19 +89,22 @@ class Register8 extends Authentication {
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                           <label>Name of the Unit</label>
-                                          <Text field='reg7BottlesReceivedUnitName' placeholder='Name of the Unit' className="form-control" />
+                                          <Text field='bottlesReceived.unitName' placeholder='Name of the Unit' className="form-control" />
+                                          <Text field='bottlesReceivedUnitName' type='hidden' className="form-control" />
                                         </div>
                                       </div>
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                           <label>T.P Number</label>
-                                          <Text field='reg7BottlesReceivedTpNo' placeholder='T.P Number' className="form-control" />
+                                          <Text field='bottlesReceived.tpNo' placeholder='T.P Number' className="form-control" />
+                                          <Text field='bottlesReceivedTpNo' type='hidden' className="form-control" />
                                         </div>
                                       </div>
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                           <label>Size in ML</label>
-                                          <Text field='reg7BottlesReceivedSize' placeholder='Size in ML' className="form-control" />
+                                          <Text field='bottlesReceived.sizeInML' placeholder='Size in ML' className="form-control" />
+                                          <Text field='bottlesReceivedSizeInML' type='hidden' className="form-control" />
                                         </div>
                                       </div>
                                     </div>
@@ -113,7 +112,8 @@ class Register8 extends Authentication {
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                           <label>Number of Bottles</label>
-                                          <Text field='reg7BottlesReceivedNumberofBottles' placeholder='Number of Bottles' className="form-control" />
+                                          <Text field='bottlesReceived.numberofBottles' placeholder='Number of Bottles' className="form-control" />
+                                          <Text field='bottlesReceivedNumberOfBottles' type='hidden' className="form-control" />
                                         </div>
                                       </div>
                                     </div>
@@ -122,35 +122,32 @@ class Register8 extends Authentication {
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Labelling</label>
-                                        <select field='reg7LabellingTransType' className="form-control"  value={ this.state.LabellingTransType } onChange={ thisVar.handleLabellingTrans }>
-                                            {LabellingTransType.map(LabellingTransTypeVal => {
-                                            return <option key={LabellingTransTypeVal.id} value={LabellingTransTypeVal.id}>
-                                                {LabellingTransTypeVal.name}
-                                            </option>;
-                                            })}
-                                        </select>
+                                        <Select field='transferType' className="form-control" value={transferTypeInDB} options={labellingTransType} />
                                       </div>
                                     </div>
                                   </div>
-                                  { thisVar.state.LabellingTransType == 1 ?
+                                  { thisVar.state.transferType == 1 ?
                                   <div>
                                     <div className="row">
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                           <label>Brand Name</label>
-                                          <Text field='reg7LabellingBrandName' placeholder='Brand Name' className="form-control" />
+                                          <Text field='labelling.brandName' placeholder='Brand Name' className="form-control" />
+                                          <Text field='labellingBrandName' type='hidden' className="form-control" />
                                         </div>
                                       </div>
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                           <label>Strength</label>
-                                          <Text field='reg7LabellingStrength' placeholder='Strength' className="form-control" />
+                                          <Text field='labelling.strength' placeholder='Strength' className="form-control" />
+                                          <Text field='labellingStrength' type='hidden' className="form-control" />
                                         </div>
                                       </div>
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                           <label>Batch No.</label>
-                                          <Text field='reg7LabellingBatchNo' placeholder='Batch No' className="form-control" />
+                                          <Text field='labelling.batchNo' placeholder='Batch No' className="form-control" />
+                                          <Text field='labellingBatchNo' type='hidden' className="form-control" />
                                         </div>
                                       </div>
                                     </div>
@@ -158,19 +155,22 @@ class Register8 extends Authentication {
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                           <label>Mfg. Date</label>
-                                          <Text field='reg7LabellingMfgDate' placeholder='Mfg. Date' className="form-control" type="date"/>
+                                          <Text field='labelling.mfgDate' placeholder='Mfg. Date' className="form-control" type="date"/>
+                                          <Text field='labellingMfgDate' type='hidden' className="form-control" />
                                         </div>
                                       </div>
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                           <label>Size in ML</label>
-                                          <Text field='reg7LabellingSizeinML' placeholder='Size in ML' className="form-control" />
+                                          <Text field='labelling.sizeinML' placeholder='Size in ML' className="form-control" />
+                                          <Text field='labellingSizeinML' type='hidden' className="form-control" />
                                         </div>
                                       </div>
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                           <label>No. of Bottles</label>
-                                          <Text field='reg7LabellingNoOfBottles' placeholder='No. of Bottles' className="form-control" />
+                                          <Text field='labelling.noOfBottles' placeholder='No. of Bottles' className="form-control" />
+                                          <Text field='labellingNoOfBottles' type='hidden' className="form-control" />
                                         </div>
                                       </div>
                                     </div>
@@ -180,19 +180,22 @@ class Register8 extends Authentication {
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                           <label>Name of Unit</label>
-                                          <Text field='reg7TransferredUnitName' placeholder='Name of Unit' className="form-control" />
+                                          <Text field='transferred.unitName' placeholder='Name of Unit' className="form-control" />
+                                          <Text field='transferredUnitName' type='hidden' className="form-control" />
                                         </div>
                                       </div>
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                           <label>T.P No.</label>
-                                          <Text field='reg7TransferredTpNo' placeholder='T.P No.' className="form-control" />
+                                          <Text field='transferred.tpNo' placeholder='T.P No.' className="form-control" />
+                                          <Text field='transferredTpNo' type='hidden' className="form-control" />
                                         </div>
                                       </div>
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                           <label>Size in ML</label>
-                                          <Text field='reg7TransferredSizeinMl' placeholder='Size in ML' className="form-control" />
+                                          <Text field='transferred.sizeinML' placeholder='Size in ML' className="form-control" />
+                                          <Text field='transferredSizeinML' type='hidden' className="form-control" />
                                         </div>
                                       </div>
                                     </div>
@@ -200,13 +203,15 @@ class Register8 extends Authentication {
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                           <label>Number of Bottles</label>
-                                          <Text field='reg7TransferredNoOfBottles' placeholder='Number of Bottles' className="form-control" />
+                                          <Text field='transferred.noOfBottles' placeholder='Number of Bottles' className="form-control" />
+                                          <Text field='transferredNoOfBottles' type='hidden' className="form-control" />
                                         </div>
                                       </div>
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                           <label>Vend Fee</label>
-                                          <Text field='reg7TransferredVendFee' placeholder='Vend Fee' className="form-control" />
+                                          <Text field='transferred.vendFee' placeholder='Vend Fee' className="form-control" />
+                                          <Text field='transferredVendFee' type='hidden' className="form-control" />
                                         </div>
                                       </div>
                                     </div>
@@ -217,13 +222,15 @@ class Register8 extends Authentication {
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                           <label>Size in Ml</label>
-                                          <Text field='reg7SamlingSize' placeholder='Size in Ml' className="form-control" />
+                                          <Text field='sampling.sizeInML' placeholder='Size in ML' className="form-control" />
+                                          <Text field='samplingSizeInML' type='hidden' className="form-control" />
                                         </div>
                                       </div>
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                           <label>No. of Bottles</label>
-                                          <Text field='reg7SamlingNoOfBottles' placeholder='No. of Bottles' className="form-control" />
+                                          <Text field='sampling.noOfBottles' placeholder='No. of Bottles' className="form-control" />
+                                          <Text field='samplingNoOfBottles' type='hidden' className="form-control" />
                                         </div>
                                       </div>
                                     </div>
@@ -234,13 +241,15 @@ class Register8 extends Authentication {
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                           <label>Size in Ml</label>
-                                          <Text field='reg7BreakagesSize' placeholder='Size in Ml' className="form-control" />
+                                          <Text field='breakages.sizeInML' placeholder='Size in ML' className="form-control" />
+                                          <Text field='breakagesSizeInML' type='hidden' className="form-control" />
                                         </div>
                                       </div>
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                           <label>No. of Bottles</label>
-                                          <Text field='reg7BreakagesNoOfBottles' placeholder='No. of Bottles' className="form-control" />
+                                          <Text field='breakages.noOfBottles' placeholder='No. of Bottles' className="form-control" />
+                                          <Text field='breakagesNoOfBottles' type='hidden' className="form-control" />
                                         </div>
                                       </div>
                                     </div>
@@ -251,13 +260,15 @@ class Register8 extends Authentication {
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                           <label>Size in Ml</label>
-                                          <Text field='reg7ClosingBalanceSize' placeholder='Size in Ml' className="form-control" />
+                                          <Text field='closingBalance.sizeInML' placeholder='Size in ML' className="form-control" />
+                                          <Text field='closingBalanceSizeInML' type='hidden' className="form-control" />
                                         </div>
                                       </div>
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                           <label>No. of Bottles</label>
-                                          <Text field='reg7ClosingBalanceNoOfBottles' placeholder='No. of Bottles' className="form-control" />
+                                          <Text field='closingBalance.noOfBottles' placeholder='No. of Bottles' className="form-control" />
+                                          <Text field='closingBalanceNoOfBottles' type='hidden' className="form-control" />
                                         </div>
                                       </div>
                                     </div>
@@ -267,7 +278,7 @@ class Register8 extends Authentication {
                                       <div className="form-group">
                                         <label className="text-area-labels">
                                           Remarks:
-                                          <textarea className="form-control" />
+                                          <Textarea className="form-control" field="remarks" />
                                         </label>
                                       </div>
                                     </div>

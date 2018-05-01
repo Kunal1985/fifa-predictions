@@ -6,8 +6,8 @@ var register9Schema = mongoose.Schema({
     brandName: String,
     strength: Number,
     batchNumber: String,
-    size: String,
-    bottleQty: Number,
+    sizeInML: String,
+    noOfBottles: Number,
 	openingBalance: Number,
 	closingBalance: Number,
     remarks: String,
@@ -28,8 +28,8 @@ var register9Schema = mongoose.Schema({
         brandName: String,
         strength: Number,
         batchNumber: String,
-        size: String,
-        bottleQty: Number,
+        sizeInML: String,
+        noOfBottles: Number,
     },
     remarks: String
 });

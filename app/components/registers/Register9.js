@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
-import { sideBarList, sizeInML, TransferType } from '../../utils/Constants';
+import { sideBarList, sizeInML, reg9TransferType } from '../../utils/Constants';
 import { getCurrRecord, upsertRecord, validateForm } from '../../utils/Functions';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
@@ -81,19 +81,13 @@ class Register9 extends Authentication {
                                 <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                         <label>Size</label>
-                                        <select field='reg8SizeMl' className="form-control" field="size" id="size">
-                                        {sizeInML.map(sizeInMLVal => {
-                                          return <option key={sizeInMLVal.id} value={sizeInMLVal.id}>
-                                            {sizeInMLVal.name}
-                                          </option>;
-                                        })}
-                                        </select>
+                                        <Select className="form-control" field='sizeInML' id="sizeInML" options={sizeInML} />
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                         <label>Number of Bottles</label>
-                                        <Text field='bottleQty' placeholder='Number of Bottles' className="form-control"/>
+                                        <Text field='noOfBottles' placeholder='Number of Bottles' className="form-control"/>
                                     </div>
                                 </div>
                             </div>
@@ -102,13 +96,7 @@ class Register9 extends Authentication {
                             <div className="col-lg-4 col-md-4 col-sm-12">
                                 <div className="form-group">
                                     <label>Quantity of Wine Dispatched from Finished Goods</label>
-                                        <select field="dispatchType" id="dispatchType" className="form-control">
-                                            {TransferType.map(TransferTypeVal => {
-                                            return <option key={TransferTypeVal.id} value={TransferTypeVal.id}>
-                                                {TransferTypeVal.name}
-                                            </option>;
-                                            })}
-                                        </select>
+                                        <Select field="dispatchType" id="dispatchType" className="form-control" options={reg9TransferType}/>
                                 </div>
                             </div>
                         </div>
@@ -199,18 +187,21 @@ class Register9 extends Authentication {
                                     <div className="form-group">
                                         <label>Brand Name</label>
                                         <Text field='closingWineBalance.brandName' placeholder='Brand Name' className="form-control"/>
+                                        <Text field='closingWineBalanceBrandName' type='hidden' className="form-control"/>
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                         <label>Strength</label>
                                         <Text field='closingWineBalance.strength' placeholder='Strength' className="form-control"/>
+                                        <Text field='closingWineBalanceStrength' type='hidden' className="form-control"/>
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                         <label>Batch No.</label>
                                         <Text field='closingWineBalance.batchNumber' placeholder='Batch No.' className="form-control"/>
+                                        <Text field='closingWineBalanceBatchNumber' type='hidden' className="form-control"/>
                                     </div>
                                 </div>
                             </div>
@@ -218,19 +209,15 @@ class Register9 extends Authentication {
                                 <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                         <label>Size</label>
-                                        <select field='reg8ClosingSizeMl' className="form-control" field="closingWineBalance.size" id="closingWineBalance.size">
-                                        {sizeInML.map(sizeInMLVal => {
-                                          return <option key={sizeInMLVal.id} value={sizeInMLVal.id}>
-                                            {sizeInMLVal.name}
-                                          </option>;
-                                        })}
-                                        </select>
+                                        <select className="form-control" field="closingWineBalance.sizeInML" id="closingWineBalance.sizeInML" options={sizeInML} />
+                                        <Text field='closingWineBalanceSizeInML' type='hidden' className="form-control"/>
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                         <label>Number of Bottles</label>
-                                        <Text field='closingWineBalance.bottleQty' placeholder='Number of Bottles' className="form-control"/>
+                                        <Text field='closingWineBalance.noOfBottles' placeholder='Number of Bottles' className="form-control"/>
+                                        <Text field='closingWineBalanceNoOfBottles' type='hidden' className="form-control"/>
                                     </div>
                                 </div>
                             </div>
@@ -240,7 +227,7 @@ class Register9 extends Authentication {
                                 <div className="form-group">
                                     <label className="text-area-labels">
                                     Remarks:
-                                    <textarea className="form-control" field='remarks'/>
+                                    <Textarea className="form-control" field='remarks'/>
                                     </label>
                                 </div> 
                             </div>

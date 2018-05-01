@@ -54,7 +54,6 @@ class Register8Summary extends Authentication {
                   <thead>
                     <tr>
                       <th>Edit</th>
-                      <th>Tank</th>
                       <th>Opening Balance</th>
                       <th>Closing Balance</th>
                     </tr>
@@ -63,12 +62,11 @@ class Register8Summary extends Authentication {
                     { currRecords ? currRecords.map((currRecord, index) => (
                         <tr key={ currRecord._id }>
                           <td className="text-center" onClick={ () => this.editFermentedWine(currRecord._id) }><i className="fa fa-edit"></i></td>
-                          <td>{ currRecord.tankNumber }</td>
                           <td>
-                            { currRecord.openingBalance }
+                            { currRecord.openingBalance ? currRecord.openingBalance.sizeInML : "-----" }
                           </td>
                           <td>
-                            { currRecord.closingBalance }
+                            { currRecord.closingBalance ? currRecord.closingBalance.sizeInML : "-----" }
                           </td>
                         </tr>
                       )) : "" }

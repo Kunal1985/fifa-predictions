@@ -199,14 +199,14 @@ const bulkTransferOtherUnitType = [{
 }]
 
 const saleType = [{
-    id: 1,
-    name: "Bulk Wine Sale"
+    value: "1",
+    label: "Bulk Wine Sale"
 }, {
-    id: 2,
-    name: "Transferred to other Unit"
+    value: "2",
+    label: "Transferred to other Unit"
 }, {
-    id: 3,
-    name: "Transferred to other Tank",
+    value: "3",
+    label: "Transferred to other Tank",
 }]
 
 const searchType = [{
@@ -225,37 +225,37 @@ const tankType = [{
     value: "2"
 }]
 
-const TransferType = [{
-    id: 1,
-    name: "Own State"
+const reg9TransferType = [{
+    value: "1",
+    label: "Own State"
 }, {
-    id: 2,
-    name: "Other State"
+    value: "2",
+    label: "Other State"
 }, {
-    id: 3,
-    name: "Overseas Export"
+    value: "3",
+    label: "Overseas Export"
 }]
 
-const OpeningBalanceType = [{
-    id: 1,
-    name: "Disgorged Bottles"
+const labellingWineType = [{
+    value: "1",
+    label: "Disgorged Bottles"
 }, {
-    id: 2,
-    name: "Still Wine"
+    value: "2",
+    label: "Still Wine"
 }, {
-    id: 3,
-    name: "Red Wine"
+    value: "3",
+    label: "Red Wine"
 }, {
-    id: 4,
-    name: "White Wine"
+    value: "4",
+    label: "White Wine"
 }]
 
-const LabellingTransType = [{
-    id: 1,
-    name: "Labelling Details"
+const labellingTransType = [{
+    value: "1",
+    label: "Labelling Details"
 }, {
-    id: 2,
-    name: "Transferred to Other Unit"
+    value: "2",
+    label: "Transferred to Other Unit"
 }]
 
 const suppliers = [{
@@ -282,9 +282,17 @@ const brandList = [{
     value: "Brand 2"
 }]
 
+const disgorgingTypeList = [{
+    label: "Transfer to Own Unit",
+    value: "ownUnitTransfer"
+}, {
+    label: "Tranfer to Other Unit",
+    value: "otherUnitTransfer"
+}]
+
 export { 
     sideBarList, grapeVariety, sizeInML, bottleSize, 
     wineType, licenseType, purchaseType, saleType, 
-    searchType, tankType, TransferType, 
-    bulkTransferOtherUnitType, OpeningBalanceType, 
-    LabellingTransType, suppliers, tankNumbers, brandList };
+    searchType, tankType, reg9TransferType, disgorgingTypeList,
+    bulkTransferOtherUnitType, labellingWineType, 
+    labellingTransType, suppliers, tankNumbers, brandList };

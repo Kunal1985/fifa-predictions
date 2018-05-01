@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { sideBarList, sizeInML, bottleSize, wineType, } from '../../utils/Constants';
+import { sideBarList, sizeInML, bottleSize, wineType, disgorgingTypeList } from '../../utils/Constants';
 import { getCurrRecord, upsertRecord, validateForm } from '../../utils/Functions';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
@@ -13,13 +13,6 @@ class Register7 extends Authentication {
         this.state = {
             transferType: "ownUnitTransfer"
         };
-        this.handleChange = this.handleChange.bind(this);
-    }
-
-    handleChange(e) {
-        this.setState({
-            transferType: e.target.value
-        });
     }
 
     goBack() {
@@ -31,13 +24,15 @@ class Register7 extends Authentication {
       let queryParams = this.props.location.query;
       let thisVar = this;
       getCurrRecord(queryParams, this, thisVar.modelName);
+      let currRecord = (this.state && this.state.currRecord) ? this.state.currRecord : null;
+      let disgorgingTypeInDB = currRecord ? currRecord.disgorgingType : null;
         return (
             <div className="container">
               <div className="register-heading">Disgorging</div>
               <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
               <div className="container">
                 <Form 
-                  defaultValues = {thisVar.state? thisVar.state.currRecord ? thisVar.state.currRecord: {} : {}}
+                  defaultValues = {currRecord}
                   onSubmit={ (values) => {
                       let data = values;
                       if(thisVar.state && thisVar.state.currRecord)
@@ -47,6 +42,11 @@ class Register7 extends Authentication {
                     } 
                   }
                   validate={ (values) => {
+                      let currDisgorgingType = values.disgorgingType;
+                      if(thisVar.state && thisVar.state.transferType != currDisgorgingType){
+                        if(currDisgorgingType)
+                          thisVar.setState({transferType: currDisgorgingType});
+                      }
                       return validateForm(values, thisVar.modelName);
                     } 
                   }>
@@ -71,89 +71,87 @@ class Register7 extends Authentication {
                                       <div className="row">
                                         <div className="col-lg-4 col-md-4 col-sm-12">
                                           <label>Disgorging Type</label>
-                                          <select className="form-control" field="disgorgingType" id="disgorgingType" value={ this.state.value } onChange={ thisVar.handleChange }>
-                                            <option value="ownUnitTransfer" selected>Transfer to Own Unit</option>
-                                            <option value="otherUnitTransfer">Tranfer to Other Unit</option>
-                                          </select>
+                                          <Select className="form-control" field="disgorgingType" id="disgorgingType" value={ disgorgingTypeInDB } options={ disgorgingTypeList } />
                                         </div>
                                       </div>
                                       { thisVar.state.transferType === "ownUnitTransfer" ? <div>
-                                                                                       <div className="row">
-                                                                                         <div className="col-lg-4 col-md-4 col-sm-12">
-                                                                                           <div className="form-group">
-                                                                                             <label>Bottle Size</label>
-                                                                                             <Select className="form-control" field="ownUnit.sizeInML" id="ownUnit.sizeInML" options={sizeInML}/>
-                                                                                           </div>
-                                                                                         </div>
-                                                                                         <div className="col-lg-4 col-md-4 col-sm-12">
-                                                                                           <div className="form-group">
-                                                                                             <label>Number of Bottles</label>
-                                                                                             <Text field='ownUnit.bottlesQty' placeholder='Number of Bottles' className="form-control" />
-                                                                                           </div>
-                                                                                         </div>
-                                                                                       </div>
-                                                                                     </div> : <div>
-                                                                                                <div className="row">
-                                                                                                  <div className="col-lg-4 col-md-4 col-sm-12">
-                                                                                                    <div className="form-group">
-                                                                                                      <label>Name of Party</label>
-                                                                                                      <Text field='otherUnit.name' placeholder='Name of Party' className="form-control" />
-                                                                                                    </div>
-                                                                                                  </div>
-                                                                                                  <div className="col-lg-4 col-md-4 col-sm-12">
-                                                                                                    <div className="form-group">
-                                                                                                      <label>Address of Party</label>
-                                                                                                      <Text field='otherUnit.address' placeholder='Address of Party' className="form-control" />
-                                                                                                    </div>
-                                                                                                  </div>
-                                                                                                  <div className="col-lg-4 col-md-4 col-sm-12">
-                                                                                                    <div className="form-group">
-                                                                                                      <label>T.P/E.P No.</label>
-                                                                                                      <Text field='otherUnit.tpEpNumber' placeholder='T.P/E.P  No.' className="form-control" />
-                                                                                                    </div>
-                                                                                                  </div>
-                                                                                                </div>
-                                                                                                <div className="row">
-                                                                                                  <div className="col-lg-4 col-md-4 col-sm-12">
-                                                                                                    <div className="form-group">
-                                                                                                      <label>Size in ML</label>
-                                                                                                      <Select className="form-control" field="otherUnit.size" id="otherUnit.size" options={sizeInML}/>
-                                                                                                    </div>
-                                                                                                  </div>
-                                                                                                  <div className="col-lg-4 col-md-4 col-sm-12">
-                                                                                                    <div className="form-group">
-                                                                                                      <label>Number of Bottles</label>
-                                                                                                      <Text field='otherUnit.bottlesQty' placeholder='Number of Bottles' className="form-control" />
-                                                                                                    </div>
-                                                                                                  </div>
-                                                                                                  <div className="col-lg-4 col-md-4 col-sm-12">
-                                                                                                    <div className="form-group">
-                                                                                                      <label>Vend Fee Paid</label>
-                                                                                                      <Text field='otherUnit.vendFee' placeholder='Vendor Fee Paid' className="form-control" />
-                                                                                                    </div>
-                                                                                                  </div>
-                                                                                                </div>
-                                                                                                <div className="row">
-                                                                                                  <div className="col-lg-4 col-md-4 col-sm-12">
-                                                                                                    <div className="form-group">
-                                                                                                      <label>Excise Duty Paid</label>
-                                                                                                      <Text field='otherUnit.exciseDuty' placeholder='Excise Duty Paid' className="form-control" />
-                                                                                                    </div>
-                                                                                                  </div>
-                                                                                                  <div className="col-lg-4 col-md-4 col-sm-12">
-                                                                                                    <div className="form-group">
-                                                                                                      <label>Special Fee Paid</label>
-                                                                                                      <Text field='otherUnit.specialFee' placeholder='Special Fee Paid' className="form-control" />
-                                                                                                    </div>
-                                                                                                  </div>
-                                                                                                  <div className="col-lg-4 col-md-4 col-sm-12">
-                                                                                                    <div className="form-group">
-                                                                                                      <label>Kind of Liscense</label>
-                                                                                                      <Text field='otherUnit.liscenseType' placeholder='Kind of Liscense' className="form-control" />
-                                                                                                    </div>
-                                                                                                  </div>
-                                                                                                </div>
-                                                                                              </div> }
+                                        <div className="row">
+                                          <div className="col-lg-4 col-md-4 col-sm-12">
+                                            <div className="form-group">
+                                              <label>Bottle Size</label>
+                                              <Select className="form-control" field="ownUnit.sizeInML" id="ownUnit.sizeInML" options={sizeInML}/>
+                                            </div>
+                                          </div>
+                                          <div className="col-lg-4 col-md-4 col-sm-12">
+                                            <div className="form-group">
+                                              <label>Number of Bottles</label>
+                                              <Text field='ownUnit.bottlesQty' placeholder='Number of Bottles' className="form-control" />
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div> : 
+                                      <div>
+                                        <div className="row">
+                                          <div className="col-lg-4 col-md-4 col-sm-12">
+                                            <div className="form-group">
+                                              <label>Name of Party</label>
+                                              <Text field='otherUnit.name' placeholder='Name of Party' className="form-control" />
+                                            </div>
+                                          </div>
+                                          <div className="col-lg-4 col-md-4 col-sm-12">
+                                            <div className="form-group">
+                                              <label>Address of Party</label>
+                                              <Text field='otherUnit.address' placeholder='Address of Party' className="form-control" />
+                                            </div>
+                                          </div>
+                                          <div className="col-lg-4 col-md-4 col-sm-12">
+                                            <div className="form-group">
+                                              <label>T.P/E.P No.</label>
+                                              <Text field='otherUnit.tpEpNumber' placeholder='T.P/E.P  No.' className="form-control" />
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div className="row">
+                                          <div className="col-lg-4 col-md-4 col-sm-12">
+                                            <div className="form-group">
+                                              <label>Size in ML</label>
+                                              <Select className="form-control" field="otherUnit.size" id="otherUnit.size" options={sizeInML}/>
+                                            </div>
+                                          </div>
+                                          <div className="col-lg-4 col-md-4 col-sm-12">
+                                            <div className="form-group">
+                                              <label>Number of Bottles</label>
+                                              <Text field='otherUnit.bottlesQty' placeholder='Number of Bottles' className="form-control" />
+                                            </div>
+                                          </div>
+                                          <div className="col-lg-4 col-md-4 col-sm-12">
+                                            <div className="form-group">
+                                              <label>Vend Fee Paid</label>
+                                              <Text field='otherUnit.vendFee' placeholder='Vendor Fee Paid' className="form-control" />
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div className="row">
+                                          <div className="col-lg-4 col-md-4 col-sm-12">
+                                            <div className="form-group">
+                                              <label>Excise Duty Paid</label>
+                                              <Text field='otherUnit.exciseDuty' placeholder='Excise Duty Paid' className="form-control" />
+                                            </div>
+                                          </div>
+                                          <div className="col-lg-4 col-md-4 col-sm-12">
+                                            <div className="form-group">
+                                              <label>Special Fee Paid</label>
+                                              <Text field='otherUnit.specialFee' placeholder='Special Fee Paid' className="form-control" />
+                                            </div>
+                                          </div>
+                                          <div className="col-lg-4 col-md-4 col-sm-12">
+                                            <div className="form-group">
+                                              <label>Kind of Liscense</label>
+                                              <Text field='otherUnit.liscenseType' placeholder='Kind of Liscense' className="form-control" />
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div> }
                                     </div>
                                   </div>
                                   <div>
@@ -218,7 +216,7 @@ class Register7 extends Authentication {
                                       <div className="form-group">
                                         <label className="text-area-labels">
                                           Remarks:
-                                          <textarea className="form-control" field='remarks'/>
+                                          <Textarea className="form-control" field='remarks'/>
                                         </label>
                                       </div>
                                     </div>

@@ -151,7 +151,7 @@ class Register1 extends Authentication {
                                     <div className="form-group">
                                       <label className="text-area-labels">
                                         Remarks:
-                                        <textarea className="form-control" field='remarks'/>
+                                        <Textarea className="form-control" field='remarks'/>
                                       </label>
                                     </div>
                                   </div>
