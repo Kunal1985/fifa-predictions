@@ -169,6 +169,15 @@ exports.validateForm = function(values, modelName){
                 "fortifiedWineFortificationLoss": !values.fortifiedWine || !values.fortifiedWine.fortificationLoss ? 'Please enter the Fortification Loss' : undefined,
             };
             break;
+        case "Register5":
+            validators = {
+                date: !values.date ? 'Please select the Date' : undefined,
+                transferType: !values.transferType ? "You have not selected the 'Bulk Wine transactions'" : undefined,
+                otherUnitBulkTransactionType: 
+                    (values.transferType === "2" && (!values.otherUnit || (values.otherUnit && !values.otherUnit.bulkTransactionType))) ? 
+                        "You have not selected the 'Bulk Transaction Type'" : undefined
+            };
+            break;
         case "Register6":
             validators = {
                 date: !values.date ? 'Please select the Date' : undefined,

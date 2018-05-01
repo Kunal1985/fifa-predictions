@@ -10,13 +10,7 @@ class Register5 extends Authentication {
         super(props);
         this.modelName = "Register5";
         this.goBack = this.goBack.bind(this);
-        
-        this.state = {
-            bulkOpeningValue: 1,
-            bulkClosingValue: 1,
-            bulkOtherUnitValue: 1
-            
-        };
+        this.updateValuesFromDB = this.updateValuesFromDB.bind(this);
         getRecordsByQuery(this, "TankMaster");
     }
 
@@ -25,39 +19,52 @@ class Register5 extends Authentication {
       currProps.history.goBack();
     }
 
+    updateValuesFromDB(transferTypeInDB, bulkTransactionTypeInDB){
+      let currState = this.state;
+      transferTypeInDB = parseInt(transferTypeInDB);
+      bulkTransactionTypeInDB = parseInt(bulkTransactionTypeInDB);
+      if(transferTypeInDB && !currState.bulkOpeningValue)
+        this.setState({bulkOpeningValue: transferTypeInDB});
+      if(bulkTransactionTypeInDB && !currState.bulkOtherUnitValue)
+        this.setState({bulkOtherUnitValue: bulkTransactionTypeInDB});
+    }
+
     render() {
-        let queryParams = this.props.location.query;
         let thisVar = this;
-        getCurrRecord(queryParams, this, thisVar.modelName);
-        let tankList = (this.state && this.state["tankmaster"]) ? this.state["tankmaster"] : [];
-        let currRecord = (this.state && this.state.currRecord) ? this.state.currRecord : null;
+        let queryParams = thisVar.props.location.query;
+        getCurrRecord(queryParams, thisVar, thisVar.modelName);
+        let currState = thisVar.state;
+        let tankList = currState ? currState["tankmaster"] : [];
+        let currRecord = currState ? currState.currRecord : null;
         let transferTypeInDB = currRecord ? currRecord.transferType : null;
-        let bulkTransactionTypeInDB = currRecord ? currRecord.bulkTransactionType : null;
+        let bulkTransactionTypeInDB = (currRecord && currRecord.otherUnit) ? currRecord.otherUnit.bulkTransactionType : null;
+        thisVar.updateValuesFromDB(transferTypeInDB, bulkTransactionTypeInDB);
+        let currBulkOpeningValue = currState ? currState.bulkOpeningValue : null;
         return (
             <div className="container">
               <div className="register-heading">Bulk Transfer</div>
-              <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
+              <div className="text-right"><a onClick={ thisVar.goBack }>Back</a></div>
               <div className="container">
                 <Form 
                   defaultValues = {currRecord}
                   onSubmit={ (values) => {
                       let data = values;
-                      if(thisVar.state && thisVar.state.currRecord)
-                        data._id = thisVar.state.currRecord._id;
+                      if(currState && currState.currRecord)
+                        data._id = currState.currRecord._id;
                       console.log("ValuestoSend", data);
                       upsertRecord(data, thisVar, thisVar.modelName);
                     } 
                   }
                   validate={ (values) => {
                       let currTransferType = values.transferType;
-                      if(thisVar.state && thisVar.state.selectedTransferType != currTransferType){
+                      if(currState && currState.selectedTransferType != currTransferType){
                         thisVar.setState({selectedTransferType: currTransferType});
                         if(currTransferType)
                           thisVar.setState({bulkOpeningValue: parseInt(currTransferType)});
                       }
-                      let currBulkTransactionType = values.bulkTransactionType;
-                      if(thisVar.state && thisVar.state.selectedBulkTransactionType != currBulkTransactionType){
-                        thisVar.setState({selectedTransferType: currBulkTransactionType});
+                      let currBulkTransactionType = values.otherUnit ? values.otherUnit.bulkTransactionType : null;
+                      if(currState && currState.selectedBulkTransactionType != currBulkTransactionType){
+                        thisVar.setState({selectedBulkTransactionType: currBulkTransactionType});
                         if(currBulkTransactionType)
                           thisVar.setState({bulkOtherUnitValue: parseInt(currBulkTransactionType)});
                       }
@@ -99,7 +106,7 @@ class Register5 extends Authentication {
                                         <Select className="form-control" field="transferType" id="transferType" value={ transferTypeInDB } options={ purchaseType } />
                                       </div>
                                     </div>
-                                    { thisVar.state.bulkOpeningValue == 1 ?
+                                    { currBulkOpeningValue == 1 ?
                                       <div>
                                       <div className="row">
                                         <div className="col-lg-4 col-md-4 col-sm-12">
@@ -148,116 +155,122 @@ class Register5 extends Authentication {
                                         </div>
                                       </div>
                                     </div>
-                                      : <div></div> }
-                                    { thisVar.state.bulkOpeningValue == 2 ?
+                                      : currBulkOpeningValue == 2 ?
                                       <div>
                                         <div className="row">
                                           <div className="col-lg-4 col-md-4 col-sm-12">
                                             <label>Bulk Transaction Type</label>
-                                            <Select className="form-control" field="bulkTransactionType" value={ bulkTransactionTypeInDB } options={ bulkTransferOtherUnitType } />
+                                            <Select className="form-control" field="otherUnit.bulkTransactionType" value={ bulkTransactionTypeInDB } options={ bulkTransferOtherUnitType } />
+                                            <Text field='otherUnitBulkTransactionType' type='hidden' className="form-control" />
                                           </div>
                                         </div>
-                                        <div className="row">
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Party Name</label>
-                                              <Text field='otherUnit.partyName' placeholder='Party Name' className="form-control" />
-                                              <Text field='otherUnitPartyName' type='hidden' className="form-control" />
+                                        {currState.bulkOtherUnitValue ?
+                                          <div>
+                                            <div className="row">
+                                              <div className="col-lg-4 col-md-4 col-sm-12">
+                                                <div className="form-group">
+                                                  <label>Party Name</label>
+                                                  <Text field='otherUnit.partyName' placeholder='Party Name' className="form-control" />
+                                                  <Text field='otherUnitPartyName' type='hidden' className="form-control" />
+                                                </div>
+                                              </div>
+                                              <div className="col-lg-4 col-md-4 col-sm-12">
+                                                <div className="form-group">
+                                                  <label>Address of party</label>
+                                                  <Text field='otherUnit.partyAddress' placeholder='Address of party' className="form-control" />
+                                                  <Text field='otherUnitPartyAddress' type='hidden' className="form-control" />
+                                                </div>
+                                              </div>
+                                              <div className="col-lg-4 col-md-4 col-sm-12">
+                                                { currState.bulkOtherUnitValue == 1 || currState.bulkOtherUnitValue == 2 || currState.bulkOtherUnitValue == 4 || currState.bulkOtherUnitValue == 5 ?
+                                                  <div className="form-group"><label>T.P No.</label>
+                                                    <Text field='otherUnit.tpepipNumber' placeholder='T.P No.' className="form-control" />
+                                                  </div> : <div></div> }
+                                                { currState.bulkOtherUnitValue == 6 ?
+                                                  <div className="form-group"><label>E.P No.</label>
+                                                    <Text field='otherUnit.tpepipNumber' placeholder='E.P No.' className="form-control" />
+                                                  </div> : <div></div> }
+                                                { currState.bulkOtherUnitValue == 3 ?
+                                                  <div className="form-group"><label>I.P No.</label>
+                                                    <Text field='otherUnit.tpepipNumber' placeholder='I.P No.' className="form-control" />
+                                                  </div> : <div></div> }
+                                                <Text field='otherUnitTpepipNumber' type='hidden' className="form-control" />
+                                              </div>
                                             </div>
-                                          </div>
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Address of party</label>
-                                              <Text field='otherUnit.partyAddress' placeholder='Address of party' className="form-control" />
-                                              <Text field='otherUnitPartyAddress' type='hidden' className="form-control" />
+                                            <div className="row">
+                                              <div className="col-lg-4 col-md-4 col-sm-12">
+                                                <div className="form-group">
+                                                  <label>Kind of Liscense</label>
+                                                  <Text field='otherUnit.liscenseType' placeholder='Kind of Liscense' className="form-control" />
+                                                  <Text field='otherUnitLiscenseType' type='hidden' className="form-control" />
+                                                </div>
+                                              </div>
+                                              <div className="col-lg-4 col-md-4 col-sm-12">
+                                                <div className="form-group">
+                                                  <label>Wine Variety</label>
+                                                  <Select className="form-control" field="otherUnit.wineVariety" id="otherUnit.wineVariety" options={wineType}/>
+                                                  <Text field='otherUnitWineVariety' type='hidden' className="form-control" />
+                                                </div>
+                                              </div>
                                             </div>
-                                          </div>
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            { thisVar.state.bulkOtherUnitValue == 1 || thisVar.state.bulkOtherUnitValue == 2 || thisVar.state.bulkOtherUnitValue == 4 || thisVar.state.bulkOtherUnitValue == 5 ?
-                                              <div className="form-group"><label>T.P No.</label>
-                                                <Text field='otherUnit.tpepipNumber' placeholder='T.P No.' className="form-control" />
-                                              </div> : <div></div> }
-                                            { thisVar.state.bulkOtherUnitValue == 6 ?
-                                              <div className="form-group"><label>E.P No.</label>
-                                                <Text field='otherUnit.tpepipNumber' placeholder='E.P No.' className="form-control" />
-                                              </div> : <div></div> }
-                                            { thisVar.state.bulkOtherUnitValue == 3 ?
-                                              <div className="form-group"><label>I.P No.</label>
-                                                <Text field='otherUnit.tpepipNumber' placeholder='I.P No.' className="form-control" />
-                                              </div> : <div></div> }
-                                            <Text field='otherUnitTpepipNumber' type='hidden' className="form-control" />
-                                          </div>
-                                        </div>
-                                        <div className="row">
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Kind of Liscense</label>
-                                              <Text field='otherUnit.liscenseType' placeholder='Kind of Liscense' className="form-control" />
-                                              <Text field='otherUnitLiscenseType' type='hidden' className="form-control" />
+                                            <div className="row">
+                                              <div className="col-lg-4 col-md-4 col-sm-12">
+                                                <div className="form-group">
+                                                  <label>Quantity in Litres</label>
+                                                  <Text field='qtyInLitres' placeholder='Quantity in Litres' className="form-control" />
+                                                </div>
+                                              </div>
+                                              { currState.bulkOtherUnitValue == 3 ?
+                                                <div className="col-lg-4 col-md-4 col-sm-12">
+                                                <div className="form-group">
+                                                  <label>Import Fee Paid</label>
+                                                  <Text field='otherUnit.importExportFeePaid' placeholder='Import Fee Paid' className="form-control" />
+                                                  <Text field='otherUnitImportExportFeePaid' type='hidden' className="form-control" />
+                                                </div></div> : <div></div> }
+                                                { currState.bulkOtherUnitValue == 6 ?
+                                                <div className="col-lg-4 col-md-4 col-sm-12">
+                                                <div className="form-group">
+                                                  <label>Export Fee Paid</label>
+                                                  <Text field='otherUnit.importExportFeePaid' placeholder='Export Fee Paid' className="form-control" />
+                                                  <Text field='otherUnitImportExportFeePaid' type='hidden' className="form-control" />
+                                                </div> </div>: <div></div> }
+                                              <div className="col-lg-4 col-md-4 col-sm-12">
+                                                <div className="form-group">
+                                                  <label>Vend Fee Paid</label>
+                                                  <Text field='otherUnit.vendFeePaid' placeholder='Vend Fee Paid' className="form-control" />
+                                                  <Text field='otherUnitVendFeePaid' type='hidden' className="form-control" />
+                                                </div>
+                                              </div>
                                             </div>
+                                            <div className="row">
+                                              <div className="col-lg-4 col-md-4 col-sm-12">
+                                                <div className="form-group">
+                                                  <label>Excise Duty Paid</label>
+                                                  <Text field='otherUnit.exciseDutyPaid' placeholder='Excise Duty Paid' className="form-control" />
+                                                  <Text field='otherUnitExciseDutyPaid' type='hidden' className="form-control" />
+                                                </div>
+                                              </div>
+                                              <div className="col-lg-4 col-md-4 col-sm-12">
+                                                <div className="form-group">
+                                                  <label>Special Fee Paid</label>
+                                                  <Text field='otherUnit.specialFeePaid' placeholder='Special Fee Paid' className="form-control" />
+                                                  <Text field='otherUnitSpecialFeePaid' type='hidden' className="form-control" />
+                                                </div>
+                                              </div>
+                                              <div className="col-lg-4 col-md-4 col-sm-12">
+                                                <div className="form-group">
+                                                  <label>Losses</label>
+                                                  <Text field='otherUnit.losses' placeholder='Losses' className="form-control" />
+                                                  <Text field='otherUnitLosses' type='hidden' className="form-control" />
+                                                </div>
+                                              </div>
+                                            </div> 
                                           </div>
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Wine Variety</label>
-                                              <Select className="form-control" field="otherUnit.wineVariety" id="otherUnit.wineVariety" options={wineType}/>
-                                              <Text field='otherUnitWineVariety' type='hidden' className="form-control" />
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div className="row">
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Quantity in Litres</label>
-                                              <Text field='qtyInLitres' placeholder='Quantity in Litres' className="form-control" />
-                                            </div>
-                                          </div>
-                                          { thisVar.state.bulkOtherUnitValue == 3 ?
-                                            <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Import Fee Paid</label>
-                                              <Text field='otherUnit.importExportFeePaid' placeholder='Import Fee Paid' className="form-control" />
-                                              <Text field='otherUnitImportExportFeePaid' type='hidden' className="form-control" />
-                                            </div></div> : <div></div> }
-                                            { thisVar.state.bulkOtherUnitValue == 6 ?
-                                            <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Export Fee Paid</label>
-                                              <Text field='otherUnit.importExportFeePaid' placeholder='Export Fee Paid' className="form-control" />
-                                              <Text field='otherUnitImportExportFeePaid' type='hidden' className="form-control" />
-                                            </div> </div>: <div></div> }
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Vend Fee Paid</label>
-                                              <Text field='otherUnit.vendFeePaid' placeholder='Vend Fee Paid' className="form-control" />
-                                              <Text field='otherUnitVendFeePaid' type='hidden' className="form-control" />
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div className="row">
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Excise Duty Paid</label>
-                                              <Text field='otherUnit.exciseDutyPaid' placeholder='Excise Duty Paid' className="form-control" />
-                                              <Text field='otherUnitExciseDutyPaid' type='hidden' className="form-control" />
-                                            </div>
-                                          </div>
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Special Fee Paid</label>
-                                              <Text field='otherUnit.specialFeePaid' placeholder='Special Fee Paid' className="form-control" />
-                                              <Text field='otherUnitSpecialFeePaid' type='hidden' className="form-control" />
-                                            </div>
-                                          </div>
-                                          <div className="col-lg-4 col-md-4 col-sm-12">
-                                            <div className="form-group">
-                                              <label>Losses</label>
-                                              <Text field='otherUnit.losses' placeholder='Losses' className="form-control" />
-                                              <Text field='otherUnitLosses' type='hidden' className="form-control" />
-                                            </div>
-                                          </div>
-                                        </div>
+                                          :
+                                          <div className="padding-10">Please select <strong>Bulk Transaction Type</strong> to proceed!</div>
+                                         }
                                       </div>
-                                      : <div></div> }
+                                      : <div className="padding-10">Please select the <strong>Bulk Wine transactions</strong> to proceed!</div> }
                                   </div>
                                   <div className="row">
                                     <div className="col-lg-4 col-md-4 col-sm-12">
