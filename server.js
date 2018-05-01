@@ -59,25 +59,21 @@ passport.use(new LocalStrategy(
     user.username = username;
     user.password = password;
     User.findOne(user, function(err, doc) {
-      console.log("User found", err, doc)
       if (err) { return done(err); }
       if (!doc) { return done(new Error("Incorrect combination for username/password!")); }
-      return done(null, user);
+      doc.password = "********";
+      return done(null, doc);
     });
   }));
 
 passport.serializeUser(function(user, done) {
-  console.log("serializeUser", user);
-  done(null, user.username);
+  console.log("Passport serializeUser", user);
+  done(null, user);
 });
 
-passport.deserializeUser(function(username, done) {
-  console.log("deserializeUser", username);
-  User.findOne({username: username}, function(err, doc) {
-    if (err) { return done(err); }
-    console.log("User found");
-    return done(null, doc);
-  });
+passport.deserializeUser(function(user, done) {
+  console.log("Passport deserializeUser", user);
+  return done(null, user);
 });
 
 var config = require('./config');
@@ -140,11 +136,12 @@ app.get('/userDetails', function(req, res, next) {
   var currPassport = req.session.passport;
   if(currPassport){
     console.log("userDetails", currPassport);
-    User.findOne({username: currPassport.user}, function(err, doc) {
-      if (err) { throw err; }
-      console.log("User found");
-      res.json(doc);
-    });
+    res.json(currPassport.user);
+    // User.findOne({username: currPassport.user}, function(err, doc) {
+    //   if (err) { throw err; }
+    //   console.log("User found!");
+    //   res.json(doc);
+    // });
   } else{
     throw new Error("Not Logged In");
   }
@@ -657,13 +654,15 @@ getModelObject = function(modelName){
 app.use(function(req, res) {
   res.header("Access-Control-Allow-Origin", "*"); 
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  if(!req.session.passport && req.url != "/"){
+  var currPassport = req.session.passport;
+  if(!currPassport && req.url != "/"){
     res.redirect("/");
   } else{
-    if(req.session.passport && req.url === "/"){
+    if(currPassport && req.url === "/"){
       res.redirect("/home");
     } else {
       Router.match({ routes: routes.default, location: req.url }, function(err, redirectLocation, renderProps) {
+        console.log("Inside2", req.url);
         if (err) {
           res.status(500).send(err.message)
         } else if (redirectLocation) {
@@ -671,7 +670,7 @@ app.use(function(req, res) {
         } else if (renderProps) {
           var html = ReactDOM.renderToString(React.createElement(Router.RoutingContext, renderProps));
           var page = swig.renderFile('views/index.html', { html: html });
-          res.set('passport-value', req.session.passport);
+          res.set('passport-value', currPassport);
           res.status(200).send(page);
         } else {
           res.status(404).send('Page Not Found')
