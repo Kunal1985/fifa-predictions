@@ -39,7 +39,7 @@ class Register2Summary extends Authentication {
 
   componentDidMount(){
     console.log(this.viewName, "componentDidMount");      
-    getAllRecords(this, "Register2");
+    getAllRecords(this, this.modelName);
   }
 
   componentDidUpdate(){

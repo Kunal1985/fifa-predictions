@@ -50,7 +50,6 @@ class Register2 extends Authentication {
               let data = values;
               if(currState && currState.currRecord)
                 data._id = currState.currRecord._id;
-              console.log("ValuestoSend", data);
               upsertRecord(data, thisVar, thisVar.modelName);
             } 
           }

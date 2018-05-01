@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router';
 import { grapeVariety, suppliers } from '../../utils/Constants';
 import { getCurrRecord, upsertRecord, validateForm, getRecordsByQuery } from '../../utils/Functions';
-import rp from 'request-promise';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 import { InputGroup } from 'react-bootstrap';
@@ -35,7 +34,6 @@ class Register1 extends Authentication {
   render() {
     let thisVar = this;
     let currState = this.state;
-    let queryParams = this.props.location.state;
     let currRecord = currState ? currState.currRecord : null;
     let stateList = (currState && currState["states"]) ? currState["states"] : [];
     let districtList = (currState && currState["districts"]) ? currState["districts"] : [];
@@ -55,7 +53,6 @@ class Register1 extends Authentication {
               let data = values;
               if(currState && currState.currRecord)
                 data._id = currState.currRecord._id;
-              console.log("ValuestoSend", data);
               upsertRecord(data, thisVar, thisVar.modelName);
             } 
           }

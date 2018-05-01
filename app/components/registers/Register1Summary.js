@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router';
 import { getAllRecords } from '../../utils/Functions';
 import Authentication from '../Authentication';
-import rp from 'request-promise';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 import { Table } from 'react-bootstrap';
 
@@ -39,7 +38,7 @@ class Register1Summary extends Authentication {
 
   componentDidMount(){
     console.log(this.viewName, "componentDidMount");      
-    getAllRecords(this, "Register1");
+    getAllRecords(this, this.modelName);
   }
 
   componentDidUpdate(){
