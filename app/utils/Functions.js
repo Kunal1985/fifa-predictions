@@ -6,7 +6,7 @@ exports.getAllRecords = function(currObj, modelName) {
         uri: `http://localhost:3000/get${modelName}`,
         json: true
     };
-    rp(options)
+    return rp(options)
         .then(function(body) {
             console.log("getAllRecords Response for", modelName, body.length, body);
             if (!currObj.state || currObj.state.lastCount != body.length)
@@ -14,14 +14,16 @@ exports.getAllRecords = function(currObj, modelName) {
                     records: body,
                     lastCount: body.length
                 });
+            return body;
         })
         .catch(function(err) {
             console.log("Error", err);
+            return null;
         });
 }
 
 exports.getRecordsByQuery = function(currObj, modelName, query) {
-    console.log("getAllRecords for", modelName);
+    console.log("getRecordsByQuery for", modelName);
     var enpointUrl;
     var httpMethod;
     if(["States", "Districts", "SubDistricts", "Villages"].indexOf(modelName) != -1){
@@ -39,9 +41,9 @@ exports.getRecordsByQuery = function(currObj, modelName, query) {
         },
         json: true
     };
-    rp(options)
+    return rp(options)
         .then(function(body) {
-            console.log("getAllRecordsGeneric Response for", modelName, body.length, body);
+            console.log("getRecordsByQuery Response for", modelName, body.length, body);
             var stateChangeVar = currObj.state;
             if(!stateChangeVar)
                 stateChangeVar = {};
@@ -71,14 +73,16 @@ exports.getRecordsByQuery = function(currObj, modelName, query) {
                 }
             });
             currObj.setState(stateChangeVar);
+            return stateChangeVar;
         })
         .catch(function(err) {
             console.log("Error", err);
+            return null;
         });
 }
 
 exports.getCurrRecord = function(queryParams, currObj, modelName) {
-    if (queryParams.upsertAction === 'update' && queryParams.id) {
+    if (queryParams && queryParams.upsertAction === 'update' && queryParams.id) {
         var options = {
             method: 'POST',
             uri: `http://localhost:3000/get${modelName}Record`,
@@ -87,14 +91,16 @@ exports.getCurrRecord = function(queryParams, currObj, modelName) {
             },
             json: true
         };
-        rp(options)
+        return rp(options)
             .then(function(body) {
                 console.log("getCurrRecord Response for", modelName, body);
                 if (!currObj.state || !currObj.state.currRecord)
                     currObj.setState({ currRecord: body });
+                return body;
             })
             .catch(function(err) {
                 console.log("Error", err);
+                return null;
             });
     }
 }
@@ -106,13 +112,15 @@ exports.upsertRecord = function(data, thisVar, modelName){
         body: data,
         json: true
     };
-    rp(options)
+    return rp(options)
         .then(function (body) {
             console.log("Response", body);
             thisVar.goBack();
+            return body;
         })
         .catch(function (err) {
             console.log("Error", err);
+            return null;
         });
 }
 

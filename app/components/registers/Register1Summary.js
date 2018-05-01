@@ -10,20 +10,26 @@ import { Table } from 'react-bootstrap';
 class Register1Summary extends Authentication {
     constructor(props) {
         super(props);
-        this.setState({});
+        this.state ={};
         this.goBack = this.goBack.bind(this);
-        this.createFermentedWine = this.createFermentedWine.bind(this);
-        this.editFermentedWine = this.editFermentedWine.bind(this);
+        this.redirectToCreate = this.redirectToCreate.bind(this);
+        this.redirectToEdit = this.redirectToEdit.bind(this);
     }
 
-    createFermentedWine() {
+    redirectToCreate() {
         let currProps = this.props;
         currProps.history.push("/register1");
     }
 
-    editFermentedWine(currId) {
+    redirectToEdit(currId) {
         let currProps = this.props;
-        currProps.history.push("/register1?upsertAction=update&id=" + currId);
+        currProps.history.push({
+          pathname: "/register1",
+          state: {
+            upsertAction: "update",
+            id: currId
+          }
+        });
     }
 
     goBack() {
@@ -33,8 +39,8 @@ class Register1Summary extends Authentication {
 
     render() {
         getAllRecords(this, "Register1");
-        console.log("STATE", this.state);
-        let currRecords = this.state ? this.state.records : null;
+        let currState = this.state;
+        let currRecords = currState ? currState.records : null;
         return (
             <div className="container">
               <div className="register-heading">Grape Receipt Transactions</div>
@@ -43,7 +49,7 @@ class Register1Summary extends Authentication {
                 <div className="col-lg-12 col-md-12 col-sm-12">
                   <div className="search-section">
                     <div>
-                      <button className="btn btn-default" onClick={ this.createFermentedWine }>
+                      <button className="btn btn-default" onClick={ this.redirectToCreate }>
                         Add New
                       </button>
                     </div>
@@ -64,7 +70,7 @@ class Register1Summary extends Authentication {
                   <tbody>
                     { currRecords ? currRecords.map((currRecord, index) => (
                           <tr key={ currRecord._id }>
-                            <td className="text-center" onClick={ () => this.editFermentedWine(currRecord._id) }><i className="fa fa-edit"></i></td>
+                            <td className="text-center" onClick={ () => this.redirectToEdit(currRecord._id) }><i className="fa fa-edit"></i></td>
                             <td>{ currRecord.supplierName }</td>
                             <td>
                               { currRecord.qtyReceived }
