@@ -9,6 +9,7 @@ class Register5 extends Authentication {
     constructor(props) {
         super(props);
         this.modelName = "Register5";
+        this.state = {};
         this.goBack = this.goBack.bind(this);
         this.updateValuesFromDB = this.updateValuesFromDB.bind(this);
         getRecordsByQuery(this, "TankMaster");

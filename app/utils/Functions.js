@@ -193,6 +193,12 @@ exports.validateForm = function(values, modelName){
                 closingBalance: !values.closingBalance ? 'Please enter the Closing Balance' : undefined,
             };
             break;
+        case "Register7":
+            validators = {
+                date: !values.date ? 'Please select the Date' : undefined,
+                disgorgingType: !values.disgorgingType ? "You have not selected the 'Disgorging Type'" : undefined
+            };
+            break;    
         case "TankMaster":
             validators = {
                 gugingDate: !values.gugingDate ? 'Please select the Guging Date' : undefined,

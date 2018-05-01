@@ -9,10 +9,8 @@ class Register7 extends Authentication {
     constructor(props) {
         super(props);
         this.modelName = "Register7";
+        this.state = {};
         this.goBack = this.goBack.bind(this);
-        this.state = {
-            transferType: "ownUnitTransfer"
-        };
     }
 
     goBack() {
@@ -20,30 +18,39 @@ class Register7 extends Authentication {
       currProps.history.goBack();
     }
 
+    updateValuesFromDB(disgorgingTypeInDB){
+      let currState = this.state;
+      if(disgorgingTypeInDB && !currState.transferType)
+        this.setState({transferType: disgorgingTypeInDB});
+    }
+
     render() {
-      let queryParams = this.props.location.query;
       let thisVar = this;
-      getCurrRecord(queryParams, this, thisVar.modelName);
-      let currRecord = (this.state && this.state.currRecord) ? this.state.currRecord : null;
+      let currState = this.state;
+      let queryParams = thisVar.props.location.query;
+      getCurrRecord(queryParams, thisVar, thisVar.modelName);
+      let currRecord = currState ? currState.currRecord : null;
       let disgorgingTypeInDB = currRecord ? currRecord.disgorgingType : null;
+      thisVar.updateValuesFromDB(disgorgingTypeInDB);
+      let currTransferType = currState ? currState.transferType : null;
         return (
             <div className="container">
               <div className="register-heading">Disgorging</div>
-              <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
+              <div className="text-right"><a onClick={ thisVar.goBack }>Back</a></div>
               <div className="container">
                 <Form 
                   defaultValues = {currRecord}
                   onSubmit={ (values) => {
                       let data = values;
-                      if(thisVar.state && thisVar.state.currRecord)
-                        data._id = thisVar.state.currRecord._id;
+                      if(currState && currState.currRecord)
+                        data._id = currState.currRecord._id;
                       console.log("ValuestoSend", data);
                       upsertRecord(data, thisVar, thisVar.modelName);
                     } 
                   }
                   validate={ (values) => {
                       let currDisgorgingType = values.disgorgingType;
-                      if(thisVar.state && thisVar.state.transferType != currDisgorgingType){
+                      if(currState && currState.transferType != currDisgorgingType){
                         if(currDisgorgingType)
                           thisVar.setState({transferType: currDisgorgingType});
                       }
@@ -74,7 +81,7 @@ class Register7 extends Authentication {
                                           <Select className="form-control" field="disgorgingType" id="disgorgingType" value={ disgorgingTypeInDB } options={ disgorgingTypeList } />
                                         </div>
                                       </div>
-                                      { thisVar.state.transferType === "ownUnitTransfer" ? <div>
+                                      { currTransferType === "ownUnitTransfer" ? <div>
                                         <div className="row">
                                           <div className="col-lg-4 col-md-4 col-sm-12">
                                             <div className="form-group">
@@ -89,7 +96,7 @@ class Register7 extends Authentication {
                                             </div>
                                           </div>
                                         </div>
-                                      </div> : 
+                                      </div> : currTransferType === "otherUnitTransfer" ?
                                       <div>
                                         <div className="row">
                                           <div className="col-lg-4 col-md-4 col-sm-12">
@@ -151,76 +158,80 @@ class Register7 extends Authentication {
                                             </div>
                                           </div>
                                         </div>
-                                      </div> }
+                                      </div> : <div className="padding-10">Please select <strong>Disgorging Type</strong> to proceed!</div>}
                                     </div>
                                   </div>
-                                  <div>
-                                    <div className="form-label-headings">Disgorging Loss</div>
-                                    <div className="row">
-                                      <div className="col-lg-4 col-md-4 col-sm-12">
-                                        <div className="form-group">
-                                          <label>No. of Bottles</label>
-                                          <Text field='disgorgingLoss.bottlesQty' placeholder='No. of Bottles' className="form-control" />
+                                  {currTransferType ? 
+                                    <div>
+                                      <div>
+                                        <div className="form-label-headings">Disgorging Loss</div>
+                                        <div className="row">
+                                          <div className="col-lg-4 col-md-4 col-sm-12">
+                                            <div className="form-group">
+                                              <label>No. of Bottles</label>
+                                              <Text field='disgorgingLoss.bottlesQty' placeholder='No. of Bottles' className="form-control" />
+                                            </div>
+                                          </div>
+                                          <div className="col-lg-4 col-md-4 col-sm-12">
+                                            <div className="form-group">
+                                              <label>Quantity in Litres</label>
+                                              <Text field='disgorgingLoss.quantity' placeholder='Quantity in Litres' className="form-control" />
+                                            </div>
+                                          </div>
                                         </div>
                                       </div>
-                                      <div className="col-lg-4 col-md-4 col-sm-12">
-                                        <div className="form-group">
-                                          <label>Quantity in Litres</label>
-                                          <Text field='disgorgingLoss.quantity' placeholder='Quantity in Litres' className="form-control" />
+                                      <div>
+                                        <div className="form-label-headings">Closing Balance of Disgorged Bottles</div>
+                                        <div className="row">
+                                          <div className="col-lg-4 col-md-4 col-sm-12">
+                                            <div className="form-group">
+                                              <label>Size in ML</label>
+                                              <Text field='closingBalanceDisgorged.sizeInML' placeholder='Size in ML' className="form-control" />
+                                            </div>
+                                          </div>
+                                          <div className="col-lg-4 col-md-4 col-sm-12">
+                                            <div className="form-group">
+                                              <label>No. of Bottles</label>
+                                              <Text field='closingBalanceDisgorged.bottlesQty' placeholder='No. of Bottles' className="form-control" />
+                                            </div>
+                                          </div>
                                         </div>
                                       </div>
-                                    </div>
-                                  </div>
-                                  <div>
-                                    <div className="form-label-headings">Closing Balance of Disgorged Bottles</div>
-                                    <div className="row">
-                                      <div className="col-lg-4 col-md-4 col-sm-12">
-                                        <div className="form-group">
-                                          <label>Size in ML</label>
-                                          <Text field='closingBalanceDisgorged.sizeInML' placeholder='Size in ML' className="form-control" />
+                                      <div>
+                                        <div className="form-label-headings">Closing Balance of Tirage Bottles</div>
+                                        <div className="row">
+                                          <div className="col-lg-4 col-md-4 col-sm-12">
+                                            <div className="form-group">
+                                              <label>Size in ML</label>
+                                              <Text field='closingBalanceTirage.bottleSize' placeholder='Size in ML' className="form-control" />
+                                            </div>
+                                          </div>
+                                          <div className="col-lg-4 col-md-4 col-sm-12">
+                                            <div className="form-group">
+                                              <label>No. of Bottles</label>
+                                              <Text field='closingBalanceTirage.bottlesQty' placeholder='No. of Bottles' className="form-control" />
+                                            </div>
+                                          </div>
+                                          <div className="col-lg-4 col-md-4 col-sm-12">
+                                            <div className="form-group">
+                                              <label>Loss</label>
+                                              <Text field='closingBalanceTirage.loss' placeholder='Loss' className="form-control" />
+                                            </div>
+                                          </div>
                                         </div>
                                       </div>
-                                      <div className="col-lg-4 col-md-4 col-sm-12">
-                                        <div className="form-group">
-                                          <label>No. of Bottles</label>
-                                          <Text field='closingBalanceDisgorged.bottlesQty' placeholder='No. of Bottles' className="form-control" />
+                                      <div className="row">
+                                        <div className="col-lg-4 col-md-4 col-sm-12">
+                                          <div className="form-group">
+                                            <label className="text-area-labels">
+                                              Remarks:
+                                              <Textarea className="form-control" field='remarks'/>
+                                            </label>
+                                          </div>
                                         </div>
                                       </div>
-                                    </div>
-                                  </div>
-                                  <div>
-                                    <div className="form-label-headings">Closing Balance of Tirage Bottles</div>
-                                    <div className="row">
-                                      <div className="col-lg-4 col-md-4 col-sm-12">
-                                        <div className="form-group">
-                                          <label>Size in ML</label>
-                                          <Text field='closingBalanceTirage.bottleSize' placeholder='Size in ML' className="form-control" />
-                                        </div>
-                                      </div>
-                                      <div className="col-lg-4 col-md-4 col-sm-12">
-                                        <div className="form-group">
-                                          <label>No. of Bottles</label>
-                                          <Text field='closingBalanceTirage.bottlesQty' placeholder='No. of Bottles' className="form-control" />
-                                        </div>
-                                      </div>
-                                      <div className="col-lg-4 col-md-4 col-sm-12">
-                                        <div className="form-group">
-                                          <label>Loss</label>
-                                          <Text field='closingBalanceTirage.loss' placeholder='Loss' className="form-control" />
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div className="row">
-                                    <div className="col-lg-4 col-md-4 col-sm-12">
-                                      <div className="form-group">
-                                        <label className="text-area-labels">
-                                          Remarks:
-                                          <Textarea className="form-control" field='remarks'/>
-                                        </label>
-                                      </div>
-                                    </div>
-                                  </div>
+                                    </div> : <div></div>  
+                                  }
                                   <div className="row">
                                     <div className="button-section text-center">
                                       <div className="text-center">
