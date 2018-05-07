@@ -24,7 +24,7 @@ class Sidebar extends React.Component {
     return (
         <div id="sidenav" className="sidenav">
             {sideBarList.map((item, index) => (
-                <div className="step-name-container" onClick={(e) => this.changeStep(e, item)}>
+                <div key={index} className="step-name-container" onClick={(e) => this.changeStep(e, item)}>
                   <a href="#" key={index} >
                     <div><span className="fa-stack">
                           <span className="fa fa-circle-o fa-stack-2x"></span>

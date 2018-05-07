@@ -22,7 +22,7 @@ class Summary extends Authentication {
       <div className="container">
         <div className="sub-sections-nav">
             {subSectionList.map((item, index) => (
-                <div className="row">
+                <div key={index} className="row">
                   <div className="col-lg-3 col-md-3"></div>
                   <div className="col-lg-6 col-md-6 col-sm-12">
                     <div className="step-name-container" onClick={(e) => this.changeStep(e, item)}>
