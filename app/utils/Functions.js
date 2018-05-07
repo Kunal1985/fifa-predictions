@@ -1,37 +1,17 @@
 import rp from 'request-promise';
 
 exports.authenticateUser = function (values, currObj) {
+  var actionType = currObj.state.submitType.toLowerCase();
   let options = {
     method: 'POST',
-    uri: 'http://localhost:3000/' + currObj.state.submitType.toLowerCase(),
+    uri: 'http://localhost:3000/' + actionType,
     body: values,
     json: true
   };
   return rp(options)
     .then(function (body) {
-      if (body.userRegistered) {
-        options.uri = 'http://localhost:3000/login'
-        return rp(options)
-          .then(function (body) {
-            currObj.props.history.push("/home");
-            return body
-          })
-          .catch(function (err) {
-            currObj.setState({ errorObj: err });
-            return null;
-          });
-      } else {
-        if (body.loginSuccess)
-          currObj.props.history.push("/home");
-        else
-          currObj.setState({
-            errorObj: {
-              error: "{\"message\":\"Not Logged In\"}",
-              message: "500 - {\"message\":\"Not Logged In\"}",
-              name: "StatusCodeError"
-            }
-          });
-      }
+      console.log("SUCCESS during", actionType);
+      currObj.props.history.push("/home");
       return body;
     })
     .catch(function (err) {

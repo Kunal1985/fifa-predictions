@@ -13,11 +13,11 @@ class Login extends Authentication {
   }
 
   enableRegister() {
-    this.setState({ submitType: "Register" });
+    this.setState({ submitType: "Register", errorObj: null });
   }
 
   enableLogin() {
-    this.setState({ submitType: "Login" });
+    this.setState({ submitType: "Login", errorObj: null });
   }
 
   render() {
