@@ -165,3 +165,27 @@ table {
 .padding-10 {
     padding: 10px !important;
 }
+
+.is-mobile {
+
+    .hambclicker {
+        padding: 0 1.5rem;
+    }
+
+    .is-close {
+        position: absolute;
+        width: 100%;
+        transform: translateX(-100%);
+        transition: transform 300ms;
+        background-color: white;
+    }
+
+    .is-open {
+        position: absolute;
+        width: 100%;
+        transform: none;
+        transition: transform 300ms;
+        z-index: 10;
+        background-color: white;
+    }
+}
