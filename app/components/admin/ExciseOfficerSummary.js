@@ -51,7 +51,7 @@ class ExciseOfficerSummary extends Authentication {
     let currRecords = currState ? currState.records : null;
     return (
       <div className="container">
-        <div className="register-heading">Winery Users</div>
+        <div className="register-heading">Excise Officers</div>
         <div className="text-right"><a onClick={ thisVar.goBack }>Back</a></div>
         <div className="row">
           <div className="col-lg-12 col-md-12 col-sm-12">

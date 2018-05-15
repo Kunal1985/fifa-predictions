@@ -71,58 +71,61 @@ class exciseOfficer extends React.Component {
                         let errorMessage = null;
                         
                         return (
-                            <div className="row">
-                                <div className="col-lg-12 col-md-12 col-sm-12">
-                                    <form onSubmit={submitForm} id="admin-create-user">
-                                        <div className="row">
-                                            <div className="col-lg-4 col-md-4 col-sm-12">
-                                                <div className="form-group">
-                                                    <label>Name</label>
-                                                    <Text field='name' placeholder='Name' className="form-control"/>
+                            <div className="container">
+                                <div className="register-heading">Excise Officers</div>
+                                <div className="row">
+                                    <div className="col-lg-12 col-md-12 col-sm-12">
+                                        <form onSubmit={submitForm} id="admin-create-user">
+                                            <div className="row">
+                                                <div className="col-lg-4 col-md-4 col-sm-12">
+                                                    <div className="form-group">
+                                                        <label>Name*</label>
+                                                        <Text field='name' placeholder='Name' className="form-control"/>
+                                                    </div>
+                                                </div>
+                                                <div className="col-lg-4 col-md-4 col-sm-12">
+                                                    <div className="form-group">
+                                                        <label>Office Name*</label>
+                                                        <Text field='officeName' placeholder='Office Name' className="form-control"/>
+                                                    </div>
+                                                </div>
+                                                <div className="col-lg-4 col-md-4 col-sm-12">
+                                                    <div className="form-group">
+                                                        <label>Post*</label>
+                                                        <Text field='post' placeholder='Post' className="form-control"/>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div className="col-lg-4 col-md-4 col-sm-12">
-                                                <div className="form-group">
-                                                    <label>Office Name</label>
-                                                    <Text field='officeName' placeholder='Office Name' className="form-control"/>
+                                            <div className="row">
+                                                <div className="col-lg-4 col-md-4 col-sm-12">
+                                                    <div className="form-group">
+                                                        <label>Email*</label>
+                                                        <Text field='email' placeholder='Email' className="form-control"/>
+                                                    </div>
+                                                </div>
+                                                <div className="col-lg-4 col-md-4 col-sm-12">
+                                                    <div className="form-group">
+                                                        <label>Telephone Number*</label>
+                                                        <Text field='telephoneNumber' placeholder='Telephone Number' className="form-control"/>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div className="col-lg-4 col-md-4 col-sm-12">
-                                                <div className="form-group">
-                                                    <label>Post</label>
-                                                    <Text field='post' placeholder='Post' className="form-control"/>
+                                            <div className="row">
+                                                <div className="button-section text-center">
+                                                    <div className="text-center">
+                                                        <button className="btn btn-primary" onClick={this.goBack}>
+                                                            Back
+                                                        </button>
+                                                    </div>
+                                                    <div className="text-center">
+                                                        <button className="btn btn-default" type='submit'>
+                                                            Submit
+                                                        </button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-lg-4 col-md-4 col-sm-12">
-                                                <div className="form-group">
-                                                    <label>Email</label>
-                                                    <Text field='email' placeholder='Email' className="form-control"/>
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-4 col-md-4 col-sm-12">
-                                                <div className="form-group">
-                                                    <label>Telephone Number</label>
-                                                    <Text field='telephoneNumber' placeholder='Telephone Number' className="form-control"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="button-section text-center">
-                                                <div className="text-center">
-                                                    <button className="btn btn-primary" onClick={this.goBack}>
-                                                        Back
-                                                    </button>
-                                                </div>
-                                                <div className="text-center">
-                                                    <button className="btn btn-default" type='submit'>
-                                                        Submit
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>       
-                                    </form>
+                                            </div>       
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         )

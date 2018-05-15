@@ -279,6 +279,30 @@ exports.validateForm = function (values, modelName) {
         installationDate: !values.installationDate ? 'Please select the Installation Date' : undefined
       };
       break;
+      case "WineryUser":
+        validators = {
+          name: !values.name ? 'Please Enter Name' : undefined,
+          liscenceNumber: !values.liscenceNumber ? 'Please Enter Liscence Number.' : undefined,
+          authorizedOfficer: !values.authorizedOfficer ? 'Please select Authorized Officer.' : undefined,
+          ownerName: !values.ownerName ? 'Please Enter Owner Name.' : undefined,
+          email: !values.email ? 'Please Enter Email.' : undefined,
+          telephoneNumber: !values.telephoneNumber ? 'Please Enter Telephone Number.' : undefined,
+          gatNumber: !values.gatNumber ? 'Please enter a valid GAT/Survey No.' : undefined,
+          state: !values.state ? 'Please select a State.' : undefined,
+          district: !values.district ? 'Please select a District.' : undefined,
+          taluka: !values.taluka ? 'Please select a Taluka.' : undefined,
+          village: !values.village ? 'Please select a Village.' : undefined
+        };
+      break;
+      case "ExciseOfficer":
+        validators = {
+          name: !values.name ? 'Please Enter Name' : undefined,
+          officeName: !values.officeName ? 'Please Enter Office Name.' : undefined,
+          post: !values.post ? 'Please Enter Post.' : undefined,
+          email: !values.email ? 'Please Enter Email.' : undefined,
+          telephoneNumber: !values.telephoneNumber ? 'Please Enter Telephone Number.' : undefined
+        };
+      break;
     default:
       validators = {};
       break;

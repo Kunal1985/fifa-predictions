@@ -73,101 +73,104 @@ class WineryUser extends React.Component {
                         let errorMessage = null;
                         
                         return (
-                            <div className="row">
-                                <div className="col-lg-12 col-md-12 col-sm-12">
-                                    <form onSubmit={submitForm} id="admin-create-user">
-                                        <div className="row">
-                                            <div className="col-lg-4 col-md-4 col-sm-12">
-                                                <div className="form-group">
-                                                    <label>Winery Name</label>
-                                                    <Text field='name' placeholder='Winery Name' className="form-control"/>
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-4 col-md-4 col-sm-12">
-                                                <div className="form-group">
-                                                    <label>Liscence Number</label>
-                                                    <Text field='liscenceNumber' placeholder='Liscence Number' className="form-control"/>
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-4 col-md-4 col-sm-12">
-                                                <div className="form-group">
-                                                    <label>Authorized Officer</label>
-                                                    <Select className="form-control" field="authorizedOfficer" id="authorizedOfficer" options={ officerList } />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-lg-4 col-md-4 col-sm-12">
-                                                <div className="form-group">
-                                                    <label>Owner Name</label>
-                                                    <Text field='ownerName' placeholder='Owner Name' className="form-control"/>
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-4 col-md-4 col-sm-12">
-                                                <div className="form-group">
-                                                    <label>Email</label>
-                                                    <Text field='email' placeholder='Email' className="form-control"/>
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-4 col-md-4 col-sm-12">
-                                                <div className="form-group">
-                                                    <label>Telephone Number</label>
-                                                    <Text field='telephoneNumber' placeholder='Telephone Number' className="form-control"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                        <div className="form-label-headings">Address</div>
+                            <div className="container">
+                                <div className="register-heading">Winery Users</div>
+                                <div className="row">
+                                    <div className="col-lg-12 col-md-12 col-sm-12">
+                                        <form onSubmit={submitForm} id="admin-create-user">
                                             <div className="row">
                                                 <div className="col-lg-4 col-md-4 col-sm-12">
-                                                <div className="form-group">
-                                                    <label>State</label>
-                                                    <Select className="form-control" field="state" id="state" value={stateInDB} options={stateList} />
-                                                </div>
-                                                </div>
-                                                <div className="col-lg-4 col-md-4 col-sm-12">
-                                                <div className="form-group">
-                                                    <label>District</label>
-                                                    <Select className="form-control" field="district" id="district" value={districtInDB} options={districtList} />
-                                                </div>
+                                                    <div className="form-group">
+                                                        <label>Winery Name*</label>
+                                                        <Text field='name' placeholder='Winery Name' className="form-control"/>
+                                                    </div>
                                                 </div>
                                                 <div className="col-lg-4 col-md-4 col-sm-12">
-                                                <div className="form-group">
-                                                    <label>Taluka/Tahsil</label>
-                                                    <Select className="form-control" field="taluka" id="taluka" value={subDistrictInDB} options={subDistrictList} />
+                                                    <div className="form-group">
+                                                        <label>Liscence Number*</label>
+                                                        <Text field='liscenceNumber' placeholder='Liscence Number' className="form-control"/>
+                                                    </div>
                                                 </div>
+                                                <div className="col-lg-4 col-md-4 col-sm-12">
+                                                    <div className="form-group">
+                                                        <label>Authorized Officer*</label>
+                                                        <Select className="form-control" field="authorizedOfficer" id="authorizedOfficer" options={ officerList } />
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div className="row">
                                                 <div className="col-lg-4 col-md-4 col-sm-12">
-                                                <div className="form-group">
-                                                    <label>Village</label>
-                                                    <Select className="form-control" field="village" id="village" value={villageInDB} options={villageList} />
-                                                </div>
+                                                    <div className="form-group">
+                                                        <label>Owner Name*</label>
+                                                        <Text field='ownerName' placeholder='Owner Name' className="form-control"/>
+                                                    </div>
                                                 </div>
                                                 <div className="col-lg-4 col-md-4 col-sm-12">
-                                                <div className="form-group">
-                                                    <label>Gat/ Survey No.</label>
-                                                    <Text field='gatNumber' placeholder='Gat/ Survey No.' className="form-control" />
+                                                    <div className="form-group">
+                                                        <label>Email*</label>
+                                                        <Text field='email' placeholder='Email' className="form-control" type="email"/>
+                                                    </div>
                                                 </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="button-section text-center">
-                                                <div className="text-center">
-                                                    <button className="btn btn-primary" onClick= {thisVar.goBack}>
-                                                        Back
-                                                    </button>
-                                                </div>
-                                                <div className="text-center">
-                                                    <button className="btn btn-default" type='submit'>
-                                                        Submit
-                                                    </button>
+                                                <div className="col-lg-4 col-md-4 col-sm-12">
+                                                    <div className="form-group">
+                                                        <label>Telephone Number*</label>
+                                                        <Text field='telephoneNumber' placeholder='Telephone Number' className="form-control" type="tel"/>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>       
-                                    </form>
+                                            <div>
+                                            <div className="form-label-headings">Address</div>
+                                                <div className="row">
+                                                    <div className="col-lg-4 col-md-4 col-sm-12">
+                                                    <div className="form-group">
+                                                        <label>State*</label>
+                                                        <Select className="form-control" field="state" id="state" value={stateInDB} options={stateList} />
+                                                    </div>
+                                                    </div>
+                                                    <div className="col-lg-4 col-md-4 col-sm-12">
+                                                    <div className="form-group">
+                                                        <label>District*</label>
+                                                        <Select className="form-control" field="district" id="district" value={districtInDB} options={districtList} />
+                                                    </div>
+                                                    </div>
+                                                    <div className="col-lg-4 col-md-4 col-sm-12">
+                                                    <div className="form-group">
+                                                        <label>Taluka/Tahsil*</label>
+                                                        <Select className="form-control" field="taluka" id="taluka" value={subDistrictInDB} options={subDistrictList} />
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                <div className="row">
+                                                    <div className="col-lg-4 col-md-4 col-sm-12">
+                                                    <div className="form-group">
+                                                        <label>Village*</label>
+                                                        <Select className="form-control" field="village" id="village" value={villageInDB} options={villageList} />
+                                                    </div>
+                                                    </div>
+                                                    <div className="col-lg-4 col-md-4 col-sm-12">
+                                                    <div className="form-group">
+                                                        <label>Gat/ Survey No.*</label>
+                                                        <Text field='gatNumber' placeholder='Gat/ Survey No.' className="form-control" />
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <div className="button-section text-center">
+                                                    <div className="text-center">
+                                                        <button className="btn btn-primary" onClick= {thisVar.goBack}>
+                                                            Back
+                                                        </button>
+                                                    </div>
+                                                    <div className="text-center">
+                                                        <button className="btn btn-default" type='submit'>
+                                                            Submit
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>       
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         )
