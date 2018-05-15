@@ -34,6 +34,10 @@ var Districts = require('../../models/geography/districts');
 var SubDistricts = require('../../models/geography/subDistricts');
 var Villages = require('../../models/geography/villages');
 
+// Imports for Admin's Models
+var WineryUser = require('../../models/admin/wineryUser');
+var ExciseOfficer = require('../../models/admin/exciseOfficer');
+
 /**
  * Method to fetch Record by ID for a model.
  * 
@@ -60,6 +64,8 @@ var getModelObject = function(modelName){
     case "Districts": modelObj = Districts; break;
     case "SubDistricts": modelObj = SubDistricts; break;
     case "Villages": modelObj = Villages; break;
+    case "WineryUser": modelObj = WineryUser; break;
+    case "ExciseOfficer": modelObj = ExciseOfficer; break;
     default: break;
   }
   return modelObj;

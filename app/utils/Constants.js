@@ -109,7 +109,7 @@ const sideBarList = [{
     title1: "Register9",
     title2: "Finished Goods/Dispatch",
 }, {
-    url: "/Admin",
+    url: "/admin",
     title1: "Admin",
     title2: "Admin",
 }]

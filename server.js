@@ -76,6 +76,10 @@ require('./server/routes/masters/wine-type')(app, passport);
 // Server-side Routes for Geography
 require('./server/routes/geography')(app, passport);
 
+// Server-side Routes for Admin
+require('./server/routes/admin/wineryUser')(app, passport);
+require('./server/routes/admin/exciseOfficer')(app, passport);
+
 app.use(function(req, res) {
   res.header("Access-Control-Allow-Origin", "*"); 
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");

@@ -111,6 +111,7 @@ exports.getRecordsByQuery = function (currObj, modelName, query) {
         case "SubDistricts": fieldName = "subDistrict"; break;
         case "Villages": fieldName = "village"; break;
         case "TankMaster": fieldName = "tankmaster"; break;
+        case "ExciseOfficer": fieldName = "ExciseOfficer"; break;
         default: break;
       }
       stateChangeVar[modelName.toLowerCase()] = body.map(function (currRecord) {
@@ -118,6 +119,12 @@ exports.getRecordsByQuery = function (currObj, modelName, query) {
           case "TankMaster": return {
             label: currRecord.number,
             value: currRecord.number,
+            selected: true
+          }
+            break;
+          case "ExciseOfficer": return {
+            label: currRecord.name,
+            value: currRecord.name,
             selected: true
           }
             break;
