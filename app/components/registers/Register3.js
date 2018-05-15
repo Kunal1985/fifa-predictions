@@ -107,7 +107,7 @@ class Register3 extends Authentication {
                         <div className="col-lg-4 col-md-4 col-sm-12">
                           <div id="dynamicTankInput" className="form-group">
                             <label>Tank Number</label>
-                              {currState.tanks.map(input => <Text placeholder='Tank Number' className="form-control" field={input} />)}
+                              {currState.tanks.map(input => <Select className="form-control" field="input" id="input" options={ tankList }/>)}
                           </div>
                         </div>
                         <div className="col-lg-4 col-md-4 col-sm-12">

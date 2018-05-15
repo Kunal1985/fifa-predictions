@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { grapeVariety } from '../../utils/Constants';
-import { getCurrRecord, upsertRecord, validateForm } from '../../utils/Functions';
+import { getCurrRecord, upsertRecord, validateForm, getRecordsByQuery } from '../../utils/Functions';
 import rp from 'request-promise';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
@@ -28,6 +28,7 @@ class Register2 extends Authentication {
 
   componentDidMount(){
     console.log(this.viewName, "componentDidMount");
+    getRecordsByQuery(this, "TankMaster");
     let queryParams = this.props.location.state;
     getCurrRecord(queryParams, this, this.modelName);
   }
@@ -40,6 +41,7 @@ class Register2 extends Authentication {
     let thisVar = this;
     let currState = thisVar.state;
     let currRecord = currState ? currState.currRecord : null;
+    let tankList = (currState && currState["tankmaster"]) ? currState["tankmaster"] : [];
     return (
       <div className="container">
         <div className="register-heading">Crushing/Juice Processing</div>
@@ -101,7 +103,7 @@ class Register2 extends Authentication {
                       <div className="col-lg-4 col-md-4 col-sm-12">
                       <div id="dynamicTankInput" className="form-group">
                         <label>Tank Number</label>
-                          {this.state.tanks.map(input => <Text placeholder='Tank Number' className="form-control" field={input} />)}
+                          {this.state.tanks.map(input => <Select className="form-control" field="input" id="input" options={ tankList }/>)}
                       </div>
                       </div>
                       <div className="col-lg-4 col-md-4 col-sm-12">
@@ -113,7 +115,7 @@ class Register2 extends Authentication {
                     </div>
                     <div className="row">
                       <div className="col-lg-4 col-md-4 col-sm-12">
-                        <button className="btn btn-default" onClick={ () => thisVar.appendInput() }>
+                        <button className="btn btn-default" onClick={ () => thisVar.appendInput() } type="button">
                           Add Tank
                         </button>
                       </div>
