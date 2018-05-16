@@ -307,6 +307,116 @@ exports.validateForm = function (values, modelName) {
         installationDate: !values.installationDate ? 'Please select the Installation Date' : undefined
       };
       break;
+      case "BrandMaster":
+      validators = {
+        name: !values.name ? 'Please Enter a Name' : undefined,
+        size: !values.size ? 'Please select the Tank Type' : undefined,
+        mfgCost: !values.mfgCost ? 'Please enter the Mfg. Cost.' : undefined,
+        exciseDuty: !values.exciseDuty ? 'Please enter the Excise Duty.' : undefined,
+        salesTax: !values.salesTax ? 'Please enter the Sales Tax.' : undefined,
+        mrp: !values.mrp ? 'Please enter the MRP.' : undefined,
+        labelAppOrderNo: !values.labelAppOrderNo ? 'Please enter the Label Approved No.' : undefined,
+        mrpApprovalDate: !values.mrpApprovalDate ? 'Please select MRP approval date.' : undefined,
+        mrpEffectiveDate: !values.mrpEffectiveDate ? 'Please select MRP effective date.' : undefined,
+        mrpChangeDate: !values.mrpChangeDate ? 'Please select MRP change date.' : undefined
+      };
+      break;
+      case "FlavourMaster":
+      validators = {
+        name: !values.name ? 'Please Enter a Name' : undefined,
+        size: !values.size ? 'Please enter the size' : undefined,
+        uom: !values.uom ? 'Please enter the UOM.' : undefined,
+        brand: !values.brand ? 'Please enter the Brand.' : undefined
+      };
+      break;
+      case "GrapeVarietyMaster":
+      validators = {
+        name: !values.name ? 'Please Enter a Name' : undefined
+      };
+      break;
+      case "SpiritMaster":
+      validators = {
+        name: !values.name ? 'Please Enter a Name' : undefined,
+        brand: !values.brand ? 'Please Enter a Brand' : undefined
+      };
+      break;
+      case "WineTypeMaster":
+      validators = {
+        name: !values.name ? 'Please Enter a Name' : undefined
+      };
+      break;
+      case "BottledDetails":
+      validators = {
+        date: !values.date ? 'Please Select a Date' : undefined,
+        type: !values.type ? 'Please Select a Type' : undefined,
+        bottleSize: !values.bottleSize ? 'Please enter the bottle size.' : undefined,
+        quantity: !values.quantity ? 'Please enter the quantity.' : undefined
+      };
+      break;
+      case "CrushedJuiceDetails":
+      validators = {
+        date: !values.date ? 'Please Select a Date' : undefined,
+        tank: !values.tank ? 'Please Select a Tank' : undefined,
+        grapeVariety: !values.grapeVariety ? 'Please select grape variety.' : undefined,
+        quantity: !values.quantity ? 'Please enter the quantity.' : undefined
+      };
+      break;
+      case "FermentedDetails":
+      validators = {
+        date: !values.date ? 'Please Select a Date' : undefined,
+        tank: !values.tank ? 'Please Select a Tank' : undefined,
+        quantity: !values.quantity ? 'Please enter the quantity.' : undefined
+      };
+      break;
+      case "FinishedGoodsDetails":
+      validators = {
+        date: !values.date ? 'Please Select a Date' : undefined,
+        type: !values.type ? 'Please Select a Type' : undefined,
+        bottleSize: !values.bottleSize ? 'Please enter the bottle size.' : undefined,
+        quantity: !values.quantity ? 'Please enter the quantity.' : undefined
+      };
+      break;
+      case "FlavourDetails":
+      validators = {
+        date: !values.date ? 'Please Select a Date' : undefined,
+        tank: !values.tank ? 'Please Select a Tank' : undefined,
+        flavour: !values.flavour ? 'Please select a flavour.' : undefined,
+        quantity: !values.quantity ? 'Please enter the quantity.' : undefined
+      };
+      break;
+      case "GrapesDetails":
+      validators = {
+        date: !values.date ? 'Please Select a Date' : undefined,
+        variety: !values.variety ? 'Please Select a Variety' : undefined,
+        quantity: !values.quantity ? 'Please enter the quantity.' : undefined
+      };
+      break;
+      case "LabelledDetails":
+      validators = {
+        date: !values.date ? 'Please Select a Date' : undefined,
+        type: !values.type ? 'Please Select a Type' : undefined,
+        bottleSize: !values.bottleSize ? 'Please enter bottle size.' : undefined,
+        quantity: !values.quantity ? 'Please enter the quantity.' : undefined
+      };
+      break;
+      case "SpiritDetails":
+      validators = {
+        date: !values.date ? 'Please Select a Date' : undefined,
+        tankNumber: !values.tankNumber ? 'Please Select a Tank' : undefined,
+        spiritType: !values.spiritType ? 'Please select Spirit Type.' : undefined,
+        quantity: !values.quantity ? 'Please enter the quantity.' : undefined,
+        strength: !values.strength ? 'Please enter strength.' : undefined,
+        pl: !values.pl ? 'Please enter PL.' : undefined
+      };
+      break;
+      case "TirageDisgorgedDetails":
+      validators = {
+        date: !values.date ? 'Please Select a Date' : undefined,
+        tankNumber: !values.tankNumber ? 'Please Select a Tank' : undefined,
+        spiritType: !values.spiritType ? 'Please select Spirit Type.' : undefined,
+        quantity: !values.quantity ? 'Please enter the quantity.' : undefined
+      };
+      break;
       case "WineryUser":
         validators = {
           name: !values.name ? 'Please Enter Name' : undefined,
