@@ -9,20 +9,27 @@ import { Table } from 'react-bootstrap';
 class WineType extends Authentication {
     constructor(props) {
         super(props);
-        this.setState({});
-        this.createWineType = this.createWineType.bind(this);
+        this.modelName = "WineTypeMaster";
+        this.viewName = `${this.modelName}Summary`;
         this.goBack = this.goBack.bind(this);
-        this.editWineType = this.editWineType.bind(this);
+        this.redirectToCreate = this.redirectToCreate.bind(this);
+        this.redirectToEdit = this.redirectToEdit.bind(this);
     }
 
-    createWineType() {
+    redirectToCreate() {
         let currProps = this.props;
         currProps.history.push("/createWineType");
     }
 
-    editWineType(currId) {
-        let currProps = this.props;
-        currProps.history.push("/createWineType?upsertAction=update&id=" + currId);
+    redirectToEdit(currId) {
+      let currProps = this.props;
+      currProps.history.push({
+        pathname: "/createWineType",
+        state: {
+          upsertAction: "update",
+          id: currId
+        }
+      });
     }
 
     goBack() {
@@ -30,10 +37,19 @@ class WineType extends Authentication {
         currProps.history.push("/home");
     }
 
+    componentDidMount(){
+      console.log(this.viewName, "componentDidMount");      
+      getAllRecords(this, this.modelName);
+    }
+  
+    componentDidUpdate(){
+      console.log(this.viewName, "componentDidUpdate");
+    }
+
     render() {
-      getAllRecords(this, "WineTypeMaster");
-      console.log("STATE", this.state);
-      let currRecords = this.state ? this.state.records : null;
+      let thisVar = this;
+      let currState = thisVar.state;
+      let currRecords = currState ? currState.records : null;
         return (
             <div className="container">
               <div className="register-heading">Type of Wine</div>
@@ -79,7 +95,7 @@ class WineType extends Authentication {
                                         </button>
                                       </div>
                                       <div>
-                                        <button className="btn btn-default" onClick={ this.createWineType }>
+                                        <button className="btn btn-default" onClick={ this.redirectToCreate }>
                                           Add New
                                         </button>
                                       </div>
@@ -104,7 +120,7 @@ class WineType extends Authentication {
                   <tbody>
                   { currRecords ? currRecords.map((currRecord, index) => (
                       <tr key={ currRecord._id }>
-                      <td className="text-center" onClick={ () => this.editWineType(currRecord._id) }><i className="fa fa-edit"></i></td>
+                      <td className="text-center" onClick={ () => this.redirectToEdit(currRecord._id) }><i className="fa fa-edit"></i></td>
                       <td>{ currRecord.date }</td>
                       <td>{ currRecord.name }</td>
                     </tr>

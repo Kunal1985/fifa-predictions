@@ -9,31 +9,47 @@ import { Table } from 'react-bootstrap';
 class TankMaster extends Authentication {
     constructor(props) {
         super(props);
-        this.setState({});
-        this.createTank = this.createTank.bind(this);
+        this.modelName = "TankMaster";
+        this.viewName = `${this.modelName}Summary`;
+        this.redirectToCreate = this.redirectToCreate.bind(this);
         this.goBack = this.goBack.bind(this);
-        this.editTank = this.editTank.bind(this);
+        this.redirectToEdit = this.redirectToEdit.bind(this);
     }
 
-    createTank() {
+    redirectToCreate() {
         let currProps = this.props;
         currProps.history.push("/createTank");
     }
 
-    editTank(currId) {
+    redirectToEdit(currId) {
       let currProps = this.props;
-      currProps.history.push("/createTank?upsertAction=update&id=" + currId);
-  }
+      currProps.history.push({
+        pathname: "/createTank",
+        state: {
+          upsertAction: "update",
+          id: currId
+        }
+      });
+    }
 
     goBack() {
       let currProps = this.props;
       currProps.history.push("/home");
   }
 
+  componentDidMount(){
+    console.log(this.viewName, "componentDidMount");      
+    getAllRecords(this, this.modelName);
+  }
+
+  componentDidUpdate(){
+    console.log(this.viewName, "componentDidUpdate");
+  }
+
     render() {
-      getAllRecords(this, "TankMaster");
-      console.log("STATE", this.state);
-      let currRecords = this.state ? this.state.records : null;
+      let thisVar = this;
+      let currState = thisVar.state;
+      let currRecords = currState ? currState.records : null;
         return (
             <div className="container">
               <div className="register-heading">Tank Master</div>
@@ -79,7 +95,7 @@ class TankMaster extends Authentication {
                                         </button>
                                       </div>
                                       <div>
-                                        <button className="btn btn-default" onClick={ this.createTank }>
+                                        <button className="btn btn-default" onClick={ this.redirectToCreate }>
                                           Add New
                                         </button>
                                       </div>
@@ -107,7 +123,7 @@ class TankMaster extends Authentication {
                   <tbody>
                     { currRecords ? currRecords.map((currRecord, index) => (
                       <tr key={ currRecord._id }>
-                        <td className="text-center" onClick={ () => this.editTank(currRecord._id) }><i className="fa fa-edit"></i></td>
+                        <td className="text-center" onClick={ () => this.redirectToEdit(currRecord._id) }><i className="fa fa-edit"></i></td>
                         <td>{ currRecord.number }</td>
                         <td>{ currRecord.type }</td>
                         <td>{ currRecord.capacity }</td>

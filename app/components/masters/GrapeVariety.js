@@ -9,20 +9,27 @@ import { Table } from 'react-bootstrap';
 class GrapeVariety extends Authentication {
     constructor(props) {
         super(props);
-        this.setState({});
-        this.createGrapeVariety = this.createGrapeVariety.bind(this);
+        this.modelName = "GrapeVarietyMaster";
+        this.viewName = `${this.modelName}Summary`;
+        this.redirectToCreate = this.redirectToCreate.bind(this);
         this.goBack = this.goBack.bind(this);
-        this.editGrapeVariety = this.editGrapeVariety.bind(this);
+        this.redirectToEdit = this.redirectToEdit.bind(this);
     }
 
-    createGrapeVariety() {
+    redirectToCreate() {
         let currProps = this.props;
         currProps.history.push("/createGrapeVariety");
     }
 
-    editGrapeVariety(currId) {
-        let currProps = this.props;
-        currProps.history.push("/createGrapeVariety?upsertAction=update&id=" + currId);
+    redirectToEdit(currId) {
+      let currProps = this.props;
+      currProps.history.push({
+        pathname: "/createGrapeVariety",
+        state: {
+          upsertAction: "update",
+          id: currId
+        }
+      });
     }
 
     goBack() {
@@ -30,10 +37,19 @@ class GrapeVariety extends Authentication {
         currProps.history.push("/home");
     }
 
+    componentDidMount(){
+      console.log(this.viewName, "componentDidMount");      
+      getAllRecords(this, this.modelName);
+    }
+  
+    componentDidUpdate(){
+      console.log(this.viewName, "componentDidUpdate");
+    }
+
     render() {
-      getAllRecords(this, "GrapeVarietyMaster");
-      console.log("STATE", this.state);
-      let currRecords = this.state ? this.state.records : null;
+      let thisVar = this;
+      let currState = thisVar.state;
+      let currRecords = currState ? currState.records : null;
         return (
             <div className="container">
               <div className="register-heading">Variety of Grape/Fruit</div>
@@ -79,7 +95,7 @@ class GrapeVariety extends Authentication {
                                         </button>
                                       </div>
                                       <div>
-                                        <button className="btn btn-default" onClick={ this.createGrapeVariety }>
+                                        <button className="btn btn-default" onClick={ this.redirectToCreate }>
                                           Add New
                                         </button>
                                       </div>
@@ -104,7 +120,7 @@ class GrapeVariety extends Authentication {
                   <tbody>
                   { currRecords ? currRecords.map((currRecord, index) => (
                       <tr key={ currRecord._id }>
-                      <td className="text-center" onClick={ () => this.editGrapeVariety(currRecord._id) }><i className="fa fa-edit"></i></td>
+                      <td className="text-center" onClick={ () => this.redirectToEdit(currRecord._id) }><i className="fa fa-edit"></i></td>
                       <td>{ currRecord.date }</td>
                       <td>{ currRecord.name }</td>
                     </tr>

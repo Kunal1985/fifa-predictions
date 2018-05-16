@@ -9,20 +9,27 @@ import { Table } from 'react-bootstrap';
 class Spirit extends Authentication {
     constructor(props) {
         super(props);
-        this.setState({});
-        this.createSpirit = this.createSpirit.bind(this);
+        this.modelName = "SpiritMaster";
+        this.viewName = `${this.modelName}Summary`;
+        this.redirectToCreate = this.redirectToCreate.bind(this);
         this.goBack = this.goBack.bind(this);
-        this.editSpirit = this.editSpirit.bind(this);
+        this.redirectToEdit = this.redirectToEdit.bind(this);
     }
 
-    createSpirit() {
+    redirectToCreate() {
         let currProps = this.props;
         currProps.history.push("/createSpirit");
     }
 
-    editSpirit(currId) {
-        let currProps = this.props;
-        currProps.history.push("/createSpirit?upsertAction=update&id=" + currId);
+    redirectToEdit(currId) {
+      let currProps = this.props;
+      currProps.history.push({
+        pathname: "/createSpirit",
+        state: {
+          upsertAction: "update",
+          id: currId
+        }
+      });
     }
 
     goBack() {
@@ -30,10 +37,19 @@ class Spirit extends Authentication {
         currProps.history.push("/home");
     }
 
+    componentDidMount(){
+      console.log(this.viewName, "componentDidMount");      
+      getAllRecords(this, this.modelName);
+    }
+  
+    componentDidUpdate(){
+      console.log(this.viewName, "componentDidUpdate");
+    }
+
     render() {
-      getAllRecords(this, "SpiritMaster");
-      console.log("STATE", this.state);
-      let currRecords = this.state ? this.state.records : null;
+      let thisVar = this;
+      let currState = thisVar.state;
+      let currRecords = currState ? currState.records : null;
         return (
             <div className="container">
               <div className="register-heading">Spirit</div>
@@ -79,7 +95,7 @@ class Spirit extends Authentication {
                                         </button>
                                       </div>
                                       <div>
-                                        <button className="btn btn-default" onClick={ this.createSpirit }>
+                                        <button className="btn btn-default" onClick={ this.redirectToCreate }>
                                           Add New
                                         </button>
                                       </div>
@@ -104,7 +120,7 @@ class Spirit extends Authentication {
                   <tbody>
                   { currRecords ? currRecords.map((currRecord, index) => (
                       <tr key={ currRecord._id }>
-                      <td className="text-center" onClick={ () => this.editSpirit(currRecord._id) }><i className="fa fa-edit"></i></td>
+                      <td className="text-center" onClick={ () => this.redirectToEdit(currRecord._id) }><i className="fa fa-edit"></i></td>
                       <td>{ currRecord.type }</td>
                       <td>{ currRecord.brand }</td>
                     </tr>

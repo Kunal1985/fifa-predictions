@@ -10,6 +10,7 @@ class CreateTank extends Authentication {
     constructor(props) {
         super(props);
         this.modelName = "TankMaster";
+        this.viewName = `${this.modelName}Form`;        
         this.onCancel = this.onCancel.bind(this);
         this.goBack = this.goBack.bind(this);
     }
@@ -24,22 +25,31 @@ class CreateTank extends Authentication {
         currProps.history.goBack();
     }
 
+    componentDidMount(){
+      console.log(this.viewName, "componentDidMount");
+      let queryParams = this.props.location.state;
+      getCurrRecord(queryParams, this, this.modelName);
+    }
+
+    componentDidUpdate(){
+      console.log(this.viewName, "componentDidUpdate");
+    }
+
     render() {
-      let queryParams = this.props.location.query;
       let thisVar = this;
-      getCurrRecord(queryParams, this, thisVar.modelName);
+      let currState = thisVar.state;
+      let currRecord = currState ? currState.currRecord : null;
         return (
             <div className="container">
               <div className="register-heading">Tank Master</div>
               <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
               <Form 
-                defaultValues = {thisVar.state? thisVar.state.currRecord ? thisVar.state.currRecord: {} : {}}
+                defaultValues = {currRecord}
                 onSubmit={ (values) => {
-                    let data = values;
-                    if(thisVar.state && thisVar.state.currRecord)
-                      data._id = thisVar.state.currRecord._id;
-                    console.log("ValuestoSend", data);
-                    upsertRecord(data, thisVar, thisVar.modelName);
+                  let data = values;
+                  if(currState && currState.currRecord)
+                    data._id = currState.currRecord._id;
+                  upsertRecord(data, thisVar, thisVar.modelName);
                   } 
                 }
                 validate={ (values) => {
