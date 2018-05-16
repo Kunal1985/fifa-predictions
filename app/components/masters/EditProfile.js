@@ -158,7 +158,7 @@ class EditProfile extends Authentication {
                                 <div className="row">
                                   <div className="button-section text-center">
                                     <div className="text-center">
-                                      <button className="btn btn-primary" onClick={ this.onClear }>
+                                      <button type="button" className="btn btn-primary" onClick={ this.onClear }>
                                         Clear
                                       </button>
                                     </div>

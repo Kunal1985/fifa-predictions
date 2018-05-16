@@ -113,7 +113,7 @@ class exciseOfficer extends React.Component {
                                             <div className="row">
                                                 <div className="button-section text-center">
                                                     <div className="text-center">
-                                                        <button className="btn btn-primary" onClick={this.goBack}>
+                                                        <button type="button" className="btn btn-primary" onClick={this.goBack}>
                                                             Back
                                                         </button>
                                                     </div>

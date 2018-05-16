@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { sideBarList } from '../../utils/Constants';
-import { getCurrRecord, upsertRecord, validateForm } from '../../utils/Functions';
+import { getCurrRecord, upsertRecord, validateForm, getRecordsByQuery } from '../../utils/Functions';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 
@@ -28,6 +28,7 @@ class CreateGrapesOpeningEntry extends Authentication {
     componentDidMount(){
       console.log(this.viewName, "componentDidMount");
       let queryParams = this.props.location.state;
+      getRecordsByQuery(this, "GrapeVarietyMaster");
       getCurrRecord(queryParams, this, this.modelName);
     }
 
@@ -39,6 +40,7 @@ class CreateGrapesOpeningEntry extends Authentication {
       let thisVar = this;
       let currState = thisVar.state;
       let currRecord = currState ? currState.currRecord : null;
+      let grapeVarietyList = (currState && currState["grapevarietymaster"]) ? currState["grapevarietymaster"] : [];
         return (
             <div className="container">
               <div className="register-heading">Grapes Details</div>
@@ -72,7 +74,7 @@ class CreateGrapesOpeningEntry extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                   <div className="form-group">
                                       <label>Grape Variety</label>
-                                      <select className="form-control" field="variety" id="variety"></select>
+                                      <Select className="form-control" field="variety" id="variety" options={ grapeVarietyList } />
                                     </div>
                                   </div>
                                 </div>
@@ -88,7 +90,7 @@ class CreateGrapesOpeningEntry extends Authentication {
                                 <div className="row">
                                   <div className="button-section text-center">
                                     <div className="text-center">
-                                      <button className="btn btn-primary" onClick={ this.onCancel }>
+                                      <button type="button" className="btn btn-primary" onClick={ this.onCancel }>
                                         Cancel
                                       </button>
                                     </div>

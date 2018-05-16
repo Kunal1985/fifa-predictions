@@ -85,17 +85,17 @@ class Flavour extends Authentication {
                                         <Text field='searchName' placeholder='Search' className="form-control" />
                                       </div>
                                       <div>
-                                        <button className="btn btn-default" type='submit'>
+                                        <button type="button" className="btn btn-default" type='submit'>
                                           Search
                                         </button>
                                       </div>
                                       <div>
-                                        <button className="btn btn-default" type='submit'>
+                                        <button type="button" className="btn btn-default" type='submit'>
                                           Search All
                                         </button>
                                       </div>
                                       <div>
-                                        <button className="btn btn-default" onClick={ this.redirectToCreate }>
+                                        <button type="button" className="btn btn-default" onClick={ this.redirectToCreate }>
                                           Add New
                                         </button>
                                       </div>

@@ -28,6 +28,7 @@ class CreateBottledWineOpeningEntry extends Authentication {
     componentDidMount(){
       console.log(this.viewName, "componentDidMount");
       getRecordsByQuery(this, "TankMaster");
+      getRecordsByQuery(this, "WineTypeMaster");
       let queryParams = this.props.location.state;
       getCurrRecord(queryParams, this, this.modelName);
     }
@@ -41,6 +42,7 @@ class CreateBottledWineOpeningEntry extends Authentication {
       let currState = thisVar.state;
       let currRecord = currState ? currState.currRecord : null;
       let tankList = (currState && currState["tankmaster"]) ? currState["tankmaster"] : [];
+      let wineList = (currState && currState["winetypemaster"]) ? currState["winetypemaster"] : [];
         return (
             <div className="container">
               <div className="register-heading">Bottled Wine Details</div>
@@ -74,7 +76,7 @@ class CreateBottledWineOpeningEntry extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Type</label>
-                                      <select className="form-control" field="type" id="type"></select>
+                                      <Select className="form-control" field="type" id="type" options= {wineList} />
                                     </div>
                                   </div>
                                 </div>
@@ -99,7 +101,7 @@ class CreateBottledWineOpeningEntry extends Authentication {
                                 <div className="row">
                                   <div className="button-section text-center">
                                     <div className="text-center">
-                                      <button className="btn btn-primary" onClick={ this.onCancel }>
+                                      <button type="button" className="btn btn-primary" onClick={ this.onCancel }>
                                         Cancel
                                       </button>
                                     </div>

@@ -86,17 +86,17 @@ class Brand extends Authentication {
                                         <Text field='searchName' placeholder='Search' className="form-control" />
                                       </div>
                                       <div>
-                                        <button className="btn btn-default" type='submit'>
+                                        <button type="button" className="btn btn-default" type='submit'>
                                           Search
                                         </button>
                                       </div>
                                       <div>
-                                        <button className="btn btn-default" type='submit'>
+                                        <button type="button" className="btn btn-default" type='submit'>
                                           Search All
                                         </button>
                                       </div>
                                       <div>
-                                        <button className="btn btn-default" onClick={ thisVar.redirectToCreate }>
+                                        <button type="button" className="btn btn-default" onClick={ thisVar.redirectToCreate }>
                                           Add New
                                         </button>
                                       </div>

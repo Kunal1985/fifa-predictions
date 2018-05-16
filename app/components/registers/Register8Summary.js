@@ -57,7 +57,7 @@ class Register8Summary extends Authentication {
           <div className="col-lg-12 col-md-12 col-sm-12">
             <div className="search-section">
               <div>
-                <button className="btn btn-default" onClick={ thisVar.redirectToCreate }>
+                <button type="button" className="btn btn-default" onClick={ thisVar.redirectToCreate }>
                   Add New
                 </button>
               </div>

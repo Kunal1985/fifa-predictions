@@ -28,6 +28,7 @@ class CreateCrushedJuiceOpeningEntry extends Authentication {
     componentDidMount(){
       console.log(this.viewName, "componentDidMount");
       getRecordsByQuery(this, "TankMaster");
+      getRecordsByQuery(this, "GrapeVarietyMaster");
       let queryParams = this.props.location.state;
       getCurrRecord(queryParams, this, this.modelName);
     }
@@ -41,6 +42,7 @@ class CreateCrushedJuiceOpeningEntry extends Authentication {
       let currState = thisVar.state;
       let currRecord = currState ? currState.currRecord : null;
       let tankList = (currState && currState["tankmaster"]) ? currState["tankmaster"] : [];
+      let grapeVarietyList = (currState && currState["grapevarietymaster"]) ? currState["grapevarietymaster"] : [];
         return (
             <div className="container">
               <div className="register-heading">Crushed Juice Details</div>
@@ -83,7 +85,7 @@ class CreateCrushedJuiceOpeningEntry extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                   <div className="form-group">
                                       <label>Grape Variety</label>
-                                      <select className="form-control" field="grapeVariety" id="grapeVariety"></select>
+                                      <Select className="form-control" field="grapeVariety" id="grapeVariety" options={ grapeVarietyList } />
                                     </div>
                                   </div>
                                 </div>
@@ -99,7 +101,7 @@ class CreateCrushedJuiceOpeningEntry extends Authentication {
                                 <div className="row">
                                   <div className="button-section text-center">
                                     <div className="text-center">
-                                      <button className="btn btn-primary" onClick={ this.onCancel }>
+                                      <button type="button" className="btn btn-primary" onClick={ this.onCancel }>
                                         Cancel
                                       </button>
                                     </div>

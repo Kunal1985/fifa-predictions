@@ -112,6 +112,10 @@ exports.getRecordsByQuery = function (currObj, modelName, query) {
         case "Villages": fieldName = "village"; break;
         case "TankMaster": fieldName = "tankmaster"; break;
         case "ExciseOfficer": fieldName = "ExciseOfficer"; break;
+        case "FlavourMaster": fieldName = "flavourmaster"; break;
+        case "SpiritMaster": fieldName = "spiritmaster"; break;
+        case "GrapeVarietyMaster": fieldName = "grapevarietymaster"; break;
+        case "WineTypeMaster": fieldName = "winetypemaster"; break;
         default: break;
       }
       stateChangeVar[modelName.toLowerCase()] = body.map(function (currRecord) {
@@ -123,6 +127,30 @@ exports.getRecordsByQuery = function (currObj, modelName, query) {
           }
             break;
           case "ExciseOfficer": return {
+            label: currRecord.name,
+            value: currRecord.name,
+            selected: true
+          }
+            break;
+          case "FlavourMaster": return {
+            label: currRecord.name,
+            value: currRecord.name,
+            selected: true
+          }
+            break;
+          case "SpiritMaster": return {
+            label: currRecord.name,
+            value: currRecord.name,
+            selected: true
+          }
+            break;
+          case "GrapeVarietyMaster": return {
+            label: currRecord.name,
+            value: currRecord.name,
+            selected: true
+          }
+            break;
+          case "WineTypeMaster": return {
             label: currRecord.name,
             value: currRecord.name,
             selected: true

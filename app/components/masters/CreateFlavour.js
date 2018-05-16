@@ -135,7 +135,7 @@ class CreateFlavour extends Authentication {
                                 <div className="row">
                                   <div className="button-section text-center">
                                     <div className="text-center">
-                                      <button className="btn btn-primary" onClick={ this.onCancel }>
+                                      <button type="button" className="btn btn-primary" onClick={ this.onCancel }>
                                         Cancel
                                       </button>
                                     </div>

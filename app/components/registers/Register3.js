@@ -125,7 +125,7 @@ class Register3 extends Authentication {
                       </div>
                       <div className="row">
                         <div className="col-lg-4 col-md-4 col-sm-12">
-                          <button className="btn btn-default" onClick={ () => thisVar.appendInput() }>
+                          <button type="button" className="btn btn-default" onClick={ () => thisVar.appendInput() }>
                             Add Tank
                           </button>
                         </div>

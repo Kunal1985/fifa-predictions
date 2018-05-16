@@ -27,6 +27,7 @@ class CreateFinishedGoodsOpeningEntry extends Authentication {
 
     componentDidMount(){
       console.log(this.viewName, "componentDidMount");
+      getRecordsByQuery(this, "WineTypeMaster");
       let queryParams = this.props.location.state;
       getCurrRecord(queryParams, this, this.modelName);
     }
@@ -39,6 +40,7 @@ class CreateFinishedGoodsOpeningEntry extends Authentication {
       let thisVar = this;
       let currState = thisVar.state;
       let currRecord = currState ? currState.currRecord : null;
+      let wineList = (currState && currState["winetypemaster"]) ? currState["winetypemaster"] : [];
         return (
             <div className="container">
               <div className="register-heading">Finished Goods Details</div>
@@ -72,7 +74,7 @@ class CreateFinishedGoodsOpeningEntry extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Type</label>
-                                      <select className="form-control" field="type" id="type"></select>
+                                      <Select className="form-control" field="type" id="type" options= {wineList} />
                                     </div>
                                   </div>
                                 </div>
@@ -97,7 +99,7 @@ class CreateFinishedGoodsOpeningEntry extends Authentication {
                                 <div className="row">
                                   <div className="button-section text-center">
                                     <div className="text-center">
-                                      <button className="btn btn-primary" onClick={ this.onCancel }>
+                                      <button type="button" className="btn btn-primary" onClick={ this.onCancel }>
                                         Cancel
                                       </button>
                                     </div>
