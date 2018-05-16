@@ -74,7 +74,7 @@ class CreateFlavourOpeningEntry extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Tank</label>
-                                      <Select className="form-control" field="input" id="input" options={ tankList }/>
+                                      <Select className="form-control" field="tank" id="tank" options={ tankList }/>
                                     </div>
                                   </div>
                                 </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { sideBarList } from '../../utils/Constants';
+import { getCurrRecord, upsertRecord, validateForm, getRecordsByQuery } from '../../utils/Functions';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 
@@ -8,6 +9,8 @@ class CreateLabelledBottleOpeningEntry extends Authentication {
 
     constructor(props) {
         super(props);
+        this.modelName = "LabelledDetails";
+        this.viewName = `${this.modelName}Form`;
         this.onCancel = this.onCancel.bind(this);
         this.goBack = this.goBack.bind(this);
     }
@@ -22,18 +25,32 @@ class CreateLabelledBottleOpeningEntry extends Authentication {
         currProps.history.goBack();
     }
 
+    componentDidMount(){
+      console.log(this.viewName, "componentDidMount");
+      let queryParams = this.props.location.state;
+      getCurrRecord(queryParams, this, this.modelName);
+    }
+
+    componentDidUpdate(){
+      console.log(this.viewName, "componentDidUpdate");
+    }
+
     render() {
+      let thisVar = this;
+      let currState = thisVar.state;
+      let currRecord = currState ? currState.currRecord : null;
         return (
             <div className="container">
               <div className="register-heading">Labelled Bottle Details</div>
               <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
-              <Form onSubmit={ (values) => {
-                                   console.log('s');
+              <Form defaultValues = {currRecord} onSubmit={ (values) => {
+                                   let data = values;
+                                   if(currState && currState.currRecord)
+                                     data._id = currState.currRecord._id;
+                                   upsertRecord(data, thisVar, thisVar.modelName);
                                } } validate={ (values) => {
-                                                                                                                                                      return {
-                                                                                                                                                  
-                                                                                                                                                      }
-                                                                                                                                                  } }>
+                                return validateForm(values, thisVar.modelName);
+                                } }>
                 { ({submitForm}) => {
                       let errorMessage = null;
                   

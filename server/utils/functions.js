@@ -29,7 +29,7 @@ var FermentedDetails = require('../../models/opening-balance/fermentedDetails');
 var BottledDetails = require('../../models/opening-balance/bottledDetails');
 var TirageDisgorgedDetails = require('../../models/opening-balance/tirageDisgorgedDetails');
 var LabelledDetails = require('../../models/opening-balance/labelledDetails');
-var FinisheGoodsDetails = require('../../models/opening-balance/finishedGoodsDetails');
+var FinishedGoodsDetails = require('../../models/opening-balance/finishedGoodsDetails');
 
 // Imports for Geography's Models
 var States = require('../../models/geography/states');
@@ -77,7 +77,7 @@ var getModelObject = function(modelName){
     case "BottledDetails": modelObj = BottledDetails; break;
     case "TirageDisgorgedDetails": modelObj = TirageDisgorgedDetails; break;
     case "LabelledDetails": modelObj = LabelledDetails; break;
-    case "FinisheGoodsDetails": modelObj = FinisheGoodsDetails; break;
+    case "FinishedGoodsDetails": modelObj = FinishedGoodsDetails; break;
     default: break;
   }
   return modelObj;

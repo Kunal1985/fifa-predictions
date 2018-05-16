@@ -55,7 +55,7 @@ import CreateFermentedWineOpeningEntry from './components/opening-balance/Create
 import BottledWineOpeningEntry from './components/opening-balance/BottledWineOpeningEntry';
 import CreateBottledWineOpeningEntry from './components/opening-balance/CreateBottledWineOpeningEntry';
 import LabelledBottleOpeningEntry from './components/opening-balance/LabelledBottleOpeningEntry';
-import CreateLabelledBottleOpeningEntry from './components/opening-balance/CreateBottledWineOpeningEntry';
+import CreateLabelledBottleOpeningEntry from './components/opening-balance/CreateLabelledBottleOpeningEntry';
 import FinishedGoodsOpeningEntry from './components/opening-balance/FinishedGoodsOpeningEntry';
 import CreateFinishedGoodsOpeningEntry from './components/opening-balance/CreateFinishedGoodsOpeningEntry';
 import WineryUser from './components/admin/WineryUser';
