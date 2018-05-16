@@ -19,7 +19,9 @@ var GrapeVarietyMaster = require('../../models/masters/grapeVarietyMaster');
 var BrandMaster = require('../../models/masters/brandMaster');
 var FlavourMaster = require('../../models/masters/flavourMaster');
 var SpiritMaster = require('../../models/masters/spiritMaster');
-var FlavourdDetails = require('../../models/opening-balance/flavourDetails');
+
+// Imports for Opening Balance Models
+var FlavourDetails = require('../../models/opening-balance/flavourDetails');
 var SpiritDetails = require('../../models/opening-balance/spiritDetails');
 var GrapesDetails = require('../../models/opening-balance/grapesDetails');
 var CrushedJuiceDetails = require('../../models/opening-balance/crushedJuiceDetails');
@@ -27,6 +29,7 @@ var FermentedDetails = require('../../models/opening-balance/fermentedDetails');
 var BottledDetails = require('../../models/opening-balance/bottledDetails');
 var TirageDisgorgedDetails = require('../../models/opening-balance/tirageDisgorgedDetails');
 var LabelledDetails = require('../../models/opening-balance/labelledDetails');
+var FinisheGoodsDetails = require('../../models/opening-balance/finishedGoodsDetails');
 
 // Imports for Geography's Models
 var States = require('../../models/geography/states');
@@ -66,6 +69,15 @@ var getModelObject = function(modelName){
     case "Villages": modelObj = Villages; break;
     case "WineryUser": modelObj = WineryUser; break;
     case "ExciseOfficer": modelObj = ExciseOfficer; break;
+    case "FlavourDetails": modelObj = FlavourDetails; break;
+    case "SpiritDetails": modelObj = SpiritDetails; break;
+    case "GrapesDetails": modelObj = GrapesDetails; break;
+    case "CrushedJuiceDetails": modelObj = CrushedJuiceDetails; break;
+    case "FermentedDetails": modelObj = FermentedDetails; break;
+    case "BottledDetails": modelObj = BottledDetails; break;
+    case "TirageDisgorgedDetails": modelObj = TirageDisgorgedDetails; break;
+    case "LabelledDetails": modelObj = LabelledDetails; break;
+    case "FinisheGoodsDetails": modelObj = FinisheGoodsDetails; break;
     default: break;
   }
   return modelObj;

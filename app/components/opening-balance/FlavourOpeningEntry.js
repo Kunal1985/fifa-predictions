@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { sideBarList, searchType } from '../../utils/Constants';
+import { getAllRecords } from '../../utils/Functions';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 import { Table } from 'react-bootstrap';
@@ -8,27 +9,47 @@ import { Table } from 'react-bootstrap';
 class FlavourOpeningEntry extends Authentication {
     constructor(props) {
         super(props);
+        this.modelName = "FlavourDetails";
+        this.viewName = `${this.modelName}Summary`;
         this.goBack = this.goBack.bind(this);
-        this.createFlavour = this.createFlavour.bind(this);
-        this.editFlavour = this.editFlavour.bind(this);
+        this.redirectToCreate = this.redirectToCreate.bind(this);
+        this.redirectToEdit = this.redirectToEdit.bind(this);
     }
     
-    createFlavour() {
+    redirectToCreate() {
         let currProps = this.props;
         currProps.history.push("/createFlavourOpening");
     }
 
-    editFlavour() {
+    redirectToEdit(currId) {
       let currProps = this.props;
-      currProps.history.push("/createFlavourOpening");
-  }
+      currProps.history.push({
+        pathname: "/createFlavourOpening",
+        state: {
+          upsertAction: "update",
+          id: currId
+        }
+      });
+    }
 
     goBack() {
         let currProps = this.props;
         currProps.history.goBack();
     }
 
+    componentDidMount(){
+      console.log(this.viewName, "componentDidMount");      
+      getAllRecords(this, this.modelName);
+    }
+  
+    componentDidUpdate(){
+      console.log(this.viewName, "componentDidUpdate");
+    }
+
     render() {
+      let thisVar = this;
+      let currState = thisVar.state;
+      let currRecords = currState ? currState.records : null;
         return (
             <div className="container">
               <div className="register-heading">Flavour</div>
@@ -51,7 +72,7 @@ class FlavourOpeningEntry extends Authentication {
                               <div className="col-lg-12 col-md-12 col-sm-12">
                                 <div className="search-section">
                                   <div>
-                                    <button className="btn btn-default" onClick={ this.createFlavour }>
+                                    <button className="btn btn-default" onClick={ this.redirectToCreate }>
                                       Add New
                                     </button>
                                   </div>
@@ -76,27 +97,14 @@ class FlavourOpeningEntry extends Authentication {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td className="text-center" onClick={ this.editFlavour }><i className="fa fa-edit"></i></td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>Otto</td>
-                  </tr>
-                  <tr>
-                    <td className="text-center" onClick={ this.editFlavour }><i className="fa fa-edit"></i></td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>Otto</td>
-                  </tr>
-                  <tr>
-                    <td className="text-center" onClick={ this.editFlavour }><i className="fa fa-edit"></i></td>
-                    <td>Larry the Bird</td>
-                    <td>@twitter</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
+                { currRecords ? currRecords.map((currRecord, index) => (
+                      <tr key={ currRecord._id }>
+                      <td className="text-center" onClick={ () => thisVar.redirectToEdit(currRecord._id) }><i className="fa fa-edit"></i></td>
+                      <td>{ currRecord.tank }</td>
+                      <td>{ currRecord.flavour }</td>
+                      <td>{ currRecord.quantity }</td>
+                    </tr>
+                    )) : "" }
                 </tbody>
               </Table>;
               </div>

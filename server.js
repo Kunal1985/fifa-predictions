@@ -73,6 +73,17 @@ require('./server/routes/masters/spirit')(app, passport);
 require('./server/routes/masters/tank')(app, passport);
 require('./server/routes/masters/wine-type')(app, passport);
 
+// Server-side Routes for Opening Balance
+require('./server/routes/opening-balance/flavour-details')(app, passport);
+require('./server/routes/opening-balance/spirit-details')(app, passport);
+require('./server/routes/opening-balance/grapes-details')(app, passport);
+require('./server/routes/opening-balance/crushed-juice-details')(app, passport);
+require('./server/routes/opening-balance/fermented-details')(app, passport);
+require('./server/routes/opening-balance/bottled-details')(app, passport);
+require('./server/routes/opening-balance/tirage-disgorged-details')(app, passport);
+require('./server/routes/opening-balance/labelled-details')(app, passport);
+require('./server/routes/opening-balance/finished-goods-details')(app, passport);
+
 // Server-side Routes for Geography
 require('./server/routes/geography')(app, passport);
 
