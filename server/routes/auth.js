@@ -19,17 +19,24 @@ module.exports = function(app, passport) {
     failureRedirect: '/' 
   }), function(req, res, next) {
     var currPassport = req.session.passport;
-    console.log("Passpor during Login", currPassport);
-    User.findById(currPassport.user, function(err, user) {
-      if (err) { throw err; }
-      var redirectUrl = "/home";
-      switch(user.role){
-        case 2: redirectUrl = "openingBalance";break;
-        case 0: redirectUrl = "admin"; break;
-        default: break;
-      }
-      res.json({loginSuccess: true, redirectUrl: redirectUrl});
-    });
+    console.log("Passport during Login", currPassport);
+    var redirectUrl = "/home";
+    switch(currPassport.user.role){
+      case 2: redirectUrl = "openingBalance";break;
+      case 0: redirectUrl = "admin"; break;
+      default: break;
+    }
+    res.json({loginSuccess: true, redirectUrl: redirectUrl});
+    // User.findById(currPassport.user, function(err, user) {
+    //   if (err) { throw err; }
+    //   var redirectUrl = "/home";
+    //   switch(user.role){
+    //     case 2: redirectUrl = "openingBalance";break;
+    //     case 0: redirectUrl = "admin"; break;
+    //     default: break;
+    //   }
+    //   res.json({loginSuccess: true, redirectUrl: redirectUrl});
+    // });
   });
 
   /**
@@ -52,12 +59,12 @@ module.exports = function(app, passport) {
     var currPassport = req.session.passport;
     if(currPassport){
       console.log("userDetails", currPassport);
-      // res.json(currPassport.user);
-      User.findById(currPassport.user, function(err, user) {
-        if (err) { throw err; }
-        console.log("User found!");
-        res.json(user);
-      });
+      res.json(currPassport.user);
+      // User.findById(currPassport.user, function(err, user) {
+      //   if (err) { throw err; }
+      //   console.log("User found!");
+      //   res.json(user);
+      // });
     } else{
       throw new Error("Unauthenticated Access!");
     }
