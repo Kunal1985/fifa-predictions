@@ -48,7 +48,7 @@ module.exports = function(app, passport) {
         res.json(user);
       });
     } else{
-      throw new Error("Not Logged In");
+      throw new Error("Unauthenticated Access!");
     }
   });
 }

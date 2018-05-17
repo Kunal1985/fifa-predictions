@@ -51,7 +51,7 @@ exports.getUserDetails = function (currObj) {
       return body;
     })
     .catch(function (err) {
-      console.warn("Error", err);
+      // console.warn("Error", err);
       return null;
     });
 }

@@ -12,7 +12,7 @@ module.exports = function(passport) {
     User.findById(id, function(err, user) {
       done(err, user);
     });
-    return done(null, user);
+    // return done(null, user);
   });
 
   passport.use('local-signup', new LocalStrategy({
