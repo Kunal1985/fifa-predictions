@@ -8,7 +8,8 @@ var register2Schema = mongoose.Schema({
     juiceObtained: Number,
     clarificationLoss: String,
     tankNumber: String,
-    remarks: String
+    remarks: String,
+    verified: Boolean
 });
 
 // create the model for users and expose it to our app

@@ -103,6 +103,7 @@ class FlavourOpeningEntry extends Authentication {
                       <td>{ currRecord.tank }</td>
                       <td>{ currRecord.flavour }</td>
                       <td>{ currRecord.quantity }</td>
+                      <td>{ currRecord.verified ? <span className="verified">Verified</span> : <span className="unverified">Unverified</span> }</td>
                     </tr>
                     )) : "" }
                 </tbody>

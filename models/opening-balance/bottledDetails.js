@@ -5,7 +5,8 @@ var bottledSchema = mongoose.Schema({
     date: String,
     type: String,
     bottleSize: Number,
-    quantity: Number
+    quantity: Number,
+    verified: Boolean
 });
 
 // create the model for users and expose it to our app

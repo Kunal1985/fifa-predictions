@@ -4,7 +4,8 @@ var mongoose = require('mongoose');
 var fermentedDetailsSchema = mongoose.Schema({
     date: String,
     tank: String,
-    quantity: Number
+    quantity: Number,
+    verified: Boolean
 });
 
 // create the model for users and expose it to our app

@@ -10,7 +10,8 @@ var register3Schema = mongoose.Schema({
     transferredQty: Number,
     closingBalance: Number,
     transferLoss: Number,
-    remarks: String
+    remarks: String,
+    verified: Boolean
 });
 
 // create the model for users and expose it to our app

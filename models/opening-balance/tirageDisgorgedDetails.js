@@ -6,6 +6,7 @@ var tirageDisgorgedDetailsSchema = mongoose.Schema({
     tankNumber: String,
     spiritType: String,
     quantity: Number,
+    verified: Boolean
 });
 
 // create the model for users and expose it to our app

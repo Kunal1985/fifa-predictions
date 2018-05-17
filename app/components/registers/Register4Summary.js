@@ -72,6 +72,7 @@ class Register4Summary extends Authentication {
                 <th>Fermented Wine</th>
                 <th>Spirit</th>
                 <th>Fortified Wine Manufactured</th>
+                <th>Verify</th>
               </tr>
             </thead>
             <tbody>
@@ -87,6 +88,7 @@ class Register4Summary extends Authentication {
                     <td>
                       { currRecord.fortifiedWine.tankNumber } -- { currRecord.fortifiedWine.quantity }
                     </td>
+                    <td>{ currRecord.verified ? <span className="verified">Verified</span> : <span className="unverified">Unverified</span> }</td>
                   </tr>
                 )) : "" }
             </tbody>

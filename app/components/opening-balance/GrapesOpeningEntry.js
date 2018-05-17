@@ -101,6 +101,7 @@ class GrapesOpeningEntry extends Authentication {
                       <td className="text-center" onClick={ () => thisVar.redirectToEdit(currRecord._id) }><i className="fa fa-edit"></i></td>
                       <td>{ currRecord.variety }</td>
                       <td>{ currRecord.quantity }</td>
+                      <td>{ currRecord.verified ? <span className="verified">Verified</span> : <span className="unverified">Unverified</span> }</td>
                     </tr>
                     )) : "" }
                 </tbody>

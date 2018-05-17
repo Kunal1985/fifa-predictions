@@ -103,6 +103,7 @@ class LabelledBottleOpeningEntry extends Authentication {
                       <td>{ currRecord.type }</td>
                       <td>{ currRecord.bottleSize }</td>
                       <td>{ currRecord.quantity }</td>
+                      <td>{ currRecord.verified ? <span className="verified">Verified</span> : <span className="unverified">Unverified</span> }</td>
                     </tr>
                     )) : "" }
                 </tbody>

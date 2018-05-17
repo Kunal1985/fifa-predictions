@@ -13,7 +13,8 @@ var register6Schema = mongoose.Schema({
 	qtyInLitres: Number,
 	bottlingLoss: Number,
 	closingBalance: Number,
-    remarks: String
+    remarks: String,
+    verified: Boolean
 });
 
 // create the model for users and expose it to our app

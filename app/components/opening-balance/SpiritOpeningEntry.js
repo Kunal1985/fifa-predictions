@@ -107,6 +107,7 @@ class SpiritOpeningEntry extends Authentication {
                       <td>{ currRecord.quantity }</td>
                       <td>{ currRecord.strength }</td>
                       <td>{ currRecord.pl }</td>
+                      <td>{ currRecord.verified ? <span className="verified">Verified</span> : <span className="unverified">Unverified</span> }</td>
                     </tr>
                     )) : "" }
                 </tbody>

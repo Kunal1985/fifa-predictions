@@ -4,7 +4,8 @@ var mongoose = require('mongoose');
 var grapesDetailsSchema = mongoose.Schema({
     date: String,
     variety: String,
-    quantity: Number
+    quantity: Number,
+    verified: Boolean
 });
 
 // create the model for users and expose it to our app

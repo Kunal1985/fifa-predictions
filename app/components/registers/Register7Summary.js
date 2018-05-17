@@ -76,6 +76,7 @@ class Register7Summary extends Authentication {
                 <th>Disgorging Loss</th>
                 <th>Disgorged Bottles</th>
                 <th>Tirage Bottles</th>
+                <th>Verify</th>
               </tr>
             </thead>
             <tbody>
@@ -95,6 +96,7 @@ class Register7Summary extends Authentication {
                     <td>
                       { currRecord.closingBalanceTirage ? currRecord.closingBalanceTirage.bottlesQty : "-----" }
                     </td>
+                    <td>{ currRecord.verified ? <span className="verified">Verified</span> : <span className="unverified">Unverified</span> }</td>
                   </tr>
                 )) : "" }
             </tbody>

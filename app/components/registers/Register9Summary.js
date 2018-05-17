@@ -72,6 +72,7 @@ class Register9Summary extends Authentication {
                 <th>Tank</th>
                 <th>Opening Balance</th>
                 <th>Closing Balance</th>
+                <th>Verify</th>
               </tr>
             </thead>
             <tbody>
@@ -81,6 +82,7 @@ class Register9Summary extends Authentication {
                   <td>{ currRecord.tankNumber }</td>
                   <td>{ currRecord.openingBalance }</td>
                   <td>{ currRecord.closingBalance }</td>
+                  <td>{ currRecord.verified ? <span className="verified">Verified</span> : <span className="unverified">Unverified</span> }</td>
                 </tr>
                 )) : "" }
             </tbody>

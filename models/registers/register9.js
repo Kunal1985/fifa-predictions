@@ -31,7 +31,8 @@ var register9Schema = mongoose.Schema({
         sizeInML: String,
         noOfBottles: Number,
     },
-    remarks: String
+    remarks: String,
+    verified: Boolean
 });
 
 // create the model for users and expose it to our app

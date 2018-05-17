@@ -74,6 +74,7 @@ class Register2Summary extends Authentication {
                 <th>Quantity</th>
                 <th>Juice Obtained</th>
                 <th>Clarification Losses</th>
+                <th>Verify</th>
               </tr>
             </thead>
             <tbody>
@@ -84,6 +85,7 @@ class Register2Summary extends Authentication {
                   <td>{ currRecord.quantity }</td>
                   <td>{ currRecord.juiceObtained }</td>
                   <td>{ currRecord.clarificationLoss }</td>
+                  <td>{ currRecord.verified ? <span className="verified">Verified</span> : <span className="unverified">Unverified</span> }</td>
                 </tr>
               )) : "" }
             </tbody>

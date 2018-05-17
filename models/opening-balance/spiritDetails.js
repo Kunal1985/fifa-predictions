@@ -7,7 +7,8 @@ var spiritDetailsSchema = mongoose.Schema({
     spiritType: String,
     quantity: Number,
     strength: String,
-    pl: String
+    pl: String,
+    verified: Boolean
 });
 
 // create the model for users and expose it to our app

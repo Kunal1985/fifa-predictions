@@ -73,6 +73,7 @@ class Register3Summary extends Authentication {
                 <th>Opening Balance</th>
                 <th>Base Wine obtained</th>
                 <th>Racking Loss</th>
+                <th>Verify</th>
               </tr>
             </thead>
             <tbody>
@@ -83,6 +84,7 @@ class Register3Summary extends Authentication {
                   <td>{ currRecord.openingBalance }</td>
                   <td>{ currRecord.baseWineObtained }</td>
                   <td>{ currRecord.rackingLoss }</td>
+                  <td>{ currRecord.verified ? <span className="verified">Verified</span> : <span className="unverified">Unverified</span> }</td>
                 </tr>
               )) : "" }
             </tbody>

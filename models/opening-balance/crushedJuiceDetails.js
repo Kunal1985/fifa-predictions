@@ -5,7 +5,8 @@ var crushedJuiceDeatilsSchema = mongoose.Schema({
     date: String,
     tank: String,
     grapeVariety: String,
-    quantity: Number
+    quantity: Number,
+    verified: Boolean
 });
 
 // create the model for users and expose it to our app

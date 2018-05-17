@@ -71,6 +71,7 @@ class Register8Summary extends Authentication {
                 <th>Edit</th>
                 <th>Opening Balance</th>
                 <th>Closing Balance</th>
+                <th>Verify</th>
               </tr>
             </thead>
             <tbody>
@@ -83,6 +84,7 @@ class Register8Summary extends Authentication {
                     <td>
                       { currRecord.closingBalance ? currRecord.closingBalance.sizeInML : "-----" }
                     </td>
+                    <td>{ currRecord.verified ? <span className="verified">Verified</span> : <span className="unverified">Unverified</span> }</td>
                   </tr>
                 )) : "" }
             </tbody>

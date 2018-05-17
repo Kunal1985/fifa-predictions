@@ -103,6 +103,7 @@ class CrushedJuiceOpeningEntry extends Authentication {
                       <td>{ currRecord.tank }</td>
                       <td>{ currRecord.grapeVariety }</td>
                       <td>{ currRecord.quantity }</td>
+                      <td>{ currRecord.verified ? <span className="verified">Verified</span> : <span className="unverified">Unverified</span> }</td>
                     </tr>
                     )) : "" }
                 </tbody>
