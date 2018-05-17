@@ -1,3 +1,5 @@
+var User = require('../../models/user');
+
 module.exports = function(app, passport) {
   /**
    * POST /register
@@ -39,12 +41,12 @@ module.exports = function(app, passport) {
     var currPassport = req.session.passport;
     if(currPassport){
       console.log("userDetails", currPassport);
-      res.json(currPassport.user);
-      // User.findOne({username: currPassport.user}, function(err, doc) {
-      //   if (err) { throw err; }
-      //   console.log("User found!");
-      //   res.json(doc);
-      // });
+      // res.json(currPassport.user);
+      User.findById(currPassport.user, function(err, user) {
+        if (err) { throw err; }
+        console.log("User found!");
+        res.json(user);
+      });
     } else{
       throw new Error("Not Logged In");
     }
