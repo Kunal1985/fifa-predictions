@@ -33,7 +33,7 @@ module.exports = function(passport) {
   
           // check to see if theres already a user with that username
           if (user) {
-              return done(new Error('That username is already taken.'));
+              return done(new Error(`The username '${username}' is already taken.`));
           } else {
   
               // if there is no user with that username
@@ -71,11 +71,11 @@ module.exports = function(passport) {
   
       // if no user is found, return the message
       if (!user)
-          return done(new Error('No user found.')); // req.flash is the way to set flashdata using connect-flash
+          return done(new Error(`No user found with username - ${username}.`));
   
       // if the user is found but the password is wrong
       if (!user.validPassword(password))
-          return done(new Error('Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
+          return done(new Error('Oops! Wrong password.'));
   
       // all is well, return successful user
       return done(null, user);
