@@ -6,19 +6,30 @@ module.exports = function(app, passport) {
    * User Register
    */
   app.post('/register', passport.authenticate('local-signup', {
-    successRedirect : '/home', 
     failureRedirect : '/'
-  }));
+  }), function(req, res, next) {
+    res.json({registerSuccess: true, redirectUrl: "/admin"});
+  });
   
   /**
    * POST /login
    * User Log-In
    */
   app.post('/login', passport.authenticate('local-login', { 
-    successRedirect: '/home',
     failureRedirect: '/' 
   }), function(req, res, next) {
-    res.json({loginSuccess: true});
+    var currPassport = req.session.passport;
+    console.log("Passpor during Login", currPassport);
+    User.findById(currPassport.user, function(err, user) {
+      if (err) { throw err; }
+      var redirectUrl = "/home";
+      switch(user.role){
+        case 2: redirectUrl = "openingBalance";break;
+        case 0: redirectUrl = "admin"; break;
+        default: break;
+      }
+      res.json({loginSuccess: true, redirectUrl: redirectUrl});
+    });
   });
 
   /**

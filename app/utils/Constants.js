@@ -2,6 +2,7 @@ const sideBarList = [{
     url: "/home",
     title1: "Home",
     title2: "Masters",
+    allowedRoles: [1],
     subSectionList: [{
         url: "/profile",
         title1: "Liscencee Profile",
@@ -35,6 +36,7 @@ const sideBarList = [{
     url: "/openingBalance",
     title1: "Opening Balance",
     title2: "Opening Balance",
+    allowedRoles: [1,2],
     subSectionList: [{
         url: "/flavourDetails",
         title1: "Flavour Details",
@@ -76,42 +78,52 @@ const sideBarList = [{
     url: "/register1Summary",
     title1: "Register1",
     title2: "Grape/Fruit Receipt Transactions",
+    allowedRoles: [1,2]
 }, {
     url: "/register2Summary",
     title1: "Register2",
     title2: "Juice Processing",
+    allowedRoles: [1,2]
 }, {
     url: "/register3Summary",
     title1: "Register3",
     title2: "Fermentation",
+    allowedRoles: [1,2]
 }, {
     url: "/register4Summary",
     title1: "Register4",
     title2: "Fortification",
+    allowedRoles: [1,2]
 }, {
     url: "/register5Summary",
     title1: "Register5",
     title2: "Bulk Transfer",
+    allowedRoles: [1,2]
 }, {
     url: "/register6Summary",
     title1: "Register6",
     title2: "Bottling",
+    allowedRoles: [1,2]
 }, {
     url: "/register7Summary",
     title1: "Register7",
     title2: "Tirage/Disgorging",
+    allowedRoles: [1,2]
 }, {
     url: "/register8Summary",
     title1: "Register8",
     title2: "Labelling",
+    allowedRoles: [1,2]
 }, {
     url: "/register9Summary",
     title1: "Register9",
     title2: "Finished Goods/Dispatch",
+    allowedRoles: [1,2]
 }, {
     url: "/admin",
     title1: "Admin",
     title2: "Admin",
+    allowedRoles: [0]
 }]
 
 

@@ -31,21 +31,18 @@ class Navbar extends React.Component {
 
     componentDidUpdate() {
         console.log(this.viewName, "componentDidUpdate");
-        let currState = this.state;
-        if (!currState || (currState && !currState.currUser)) {
-            getUserDetails(this);
-        }
     }
 
     render() {
         let thisVar = this;
         let currState = thisVar.state;
+        let currUser = thisVar.props.currUser;
         return (
             <nav className='navbar navbar-static-top'>
                 <div id='navbar'>
                     <ul className='nav list-header'>
                         <li className="login-links">
-                            {(currState && currState.currUser) ?
+                            {currUser ?
                                 <div>
                                     <div className="pull-left text-left">
                                         <div>
@@ -58,7 +55,7 @@ class Navbar extends React.Component {
                                         </div>
                                     </div>
                                     <div className="text-right pull-right">
-                                        <strong className="text-size-16">Hello, {currState.currUser.username}</strong>
+                                        <strong className="text-size-16">Hello, {currUser.username}</strong>
                                         <br />
                                         <span className="text-size-16">
                                             <a href="#" onClick={this.logoutUser}>Logout</a> | <a href="#" onClick={this.changePassword}>Change Password</a>

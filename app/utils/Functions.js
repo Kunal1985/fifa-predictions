@@ -1,4 +1,5 @@
 import rp from 'request-promise';
+import { sideBarList } from './Constants';
 
 exports.authenticateUser = function (values, currObj) {
   var actionType = currObj.state.submitType.toLowerCase();
@@ -10,8 +11,12 @@ exports.authenticateUser = function (values, currObj) {
   };
   return rp(options)
     .then(function (body) {
-      console.log("SUCCESS during", actionType);
-      currObj.props.history.push("/home");
+      console.log("SUCCESS during", actionType, body);
+      let redirectUrl = body.redirectUrl;
+      if(redirectUrl)
+        currObj.props.history.push(redirectUrl);
+      else
+        currObj.props.history.push("/admin");
       return body;
     })
     .catch(function (err) {
@@ -42,6 +47,10 @@ exports.logoutUser = function (currObj) {
     });
 }
 
+exports.getUserDetailsRP = function (currObj) {
+  return rp("http://localhost:3000/userDetails");
+}
+
 exports.getUserDetails = function (currObj) {
   return rp("http://localhost:3000/userDetails")
     .then(function (body) {
@@ -51,7 +60,6 @@ exports.getUserDetails = function (currObj) {
       return body;
     })
     .catch(function (err) {
-      // console.warn("Error", err);
       return null;
     });
 }
@@ -214,6 +222,11 @@ exports.upsertRecord = function (data, thisVar, modelName) {
       console.log("Error", err);
       return null;
     });
+}
+
+exports.getSideBarList = function(currUser){
+  console.log("getSideBarList", currUser);
+  return sideBarList.filter(u => currUser ? (u.allowedRoles.indexOf(currUser.role) != -1) : false);
 }
 
 exports.validateForm = function (values, modelName) {

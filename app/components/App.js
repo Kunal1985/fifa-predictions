@@ -3,6 +3,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import Sidebar from './Sidebar';
 import Login from './Login';
+import { getUserDetailsRP } from '../utils/Functions';
 
 class App extends React.Component {
 
@@ -38,12 +39,38 @@ class App extends React.Component {
     document.addEventListener('click', this._handleDocumentClick, false);
   }
 
+  componentWillMount () {
+    console.log("AppJS componentWillMount");
+  }
+
   /**
    * Remove event listener
    */
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateDimensions.bind(this));
     document.removeEventListener('click', this._handleDocumentClick, false);
+  }
+
+  componentDidUpdate() {
+    let currObj = this;
+    let currState = currObj.state;
+    getUserDetailsRP(currObj).then(function (body) {
+      if(!currState || (currState && !currState.currUser))
+        currObj.setState({
+          currUser: JSON.parse(body)
+        });
+      return body;  
+    })
+    .catch(function (err) {
+      let currState = currObj.state;
+      if(currState && currState.currUser)
+        currObj.setState({
+          currUser: null
+        });
+      return null;  
+    });
+    let currUser = currState && currState.currUser ? currState.currUser : null;
+    console.log("AppJS componentDidUpdate", currUser);
   }
 
   _handleDocumentClick(e) {
@@ -61,11 +88,13 @@ class App extends React.Component {
   }
 
   render() {
+    let currState = this.state;
     let pathname = this.props.location.pathname;
-    let isMobile = this.state.width < 479;
+    let isMobile = currState.width < 479;
+    let currUser = currState && currState.currUser ? currState.currUser : null;
     return (
       <div ref="root">
-        <Navbar history={this.props.history} />
+        <Navbar history={this.props.history} currUser={currUser}/>
         {(pathname == "/") ?
           <div className="row">
             {this.props.children}
@@ -75,7 +104,7 @@ class App extends React.Component {
             {(isMobile) ? <div className="hambclicker" onClick={ this._menuToggle }><i className="fa fa-bars fa-2x"></i></div> : <div></div>}
             <div className={"col-lg-3 col-md-3 col-sm-12 " + (this.state.isOpen ? 'is-open' : 'is-close')}>
               <div className="left-section">
-                <Sidebar history={this.props.history} />
+                <Sidebar history={this.props.history} currUser={currUser} />
               </div>
             </div>
             <div className="col-lg-9 col-md-9 col-sm-12">

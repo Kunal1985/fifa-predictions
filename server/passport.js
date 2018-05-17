@@ -38,12 +38,12 @@ module.exports = function(passport) {
   
               // if there is no user with that username
               // create the user
-              var newUser            = new User();
+              var newUser = new User();
   
               // set the user's local credentials
-              newUser.username    = username;
+              newUser.username = username;
               newUser.password = newUser.generateHash(password);
-  
+              newUser.role = 0;
               // save the user
               newUser.save(function(err) {
                   if (err)
