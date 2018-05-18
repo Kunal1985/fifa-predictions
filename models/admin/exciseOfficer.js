@@ -7,7 +7,8 @@ var exciseOfficerSchema = mongoose.Schema({
     officeName: String,
     post: String,
     email: String,
-    telephoneNumber: Number
+    telephoneNumber: Number,
+    officerType: Number
 });
 
 exciseOfficerSchema.pre('save', function (next) {

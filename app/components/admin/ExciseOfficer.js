@@ -79,6 +79,14 @@ class exciseOfficer extends React.Component {
                                             <div className="row">
                                                 <div className="col-lg-4 col-md-4 col-sm-12">
                                                     <div className="form-group">
+                                                        <label>Email*</label>
+                                                        <Text field='email' placeholder='Email' className="form-control"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-lg-4 col-md-4 col-sm-12">
+                                                    <div className="form-group">
                                                         <label>Name*</label>
                                                         <Text field='name' placeholder='Name' className="form-control"/>
                                                     </div>
@@ -99,15 +107,18 @@ class exciseOfficer extends React.Component {
                                             <div className="row">
                                                 <div className="col-lg-4 col-md-4 col-sm-12">
                                                     <div className="form-group">
-                                                        <label>Email*</label>
-                                                        <Text field='email' placeholder='Email' className="form-control"/>
-                                                    </div>
-                                                </div>
-                                                <div className="col-lg-4 col-md-4 col-sm-12">
-                                                    <div className="form-group">
                                                         <label>Telephone Number*</label>
                                                         <Text field='telephoneNumber' placeholder='Telephone Number' className="form-control"/>
                                                     </div>
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <div className="form-group">
+                                                    <RadioGroup field="officerType">
+                                                        <label>Officer Type</label>
+                                                        <div><Radio value="1" /><label>Winery Excise Officer</label></div>
+                                                        <div><Radio value="2" /><label>Other Excise Officer</label></div>
+                                                    </RadioGroup>
                                                 </div>
                                             </div>
                                             <div className="row">
