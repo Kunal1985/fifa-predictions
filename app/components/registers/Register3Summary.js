@@ -3,7 +3,8 @@ import { Link } from 'react-router';
 import { getAllRecords } from '../../utils/Functions';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
-import { Table } from 'react-bootstrap';
+import ReactTable from "react-table";
+import matchSorter from 'match-sorter';
 
 class Register3Summary extends Authentication {
   constructor(props) {
@@ -49,6 +50,56 @@ class Register3Summary extends Authentication {
     let thisVar = this; 
     let currState = thisVar.state;
     let currRecords = currState ? currState.records : null;
+
+    const columns = [{
+      Header: 'Edit', // String-based value accessors!
+      accessor: '_id',
+      Cell: row => (
+        <span onClick={ () => thisVar.redirectToEdit(row.value) }><i className="fa fa-edit"></i>
+        </span>
+      )
+    },{
+      Header: 'Tank',
+      accessor: 'tankNumber', // String-based value accessors!
+      filterMethod: (filter, rows) =>
+        matchSorter(rows, filter.value, { keys: ["tankNumber"] }),
+      filterAll: true
+    }, {
+      id: 'openingBalance', // Required because our accessor is not a string
+      Header: 'Opening Balance',
+      accessor: d => d.openingBalance, // Custom value accessors!
+      filterMethod: (filter, rows) =>
+        matchSorter(rows, filter.value, { keys: ["openingBalance"] }),
+      filterAll: true
+    }, {
+      id: 'baseWineObtained', // Required because our accessor is not a string
+      Header: 'Base Wine Obtained',
+      accessor: d => d.baseWineObtained, // Custom value accessors!
+      filterMethod: (filter, rows) =>
+        matchSorter(rows, filter.value, { keys: ["baseWineObtained"] }),
+      filterAll: true
+    }, {
+      id: 'rackingLoss', // Required because our accessor is not a string
+      Header: 'Racking Loss',
+      accessor: d => d.rackingLoss, // Custom value accessors!
+      filterMethod: (filter, rows) =>
+        matchSorter(rows, filter.value, { keys: ["rackingLoss"] }),
+      filterAll: true
+    }, {
+      Header: 'Verify',
+      accessor: 'verified', // String-based value accessors!
+      Cell: row => (
+        <span style={{
+          color: row.value == true ? '#008000'
+            : '#FF0000'
+        }}>{
+          row.value == true ? 'Verified'
+          : 'Unverified'
+        }
+        </span>
+      )
+    }]
+
     return (
       <div className="container">
         <div className="register-heading">Fermentation</div>
@@ -65,30 +116,16 @@ class Register3Summary extends Authentication {
           </div>
         </div>
         <div>
-          <Table bordered hover responsive>
-            <thead>
-              <tr>
-                <th>Edit</th>
-                <th>Tank</th>
-                <th>Opening Balance</th>
-                <th>Base Wine obtained</th>
-                <th>Racking Loss</th>
-                <th>Verify</th>
-              </tr>
-            </thead>
-            <tbody>
-              { currRecords ? currRecords.map((currRecord, index) => (
-                <tr key={ currRecord._id }>
-                  <td className="text-center" onClick={ () => thisVar.redirectToEdit(currRecord._id) }><i className="fa fa-edit"></i></td>
-                  <td>{ currRecord.tankNumber }</td>
-                  <td>{ currRecord.openingBalance }</td>
-                  <td>{ currRecord.baseWineObtained }</td>
-                  <td>{ currRecord.rackingLoss }</td>
-                  <td>{ currRecord.verified ? <span className="verified">Verified</span> : <span className="unverified">Unverified</span> }</td>
-                </tr>
-              )) : "" }
-            </tbody>
-          </Table>
+          { currRecords ? 
+          <ReactTable
+            data={currRecords}
+            filterable
+            defaultFilterMethod={(filter, row) =>
+              String(row[filter.id]) === filter.value}
+            columns={columns}
+            defaultPageSize={10}
+            className="-striped -highlight"
+          /> : ""}
         </div>
       </div>
     );

@@ -4,7 +4,8 @@ import { getAllRecords } from '../../utils/Functions';
 import rp from 'request-promise';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
-import { Table } from 'react-bootstrap';
+import ReactTable from "react-table";
+import matchSorter from 'match-sorter'
 
 class Register2Summary extends Authentication {
   constructor(props) {
@@ -50,6 +51,56 @@ class Register2Summary extends Authentication {
     let thisVar = this;
     let currState = thisVar.state;
     let currRecords = currState ? currState.records : null;
+
+    const columns = [{
+      Header: 'Edit', // String-based value accessors!
+      accessor: '_id',
+      Cell: row => (
+        <span onClick={ () => thisVar.redirectToEdit(row.value) }><i className="fa fa-edit"></i>
+        </span>
+      )
+    },{
+      Header: 'Grape Variety',
+      accessor: 'grapeVariety', // String-based value accessors!
+      filterMethod: (filter, rows) =>
+        matchSorter(rows, filter.value, { keys: ["grapeVariety"] }),
+      filterAll: true
+    }, {
+      id: 'quantity', // Required because our accessor is not a string
+      Header: 'Quantity',
+      accessor: d => d.quantity, // Custom value accessors!
+      filterMethod: (filter, rows) =>
+        matchSorter(rows, filter.value, { keys: ["quantity"] }),
+      filterAll: true
+    }, {
+      id: 'juiceObtained', // Required because our accessor is not a string
+      Header: 'Juice Obtained',
+      accessor: d => d.juiceObtained, // Custom value accessors!
+      filterMethod: (filter, rows) =>
+        matchSorter(rows, filter.value, { keys: ["juiceObtained"] }),
+      filterAll: true
+    }, {
+      id: 'clarificationLoss', // Required because our accessor is not a string
+      Header: 'Clarification Losses',
+      accessor: d => d.clarificationLoss, // Custom value accessors!
+      filterMethod: (filter, rows) =>
+        matchSorter(rows, filter.value, { keys: ["clarificationLoss"] }),
+      filterAll: true
+    }, {
+      Header: 'Verify',
+      accessor: 'verified', // String-based value accessors!
+      Cell: row => (
+        <span style={{
+          color: row.value == true ? '#008000'
+            : '#FF0000'
+        }}>{
+          row.value == true ? 'Verified'
+          : 'Unverified'
+        }
+        </span>
+      )
+    }]
+
     return (
       <div className="container">
         <div className="register-heading">Crushing/Juice Processing</div>
@@ -66,30 +117,16 @@ class Register2Summary extends Authentication {
           </div>
         </div>
         <div>
-          <Table bordered hover responsive>
-            <thead>
-              <tr>
-                <th>Edit</th>
-                <th>Fruit/Grape Variety</th>
-                <th>Quantity</th>
-                <th>Juice Obtained</th>
-                <th>Clarification Losses</th>
-                <th>Verify</th>
-              </tr>
-            </thead>
-            <tbody>
-              { currRecords ? currRecords.map((currRecord, index) => (
-                <tr key={ currRecord._id }>
-                  <td className="text-center" onClick={ () => thisVar.redirectToEdit(currRecord._id) }><i className="fa fa-edit"></i></td>
-                  <td>{ currRecord.grapeVariety }</td>
-                  <td>{ currRecord.quantity }</td>
-                  <td>{ currRecord.juiceObtained }</td>
-                  <td>{ currRecord.clarificationLoss }</td>
-                  <td>{ currRecord.verified ? <span className="verified">Verified</span> : <span className="unverified">Unverified</span> }</td>
-                </tr>
-              )) : "" }
-            </tbody>
-          </Table>
+        { currRecords ? 
+          <ReactTable
+            data={currRecords}
+            filterable
+            defaultFilterMethod={(filter, row) =>
+              String(row[filter.id]) === filter.value}
+            columns={columns}
+            defaultPageSize={10}
+            className="-striped -highlight"
+          /> : ""}
         </div>
       </div>
     );
