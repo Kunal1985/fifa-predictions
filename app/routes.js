@@ -64,70 +64,76 @@ import ChangePassword from './components/masters/ChangePassword';
 import RouteNotFound from './components/RouteNotFound';
 import Summary from './components/Summary';
 import Login from './components/Login';
+import { AdminRoute, User1Route, User12Route } from './auth-route-handle';
 
 export default (
 <Route component={ App }>
   <Route path='/' component={ Login } />
-  <Route path='/home' component={ Summary } />
-  <Route path='/admin' component={ Admin } />
-  <Route path='/register1' component={ Register1 } />
-  <Route path='/register2' component={ Register2 } />
-  <Route path='/register3' component={ Register3 } />
-  <Route path='/register4' component={ Register4 } />
-  <Route path='/register5' component={ Register5 } />
-  <Route path='/register6' component={ Register6 } />
-  <Route path='/register7' component={ Register7 } />
-  <Route path='/register8' component={ Register8 } />
-  <Route path='/register9' component={ Register9 } />
-  <Route path='/register1Summary' component={ Register1Summary } />
-  <Route path='/register2Summary' component={ Register2Summary } />
-  <Route path='/register3Summary' component={ Register3Summary } />
-  <Route path='/register4Summary' component={ Register4Summary } />
-  <Route path='/register5Summary' component={ Register5Summary } />
-  <Route path='/register6Summary' component={ Register6Summary } />
-  <Route path='/register7Summary' component={ Register7Summary } />
-  <Route path='/register8Summary' component={ Register8Summary } />
-  <Route path='/register9Summary' component={ Register9Summary } />
-  <Route path='/profile' component={ EditProfile } />
-  <Route path='/tankmaster' component={ TankMaster } />
-  <Route path='/createTank' component={ CreateTank } />
-  <Route path='/wineType' component={ WineType } />
-  <Route path='/createWineType' component={ CreateWineType } />
-  <Route path='/variety' component={ GrapeVariety } />
-  <Route path='/createGrapeVariety' component={ CreateGrapeVariety } />
-  <Route path='/brand' component={ Brand } />
-  <Route path='/createBrand' component={ CreateBrand } />
-  <Route path='/flavour' component={ Flavour } />
-  <Route path='/createFlavour' component={ CreateFlavour } />
-  <Route path='/spirit' component={ Spirit } />
-  <Route path='/createSpirit' component={ CreateSpirit } />
-  <Route path='/openingBalance' component={ OpeningBalance } />
-  <Route path='/flavourDetails' component={ FlavourOpeningEntry } />
-  <Route path='/createFlavourOpening' component={ CreateFlavourOpeningEntry } />
-  <Route path='/spiritDetails' component={ SpiritOpeningEntry } />
-  <Route path='/createSpiritOpening' component={ CreateSpiritOpeningEntry } />
-  <Route path='/grapesDetails' component={ GrapesOpeningEntry } />
-  <Route path='/createGrapesOpening' component={ CreateGrapesOpeningEntry } />
-  <Route path='/crushedJuiceDetails' component={ CrushedJuiceOpeningEntry } />
-  <Route path='/createCrushedJuiceOpening' component={ CreateCrushedJuiceOpeningEntry } />
-  <Route path='/fermentedWineDetails' component={ FermentedWineOpeningEntry } />
-  <Route path='/createFermentedWineOpening' component={ CreateFermentedWineOpeningEntry } />
-  <Route path='/bottledWineDetails' component={ BottledWineOpeningEntry } />
-  <Route path='/createBottledWineOpening' component={ CreateBottledWineOpeningEntry } />
-  <Route path='/labelledBottleDetails' component={ LabelledBottleOpeningEntry } />
-  <Route path='/createLabelledBottleOpening' component={ CreateLabelledBottleOpeningEntry } />
-  <Route path='/finishedGoodsDetails' component={ FinishedGoodsOpeningEntry } />
-  <Route path='/createFinishedGoodsOpening' component={ CreateFinishedGoodsOpeningEntry } />
-  <Route path='/wineryUser' component={ WineryUser } />
-  <Route path='/exciseOfficer' component={ ExciseOfficer } />
-  <Route path='/changePassword' component={ ChangePassword } />
-  <Route path='/LiscenseeProfile' component={ LiscenseeProfile } />
-  <Route path='/Transactions' component={ Transactions } />
-  <Route path='/PendingRequests' component={ PendingRequests } />
-  <Route path='/MISReports' component={ MISReports } />
-  <Route path='/Masters' component={ Masters } />
-  <Route path='/Uploads' component={ Uploads } />
-  <Route path='/Utilities' component={ Utilities } />
+  
+  <Route path='/admin' component={ AdminRoute(Admin) } />
+
+  <Route path='/home' component={ User1Route(Summary) } />
+  <Route path='/profile' component={ User1Route(EditProfile) } />
+  <Route path='/tankmaster' component={ User1Route(TankMaster) } />
+  <Route path='/createTank' component={ User1Route(CreateTank) } />
+  <Route path='/wineType' component={ User1Route(WineType) } />
+  <Route path='/createWineType' component={ User1Route(CreateWineType) } />
+  <Route path='/variety' component={ User1Route(GrapeVariety) } />
+  <Route path='/createGrapeVariety' component={ User1Route(CreateGrapeVariety) } />
+  <Route path='/brand' component={ User1Route(Brand) } />
+  <Route path='/createBrand' component={ User1Route(CreateBrand) } />
+  <Route path='/flavour' component={ User1Route(Flavour) } />
+  <Route path='/createFlavour' component={ User1Route(CreateFlavour) } />
+  <Route path='/spirit' component={ User1Route(Spirit) } />
+  <Route path='/createSpirit' component={ User1Route(CreateSpirit) } />
+  
+  <Route path='/register1' component={ User12Route(Register1) } />
+  <Route path='/register2' component={ User12Route(Register2) } />
+  <Route path='/register3' component={ User12Route(Register3) } />
+  <Route path='/register4' component={ User12Route(Register4) } />
+  <Route path='/register5' component={ User12Route(Register5) } />
+  <Route path='/register6' component={ User12Route(Register6) } />
+  <Route path='/register7' component={ User12Route(Register7) } />
+  <Route path='/register8' component={ User12Route(Register8) } />
+  <Route path='/register9' component={ User12Route(Register9) } />
+  <Route path='/register1Summary' component={ User12Route(Register1Summary) } />
+  <Route path='/register2Summary' component={ User12Route(Register2Summary) } />
+  <Route path='/register3Summary' component={ User12Route(Register3Summary) } />
+  <Route path='/register4Summary' component={ User12Route(Register4Summary) } />
+  <Route path='/register5Summary' component={ User12Route(Register5Summary) } />
+  <Route path='/register6Summary' component={ User12Route(Register6Summary) } />
+  <Route path='/register7Summary' component={ User12Route(Register7Summary) } />
+  <Route path='/register8Summary' component={ User12Route(Register8Summary) } />
+  <Route path='/register9Summary' component={ User12Route(Register9Summary) } />
+  
+  <Route path='/openingBalance' component={ User12Route(OpeningBalance) } />
+  <Route path='/flavourDetails' component={ User12Route(FlavourOpeningEntry) } />
+  <Route path='/createFlavourOpening' component={ User12Route(CreateFlavourOpeningEntry) } />
+  <Route path='/spiritDetails' component={ User12Route(SpiritOpeningEntry) } />
+  <Route path='/createSpiritOpening' component={ User12Route(CreateSpiritOpeningEntry) } />
+  <Route path='/grapesDetails' component={ User12Route(GrapesOpeningEntry) } />
+  <Route path='/createGrapesOpening' component={ User12Route(CreateGrapesOpeningEntry) } />
+  <Route path='/crushedJuiceDetails' component={ User12Route(CrushedJuiceOpeningEntry) } />
+  <Route path='/createCrushedJuiceOpening' component={ User12Route(CreateCrushedJuiceOpeningEntry) } />
+  <Route path='/fermentedWineDetails' component={ User12Route(FermentedWineOpeningEntry) } />
+  <Route path='/createFermentedWineOpening' component={ User12Route(CreateFermentedWineOpeningEntry) } />
+  <Route path='/bottledWineDetails' component={ User12Route(BottledWineOpeningEntry) } />
+  <Route path='/createBottledWineOpening' component={ User12Route(CreateBottledWineOpeningEntry) } />
+  <Route path='/labelledBottleDetails' component={ User12Route(LabelledBottleOpeningEntry) } />
+  <Route path='/createLabelledBottleOpening' component={ User12Route(CreateLabelledBottleOpeningEntry) } />
+  <Route path='/finishedGoodsDetails' component={ User12Route(FinishedGoodsOpeningEntry) } />
+  <Route path='/createFinishedGoodsOpening' component={ User12Route(CreateFinishedGoodsOpeningEntry) } />
+  <Route path='/wineryUser' component={ User12Route(WineryUser) } />
+  <Route path='/exciseOfficer' component={ User12Route(ExciseOfficer) } />
+  <Route path='/changePassword' component={ User12Route(ChangePassword) } />
+  <Route path='/LiscenseeProfile' component={ User12Route(LiscenseeProfile) } />
+  <Route path='/Transactions' component={ User12Route(Transactions) } />
+  <Route path='/PendingRequests' component={ User12Route(PendingRequests) } />
+  <Route path='/MISReports' component={ User12Route(MISReports) } />
+  <Route path='/Masters' component={ User12Route(Masters) } />
+  <Route path='/Uploads' component={ User12Route(Uploads) } />
+  <Route path='/Utilities' component={ User12Route(Utilities) } />
+
   <Route path="*" component={ RouteNotFound } />
 </Route>
 );
