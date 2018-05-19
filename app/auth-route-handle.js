@@ -10,15 +10,23 @@ const Authorization = (allowedRoles) =>
       }
       
       componentWillMount(){
-        this.setState({
-          user: {
-            name: getCurrUserName(),
-            role: getCurrUserRole()
-          }
-        })
+        // let currState = this.state;
+        // if(!currState || (currState && !currState.user))
+        try{
+          this.setState({
+            user: {
+              name: getCurrUserName(),
+              role: getCurrUserRole()
+            }
+          })
+        } catch(err){
+          this.setState({trespass: true});
+        }
       }
 
       render() {
+        if(this.state.trespass)
+          return <WrappedComponent {...this.props} />
         const { role } = this.state.user
         if (allowedRoles.includes(role)) {
           return <WrappedComponent {...this.props} />
