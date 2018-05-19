@@ -1,11 +1,11 @@
-import {upsertRecord, getAllRecords, getRecordById} from '../../utils/functions';
+import {isLoggedIn, upsertRecord, getAllRecords, getRecordById} from '../../utils/functions';
 
 module.exports = function(app) {
   /**
    * POST /upsertTankMaster
    * Upsert TankMaster
    */
-  app.post('/upsertTankMaster', function(req, res, next) {
+  app.post('/upsertTankMaster', isLoggedIn, function(req, res, next) {
       upsertRecord(req, res, next, "TankMaster");
   });
   
@@ -13,7 +13,7 @@ module.exports = function(app) {
    * GET /getTankMaster
    * Get TankMaster
    */
-  app.get('/getTankMaster', function(req, res, next) {
+  app.get('/getTankMaster', isLoggedIn, function(req, res, next) {
       getAllRecords(req, res, next, "TankMaster");
   });
   
@@ -21,7 +21,7 @@ module.exports = function(app) {
    * GET /getTankMasterRecord
    * Get TankMaster Record
    */
-  app.post('/getTankMasterRecord', function(req, res, next) {
+  app.post('/getTankMasterRecord', isLoggedIn, function(req, res, next) {
       getRecordById(req, res, next, "TankMaster");
   });    
 }

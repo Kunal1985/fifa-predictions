@@ -1,11 +1,11 @@
-import {upsertRecord, getAllRecords, getRecordById} from '../../utils/functions';
+import {isLoggedIn, upsertRecord, getAllRecords, getRecordById} from '../../utils/functions';
 
 module.exports = function(app) {
   /**
    * POST /upsertSpiritMaster
    * Upsert SpiritMaster
    */
-  app.post('/upsertSpiritMaster', function(req, res, next) {
+  app.post('/upsertSpiritMaster', isLoggedIn, function(req, res, next) {
     upsertRecord(req, res, next, "SpiritMaster");
   });
 
@@ -13,7 +13,7 @@ module.exports = function(app) {
    * GET /getSpiritMaster
    * Get SpiritMaster
    */
-  app.get('/getSpiritMaster', function(req, res, next) {
+  app.get('/getSpiritMaster', isLoggedIn, function(req, res, next) {
     getAllRecords(req, res, next, "SpiritMaster");
   });
 
@@ -21,7 +21,7 @@ module.exports = function(app) {
    * GET /getSpiritMasterRecord
    * Get SpiritMaster Record
    */
-  app.post('/getSpiritMasterRecord', function(req, res, next) {
+  app.post('/getSpiritMasterRecord', isLoggedIn, function(req, res, next) {
     getRecordById(req, res, next, "SpiritMaster");
   });
 }

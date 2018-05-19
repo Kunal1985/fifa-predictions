@@ -1,11 +1,11 @@
-import {upsertRecord, getAllRecords, getRecordById} from '../utils/functions';
+import {isLoggedIn, upsertRecord, getAllRecords, getRecordById} from '../utils/functions';
 
 module.exports = function(app) {
   /**
   * POST /getStates
   * Get States by specified Query
   */
-  app.post('/getStatesByQuery', function(req, res, next) {
+  app.post('/getStatesByQuery', isLoggedIn, function(req, res, next) {
     getAllRecords(req, res, next, "States");
   });
 
@@ -13,7 +13,7 @@ module.exports = function(app) {
   * POST /getDistricts
   * Get Districts by specified Query
   */
-  app.post('/getDistrictsByQuery', function(req, res, next) {
+  app.post('/getDistrictsByQuery', isLoggedIn, function(req, res, next) {
     getAllRecords(req, res, next, "Districts", req.body.query);
   });
 
@@ -21,7 +21,7 @@ module.exports = function(app) {
   * POST /getSubDistricts
   * Get SubDistricts by specified Query
   */
-  app.post('/getSubDistrictsByQuery', function(req, res, next) {
+  app.post('/getSubDistrictsByQuery', isLoggedIn, function(req, res, next) {
     getAllRecords(req, res, next, "SubDistricts", req.body.query);
   });
 
@@ -29,7 +29,7 @@ module.exports = function(app) {
   * POST /getVillages
   * Get Villages by specified Query
   */
-  app.post('/getVillagesByQuery', function(req, res, next) {
+  app.post('/getVillagesByQuery', isLoggedIn, function(req, res, next) {
     getAllRecords(req, res, next, "Villages", req.body.query);
   });
 }

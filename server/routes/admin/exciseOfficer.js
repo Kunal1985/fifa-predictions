@@ -1,11 +1,11 @@
-import {upsertRecord, getAllRecords, getRecordById} from '../../utils/functions';
+import {isLoggedIn, upsertRecord, getAllRecords, getRecordById} from '../../utils/functions';
 
 module.exports = function(app) {
   /**
    * POST /upsertExciseOfficer
    * Upsert ExciseOfficer
    */
-  app.post('/upsertExciseOfficer', function(req, res, next) {
+  app.post('/upsertExciseOfficer', isLoggedIn, function(req, res, next) {
       upsertRecord(req, res, next, "ExciseOfficer");
     });
     
@@ -13,7 +13,7 @@ module.exports = function(app) {
      * GET /getExciseOfficer
      * Get ExciseOfficer
      */
-    app.get('/getExciseOfficer', function(req, res, next) {
+    app.get('/getExciseOfficer', isLoggedIn, function(req, res, next) {
       getAllRecords(req, res, next, "ExciseOfficer");
     });
     
@@ -21,7 +21,7 @@ module.exports = function(app) {
      * GET /getExciseOfficerRecord
      * Get ExciseOfficer Record
      */
-    app.post('/getExciseOfficerRecord', function(req, res, next) {
+    app.post('/getExciseOfficerRecord', isLoggedIn, function(req, res, next) {
       getRecordById(req, res, next, "ExciseOfficer");
     });
 }

@@ -41,6 +41,12 @@ var Villages = require('../../models/geography/villages');
 var WineryUser = require('../../models/admin/wineryUser');
 var ExciseOfficer = require('../../models/admin/exciseOfficer');
 
+
+module.exports.isLoggedIn = function(req, res, next) {
+  if (req.session.passport)
+    return next();
+  return next(new Error("Not Logged In!"));
+}
 /**
  * Method to fetch Record by ID for a model.
  * 

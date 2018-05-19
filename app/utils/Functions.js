@@ -1,6 +1,7 @@
 import rp from 'request-promise';
 import { sideBarList } from './Constants';
 import { browserHistory } from 'react-router';
+import { storeToken, removeToken, getByKey } from './TokenUtils';
 
 exports.authenticateUser = function (values, currObj) {
   var actionType = currObj.state.submitType.toLowerCase();
@@ -13,6 +14,7 @@ exports.authenticateUser = function (values, currObj) {
   return rp(options)
     .then(function (body) {
       console.log("SUCCESS during", actionType, body);
+      storeToken(body);
       let redirectUrl = body.redirectUrl;
       if(redirectUrl)
         browserHistory.push(redirectUrl);
@@ -36,6 +38,7 @@ exports.logoutUser = function (currObj) {
   return rp(options)
     .then(function (body) {
       console.log("Success Logout");
+      removeToken();
       browserHistory.push("/");
       currObj.setState({
         currUser: null
@@ -70,6 +73,9 @@ exports.getAllRecords = function (currObj, modelName) {
   var options = {
     method: 'GET',
     uri: `http://localhost:3000/get${modelName}`,
+    headers: {
+      'authorization': 'Bearer ' + getByKey("authToken")
+    },
     json: true
   };
   return rp(options)

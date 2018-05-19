@@ -4,7 +4,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import Sidebar from './Sidebar';
 import Login from './Login';
-import { getUserDetailsRP } from '../utils/Functions';
+import { getToken, getCurrUserName, getCurrUserRole } from '../utils/TokenUtils';
 
 class App extends React.Component {
 
@@ -53,24 +53,27 @@ class App extends React.Component {
   }
 
   componentDidUpdate() {
+    let currUser;
     let currObj = this;
     let currState = currObj.state;
-    getUserDetailsRP(currObj).then(function (body) {
-      if(!currState || (currState && !currState.currUser))
+    let tokenPresent = getToken();
+    if(tokenPresent){
+      if(!currState || (currState && !currState.currUser)){
         currObj.setState({
-          currUser: JSON.parse(body)
+          currUser: {
+            username: getCurrUserName(),
+            role: parseInt(getCurrUserRole())
+          }
         });
-      return body;  
-    })
-    .catch(function (err) {
-      let currState = currObj.state;
-      if(currState && currState.currUser)
+      }
+    } else{
+      currUser = currState && currState.currUser ? currState.currUser : null;
+      if(currUser)
         currObj.setState({
           currUser: null
         });
-      return null;  
-    });
-    let currUser = currState && currState.currUser ? currState.currUser : null;
+    }
+    currUser = currState && currState.currUser ? currState.currUser : null;
     console.log("AppJS componentDidUpdate", currUser);
   }
 

@@ -1,4 +1,5 @@
-var User = require('../../models/user');
+import User from '../../models/user';
+import { generateToken, cleanUser } from '../utils/jwtUtils';
 
 module.exports = function(app, passport) {
   /**
@@ -8,7 +9,10 @@ module.exports = function(app, passport) {
   app.post('/register', passport.authenticate('local-signup', {
     failureRedirect : '/'
   }), function(req, res, next) {
-    res.json({registerSuccess: true, redirectUrl: "/admin"});
+    var currPassport = req.session.passport;
+    console.log("Passport during Register", currPassport);
+    var jwtToken = generateToken(currPassport);
+    res.json({registerSuccess: true, redirectUrl: "/admin", currUser: cleanUser(currPassport), token: jwtToken});
   });
   
   /**
@@ -19,14 +23,15 @@ module.exports = function(app, passport) {
     failureRedirect: '/' 
   }), function(req, res, next) {
     var currPassport = req.session.passport;
-    console.log("Passport during Login", currPassport);
+    console.log("Passport during Login", currPassport);    
+    var jwtToken = generateToken(currPassport);
     var redirectUrl = "/home";
     switch(currPassport.user.role){
       case 2: redirectUrl = "openingBalance";break;
       case 0: redirectUrl = "admin"; break;
       default: break;
     }
-    res.json({loginSuccess: true, redirectUrl: redirectUrl});
+    res.json({loginSuccess: true, redirectUrl: redirectUrl, currUser: cleanUser(currPassport), token: jwtToken});
     // User.findById(currPassport.user, function(err, user) {
     //   if (err) { throw err; }
     //   var redirectUrl = "/home";

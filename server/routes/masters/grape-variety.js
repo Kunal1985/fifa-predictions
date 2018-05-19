@@ -1,11 +1,11 @@
-import {upsertRecord, getAllRecords, getRecordById} from '../../utils/functions';
+import {isLoggedIn, upsertRecord, getAllRecords, getRecordById} from '../../utils/functions';
 
 module.exports = function(app) {
   /**
    * POST /upsertGrapeVarietyMaster
    * Upsert GrapeVarietyMaster
    */
-  app.post('/upsertGrapeVarietyMaster', function(req, res, next) {
+  app.post('/upsertGrapeVarietyMaster', isLoggedIn, function(req, res, next) {
     upsertRecord(req, res, next, "GrapeVarietyMaster");
   });
 
@@ -13,7 +13,7 @@ module.exports = function(app) {
    * GET /getGrapeVarietyMaster
    * Get GrapeVarietyMaster
    */
-  app.get('/getGrapeVarietyMaster', function(req, res, next) {
+  app.get('/getGrapeVarietyMaster', isLoggedIn, function(req, res, next) {
     getAllRecords(req, res, next, "GrapeVarietyMaster");
   });
 
@@ -21,7 +21,7 @@ module.exports = function(app) {
    * GET /getGrapeVarietyMasterRecord
    * Get GrapeVarietyMaster Record
    */
-  app.post('/getGrapeVarietyMasterRecord', function(req, res, next) {
+  app.post('/getGrapeVarietyMasterRecord', isLoggedIn, function(req, res, next) {
     getRecordById(req, res, next, "GrapeVarietyMaster");
   });      
 }
