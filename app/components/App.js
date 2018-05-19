@@ -1,4 +1,5 @@
 import React from 'react';
+import { browserHistory } from 'react-router';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import Sidebar from './Sidebar';
@@ -94,7 +95,7 @@ class App extends React.Component {
     let currUser = currState && currState.currUser ? currState.currUser : null;
     return (
       <div ref="root">
-        <Navbar history={this.props.history} currUser={currUser}/>
+        <Navbar history={browserHistory} currUser={currUser}/>
         {(pathname == "/") ?
           <div className="row">
             {this.props.children}
@@ -104,7 +105,7 @@ class App extends React.Component {
             {(isMobile) ? <div className="hambclicker" onClick={ this._menuToggle }><i className="fa fa-bars fa-2x"></i></div> : <div></div>}
             <div className={"col-lg-3 col-md-3 col-sm-12 " + (this.state.isOpen ? 'is-open' : 'is-close')}>
               <div className="left-section">
-                <Sidebar history={this.props.history} currUser={currUser} />
+                <Sidebar history={browserHistory} currUser={currUser} />
               </div>
             </div>
             <div className="col-lg-9 col-md-9 col-sm-12">

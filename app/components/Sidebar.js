@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router';
+import {Link, browserHistory} from 'react-router';
 import { getSideBarList } from '../utils/Functions';
 
 class Sidebar extends React.Component {
@@ -12,7 +12,7 @@ class Sidebar extends React.Component {
   changeStep(e, item) {
       e.preventDefault();
       let currProps = this.props;
-      currProps.history.push(item.url);
+      browserHistory.push(item.url);
       //$(e.currentTarget).closest('.sidenav').find('.step-name-container').removeClass('active');
       //$(e.currentTarget).addClass('active');
   }

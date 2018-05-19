@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { getAllRecords } from '../../utils/Functions';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
@@ -17,12 +17,12 @@ class WineryUserSummary extends Authentication {
 
   redirectToCreate() {
     let currProps = this.props;
-    currProps.history.push("/wineryUser");
+    browserHistory.push("/wineryUser");
   }
 
   redirectToEdit(currId) {
     let currProps = this.props;
-    currProps.history.push({
+    browserHistory.push({
       pathname: "/wineryUser",
       state: {
         upsertAction: "update",
@@ -33,7 +33,7 @@ class WineryUserSummary extends Authentication {
 
   goBack() {
     let currProps = this.props;
-    currProps.history.goBack();
+    browserHistory.goBack();
   }
 
   componentDidMount(){

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { getAllRecords } from '../../utils/Functions';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
@@ -18,12 +18,12 @@ class Register6Summary extends Authentication {
 
   redirectToCreate() {
     let currProps = this.props;
-    currProps.history.push("/register6");
+    browserHistory.push("/register6");
   }
 
   redirectToEdit(currId) {
     let currProps = this.props;
-    currProps.history.push({
+    browserHistory.push({
       pathname: "/register6",
       state: {
         upsertAction: "update",
@@ -34,7 +34,7 @@ class Register6Summary extends Authentication {
 
   goBack() {
     let currProps = this.props;
-    currProps.history.goBack();
+    browserHistory.goBack();
   }
 
   componentDidMount(){

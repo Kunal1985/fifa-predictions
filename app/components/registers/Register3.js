@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { sideBarList, tankNumbers } from '../../utils/Constants';
 import { getCurrRecord, upsertRecord, validateForm, getRecordsByQuery } from '../../utils/Functions';
 import Authentication from '../Authentication';
@@ -16,7 +16,7 @@ class Register3 extends Authentication {
 
   goBack() {
     let currProps = this.props;
-    currProps.history.goBack();
+    browserHistory.goBack();
   }
 
   appendInput() {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { sideBarList, sizeInML, bottleSize, wineType, disgorgingTypeList } from '../../utils/Constants';
 import { getCurrRecord, upsertRecord, validateForm } from '../../utils/Functions';
 import Authentication from '../Authentication';
@@ -15,7 +15,7 @@ class Register7 extends Authentication {
 
   goBack() {
     let currProps = this.props;
-    currProps.history.goBack();
+    browserHistory.goBack();
   }
 
   updateValuesFromDB(disgorgingTypeInDB){

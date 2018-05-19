@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { sideBarList, searchType } from '../../utils/Constants';
 import { getAllRecords } from '../../utils/Functions';
 import Authentication from '../Authentication';
@@ -18,12 +18,12 @@ class TankMaster extends Authentication {
 
     redirectToCreate() {
         let currProps = this.props;
-        currProps.history.push("/createTank");
+        browserHistory.push("/createTank");
     }
 
     redirectToEdit(currId) {
       let currProps = this.props;
-      currProps.history.push({
+      browserHistory.push({
         pathname: "/createTank",
         state: {
           upsertAction: "update",
@@ -34,7 +34,7 @@ class TankMaster extends Authentication {
 
     goBack() {
       let currProps = this.props;
-      currProps.history.push("/home");
+      browserHistory.push("/home");
   }
 
   componentDidMount(){

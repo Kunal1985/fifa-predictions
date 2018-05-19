@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router';
+import {Link, browserHistory} from 'react-router';
 import { sideBarList } from '../utils/Constants';
 import Authentication from './Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
@@ -14,7 +14,7 @@ class Summary extends Authentication {
   changeStep(e, item) {
     e.preventDefault();
     let currProps = this.props;
-    currProps.history.push(item.url);
+    browserHistory.push(item.url);
 }
   render() {
     let subSectionList = this.sideBarList[0].subSectionList;

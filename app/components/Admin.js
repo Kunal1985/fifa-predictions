@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { sideBarList, grapeVariety } from '../utils/Constants';
 import Authentication from './Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
@@ -36,10 +36,10 @@ class Admin extends Authentication {
             Tab 1 content
             </Tab>
             <Tab eventKey={2} title="Create Winery User">
-                <WineryUserSummary history={this.props.history}/>
+                <WineryUserSummary history={browserHistory}/>
             </Tab>
             <Tab eventKey={4} title="Create Excise Officer">
-                <ExciseOfficerSummary history={this.props.history}/>
+                <ExciseOfficerSummary history={browserHistory}/>
             </Tab>
         </Tabs>
         </div>

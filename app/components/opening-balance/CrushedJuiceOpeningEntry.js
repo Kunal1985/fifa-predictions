@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { sideBarList, searchType } from '../../utils/Constants';
 import { getAllRecords } from '../../utils/Functions';
 import Authentication from '../Authentication';
@@ -19,12 +19,12 @@ class CrushedJuiceOpeningEntry extends Authentication {
 
     redirectToCreate() {
         let currProps = this.props;
-        currProps.history.push("/createCrushedJuiceOpening");
+        browserHistory.push("/createCrushedJuiceOpening");
     }
 
     redirectToEdit(currId) {
       let currProps = this.props;
-      currProps.history.push({
+      browserHistory.push({
         pathname: "/createCrushedJuiceOpening",
         state: {
           upsertAction: "update",
@@ -35,7 +35,7 @@ class CrushedJuiceOpeningEntry extends Authentication {
 
     goBack() {
         let currProps = this.props;
-        currProps.history.goBack();
+        browserHistory.goBack();
     }
 
     componentDidMount(){

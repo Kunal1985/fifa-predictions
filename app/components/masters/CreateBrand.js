@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { sideBarList } from '../../utils/Constants';
 import { getCurrRecord, upsertRecord, validateForm } from '../../utils/Functions';
 import Authentication from '../Authentication';
@@ -17,12 +17,12 @@ class createBrand extends Authentication {
 
     onCancel() {
         let currProps = this.props;
-        currProps.history.goBack()
+        browserHistory.goBack()
     }
 
     goBack() {
         let currProps = this.props;
-        currProps.history.goBack();
+        browserHistory.goBack();
     }
 
     componentDidMount(){

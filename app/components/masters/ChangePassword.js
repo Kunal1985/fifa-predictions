@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { sideBarList } from '../../utils/Constants';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
@@ -13,7 +13,7 @@ class ChangePassword extends Authentication {
 
     onCancel() {
         let currProps = this.props;
-        currProps.history.goBack()
+        browserHistory.goBack()
     }
 
     render() {

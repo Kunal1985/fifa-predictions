@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { getAllRecords } from '../../utils/Functions';
 import rp from 'request-promise';
 import Authentication from '../Authentication';
@@ -19,12 +19,12 @@ class Register2Summary extends Authentication {
 
   redirectToCreate() {
     let currProps = this.props;
-    currProps.history.push("/register2");
+    browserHistory.push("/register2");
   }
 
   redirectToEdit(currId) {
     let currProps = this.props;
-    currProps.history.push({
+    browserHistory.push({
       pathname: "/register2",
       state: {
         upsertAction: "update",
@@ -35,7 +35,7 @@ class Register2Summary extends Authentication {
 
   goBack() {
     let currProps = this.props;
-    currProps.history.goBack();
+    browserHistory.goBack();
   }
 
   componentDidMount(){

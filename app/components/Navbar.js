@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { logoutUser, getUserDetails } from '../utils/Functions';
 
 class Navbar extends React.Component {
@@ -13,12 +13,12 @@ class Navbar extends React.Component {
 
     editProfile() {
         let currProps = this.props;
-        currProps.history.push("/editProfile");
+        browserHistory.push("/editProfile");
     }
 
     changePassword() {
         let currProps = this.props;
-        currProps.history.push("/changePassword");
+        browserHistory.push("/changePassword");
     }
 
     logoutUser() {

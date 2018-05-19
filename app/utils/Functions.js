@@ -1,5 +1,6 @@
 import rp from 'request-promise';
 import { sideBarList } from './Constants';
+import { browserHistory } from 'react-router';
 
 exports.authenticateUser = function (values, currObj) {
   var actionType = currObj.state.submitType.toLowerCase();
@@ -14,9 +15,9 @@ exports.authenticateUser = function (values, currObj) {
       console.log("SUCCESS during", actionType, body);
       let redirectUrl = body.redirectUrl;
       if(redirectUrl)
-        currObj.props.history.push(redirectUrl);
+        browserHistory.push(redirectUrl);
       else
-        currObj.props.history.push("/admin");
+        browserHistory.push("/admin");
       return body;
     })
     .catch(function (err) {
@@ -35,7 +36,7 @@ exports.logoutUser = function (currObj) {
   return rp(options)
     .then(function (body) {
       console.log("Success Logout");
-      currProps.history.push("/");
+      browserHistory.push("/");
       currObj.setState({
         currUser: null
       });
