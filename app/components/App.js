@@ -106,12 +106,13 @@ class App extends React.Component {
            :
           <div className={"row " + (isMobile ? 'is-mobile' : 'is-desktop')}>
             {(isMobile) ? <div className="hambclicker" onClick={ this._menuToggle }><i className="fa fa-bars fa-2x"></i></div> : <div></div>}
+            {currUser && currUser.role != 0 ?
             <div className={"col-lg-3 col-md-3 col-sm-12 " + (this.state.isOpen ? 'is-open' : 'is-close')}>
               <div className="left-section">
                 <Sidebar history={browserHistory} currUser={currUser} />
               </div>
-            </div>
-            <div className="col-lg-9 col-md-9 col-sm-12">
+            </div> : ""}
+            <div className={"col-sm-12 " + (currUser && currUser.role != 0 ? "col-lg-9 col-md-9" : "col-lg-12 col-md-12")}>
               <div className="right-section">
                 {this.props.children}
               </div>

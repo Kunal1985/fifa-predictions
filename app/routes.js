@@ -71,6 +71,8 @@ export default (
   <Route path='/' component={ Login } />
   
   <Route path='/admin' component={ AdminRoute(Admin) } />
+  <Route path='/wineryUser' component={ AdminRoute(WineryUser) } />
+  <Route path='/exciseOfficer' component={ AdminRoute(ExciseOfficer) } />
 
   <Route path='/home' component={ User1Route(Summary) } />
   <Route path='/profile' component={ User1Route(EditProfile) } />
@@ -123,8 +125,6 @@ export default (
   <Route path='/createLabelledBottleOpening' component={ User12Route(CreateLabelledBottleOpeningEntry) } />
   <Route path='/finishedGoodsDetails' component={ User12Route(FinishedGoodsOpeningEntry) } />
   <Route path='/createFinishedGoodsOpening' component={ User12Route(CreateFinishedGoodsOpeningEntry) } />
-  <Route path='/wineryUser' component={ User12Route(WineryUser) } />
-  <Route path='/exciseOfficer' component={ User12Route(ExciseOfficer) } />
   <Route path='/changePassword' component={ User12Route(ChangePassword) } />
   <Route path='/LiscenseeProfile' component={ User12Route(LiscenseeProfile) } />
   <Route path='/Transactions' component={ User12Route(Transactions) } />

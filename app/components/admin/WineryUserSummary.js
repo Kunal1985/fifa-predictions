@@ -3,7 +3,8 @@ import { Link, browserHistory } from 'react-router';
 import { getAllRecords } from '../../utils/Functions';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
-import { Table } from 'react-bootstrap';
+import ReactTable from "react-table";
+import matchSorter from 'match-sorter';
 
 class WineryUserSummary extends Authentication {
   constructor(props) {
@@ -49,6 +50,40 @@ class WineryUserSummary extends Authentication {
     let thisVar = this; 
     let currState = thisVar.state;
     let currRecords = currState ? currState.records : null;
+
+    const columns = [{
+      Header: 'Edit', // String-based value accessors!
+      accessor: '_id',
+      Cell: row => (
+        <span onClick={ () => thisVar.redirectToEdit(row.value) }><i className="fa fa-edit"></i>
+        </span>
+      )
+    },{
+      Header: 'Name',
+      accessor: 'name', // String-based value accessors!
+      filterMethod: (filter, rows) =>
+        matchSorter(rows, filter.value, { keys: ["name"] }),
+      filterAll: true
+    }, {
+      Header: 'Liscence Number',
+      accessor: 'liscenceNumber', // String-based value accessors!
+      filterMethod: (filter, rows) =>
+        matchSorter(rows, filter.value, { keys: ["liscenceNumber"] }),
+      filterAll: true
+    }, {
+      Header: 'Authorized Officer',
+      accessor: 'authorizedOfficer', // String-based value accessors!
+      filterMethod: (filter, rows) =>
+        matchSorter(rows, filter.value, { keys: ["authorizedOfficer"] }),
+      filterAll: true
+    }, {
+      Header: 'District',
+      accessor: 'district', // String-based value accessors!
+      filterMethod: (filter, rows) =>
+        matchSorter(rows, filter.value, { keys: ["district"] }),
+      filterAll: true
+    }]
+
     return (
       <div className="container">
         <div className="register-heading">Winery Users</div>
@@ -65,34 +100,16 @@ class WineryUserSummary extends Authentication {
           </div>
         </div>
         <div>
-          <Table bordered hover responsive>
-            <thead>
-              <tr>
-                <th>Edit</th>
-                <th>Winery Name</th>
-                <th>Liscence Number</th>
-                <th>Authorized Officer</th>
-                <th>Address</th>
-              </tr>
-            </thead>
-            <tbody>
-              { currRecords ? currRecords.map((currRecord, index) => (
-                <tr key={ currRecord._id }>
-                  <td className="text-center" onClick={ () => thisVar.redirectToEdit(currRecord._id) }><i className="fa fa-edit"></i></td>
-                  <td>{ currRecord.name }</td>
-                  <td>
-                    { currRecord.liscenceNumber }
-                  </td>
-                  <td>
-                    { currRecord.authorizedOfficer }
-                  </td>
-                  <td>
-                    { currRecord.district }
-                  </td>
-                </tr>
-              )) : "" }
-            </tbody>
-          </Table>
+          { currRecords ? 
+          <ReactTable
+            data={currRecords}
+            filterable
+            defaultFilterMethod={(filter, row) =>
+              String(row[filter.id]) === filter.value}
+            columns={columns}
+            defaultPageSize={10}
+            className="-striped -highlight"
+        /> : ""}
         </div>
       </div>
     );

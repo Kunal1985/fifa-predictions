@@ -114,7 +114,7 @@ class exciseOfficer extends React.Component {
                                             </div>
                                             <div className="row">
                                                 <div className="form-group">
-                                                    <RadioGroup field="officerType">
+                                                    <RadioGroup field="officerType" value={currRecord ? currRecord.officerType : ""}>
                                                         <label>Officer Type</label>
                                                         <div><Radio value="1" /><label>Winery Excise Officer</label></div>
                                                         <div><Radio value="2" /><label>Other Excise Officer</label></div>
