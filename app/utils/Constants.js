@@ -221,14 +221,6 @@ const saleType = [{
     label: "Transferred to other Tank",
 }]
 
-const searchType = [{
-    id: 1,
-    name: "Number"
-}, {
-    id: 2,
-    name: "Type"
-}]
-
 const tankType = [{
     label: "SS Tank",
     value: "1"
@@ -305,6 +297,6 @@ const disgorgingTypeList = [{
 export { 
     sideBarList, grapeVariety, sizeInML, bottleSize, 
     wineType, licenseType, purchaseType, saleType, 
-    searchType, tankType, reg9TransferType, disgorgingTypeList,
+    tankType, reg9TransferType, disgorgingTypeList,
     bulkTransferOtherUnitType, labellingWineType, 
     labellingTransType, suppliers, tankNumbers, brandList };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, browserHistory } from 'react-router';
-import { sideBarList, searchType } from '../../utils/Constants';
+import { sideBarList } from '../../utils/Constants';
 import { getAllRecords } from '../../utils/Functions';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
@@ -71,29 +71,6 @@ class WineType extends Authentication {
                                 <div className="row">
                                   <div className="col-lg-12 col-md-12 col-sm-12">
                                     <div className="search-section">
-                                      <div>Search By</div>
-                                      <div>
-                                        <select className="form-control">
-                                          { searchType.map(searchBy => {
-                                                return <option key={ searchBy.id } value={ searchBy.id }>
-                                                         { searchBy.name }
-                                                       </option>;
-                                            }) }
-                                        </select>
-                                      </div>
-                                      <div>
-                                        <Text field='searchName' placeholder='Search' className="form-control" />
-                                      </div>
-                                      <div>
-                                        <button type="button" className="btn btn-default" type='submit'>
-                                          Search
-                                        </button>
-                                      </div>
-                                      <div>
-                                        <button type="button" className="btn btn-default" type='submit'>
-                                          Search All
-                                        </button>
-                                      </div>
                                       <div>
                                         <button type="button" className="btn btn-default" onClick={ this.redirectToCreate }>
                                           Add New

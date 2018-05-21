@@ -31,7 +31,7 @@ const Authorization = (allowedRoles) =>
         if (allowedRoles.includes(role)) {
           return <WrappedComponent {...this.props} />
         } else {
-          return <h1 className="danger">Uauthorized Access!</h1>
+          return <h1 className="danger">Unauthorized Access!</h1>
         }
       }
     }

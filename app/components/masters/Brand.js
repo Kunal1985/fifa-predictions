@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, browserHistory } from 'react-router';
-import { sideBarList, searchType } from '../../utils/Constants';
+import { sideBarList } from '../../utils/Constants';
 import { getAllRecords } from '../../utils/Functions';
 import rp from 'request-promise';
 import Authentication from '../Authentication';
@@ -54,7 +54,7 @@ class Brand extends Authentication {
         return (
             <div className="container">
               <div className="register-heading">Brand</div>
-              <div className="text-right"><a onClick={ thisVar.goBack }>Back</a></div>
+              <div className="text-right"><a onClick={ thisVar.goBack } type="button">Back</a></div>
               <Form onSubmit={ (values) => {
                                    console.log('s');
                                } } validate={ (values) => {
@@ -72,29 +72,6 @@ class Brand extends Authentication {
                                 <div className="row">
                                   <div className="col-lg-12 col-md-12 col-sm-12">
                                     <div className="search-section">
-                                      <div>Search By</div>
-                                      <div>
-                                        <select className="form-control">
-                                          { searchType.map(searchBy => {
-                                                return <option key={ searchBy.id } value={ searchBy.id }>
-                                                         { searchBy.name }
-                                                       </option>;
-                                            }) }
-                                        </select>
-                                      </div>
-                                      <div>
-                                        <Text field='searchName' placeholder='Search' className="form-control" />
-                                      </div>
-                                      <div>
-                                        <button type="button" className="btn btn-default" type='submit'>
-                                          Search
-                                        </button>
-                                      </div>
-                                      <div>
-                                        <button type="button" className="btn btn-default" type='submit'>
-                                          Search All
-                                        </button>
-                                      </div>
                                       <div>
                                         <button type="button" className="btn btn-default" onClick={ thisVar.redirectToCreate }>
                                           Add New
