@@ -5,9 +5,9 @@ var flavourMasterSchema = mongoose.Schema({
     name: String,
     desc: String,
     uom: Number,
-    isCommon: Boolean,
+    isCommon: String,
     brand: String,
-    isapproved: Boolean
+    isApproved: String
 });
 
 // create the model for users and expose it to our app

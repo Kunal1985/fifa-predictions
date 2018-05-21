@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link, browserHistory } from 'react-router';
-import { sideBarList } from '../../utils/Constants';
+import { sideBarList, tankType } from '../../utils/Constants';
 import { getAllRecords } from '../../utils/Functions';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
-import { Table } from 'react-bootstrap';
+import ReactTable from "react-table";
+import matchSorter from 'match-sorter';
 
 class TankMaster extends Authentication {
     constructor(props) {
@@ -50,6 +51,50 @@ class TankMaster extends Authentication {
       let thisVar = this;
       let currState = thisVar.state;
       let currRecords = currState ? currState.records : null;
+
+      const columns = [{
+        Header: 'Edit', // String-based value accessors!
+        accessor: '_id',
+        Cell: row => (
+          <span onClick={ () => thisVar.redirectToEdit(row.value) }><i className="fa fa-edit"></i>
+          </span>
+        )
+      },{
+        Header: 'Number',
+        accessor: 'number', // String-based value accessors!
+        filterMethod: (filter, rows) =>
+          matchSorter(rows, filter.value, { keys: ["number"] }),
+        filterAll: true
+      },{
+        Header: 'Type',
+        accessor: 'type', // String-based value accessors!
+        filterMethod: (filter, rows) =>
+          matchSorter(rows, filter.value, { keys: ["type"] }),
+        filterAll: true,
+        Cell: row => (
+          <span>{ row.value == '1' ? "SS Tank" : "Oak Wine Barrel Tank" }</span>
+        )
+      }, {
+        id: 'capacity', // Required because our accessor is not a string
+        Header: 'Capacity',
+        accessor: d => d.capacity, // Custom value accessors!
+        filterMethod: (filter, rows) =>
+          matchSorter(rows, filter.value, { keys: ["capacity"] }),
+        filterAll: true
+      }, {
+        Header: 'Guging Date',
+        accessor: 'gugingDate', // String-based value accessors!
+        filterMethod: (filter, rows) =>
+          matchSorter(rows, filter.value, { keys: ["gugingDate"] }),
+        filterAll: true
+      },{
+        Header: 'Installation Date',
+        accessor: 'installationDate', // String-based value accessors!
+        filterMethod: (filter, rows) =>
+          matchSorter(rows, filter.value, { keys: ["installationDate"] }),
+        filterAll: true
+      }]
+
         return (
             <div className="container">
               <div className="register-heading">Tank Master</div>
@@ -86,30 +131,16 @@ class TankMaster extends Authentication {
                   } }
               </Form>
               <div>
-                <Table bordered hover responsive>
-                  <thead>
-                    <tr>
-                      <th>Edit</th>
-                      <th>Number</th>
-                      <th>Type</th>
-                      <th>Capacity</th>
-                      <th>Guging Date</th>
-                      <th>Installation Date</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    { currRecords ? currRecords.map((currRecord, index) => (
-                      <tr key={ currRecord._id }>
-                        <td className="text-center" onClick={ () => this.redirectToEdit(currRecord._id) }><i className="fa fa-edit"></i></td>
-                        <td>{ currRecord.number }</td>
-                        <td>{ currRecord.type }</td>
-                        <td>{ currRecord.capacity }</td>
-                        <td>{ currRecord.gugingDate }</td>
-                        <td>{ currRecord.installationDate }</td>
-                      </tr>
-                      )) : "" }
-                  </tbody>
-                </Table>
+                { currRecords ? 
+                  <ReactTable
+                    data={currRecords}
+                    filterable
+                    defaultFilterMethod={(filter, row) =>
+                      String(row[filter.id]) === filter.value}
+                    columns={columns}
+                    defaultPageSize={10}
+                    className="-striped -highlight"
+                  /> : ""}
               </div>
             </div>
             );

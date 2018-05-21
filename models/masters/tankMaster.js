@@ -6,7 +6,8 @@ var tankMasterSchema = mongoose.Schema({
     type: String,
     capacity: Number,
     gugingDate: String,
-    installationDate: String
+    installationDate: String,
+    balance: Number
 });
 
 // create the model for users and expose it to our app

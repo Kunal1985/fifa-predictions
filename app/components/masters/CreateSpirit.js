@@ -73,7 +73,7 @@ class CreateSpirit extends Authentication {
                                     <div className="form-group">
                                       <label className="text-area-labels">
                                         Desc:
-                                        <textarea className="form-control" field="desc" />
+                                        <Textarea className="form-control" field="desc" />
                                       </label>
                                     </div>
                                   </div>

@@ -4,7 +4,8 @@ import { sideBarList } from '../../utils/Constants';
 import { getAllRecords } from '../../utils/Functions';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
-import { Table } from 'react-bootstrap';
+import ReactTable from "react-table";
+import matchSorter from 'match-sorter';
 
 class GrapeVariety extends Authentication {
     constructor(props) {
@@ -50,6 +51,22 @@ class GrapeVariety extends Authentication {
       let thisVar = this;
       let currState = thisVar.state;
       let currRecords = currState ? currState.records : null;
+
+      const columns = [{
+        Header: 'Edit', // String-based value accessors!
+        accessor: '_id',
+        Cell: row => (
+          <span onClick={ () => thisVar.redirectToEdit(row.value) }><i className="fa fa-edit"></i>
+          </span>
+        )
+      },{
+        Header: 'Name',
+        accessor: 'name', // String-based value accessors!
+        filterMethod: (filter, rows) =>
+          matchSorter(rows, filter.value, { keys: ["name"] }),
+        filterAll: true
+      }]
+
         return (
             <div className="container">
               <div className="register-heading">Variety of Grape/Fruit</div>
@@ -86,24 +103,16 @@ class GrapeVariety extends Authentication {
                   } }
               </Form>
               <div>
-                <Table bordered hover responsive>
-                  <thead>
-                    <tr>
-                      <th>Edit </th>
-                      <th>Date </th>
-                      <th>Name</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                  { currRecords ? currRecords.map((currRecord, index) => (
-                      <tr key={ currRecord._id }>
-                      <td className="text-center" onClick={ () => this.redirectToEdit(currRecord._id) }><i className="fa fa-edit"></i></td>
-                      <td>{ currRecord.date }</td>
-                      <td>{ currRecord.name }</td>
-                    </tr>
-                    )) : "" }
-                  </tbody>
-                </Table>;
+                { currRecords ? 
+                  <ReactTable
+                    data={currRecords}
+                    filterable
+                    defaultFilterMethod={(filter, row) =>
+                      String(row[filter.id]) === filter.value}
+                    columns={columns}
+                    defaultPageSize={10}
+                    className="-striped -highlight"
+                  /> : ""}
               </div>
             </div>
             );

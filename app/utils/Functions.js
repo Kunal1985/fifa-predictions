@@ -344,9 +344,10 @@ exports.validateForm = function (values, modelName) {
       case "FlavourMaster":
       validators = {
         name: !values.name ? 'Please Enter a Name' : undefined,
-        size: !values.size ? 'Please enter the size' : undefined,
         uom: !values.uom ? 'Please enter the UOM.' : undefined,
-        brand: !values.brand ? 'Please enter the Brand.' : undefined
+        isCommon: !values.isCommon ? 'Please select the is common' : undefined,
+        brand: !values.brand ? 'Please enter the Brand.' : undefined,
+        isApproved: !values.isApproved ? 'Please select the is approved' : undefined
       };
       break;
       case "GrapeVarietyMaster":

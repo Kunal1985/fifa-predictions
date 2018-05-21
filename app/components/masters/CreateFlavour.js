@@ -73,7 +73,7 @@ class CreateFlavour extends Authentication {
                                     <div className="form-group">
                                       <label className="text-area-labels">
                                         Desc:
-                                        <textarea className="form-control" field="desc"/>
+                                        <Textarea className="form-control" field="desc"/>
                                       </label>
                                     </div>
                                   </div>
@@ -83,7 +83,7 @@ class CreateFlavour extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>UOM</label>
-                                      <select className="form-control" field="uom" id="uom"></select>
+                                      <Text className="form-control" field="uom" id="uom"/>
                                     </div>
                                   </div>
                                 </div>
@@ -91,17 +91,11 @@ class CreateFlavour extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12"></div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
-                                      <label>Is Common</label>
-                                      <div className="radio">
-                                        <label>
-                                          <input type="radio" value="option1" checked={ true } /> Yes
-                                        </label>
-                                      </div>
-                                      <div className="radio">
-                                        <label>
-                                          <input type="radio" value="option2" /> No
-                                        </label>
-                                      </div>
+                                      <RadioGroup field="isCommon" value={currRecord ? currRecord.isCommon : ""}>
+                                        <label>Is Common</label>
+                                        <div><Radio value="yes" /><label>Yes</label></div>
+                                        <div><Radio value="no" /><label>No</label></div>
+                                      </RadioGroup>
                                     </div>
                                   </div>
                                 </div>
@@ -110,7 +104,7 @@ class CreateFlavour extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Brand</label>
-                                      <select className="form-control" field="brand" id="brand"></select>
+                                      <Text className="form-control" field="brand" id="brand"/>
                                     </div>
                                   </div>
                                 </div>
@@ -118,17 +112,11 @@ class CreateFlavour extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12"></div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
-                                      <label>Approved</label>
-                                      <div className="radio">
-                                        <label>
-                                          <input type="radio" value="option1" checked={ true } /> Yes
-                                        </label>
-                                      </div>
-                                      <div className="radio">
-                                        <label>
-                                          <input type="radio" value="option2" /> No
-                                        </label>
-                                      </div>
+                                      <RadioGroup field="isApproved" value={currRecord ? currRecord.isApproved : ""}>
+                                        <label>Approved</label>
+                                        <div><Radio value="yes" /><label>Yes</label></div>
+                                        <div><Radio value="no" /><label>No</label></div>
+                                      </RadioGroup>
                                     </div>
                                   </div>
                                 </div>
