@@ -10,11 +10,12 @@ var register6Schema = mongoose.Schema({
     brandName: String,
     bottleSize: String,
     bottleQty: Number,
-	qtyInLitres: Number,
-	bottlingLoss: Number,
-	closingBalance: Number,
+    qtyInLitres: Number,
+    bottlingLoss: Number,
+    closingBalance: Number,
     remarks: String,
-    verified: Boolean
+    verified: Boolean,
+    wineryId: String
 });
 
 // create the model for users and expose it to our app

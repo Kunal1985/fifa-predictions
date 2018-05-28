@@ -39,5 +39,6 @@ const Authorization = (allowedRoles) =>
 const AdminRoute = Authorization(['0']);
 const User1Route = Authorization(['1']);
 const User12Route = Authorization(['1', '2']);
+const User3Route = Authorization(['3']);
 
-export { AdminRoute, User1Route, User12Route };
+export { AdminRoute, User1Route, User12Route, User3Route };

@@ -7,7 +7,8 @@ var tankMasterSchema = mongoose.Schema({
     capacity: Number,
     gugingDate: String,
     installationDate: String,
-    balance: Number
+    balance: Number,
+    wineryId: String
 });
 
 // create the model for users and expose it to our app

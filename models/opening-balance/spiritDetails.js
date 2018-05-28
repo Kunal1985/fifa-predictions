@@ -8,7 +8,8 @@ var spiritDetailsSchema = mongoose.Schema({
     quantity: Number,
     strength: String,
     pl: String,
-    verified: Boolean
+    verified: Boolean,
+    wineryId: String
 });
 
 // create the model for users and expose it to our app

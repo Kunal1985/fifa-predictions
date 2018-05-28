@@ -7,7 +7,8 @@ var flavourMasterSchema = mongoose.Schema({
     uom: Number,
     isCommon: String,
     brand: String,
-    isApproved: String
+    isApproved: String,
+    wineryId: String
 });
 
 // create the model for users and expose it to our app

@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var wineTypeMasterSchema = mongoose.Schema({
     name: String,
     desc: String,
+    wineryId: String
 });
 
 // create the model for users and expose it to our app

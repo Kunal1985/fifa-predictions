@@ -8,7 +8,8 @@ var exciseOfficerSchema = mongoose.Schema({
     post: String,
     email: String,
     telephoneNumber: Number,
-    officerType: String
+    officerType: String,
+    wineryId: String
 });
 
 exciseOfficerSchema.pre('save', function (next) {
@@ -16,7 +17,12 @@ exciseOfficerSchema.pre('save', function (next) {
     var username = this.email;
     var newUser = new User();
     newUser.username = username;
-    newUser.role = 2;
+    if(this.officerType == '1') {
+        newUser.role = 2;
+    } else {
+        newUser.role = 3;
+    }
+    
     newUser.password = newUser.generateHash("abcd1234");
     User.findOne({ 'username' :  username }, function(err, user) {
         if (err)

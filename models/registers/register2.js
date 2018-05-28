@@ -9,7 +9,8 @@ var register2Schema = mongoose.Schema({
     clarificationLoss: String,
     tankNumber: String,
     remarks: String,
-    verified: Boolean
+    verified: Boolean,
+    wineryId: String
 });
 
 // create the model for users and expose it to our app

@@ -4,7 +4,8 @@ var mongoose = require('mongoose');
 var spiritMasterSchema = mongoose.Schema({
     name: String,
     desc: String,
-    brand: String
+    brand: String,
+    wineryId: String
 });
 
 // create the model for users and expose it to our app

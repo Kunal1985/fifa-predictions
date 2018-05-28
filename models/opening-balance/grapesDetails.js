@@ -5,7 +5,8 @@ var grapesDetailsSchema = mongoose.Schema({
     date: String,
     variety: String,
     quantity: Number,
-    verified: Boolean
+    verified: Boolean,
+    wineryId: String
 });
 
 // create the model for users and expose it to our app

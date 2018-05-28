@@ -11,7 +11,8 @@ var brandMasterSchema = mongoose.Schema({
     labelAppOrderNo: String,
     mrpApprovalDate: String,
     mrpEffectiveDate: String,
-    mrpChangeDate: String
+    mrpChangeDate: String,
+    wineryId: String
 });
 
 // create the model for users and expose it to our app

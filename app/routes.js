@@ -64,7 +64,7 @@ import ChangePassword from './components/masters/ChangePassword';
 import RouteNotFound from './components/RouteNotFound';
 import Summary from './components/Summary';
 import Login from './components/Login';
-import { AdminRoute, User1Route, User12Route } from './auth-route-handle';
+import { AdminRoute, User1Route, User12Route, User3Route } from './auth-route-handle';
 
 export default (
 <Route component={ App }>

@@ -6,7 +6,8 @@ var bottledSchema = mongoose.Schema({
     type: String,
     bottleSize: Number,
     quantity: Number,
-    verified: Boolean
+    verified: Boolean,
+    wineryId: String
 });
 
 // create the model for users and expose it to our app

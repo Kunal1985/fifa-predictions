@@ -29,8 +29,9 @@ var register5Schema = mongoose.Schema({
         specialFeePaid: Number,
         losses: Number
     },
-    remarks:String,
-    verified: Boolean
+    remarks: String,
+    verified: Boolean,
+    wineryId: String
 });
 
 // create the model for users and expose it to our app

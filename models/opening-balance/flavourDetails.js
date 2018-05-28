@@ -6,7 +6,8 @@ var flavourDetailsSchema = mongoose.Schema({
     tank: String,
     flavour: String,
     quantity: Number,
-    verified: Boolean
+    verified: Boolean,
+    wineryId: String
 });
 
 // create the model for users and expose it to our app
