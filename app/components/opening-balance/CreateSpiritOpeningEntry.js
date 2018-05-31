@@ -53,7 +53,7 @@ class CreateSpiritOpeningEntry extends Authentication {
                                       data._id = currState.currRecord._id;
                                     upsertRecord(data, thisVar, thisVar.modelName);
                                } } validate={ (values) => {
-                                return validateForm(values, thisVar.modelName);
+                                return validateForm(values, thisVar.modelName, tankList);
                                 } }>
                 { ({submitForm}) => {
                       let errorMessage = null;

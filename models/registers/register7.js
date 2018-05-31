@@ -5,7 +5,7 @@ var register7Schema = mongoose.Schema({
     date: String,
     disgorgingType: String,
     ownUnit: {
-        sizeInML: Number,
+        sizeInML: String,
         bottlesQty: Number
     },
     otherUnit: {

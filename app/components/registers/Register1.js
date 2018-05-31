@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, browserHistory } from 'react-router';
-import { grapeVariety, suppliers } from '../../utils/Constants';
+import { suppliers } from '../../utils/Constants';
 import { getCurrRecord, upsertRecord, validateForm, getRecordsByQuery } from '../../utils/Functions';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
@@ -23,6 +23,8 @@ class Register1 extends Authentication {
     componentDidMount() {
         console.log(this.viewName, "componentDidMount");
         getRecordsByQuery(this, "States");
+        getRecordsByQuery(this, "TankMaster");
+        getRecordsByQuery(this, "GrapeVarietyMaster");
         let queryParams = this.props.location.state;
         getCurrRecord(queryParams, this, this.modelName);
     }
@@ -43,45 +45,47 @@ class Register1 extends Authentication {
         let districtInDB = currRecord ? currRecord.district : null;
         let subDistrictInDB = currRecord ? currRecord.taluka : null;
         let villageInDB = currRecord ? currRecord.village : null;
+        let tankList = (currState && currState["tankmaster"]) ? currState["tankmaster"] : [];
+        let grapeVarietyList = (currState && currState["grapevarietymaster"]) ? currState["grapevarietymaster"] : [];
         return (
             <div className="container">
               <div className="register-heading">Grape/Fruit Receipt Transactions</div>
               <div className="text-right"><a onClick={ thisVar.goBack } type="button">Back</a></div>
               <Form defaultValues={ currRecord } onSubmit={ (values) => {
-                                                                let data = values;
-                                                                if (currState && currState.currRecord)
-                                                                    data._id = currState.currRecord._id;
-                                                                upsertRecord(data, thisVar, thisVar.modelName);
-                                                            } } validate={ (values) => {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 let currState = values.state;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 let currDistrict = values.district;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 let currSubDistrict = values.taluka;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 if (currState && currState.selectedState != currState) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     thisVar.setState({
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         selectedState: currState
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     });
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     getRecordsByQuery(this, "Districts", {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         stateCode: parseInt(currState)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     });
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 if (currState && currState.selectedDistrict != currDistrict) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     thisVar.setState({
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         selectedDistrict: currDistrict
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     });
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     getRecordsByQuery(this, "SubDistricts", {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         districtCode: parseInt(currDistrict)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     });
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 if (currState && currState.selectedSubDistrict != currSubDistrict) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     thisVar.setState({
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         selectedSubDistrict: currSubDistrict
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     });
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     getRecordsByQuery(this, "Villages", {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         subDistrictCode: parseInt(currSubDistrict)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     });
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 return validateForm(values, thisVar.modelName);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             } }>
+                          let data = values;
+                          if (currState && currState.currRecord)
+                              data._id = currState.currRecord._id;
+                          upsertRecord(data, thisVar, thisVar.modelName);
+                      } } validate={ (values) => {
+                      let currState = values.state;
+                      let currDistrict = values.district;
+                      let currSubDistrict = values.taluka;
+                      if (currState && currState.selectedState != currState) {
+                          thisVar.setState({
+                              selectedState: currState
+                          });
+                          getRecordsByQuery(this, "Districts", {
+                              stateCode: parseInt(currState)
+                          });
+                      }
+                      if (currState && currState.selectedDistrict != currDistrict) {
+                          thisVar.setState({
+                              selectedDistrict: currDistrict
+                          });
+                          getRecordsByQuery(this, "SubDistricts", {
+                              districtCode: parseInt(currDistrict)
+                        });
+                    }
+                    if (currState && currState.selectedSubDistrict != currSubDistrict) {
+                        thisVar.setState({
+                            selectedSubDistrict: currSubDistrict
+                        });
+                        getRecordsByQuery(this, "Villages", {
+                            subDistrictCode: parseInt(currSubDistrict)
+                        });
+                    }
+                    return validateForm(values, thisVar.modelName);
+                } }>
                 { ({submitForm}) => {
                       let errorMessage = null;
                       return (
@@ -149,13 +153,30 @@ class Register1 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Grape/Fruit Variety</label>
-                                      <Select className="form-control" field="grapeVariety" id="grapeVariety" options={ grapeVariety } />
+                                      <Select className="form-control" field="grapeVariety" id="grapeVariety" options={ grapeVarietyList } />
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Quantity of Grapes/Fruit Crushed in Kg.</label>
                                       <Text field='qtyCrushed' placeholder='KG' className="form-control" />
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <div className="form-label-headings">Destination 1-1C</div>
+                                  <div className="row">
+                                    <div className="col-lg-4 col-md-4 col-sm-12">
+                                      <div className="form-group">
+                                        <label>Tank</label>
+                                        <Select className="form-control" field="tank" id="tank" options={ tankList } />
+                                      </div>
+                                    </div>
+                                    <div className="col-lg-4 col-md-4 col-sm-12">
+                                      <div className="form-group">
+                                        <label>Press</label>
+                                          <Text field='press' placeholder='Press' className="form-control" />
+                                      </div>
                                     </div>
                                   </div>
                                 </div>

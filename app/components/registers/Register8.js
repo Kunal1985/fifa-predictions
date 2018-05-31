@@ -52,24 +52,24 @@ class Register8 extends Authentication {
               <div className="text-right"><a onClick={ thisVar.goBack } type="button">Back</a></div>
               <div className="container">
                 <Form defaultValues={ currRecord } onSubmit={ (values) => {
-                                                                  let data = values;
-                                                                  if (currState && currState.currRecord)
-                                                                      data._id = currState.currRecord._id;
-                                                                  console.log("ValuestoSend", data);
-                                                                  upsertRecord(data, thisVar, thisVar.modelName);
-                                                              } } validate={ (values) => {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   let currTransferType = values.transferType;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   if (currState && currState.selectedTransferType != currTransferType) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       thisVar.setState({
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           selectedTransferType: currTransferType
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       });
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       if (currTransferType)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           thisVar.setState({
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               transferType: parseInt(currTransferType)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           });
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   return validateForm(values, thisVar.modelName);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               } }>
+                        let data = values;
+                        if (currState && currState.currRecord)
+                            data._id = currState.currRecord._id;
+                        console.log("ValuestoSend", data);
+                        upsertRecord(data, thisVar, thisVar.modelName);
+                    } } validate={ (values) => {
+                      let currTransferType = values.transferType;
+                      if (currState && currState.selectedTransferType != currTransferType) {
+                          thisVar.setState({
+                              selectedTransferType: currTransferType
+                          });
+                          if (currTransferType)
+                              thisVar.setState({
+                                  transferType: parseInt(currTransferType)
+                              });
+                      }
+                      return validateForm(values, thisVar.modelName);
+                  } }>
                   { ({submitForm}) => {
                         let errorMessage = null;
                         return (
@@ -91,13 +91,13 @@ class Register8 extends Authentication {
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Size in ML</label>
-                                        <Text field='sizeinML' placeholder='Size in ML' className="form-control" />
+                                        <Text field='sizeInML' placeholder='Size in ML' className="form-control" />
                                       </div>
                                     </div>
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Number of Bottles</label>
-                                        <Text field='numberofBottles' type="number" placeholder='Number of Bottles' className="form-control" />
+                                        <Text field='noOfBottles' type="number" placeholder='Number of Bottles' className="form-control" />
                                       </div>
                                     </div>
                                   </div>
@@ -130,8 +130,8 @@ class Register8 extends Authentication {
                                       <div className="col-lg-4 col-md-4 col-sm-12">
                                         <div className="form-group">
                                           <label>Number of Bottles</label>
-                                          <Text field='bottlesReceived.numberofBottles' placeholder='Number of Bottles' className="form-control" />
-                                          <Text field='bottlesReceivedNumberOfBottles' type='hidden' className="form-control" />
+                                          <Text field='bottlesReceived.noOfBottles' placeholder='Number of Bottles' className="form-control" />
+                                          <Text field='bottlesReceivedNoOfBottles' type='hidden' className="form-control" />
                                         </div>
                                       </div>
                                     </div>

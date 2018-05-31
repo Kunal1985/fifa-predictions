@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, browserHistory } from 'react-router';
-import { purchaseType, saleType, licenseType, bulkTransferOtherUnitType, tankNumbers, wineType } from '../../utils/Constants';
+import { purchaseType, saleType, licenseType, bulkTransferOtherUnitType, tankNumbers } from '../../utils/Constants';
 import { getCurrRecord, upsertRecord, validateForm, getRecordsByQuery } from '../../utils/Functions';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
@@ -22,6 +22,7 @@ class Register5 extends Authentication {
     componentDidMount() {
         console.log(this.viewName, "componentDidMount");
         getRecordsByQuery(this, "TankMaster");
+        getRecordsByQuery(this, "WineTypeMaster");
         let queryParams = this.props.location.state;
         getCurrRecord(queryParams, this, this.modelName);
     }
@@ -57,39 +58,40 @@ class Register5 extends Authentication {
         let transferTypeInDB = currRecord ? currRecord.transferType : null;
         let bulkTransactionTypeInDB = (currRecord && currRecord.otherUnit) ? currRecord.otherUnit.bulkTransactionType : null;
         let currBulkOpeningValue = currState ? currState.bulkOpeningValue : null;
+        let wineVarietyList = (currState && currState["winetypemaster"]) ? currState["winetypemaster"] : [];
         return (
             <div className="container">
               <div className="register-heading">Bulk Transfer</div>
               <div className="text-right"><a onClick={ thisVar.goBack } type="button">Back</a></div>
               <div className="container">
                 <Form defaultValues={ currRecord } onSubmit={ (values) => {
-                                                                  let data = values;
-                                                                  if (currState && currState.currRecord)
-                                                                      data._id = currState.currRecord._id;
-                                                                  upsertRecord(data, thisVar, thisVar.modelName);
-                                                              } } validate={ (values) => {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             let currTransferType = values.transferType;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             if (currState && currState.selectedTransferType != currTransferType) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 thisVar.setState({
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     selectedTransferType: currTransferType
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 });
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 if (currTransferType)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     thisVar.setState({
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         bulkOpeningValue: parseInt(currTransferType)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     });
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             let currBulkTransactionType = values.otherUnit ? values.otherUnit.bulkTransactionType : null;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             if (currState && currState.selectedBulkTransactionType != currBulkTransactionType) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 thisVar.setState({
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     selectedBulkTransactionType: currBulkTransactionType
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 });
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 if (currBulkTransactionType)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     thisVar.setState({
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         bulkOtherUnitValue: parseInt(currBulkTransactionType)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     });
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             return validateForm(values, thisVar.modelName);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         } }>
+                      let data = values;
+                      if (currState && currState.currRecord)
+                          data._id = currState.currRecord._id;
+                      upsertRecord(data, thisVar, thisVar.modelName);
+                  } } validate={ (values) => {
+                      let currTransferType = values.transferType;
+                      if (currState && currState.selectedTransferType != currTransferType) {
+                          thisVar.setState({
+                              selectedTransferType: currTransferType
+                          });
+                          if (currTransferType)
+                              thisVar.setState({
+                                  bulkOpeningValue: parseInt(currTransferType)
+                              });
+                      }
+                      let currBulkTransactionType = values.otherUnit ? values.otherUnit.bulkTransactionType : null;
+                      if (currState && currState.selectedBulkTransactionType != currBulkTransactionType) {
+                          thisVar.setState({
+                              selectedBulkTransactionType: currBulkTransactionType
+                          });
+                          if (currBulkTransactionType)
+                              thisVar.setState({
+                                  bulkOtherUnitValue: parseInt(currBulkTransactionType)
+                              });
+                      }
+                      return validateForm(values, thisVar.modelName);
+                  } }>
                   { ({submitForm}) => {
                         let errorMessage = null;
                         return (
@@ -144,7 +146,7 @@ class Register5 extends Authentication {
                                           <div className="col-lg-4 col-md-4 col-sm-12">
                                             <div className="form-group">
                                               <label>Wine Variety</label>
-                                              <Select className="form-control" field="ownUnit.wineVariety" id="ownUnit.wineVariety" options={ wineType } />
+                                              <Select className="form-control" field="ownUnit.wineVariety" id="ownUnit.wineVariety" options={ wineVarietyList } />
                                               <Text field='ownUnitWineVariety' type='hidden' className="form-control" />
                                             </div>
                                           </div>
@@ -229,7 +231,7 @@ class Register5 extends Authentication {
                                               <div className="col-lg-4 col-md-4 col-sm-12">
                                                 <div className="form-group">
                                                   <label>Wine Variety</label>
-                                                  <Select className="form-control" field="otherUnit.wineVariety" id="otherUnit.wineVariety" options={ wineType } />
+                                                  <Select className="form-control" field="otherUnit.wineVariety" id="otherUnit.wineVariety" options={ wineVarietyList } />
                                                   <Text field='otherUnitWineVariety' type='hidden' className="form-control" />
                                                 </div>
                                               </div>

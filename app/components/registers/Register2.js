@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, browserHistory } from 'react-router';
-import { grapeVariety } from '../../utils/Constants';
 import { getCurrRecord, upsertRecord, validateForm, getRecordsByQuery } from '../../utils/Functions';
 import rp from 'request-promise';
 import Authentication from '../Authentication';
@@ -35,6 +34,7 @@ class Register2 extends Authentication {
     componentDidMount() {
         console.log(this.viewName, "componentDidMount");
         getRecordsByQuery(this, "TankMaster");
+        getRecordsByQuery(this, "GrapeVarietyMaster");
         let queryParams = this.props.location.state;
         getCurrRecord(queryParams, this, this.modelName);
     }
@@ -48,6 +48,7 @@ class Register2 extends Authentication {
         let currState = thisVar.state;
         let currRecord = currState ? currState.currRecord : null;
         let tankList = (currState && currState["tankmaster"]) ? currState["tankmaster"] : [];
+        let grapeVarietyList = (currState && currState["grapevarietymaster"]) ? currState["grapevarietymaster"] : [];
         return (
             <div className="container">
               <div className="register-heading">Crushing/Juice Processing</div>
@@ -76,7 +77,7 @@ class Register2 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Fruit/Grape Variety</label>
-                                      <Select className="form-control" field="grapeVariety" id="reg1GrapeVariety" options={ grapeVariety } />
+                                      <Select className="form-control" field="grapeVariety" id="grapeVariety" options={ grapeVarietyList } />
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">

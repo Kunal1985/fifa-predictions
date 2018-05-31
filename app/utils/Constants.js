@@ -31,6 +31,10 @@ const sideBarList = [{
         url: "/spirit",
         title1: "Spirit Master",
         title2: "Spirit Master",
+    }, {
+        url: "/vintage",
+        title1: "Vintage Master",
+        title2: "Vintage Master",
     }]
 }, {
     url: "/openingBalance",

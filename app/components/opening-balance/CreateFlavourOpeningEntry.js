@@ -25,36 +25,36 @@ class CreateFlavourOpeningEntry extends Authentication {
         browserHistory.goBack();
     }
 
-    componentDidMount(){
-      console.log(this.viewName, "componentDidMount");
-      getRecordsByQuery(this, "TankMaster");
-      getRecordsByQuery(this, "FlavourMaster");
-      let queryParams = this.props.location.state;
-      getCurrRecord(queryParams, this, this.modelName);
+    componentDidMount() {
+        console.log(this.viewName, "componentDidMount");
+        getRecordsByQuery(this, "TankMaster");
+        getRecordsByQuery(this, "FlavourMaster");
+        let queryParams = this.props.location.state;
+        getCurrRecord(queryParams, this, this.modelName);
     }
 
-    componentDidUpdate(){
-      console.log(this.viewName, "componentDidUpdate");
+    componentDidUpdate() {
+        console.log(this.viewName, "componentDidUpdate");
     }
 
     render() {
-      let thisVar = this;
-      let currState = thisVar.state;
-      let currRecord = currState ? currState.currRecord : null;
-      let tankList = (currState && currState["tankmaster"]) ? currState["tankmaster"] : [];
-      let flavourList = (currState && currState["flavourmaster"]) ? currState["flavourmaster"] : [];
-      return (
+        let thisVar = this;
+        let currState = thisVar.state;
+        let currRecord = currState ? currState.currRecord : null;
+        let tankList = (currState && currState["tankmaster"]) ? currState["tankmaster"] : [];
+        let flavourList = (currState && currState["flavourmaster"]) ? currState["flavourmaster"] : [];
+        return (
             <div className="container">
               <div className="register-heading">Flavour</div>
               <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
-              <Form defaultValues = {currRecord} onSubmit={ (values) => {
-                                   let data = values;
-                                   if(currState && currState.currRecord)
-                                     data._id = currState.currRecord._id;
-                                   upsertRecord(data, thisVar, thisVar.modelName);
-                               } } validate={ (values) => {
-                                return validateForm(values, thisVar.modelName);
-                                } }>
+              <Form defaultValues={ currRecord } onSubmit={ (values) => {
+                                                                let data = values;
+                                                                if (currState && currState.currRecord)
+                                                                    data._id = currState.currRecord._id;
+                                                                upsertRecord(data, thisVar, thisVar.modelName);
+                                                            } } validate={ (values) => {
+                                                                return validateForm(values, thisVar.modelName, tankList);
+                                                            } }>
                 { ({submitForm}) => {
                       let errorMessage = null;
                   
@@ -76,16 +76,16 @@ class CreateFlavourOpeningEntry extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Tank</label>
-                                      <Select className="form-control" field="tank" id="tank" options={ tankList }/>
+                                      <Select className="form-control" field="tank" id="tank" options={ tankList } />
                                     </div>
                                   </div>
                                 </div>
                                 <div className="row">
                                   <div className="col-lg-4 col-md-4 col-sm-12"></div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
-                                  <div className="form-group">
+                                    <div className="form-group">
                                       <label>Flavour</label>
-                                      <Select className="form-control" field="flavour" id="flavour" options={ flavourList }/>
+                                      <Select className="form-control" field="flavour" id="flavour" options={ flavourList } />
                                     </div>
                                   </div>
                                 </div>

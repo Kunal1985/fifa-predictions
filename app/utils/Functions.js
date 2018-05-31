@@ -2,6 +2,7 @@ import rp from 'request-promise';
 import { sideBarList } from './Constants';
 import { browserHistory } from 'react-router';
 import { storeToken, removeToken, getByKey } from './TokenUtils';
+import {_} from 'underscore';
 
 exports.authenticateUser = function (values, currObj) {
   var actionType = currObj.state.submitType.toLowerCase();
@@ -131,6 +132,7 @@ exports.getRecordsByQuery = function (currObj, modelName, query) {
         case "SpiritMaster": fieldName = "spiritmaster"; break;
         case "GrapeVarietyMaster": fieldName = "grapevarietymaster"; break;
         case "WineTypeMaster": fieldName = "winetypemaster"; break;
+        case "BrandMaster": fieldName = "brandmaster"; break;
         default: break;
       }
       stateChangeVar[modelName.toLowerCase()] = body.map(function (currRecord) {
@@ -138,7 +140,8 @@ exports.getRecordsByQuery = function (currObj, modelName, query) {
           case "TankMaster": return {
             label: currRecord.number,
             value: currRecord.number,
-            selected: true
+            selected: true,
+            balance: currRecord.balance
           }
             break;
           case "ExciseOfficer": return {
@@ -166,6 +169,12 @@ exports.getRecordsByQuery = function (currObj, modelName, query) {
           }
             break;
           case "WineTypeMaster": return {
+            label: currRecord.name,
+            value: currRecord.name,
+            selected: true
+          }
+            break;
+          case "BrandMaster": return {
             label: currRecord.name,
             value: currRecord.name,
             selected: true
@@ -236,7 +245,16 @@ exports.getSideBarList = function(currUser){
   return sideBarList.filter(u => currUser ? (u.allowedRoles.indexOf(currUser.role) != -1) : false);
 }
 
-exports.validateForm = function (values, modelName) {
+var checkForTankValidation = function(values, tankList) {
+  if(!values.quantity) {
+    return 'Please enter the quantity.'
+  } else if(values.quantity && values.tank && tankList && tankList.length > 0) {
+      var tankBalance = _.where(tankList, {value: values.tank});
+      return (values.quantity > tankBalance[0].balance) ? "Quantity greater than Tank Balance" : undefined;
+  }
+}
+
+exports.validateForm = function (values, modelName, tankList) {
   var validators = {};
   switch (modelName) {
     case "Register1":
@@ -379,14 +397,14 @@ exports.validateForm = function (values, modelName) {
         date: !values.date ? 'Please Select a Date' : undefined,
         tank: !values.tank ? 'Please Select a Tank' : undefined,
         grapeVariety: !values.grapeVariety ? 'Please select grape variety.' : undefined,
-        quantity: !values.quantity ? 'Please enter the quantity.' : undefined
+        quantity: checkForTankValidation(values, tankList)
       };
       break;
       case "FermentedDetails":
       validators = {
         date: !values.date ? 'Please Select a Date' : undefined,
         tank: !values.tank ? 'Please Select a Tank' : undefined,
-        quantity: !values.quantity ? 'Please enter the quantity.' : undefined
+        quantity: checkForTankValidation(values, tankList)
       };
       break;
       case "FinishedGoodsDetails":
@@ -402,7 +420,7 @@ exports.validateForm = function (values, modelName) {
         date: !values.date ? 'Please Select a Date' : undefined,
         tank: !values.tank ? 'Please Select a Tank' : undefined,
         flavour: !values.flavour ? 'Please select a flavour.' : undefined,
-        quantity: !values.quantity ? 'Please enter the quantity.' : undefined
+        quantity: checkForTankValidation(values, tankList)
       };
       break;
       case "GrapesDetails":
@@ -425,7 +443,7 @@ exports.validateForm = function (values, modelName) {
         date: !values.date ? 'Please Select a Date' : undefined,
         tankNumber: !values.tankNumber ? 'Please Select a Tank' : undefined,
         spiritType: !values.spiritType ? 'Please select Spirit Type.' : undefined,
-        quantity: !values.quantity ? 'Please enter the quantity.' : undefined,
+        quantity: checkForTankValidation(values, tankList),
         strength: !values.strength ? 'Please enter strength.' : undefined,
         pl: !values.pl ? 'Please enter PL.' : undefined
       };

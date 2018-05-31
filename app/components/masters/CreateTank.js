@@ -49,6 +49,7 @@ class CreateTank extends Authentication {
                   let data = values;
                   if(currState && currState.currRecord)
                     data._id = currState.currRecord._id;
+                    data.balance = data.capacity;
                   upsertRecord(data, thisVar, thisVar.modelName);
                   } 
                 }
@@ -96,6 +97,7 @@ class CreateTank extends Authentication {
                                     <div className="form-group">
                                       <label>Capacity</label>
                                       <Text field='capacity' placeholder='Capacity' className="form-control" />
+                                      <Text field='balance' placeholder='Capacity' type="hidden" className="form-control" />
                                     </div>
                                   </div>
                                 </div>

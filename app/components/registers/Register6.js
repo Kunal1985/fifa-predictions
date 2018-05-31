@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, browserHistory } from 'react-router';
-import { sideBarList, bottleSize, wineType, tankNumbers, brandList } from '../../utils/Constants';
+import { sideBarList, bottleSize } from '../../utils/Constants';
 import { getCurrRecord, upsertRecord, validateForm, getRecordsByQuery } from '../../utils/Functions';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
@@ -21,6 +21,8 @@ class Register6 extends Authentication {
     componentDidMount() {
         console.log(this.viewName, "componentDidMount");
         getRecordsByQuery(this, "TankMaster");
+        getRecordsByQuery(this, "WineTypeMaster");
+        getRecordsByQuery(this, "BrandMaster");
         let queryParams = this.props.location.state;
         getCurrRecord(queryParams, this, this.modelName);
     }
@@ -34,18 +36,20 @@ class Register6 extends Authentication {
         let currState = this.state;
         let currRecord = currState ? currState.currRecord : null;
         let tankList = (currState && currState["tankmaster"]) ? currState["tankmaster"] : [];
+        let wineList = (currState && currState["winetypemaster"]) ? currState["winetypemaster"] : [];
+        let brandList = (currState && currState["brandmaster"]) ? currState["brandmaster"] : [];
         return (
             <div className="container">
               <div className="register-heading">Bottling</div>
               <div className="text-right"><a onClick={ thisVar.goBack } type="button">Back</a></div>
               <Form defaultValues={ currRecord } onSubmit={ (values) => {
-                                                                let data = values;
-                                                                if (currState && currState.currRecord)
-                                                                    data._id = currState.currRecord._id;
-                                                                upsertRecord(data, thisVar, thisVar.modelName);
-                                                            } } validate={ (values) => {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 return validateForm(values, thisVar.modelName);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             } }>
+                  let data = values;
+                  if (currState && currState.currRecord)
+                      data._id = currState.currRecord._id;
+                  upsertRecord(data, thisVar, thisVar.modelName);
+              } } validate={ (values) => {
+                  return validateForm(values, thisVar.modelName);
+              } }>
                 { ({submitForm}) => {
                       let errorMessage = null;
                       return (
@@ -86,7 +90,7 @@ class Register6 extends Authentication {
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Type of Wine</label>
-                                        <Select className="form-control" field="wineType" id="wineType" options={ wineType } />
+                                        <Select className="form-control" field="wineType" id="wineType" options={ wineList } />
                                       </div>
                                     </div>
                                     <div className="col-lg-4 col-md-4 col-sm-12">
@@ -123,6 +127,12 @@ class Register6 extends Authentication {
                                     </div>
                                   </div>
                                   <div className="row">
+                                    <div className="col-lg-4 col-md-4 col-sm-12">
+                                      <div className="form-group">
+                                        <label>Vintage</label>
+                                        <Text field='vintage' placeholder='Vintage' className="form-control" />
+                                      </div>
+                                    </div>
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Closing Balance</label>

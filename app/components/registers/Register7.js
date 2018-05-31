@@ -52,21 +52,19 @@ class Register7 extends Authentication {
               <div className="text-right"><a onClick={ thisVar.goBack } type="button">Back</a></div>
               <div className="container">
                 <Form defaultValues={ currRecord } onSubmit={ (values) => {
-                                                                  let data = values;
-                                                                  if (currState && currState.currRecord)
-                                                                      data._id = currState.currRecord._id;
-                                                                  console.log("ValuestoSend", data);
-                                                                  upsertRecord(data, thisVar, thisVar.modelName);
-                                                              } } validate={ (values) => {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   let currDisgorgingType = values.disgorgingType;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   if (currState && currState.transferType != currDisgorgingType) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       if (currDisgorgingType)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           thisVar.setState({
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               transferType: currDisgorgingType
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           });
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   return validateForm(values, thisVar.modelName);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               } }>
+                          let data = values;
+                          if (currState && currState.currRecord)
+                              data._id = currState.currRecord._id;
+                          console.log("ValuestoSend", data);
+                          upsertRecord(data, thisVar, thisVar.modelName);
+                      } } validate={ (values) => {
+                      let currDisgorgingType = values.disgorgingType;
+                        if (currDisgorgingType)
+                          thisVar.setState({
+                              transferType: currDisgorgingType
+                          });
+                      return validateForm(values, thisVar.modelName);
+                  } }>
                   { ({submitForm}) => {
                         let errorMessage = null;
                         return (
@@ -91,21 +89,21 @@ class Register7 extends Authentication {
                                         </div>
                                       </div>
                                       { currTransferType === "ownUnitTransfer" ? <div>
-                                                                                   <div className="row">
-                                                                                     <div className="col-lg-4 col-md-4 col-sm-12">
-                                                                                       <div className="form-group">
-                                                                                         <label>Bottle Size</label>
-                                                                                         <Select className="form-control" field="ownUnit.sizeInML" id="ownUnit.sizeInML" options={ sizeInML } />
-                                                                                       </div>
-                                                                                     </div>
-                                                                                     <div className="col-lg-4 col-md-4 col-sm-12">
-                                                                                       <div className="form-group">
-                                                                                         <label>Number of Bottles</label>
-                                                                                         <Text field='ownUnit.bottlesQty' placeholder='Number of Bottles' className="form-control" />
-                                                                                       </div>
-                                                                                     </div>
-                                                                                   </div>
-                                                                                 </div> : currTransferType === "otherUnitTransfer" ?
+                                        <div className="row">
+                                          <div className="col-lg-4 col-md-4 col-sm-12">
+                                            <div className="form-group">
+                                              <label>Bottle Size</label>
+                                              <Select className="form-control" field="ownUnit.sizeInML" id="ownUnit.sizeInML" options={ sizeInML } />
+                                            </div>
+                                          </div>
+                                          <div className="col-lg-4 col-md-4 col-sm-12">
+                                            <div className="form-group">
+                                              <label>Number of Bottles</label>
+                                              <Text field='ownUnit.bottlesQty' placeholder='Number of Bottles' className="form-control" />
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div> : currTransferType === "otherUnitTransfer" ?
                                         <div>
                                           <div className="row">
                                             <div className="col-lg-4 col-md-4 col-sm-12">

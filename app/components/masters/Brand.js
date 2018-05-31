@@ -5,7 +5,8 @@ import { getAllRecords } from '../../utils/Functions';
 import rp from 'request-promise';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
-import { Table } from 'react-bootstrap';
+import ReactTable from "react-table";
+import matchSorter from 'match-sorter';
 
 class Brand extends Authentication {
     constructor(props) {
@@ -51,6 +52,76 @@ class Brand extends Authentication {
       let thisVar = this;
       let currState = thisVar.state;
       let currRecords = currState ? currState.records : null;
+
+      const columns = [{
+        Header: 'Edit', // String-based value accessors!
+        accessor: '_id',
+        Cell: row => (
+          <span onClick={ () => thisVar.redirectToEdit(row.value) }><i className="fa fa-edit"></i>
+          </span>
+        )
+      },{
+        Header: 'Name',
+        accessor: 'name', // String-based value accessors!
+        filterMethod: (filter, rows) =>
+          matchSorter(rows, filter.value, { keys: ["name"] }),
+        filterAll: true
+      },{
+        Header: 'Size in ML',
+        accessor: 'size', // String-based value accessors!
+        filterMethod: (filter, rows) =>
+          matchSorter(rows, filter.value, { keys: ["size"] }),
+        filterAll: true
+      },{
+        Header: 'Mfg. Cost Declared',
+        accessor: 'mfgCost', // String-based value accessors!
+        filterMethod: (filter, rows) =>
+          matchSorter(rows, filter.value, { keys: ["mfgCost"] }),
+        filterAll: true
+      },{
+        Header: 'Excise Duty',
+        accessor: 'exciseDuty', // String-based value accessors!
+        filterMethod: (filter, rows) =>
+          matchSorter(rows, filter.value, { keys: ["exciseDuty"] }),
+        filterAll: true
+      },{
+        Header: 'Sales Tax',
+        accessor: 'salesTax', // String-based value accessors!
+        filterMethod: (filter, rows) =>
+          matchSorter(rows, filter.value, { keys: ["salesTax"] }),
+        filterAll: true
+      },{
+        Header: 'MRP',
+        accessor: 'mrp', // String-based value accessors!
+        filterMethod: (filter, rows) =>
+          matchSorter(rows, filter.value, { keys: ["mrp"] }),
+        filterAll: true
+      },{
+        Header: 'Label Approved Order No.',
+        accessor: 'labelAppOrderNo', // String-based value accessors!
+        filterMethod: (filter, rows) =>
+          matchSorter(rows, filter.value, { keys: ["labelAppOrderNo"] }),
+        filterAll: true
+      },{
+        Header: 'MRP Approval Date',
+        accessor: 'mrpApprovalDate', // String-based value accessors!
+        filterMethod: (filter, rows) =>
+          matchSorter(rows, filter.value, { keys: ["mrpApprovalDate"] }),
+        filterAll: true
+      },{
+        Header: 'MRP Effective From',
+        accessor: 'mrpEffectiveDate', // String-based value accessors!
+        filterMethod: (filter, rows) =>
+          matchSorter(rows, filter.value, { keys: ["mrpEffectiveDate"] }),
+        filterAll: true
+      },{
+        Header: 'MRP Change Date',
+        accessor: 'mrpChangeDate', // String-based value accessors!
+        filterMethod: (filter, rows) =>
+          matchSorter(rows, filter.value, { keys: ["mrpChangeDate"] }),
+        filterAll: true
+      }]
+
         return (
             <div className="container">
               <div className="register-heading">Brand</div>
@@ -87,40 +158,16 @@ class Brand extends Authentication {
                   } }
               </Form>
               <div>
-                <Table bordered hover responsive>
-                  <thead>
-                    <tr>
-                      <th>Edit </th>
-                      <th>Name </th>
-                      <th>Size in ML</th>
-                      <th>Mfg. Cost Declared</th>
-                      <th>Excise Duty</th>
-                      <th>Sales Tax</th>
-                      <th>MRP</th>
-                      <th>Label Approved Order No.</th>
-                      <th>MRP Approval Date</th>
-                      <th>MRP Effective From</th>
-                      <th>MRP Change Date</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                  { currRecords ? currRecords.map((currRecord, index) => (
-                      <tr key={ currRecord._id }>
-                      <td className="text-center" onClick={ () => thisVar.redirectToEdit(currRecord._id) }><i className="fa fa-edit"></i></td>
-                      <td>{ currRecord.name }</td>
-                      <td>{ currRecord.size }</td>
-                      <td>{ currRecord.mfgCost }</td>
-                      <td>{ currRecord.exciseDuty }</td>
-                      <td>{ currRecord.salesTax }</td>
-                      <td>{ currRecord.mrp }</td>
-                      <td>{ currRecord.labelAppOrderNo }</td>
-                      <td>{ currRecord.mrpApprovalDate }</td>
-                      <td>{ currRecord.mrpEffectiveDate }</td>
-                      <td>{ currRecord.mrpChangeDate }</td>
-                    </tr>
-                    )) : "" }
-                  </tbody>
-                </Table>;
+                { currRecords ? 
+                  <ReactTable
+                    data={currRecords}
+                    filterable
+                    defaultFilterMethod={(filter, row) =>
+                      String(row[filter.id]) === filter.value}
+                    columns={columns}
+                    defaultPageSize={10}
+                    className="-striped -highlight"
+                  /> : ""}
               </div>
             </div>
             );

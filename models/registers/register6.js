@@ -15,7 +15,8 @@ var register6Schema = mongoose.Schema({
     closingBalance: Number,
     remarks: String,
     verified: Boolean,
-    wineryId: String
+    wineryId: String,
+    vintage: String
 });
 
 // create the model for users and expose it to our app

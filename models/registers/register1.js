@@ -14,7 +14,9 @@ var register1Schema = mongoose.Schema({
     grapeVariety: String,
     remarks: String,
     verified: Boolean,
-    wineryId: String
+    wineryId: String,
+    tank: Number,
+    press: String
 });
 
 // create the model for users and expose it to our app

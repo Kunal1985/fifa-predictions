@@ -90,6 +90,35 @@ var getModelObject = function(modelName){
 }
 
 /**
+ * Method to update Tank Balance.
+ * 
+ */
+var updateTankBalance = function(tank, quantity, res, modelName){
+  var modelObj = getModelObject(modelName);
+  if(modelObj){
+    modelObj.findOne({number: tank}, function(err, doc) {
+      if (err) { throw err; }
+      console.log(modelName, "record found", doc);
+      var docBalance = doc.balance;
+      if(!docBalance || isNaN(docBalance))
+        docBalance = 0;
+      var updatedBalance = docBalance - quantity;
+
+      modelObj.update({number: tank}, {balance: updatedBalance}, function(err, modelRecord) {
+        if (err) { throw err; }
+        console.log("Record Updated for", modelName, modelRecord);
+  
+        //res.json({ recordUpdated: true });
+      });
+
+    });
+    
+  } else{
+    throw new Error("Model not found!");
+  }
+}
+
+/**
  * Method to upsert Record for a model.
  * 
  */
@@ -100,16 +129,29 @@ module.exports.upsertRecord = function(req, res, next, modelName){
   if(modelObj){
     console.log("upsertRecord for", modelName, currRecordId);
     if(currRecordId){
-      modelObj.update({_id: ObjectId(currRecordId)}, data, function(err, modelRecord) {
-        if (err) return next(err);
-        console.log("Record Updated for", modelName, modelRecord);
-        res.json({ recordUpdated: true });
+      modelObj.findById(currRecordId, function(err, doc) {
+        var doc = doc;
+        modelObj.update({_id: ObjectId(currRecordId)}, data, function(err, modelRecord) {
+          if (err) return next(err);
+          console.log("Record Updated for", modelName, modelRecord);
+            if(doc.quantity != data.quantity) {
+              var quan = data.quantity - doc.quantity;
+              if (["CrushedJuiceDetails", "FermentedDetails", "FlavourDetails", "SpiritDetails", "TirageDisgorgedDetails"].indexOf(modelName) != -1) {
+                updateTankBalance(data.tank, quan, res, "TankMaster");
+              }
+            }
+          res.json({ recordUpdated: true });
+        });
       });
     } else {
       var modelObjCreated = new modelObj(data);
       modelObjCreated.save(function(err, modelRecord) {
         if (err) return next(err);
         console.log("New Record Created for", modelName, modelRecord);
+        if (["CrushedJuiceDetails", "FermentedDetails", "FlavourDetails", "SpiritDetails", "TirageDisgorgedDetails"].indexOf(modelName) != -1) {
+          updateTankBalance(data.tank, data.quantity, res, "TankMaster");
+          console.log("Inside data:"+ data);
+        }
         res.json({ recordCreated: true });
       });
     }
