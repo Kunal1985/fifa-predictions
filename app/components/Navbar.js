@@ -58,7 +58,7 @@ class Navbar extends React.Component {
                                         <strong className="text-size-16">Hello, {currUser.username}</strong>
                                         <br />
                                         <span className="text-size-16">
-                                            <a href="#" onClick={this.logoutUser}>Logout</a> | <a href="#" onClick={this.changePassword}>Change Password</a>
+                                            <a href="#" id="logoutBtn" onClick={this.logoutUser}>Logout</a> | <a href="#" onClick={this.changePassword}>Change Password</a>
                                         </span>
                                     </div>
                                 </div>

@@ -4,6 +4,14 @@ import { browserHistory } from 'react-router';
 import { storeToken, removeToken, getByKey } from './TokenUtils';
 import {_} from 'underscore';
 
+const handleTokenTampering = function(err){
+  var errMessage = err.error.message
+  if(errMessage.indexOf("tamper with the token") != -1){
+    alert(errMessage)
+    $("#logoutBtn")[0].click();
+  }
+}
+
 exports.authenticateUser = function (values, currObj) {
   var actionType = currObj.state.submitType.toLowerCase();
   let options = {
@@ -91,6 +99,7 @@ exports.getAllRecords = function (currObj, modelName) {
     })
     .catch(function (err) {
       console.log("Error", err);
+      handleTokenTampering(err);
       return null;
     });
 }
@@ -109,6 +118,9 @@ exports.getRecordsByQuery = function (currObj, modelName, query) {
   var options = {
     method: httpMethod,
     uri: enpointUrl,
+    headers: {
+      'authorization': 'Bearer ' + getByKey("authToken")
+    },
     body: {
       query: query
     },
@@ -193,6 +205,7 @@ exports.getRecordsByQuery = function (currObj, modelName, query) {
     })
     .catch(function (err) {
       console.log("Error", err);
+      handleTokenTampering(err);
       return null;
     });
 }
@@ -205,6 +218,9 @@ exports.getCurrRecord = function (queryParams, currObj, modelName) {
       body: {
         _id: queryParams.id
       },
+      headers: {
+        'authorization': 'Bearer ' + getByKey("authToken")
+      },
       json: true
     };
     return rp(options)
@@ -216,6 +232,7 @@ exports.getCurrRecord = function (queryParams, currObj, modelName) {
       })
       .catch(function (err) {
         console.log("Error", err);
+        handleTokenTampering(err);
         return null;
       });
   }
@@ -225,6 +242,9 @@ exports.upsertRecord = function (data, thisVar, modelName) {
   let options = {
     method: 'POST',
     uri: `http://localhost:3000/upsert${modelName}`,
+    headers: {
+      'authorization': 'Bearer ' + getByKey("authToken")
+    },
     body: data,
     json: true
   };
@@ -236,6 +256,7 @@ exports.upsertRecord = function (data, thisVar, modelName) {
     })
     .catch(function (err) {
       console.log("Error", err);
+      handleTokenTampering(err);
       return null;
     });
 }

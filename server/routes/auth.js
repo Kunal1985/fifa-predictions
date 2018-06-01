@@ -10,7 +10,7 @@ module.exports = function(app, passport) {
     failureRedirect : '/'
   }), function(req, res, next) {
     var currPassport = req.session.passport;
-    console.log("Passport during Register", currPassport);
+    console.log("Passport during Register", currPassport.user);
     var jwtToken = generateToken(currPassport);
     res.json({registerSuccess: true, redirectUrl: "/admin", currUser: cleanUser(currPassport), token: jwtToken});
   });
@@ -24,7 +24,7 @@ module.exports = function(app, passport) {
   }), function(req, res, next) {
     var currPassport = req.session.passport;
     console.log("Passport during Login", currPassport);    
-    var jwtToken = generateToken(currPassport);
+    var jwtToken = generateToken(currPassport.user);
     var redirectUrl = "/home";
     switch(currPassport.user.role){
       case 2: redirectUrl = "openingBalance";break;

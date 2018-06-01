@@ -41,6 +41,16 @@ var Villages = require('../../models/geography/villages');
 var WineryUser = require('../../models/admin/wineryUser');
 var ExciseOfficer = require('../../models/admin/exciseOfficer');
 
+import { verifyToken } from './jwtUtils';
+
+module.exports.checkTampering = function(req, res, next){  
+  var currPassport = req.session.passport;
+  var authToken = req.headers["authorization"];
+  var decoded = verifyToken(authToken);
+  if(decoded.username != currPassport.user.username)
+    return next(new Error("We have detected that an attempt was made to tamper with the token! You will be forcefully logged out!"));
+  return next();
+}
 
 module.exports.isLoggedIn = function(req, res, next) {
   if (req.session.passport)
