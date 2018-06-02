@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 var User = require('../user');
+require('mongoose-long')(mongoose);
+var Long = mongoose.Schema.Types.Long;
 
 // define the schema for our user model
 var exciseOfficerSchema = mongoose.Schema({
@@ -9,22 +11,27 @@ var exciseOfficerSchema = mongoose.Schema({
     email: String,
     telephoneNumber: Number,
     officerType: String,
-    wineryId: String
+    wineryId: String,
+    created_at: Long,
+    updated_at: Long,
+    created_by: String
 });
 
-exciseOfficerSchema.pre('save', function (next) {
+exciseOfficerSchema.pre('save', function(next) {
     console.log("Pre save", this);
     var username = this.email;
     var newUser = new User();
     newUser.username = username;
-    if(this.officerType == '1') {
+    if (this.officerType == '1') {
         newUser.role = 2;
     } else {
         newUser.role = 3;
     }
-    
+
     newUser.password = newUser.generateHash("abcd1234");
-    User.findOne({ 'username' :  username }, function(err, user) {
+    User.findOne({
+        'username': username
+    }, function(err, user) {
         if (err)
             next(err);
         if (user) {
@@ -35,7 +42,7 @@ exciseOfficerSchema.pre('save', function (next) {
                     next(err);
                 next();
             });
-        }    
+        }
     });
 });
 

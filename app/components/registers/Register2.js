@@ -59,8 +59,8 @@ class Register2 extends Authentication {
                                                                     data._id = currState.currRecord._id;
                                                                 upsertRecord(data, thisVar, thisVar.modelName);
                                                             } } validate={ (values) => {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 return validateForm(values, thisVar.modelName);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             } }>
+                                                              return validateForm(values, thisVar.modelName);
+                                                          } }>
                 { ({submitForm}) => {
                       let errorMessage = null;
                       return (
@@ -105,13 +105,13 @@ class Register2 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div id="dynamicTankInput" className="form-group">
                                       <label>Tank Number</label>
-                                      { this.state.tanks.map(input => <Select className="form-control" field="input" id="input" options={ tankList } />) }
+                                      { this.state.tanks.map((input, index) => <Select className="form-control" field={input} id={input} options={ tankList } key={index} />) }
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div id="dynamicQuantityInput" className="form-group">
                                       <label>Transferred Quantity</label>
-                                      { this.state.quantities.map(input => <Text placeholder='Transferred Quantity' className="form-control" field={ input } />) }
+                                      { this.state.quantities.map((input, index) => <Text placeholder='Transferred Quantity' className="form-control" field={ input } key={index} />) }
                                     </div>
                                   </div>
                                 </div>

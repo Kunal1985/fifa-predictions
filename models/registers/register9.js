@@ -1,4 +1,6 @@
 var mongoose = require('mongoose');
+require('mongoose-long')(mongoose);
+var Long = mongoose.Schema.Types.Long;
 
 // define the schema for our user model
 var register9Schema = mongoose.Schema({
@@ -8,11 +10,11 @@ var register9Schema = mongoose.Schema({
     batchNumber: String,
     sizeInML: String,
     noOfBottles: Number,
-	openingBalance: Number,
-	closingBalance: Number,
+    openingBalance: Number,
+    closingBalance: Number,
     remarks: String,
     dispatchType: String,
-    partyName:String,
+    partyName: String,
     liscenseType: String,
     dispatchedSize: Number,
     dispatchedBottleQty: Number,
@@ -33,7 +35,10 @@ var register9Schema = mongoose.Schema({
     },
     remarks: String,
     verified: Boolean,
-    wineryId: String
+    wineryId: String,
+    created_at: Long,
+    updated_at: Long,
+    created_by: String
 });
 
 // create the model for users and expose it to our app
