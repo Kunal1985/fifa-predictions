@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, browserHistory } from 'react-router';
-import { getCurrRecord, upsertRecord, validateForm, getRecordsByQuery } from '../../utils/Functions';
+import { getCurrRecord, upsertRecord, validateForm, getRecordsByQuery, setOpeningBalance } from '../../utils/Functions';
 import rp from 'request-promise';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
@@ -105,7 +105,7 @@ class Register2 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div id="dynamicTankInput" className="form-group">
                                       <label>Tank Number</label>
-                                      { this.state.tanks.map((input, index) => <Select className="form-control" field={input} id={input} options={ tankList } key={index} />) }
+                                      { this.state.tanks.map((input, index) => <Select className="form-control" field={input} id={input} options={ tankList } key={index} onChange={setOpeningBalance(index,input)} />) }
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">

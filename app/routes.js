@@ -73,6 +73,7 @@ export default (
   <Route path='/admin' component={ AdminRoute(Admin) } />
   <Route path='/wineryUser' component={ AdminRoute(WineryUser) } />
   <Route path='/exciseOfficer' component={ AdminRoute(ExciseOfficer) } />
+  <Route path='/changePassword' component={ AdminRoute(ChangePassword) } />
 
   <Route path='/home' component={ User1Route(Summary) } />
   <Route path='/profile' component={ User1Route(EditProfile) } />

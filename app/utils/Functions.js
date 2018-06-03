@@ -16,7 +16,7 @@ exports.authenticateUser = function (values, currObj) {
   var actionType = currObj.state.submitType.toLowerCase();
   let options = {
     method: 'POST',
-    uri: 'http://localhost:3000/' + actionType,
+    uri: 'http://159.89.165.136:3000/' + actionType,
     body: values,
     json: true
   };
@@ -41,7 +41,7 @@ exports.logoutUser = function (currObj) {
   let currProps = currObj.props;
   let options = {
     method: 'POST',
-    uri: 'http://localhost:3000/logout',
+    uri: 'http://159.89.165.136:3000/logout',
     json: true
   };
   return rp(options)
@@ -61,11 +61,11 @@ exports.logoutUser = function (currObj) {
 }
 
 exports.getUserDetailsRP = function (currObj) {
-  return rp("http://localhost:3000/userDetails");
+  return rp("http://159.89.165.136:3000/userDetails");
 }
 
 exports.getUserDetails = function (currObj) {
-  return rp("http://localhost:3000/userDetails")
+  return rp("http://159.89.165.136:3000/userDetails")
     .then(function (body) {
       currObj.setState({
         currUser: JSON.parse(body)
@@ -81,7 +81,7 @@ exports.getAllRecords = function (currObj, modelName) {
   console.log("getAllRecords for", modelName);
   var options = {
     method: 'GET',
-    uri: `http://localhost:3000/get${modelName}`,
+    uri: `http://159.89.165.136:3000/get${modelName}`,
     headers: {
       'authorization': 'Bearer ' + getByKey("authToken")
     },
@@ -109,10 +109,10 @@ exports.getRecordsByQuery = function (currObj, modelName, query) {
   var enpointUrl;
   var httpMethod;
   if (["States", "Districts", "SubDistricts", "Villages"].indexOf(modelName) != -1) {
-    enpointUrl = `http://localhost:3000/get${modelName}ByQuery`;
+    enpointUrl = `http://159.89.165.136:3000/get${modelName}ByQuery`;
     httpMethod = "POST";
   } else {
-    enpointUrl = `http://localhost:3000/get${modelName}`;
+    enpointUrl = `http://159.89.165.136:3000/get${modelName}`;
     httpMethod = "GET";
   }
   var options = {
@@ -214,7 +214,7 @@ exports.getCurrRecord = function (queryParams, currObj, modelName) {
   if (queryParams && queryParams.upsertAction === 'update' && queryParams.id) {
     var options = {
       method: 'POST',
-      uri: `http://localhost:3000/get${modelName}Record`,
+      uri: `http://159.89.165.136:3000/get${modelName}Record`,
       body: {
         _id: queryParams.id
       },
@@ -241,7 +241,7 @@ exports.getCurrRecord = function (queryParams, currObj, modelName) {
 exports.upsertRecord = function (data, thisVar, modelName) {
   let options = {
     method: 'POST',
-    uri: `http://localhost:3000/upsert${modelName}`,
+    uri: `http://159.89.165.136:3000/upsert${modelName}`,
     headers: {
       'authorization': 'Bearer ' + getByKey("authToken")
     },
@@ -264,6 +264,10 @@ exports.upsertRecord = function (data, thisVar, modelName) {
 exports.getSideBarList = function(currUser){
   console.log("getSideBarList", currUser);
   return sideBarList.filter(u => currUser ? (u.allowedRoles.indexOf(currUser.role) != -1) : false);
+}
+
+exports.setOpeningBalance = function() {
+  
 }
 
 var checkForTankValidation = function(values, tankList) {
