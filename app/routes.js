@@ -41,6 +41,8 @@ import Flavour from './components/masters/Flavour';
 import CreateFlavour from './components/masters/CreateFlavour';
 import Spirit from './components/masters/Spirit';
 import CreateSpirit from './components/masters/CreateSpirit';
+import Vintage from './components/masters/Vintage';
+import CreateVintage from './components/masters/CreateVintage';
 import OpeningBalance from './components/opening-balance/OpeningBalance';
 import FlavourOpeningEntry from './components/opening-balance/FlavourOpeningEntry';
 import CreateFlavourOpeningEntry from './components/opening-balance/CreateFlavourOpeningEntry';
@@ -89,6 +91,8 @@ export default (
   <Route path='/createFlavour' component={ User1Route(CreateFlavour) } />
   <Route path='/spirit' component={ User1Route(Spirit) } />
   <Route path='/createSpirit' component={ User1Route(CreateSpirit) } />
+  <Route path='/vintage' component={ User1Route(Vintage) } />
+  <Route path='/createVintage' component={ User1Route(CreateVintage) } />
   
   <Route path='/register1' component={ User12Route(Register1) } />
   <Route path='/register2' component={ User12Route(Register2) } />

@@ -6,6 +6,7 @@ var Long = mongoose.Schema.Types.Long;
 var brandMasterSchema = mongoose.Schema({
     name: String,
     size: String,
+    alcoholPercentage: Number,
     mfgCost: Number,
     exciseDuty: Number,
     salesTax: Number,

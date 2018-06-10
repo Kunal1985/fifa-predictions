@@ -17,8 +17,8 @@ const sideBarList = [{
         title2: "Type of Wine Master",
     }, {
         url: "/variety",
-        title1: "Variety of Grape/Fruit Master",
-        title2: "Variety of Grape/Fruit Master",
+        title1: "Variety of Fruit Master",
+        title2: "Variety of Fruit Master",
     }, {
         url: "/brand",
         title1: "Brand Master",

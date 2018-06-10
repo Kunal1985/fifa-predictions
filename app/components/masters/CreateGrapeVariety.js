@@ -41,7 +41,7 @@ class CreateGrapeVariety extends Authentication {
       let currRecord = currState ? currState.currRecord : null;
         return (
             <div className="container">
-              <div className="register-heading">Variety of Grape/Fruit</div>
+              <div className="register-heading">Variety of Fruit</div>
               <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
               <Form 
               defaultValues = {currRecord}

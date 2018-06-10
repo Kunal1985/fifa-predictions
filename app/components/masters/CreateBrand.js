@@ -64,8 +64,8 @@ class createBrand extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12"></div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
-                                      <label>Name</label>
-                                      <Text field='name' placeholder='Name' className="form-control" />
+                                      <label>Brand Name</label>
+                                      <Text field='name' placeholder='Brand Name' className="form-control" type="number" />
                                     </div>
                                   </div>
                                 </div>
@@ -74,7 +74,16 @@ class createBrand extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                   <div className="form-group">
                                       <label>Size in ML</label>
-                                      <Text field='size' placeholder='Size in ML' className="form-control" />
+                                      <Text field='size' placeholder='Size in ML' className="form-control" type="number" />
+                                  </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-lg-4 col-md-4 col-sm-12"></div>
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                  <div className="form-group">
+                                      <label>Alcohol Percentage</label>
+                                      <Text field='alcoholPercentage' placeholder='Alcohol Percentage' className="form-control" type="number" />
                                   </div>
                                   </div>
                                 </div>
@@ -83,7 +92,7 @@ class createBrand extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                         <label>Mfg. Cost</label>
-                                        <Text field='mfgCost' placeholder='Mfg. Cost' className="form-control" />
+                                        <Text field='mfgCost' placeholder='Mfg. Cost' className="form-control" type="number" />
                                     </div>
                                   </div>
                                 </div>
@@ -92,7 +101,7 @@ class createBrand extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                         <label>Excise Duty</label>
-                                        <Text field='exciseDuty' placeholder='Excise Duty' className="form-control" />
+                                        <Text field='exciseDuty' placeholder='Excise Duty' className="form-control" type="number" />
                                     </div>
                                   </div>
                                 </div>
@@ -101,7 +110,7 @@ class createBrand extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                         <label>Sales Tax</label>
-                                        <Text field='salesTax' placeholder='Sales Tax' className="form-control" />
+                                        <Text field='salesTax' placeholder='Sales Tax' className="form-control" type="number" />
                                     </div>
                                   </div>
                                 </div>
@@ -110,7 +119,7 @@ class createBrand extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                         <label>MRP</label>
-                                        <Text field='mrp' placeholder='MRP' className="form-control" />
+                                        <Text field='mrp' placeholder='MRP' className="form-control" type="number" />
                                     </div>
                                   </div>
                                 </div>

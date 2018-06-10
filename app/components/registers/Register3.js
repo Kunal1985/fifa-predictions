@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, browserHistory } from 'react-router';
 import { sideBarList, tankNumbers } from '../../utils/Constants';
-import { getCurrRecord, upsertRecord, validateForm, getRecordsByQuery } from '../../utils/Functions';
+import { getCurrRecord, upsertRecord, validateForm, getRecordsByQuery, setOpeningBalance } from '../../utils/Functions';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 
@@ -108,7 +108,7 @@ class Register3 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div id="dynamicTankInput" className="form-group">
                                       <label>Tank Number</label>
-                                      { currState.tanks.map(input => <Select className="form-control" field="input" id="input" options={ tankList } />) }
+                                      { currState.tanks.map(input => <Select className="form-control" field={input} id={input} options={ tankList } />) }
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">

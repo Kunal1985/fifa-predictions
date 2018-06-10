@@ -153,7 +153,7 @@ exports.getRecordsByQuery = function (currObj, modelName, query) {
             label: currRecord.number,
             value: currRecord.number,
             selected: true,
-            balance: currRecord.balance
+            balance: currRecord.capacity
           }
             break;
           case "ExciseOfficer": return {
@@ -266,8 +266,12 @@ exports.getSideBarList = function(currUser){
   return sideBarList.filter(u => currUser ? (u.allowedRoles.indexOf(currUser.role) != -1) : false);
 }
 
-exports.setOpeningBalance = function() {
-  
+exports.setOpeningBalance = function(tankList) {
+  console.log(tankList);
+}
+
+exports.checkTankBalance = function(index,tankList) {
+  console.log("checkTankBalance" + tankList);
 }
 
 var checkForTankValidation = function(values, tankList) {

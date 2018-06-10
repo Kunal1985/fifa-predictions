@@ -6,7 +6,7 @@ var Long = mongoose.Schema.Types.Long;
 var spiritMasterSchema = mongoose.Schema({
     name: String,
     desc: String,
-    brand: String,
+    type: String,
     wineryId: String,
     created_at: Long,
     updated_at: Long,

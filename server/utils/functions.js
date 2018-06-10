@@ -109,12 +109,12 @@ var updateTankBalance = function(tank, quantity, res, modelName){
     modelObj.findOne({number: tank}, function(err, doc) {
       if (err) { throw err; }
       console.log(modelName, "record found", doc);
-      var docBalance = doc.balance;
+      var docBalance = doc.closingBalance;
       if(!docBalance || isNaN(docBalance))
         docBalance = 0;
       var updatedBalance = docBalance - quantity;
 
-      modelObj.update({number: tank}, {balance: updatedBalance}, function(err, modelRecord) {
+      modelObj.update({number: tank}, {closingBalance: updatedBalance}, function(err, modelRecord) {
         if (err) { throw err; }
         console.log("Record Updated for", modelName, modelRecord);
   

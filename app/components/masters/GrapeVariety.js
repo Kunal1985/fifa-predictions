@@ -69,7 +69,7 @@ class GrapeVariety extends Authentication {
 
         return (
             <div className="container">
-              <div className="register-heading">Variety of Grape/Fruit</div>
+              <div className="register-heading">Variety of Fruit</div>
               <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
               <Form onSubmit={ (values) => {
                                    console.log('s');

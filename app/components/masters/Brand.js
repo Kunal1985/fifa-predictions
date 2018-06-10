@@ -97,12 +97,6 @@ class Brand extends Authentication {
           matchSorter(rows, filter.value, { keys: ["mrp"] }),
         filterAll: true
       },{
-        Header: 'Label Approved Order No.',
-        accessor: 'labelAppOrderNo', // String-based value accessors!
-        filterMethod: (filter, rows) =>
-          matchSorter(rows, filter.value, { keys: ["labelAppOrderNo"] }),
-        filterAll: true
-      },{
         Header: 'MRP Approval Date',
         accessor: 'mrpApprovalDate', // String-based value accessors!
         filterMethod: (filter, rows) =>
@@ -113,12 +107,6 @@ class Brand extends Authentication {
         accessor: 'mrpEffectiveDate', // String-based value accessors!
         filterMethod: (filter, rows) =>
           matchSorter(rows, filter.value, { keys: ["mrpEffectiveDate"] }),
-        filterAll: true
-      },{
-        Header: 'MRP Change Date',
-        accessor: 'mrpChangeDate', // String-based value accessors!
-        filterMethod: (filter, rows) =>
-          matchSorter(rows, filter.value, { keys: ["mrpChangeDate"] }),
         filterAll: true
       }]
 

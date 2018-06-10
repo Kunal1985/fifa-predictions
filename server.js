@@ -72,6 +72,7 @@ require('./server/routes/masters/grape-variety')(app, passport);
 require('./server/routes/masters/spirit')(app, passport);
 require('./server/routes/masters/tank')(app, passport);
 require('./server/routes/masters/wine-type')(app, passport);
+require('./server/routes/masters/vintage')(app, passport);
 
 // Server-side Routes for Opening Balance
 require('./server/routes/opening-balance/flavour-details')(app, passport);

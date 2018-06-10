@@ -82,8 +82,8 @@ class CreateSpirit extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12"></div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
-                                      <label>Brand</label>
-                                      <Text field='brand' placeholder='Brand' className="form-control" />
+                                      <label>Type of Spirit</label>
+                                      <Text field='type' placeholder='Type of Spirit' className="form-control" />
                                     </div>
                                   </div>
                                 </div>

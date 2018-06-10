@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, browserHistory } from 'react-router';
-import { getCurrRecord, upsertRecord, validateForm, getRecordsByQuery, setOpeningBalance } from '../../utils/Functions';
+import { getCurrRecord, upsertRecord, validateForm, getRecordsByQuery, setOpeningBalance, checkTankBalance } from '../../utils/Functions';
 import rp from 'request-promise';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
@@ -105,13 +105,13 @@ class Register2 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div id="dynamicTankInput" className="form-group">
                                       <label>Tank Number</label>
-                                      { this.state.tanks.map((input, index) => <Select className="form-control" field={input} id={input} options={ tankList } key={index} onChange={setOpeningBalance(index,input)} />) }
+                                      { this.state.tanks.map((input, index) => <Select className="form-control" field={input} id={input} options={ tankList } key={index} onChange={setOpeningBalance(index,tankList)} />) }
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div id="dynamicQuantityInput" className="form-group">
                                       <label>Transferred Quantity</label>
-                                      { this.state.quantities.map((input, index) => <Text placeholder='Transferred Quantity' className="form-control" field={ input } key={index} />) }
+                                      { this.state.quantities.map((input, index) => <Text placeholder='Transferred Quantity' className="form-control" field={ input } key={index} onChange={checkTankBalance(index,tankList)} />) }
                                     </div>
                                   </div>
                                 </div>

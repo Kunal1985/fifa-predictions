@@ -47,9 +47,12 @@ class CreateTank extends Authentication {
                 defaultValues = {currRecord}
                 onSubmit={ (values) => {
                   let data = values;
-                  if(currState && currState.currRecord)
+                  if(currState && currState.currRecord) {
                     data._id = currState.currRecord._id;
-                    data.balance = data.capacity;
+                  } else {
+                    data.openingBalance = 0;
+                    data.closingBalance = data.capacity;
+                  }
                   upsertRecord(data, thisVar, thisVar.modelName);
                   } 
                 }
@@ -95,9 +98,9 @@ class CreateTank extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12"></div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
-                                      <label>Capacity</label>
+                                      <label>Capacity(Bulk Litres)</label>
                                       <Text field='capacity' placeholder='Capacity' className="form-control" />
-                                      <Text field='balance' placeholder='Capacity' type="hidden" className="form-control" />
+                                      <Text field='closingBalance' placeholder='Capacity' type="hidden" className="form-control" />
                                     </div>
                                   </div>
                                 </div>
