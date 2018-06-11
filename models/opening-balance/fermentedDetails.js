@@ -7,6 +7,7 @@ var fermentedDetailsSchema = mongoose.Schema({
     date: String,
     tank: String,
     quantity: Number,
+    variety: String,
     verified: Boolean,
     wineryId: String,
     created_at: Long,

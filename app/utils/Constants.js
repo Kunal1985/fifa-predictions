@@ -35,6 +35,10 @@ const sideBarList = [{
         url: "/vintage",
         title1: "Vintage Master",
         title2: "Vintage Master",
+    }, {
+        url: "/grapesSupplier",
+        title1: "Grape Supplier Master",
+        title2: "Grape Supplier Master",
     }]
 }, {
     url: "/openingBalance",
@@ -55,12 +59,12 @@ const sideBarList = [{
         title2: "Grapes Details",
     }, {
         url: "/crushedJuiceDetails",
-        title1: "Crushed Juice Details",
-        title2: "Crushed Juice Details",
+        title1: "Juice Details",
+        title2: "Juice Details",
     }, {
-        url: "/fermentedWineDetails",
-        title1: "Fermented Details",
-        title2: "Fermented Details",
+        url: "/bulkWineDetails",
+        title1: "Bulk Wine Details",
+        title2: "Bulk Wine Details",
     }, {
         url: "/bottledWineDetails",
         title1: "Bottled Details",

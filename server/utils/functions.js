@@ -19,6 +19,8 @@ var GrapeVarietyMaster = require('../../models/masters/grapeVarietyMaster');
 var BrandMaster = require('../../models/masters/brandMaster');
 var FlavourMaster = require('../../models/masters/flavourMaster');
 var SpiritMaster = require('../../models/masters/spiritMaster');
+var VintageMaster = require('../../models/masters/vintageMaster');
+var GrapesSupplierMaster = require('../../models/masters/grapesSupplierMaster');
 
 // Imports for Opening Balance Models
 var FlavourDetails = require('../../models/opening-balance/flavourDetails');
@@ -79,6 +81,8 @@ var getModelObject = function(modelName){
     case "BrandMaster": modelObj = BrandMaster; break;
     case "FlavourMaster": modelObj = FlavourMaster; break;
     case "SpiritMaster": modelObj = SpiritMaster; break;
+    case "VintageMaster": modelObj = VintageMaster; break;
+    case "GrapesSupplierMaster": modelObj = GrapesSupplierMaster; break;
     case "States": modelObj = States; break;
     case "Districts": modelObj = Districts; break;
     case "SubDistricts": modelObj = SubDistricts; break;

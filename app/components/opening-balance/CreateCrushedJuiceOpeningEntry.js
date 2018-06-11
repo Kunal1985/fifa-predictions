@@ -45,7 +45,7 @@ class CreateCrushedJuiceOpeningEntry extends Authentication {
       let grapeVarietyList = (currState && currState["grapevarietymaster"]) ? currState["grapevarietymaster"] : [];
         return (
             <div className="container">
-              <div className="register-heading">Crushed Juice Details</div>
+              <div className="register-heading">Juice Details</div>
               <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
               <Form defaultValues = {currRecord} onSubmit={ (values) => {
                                    let data = values;

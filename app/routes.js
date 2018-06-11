@@ -42,6 +42,8 @@ import CreateFlavour from './components/masters/CreateFlavour';
 import Spirit from './components/masters/Spirit';
 import CreateSpirit from './components/masters/CreateSpirit';
 import Vintage from './components/masters/Vintage';
+import CreateGrapesSupplier from './components/masters/CreateGrapesSupplier';
+import GrapesSupplier from './components/masters/GrapesSupplier';
 import CreateVintage from './components/masters/CreateVintage';
 import OpeningBalance from './components/opening-balance/OpeningBalance';
 import FlavourOpeningEntry from './components/opening-balance/FlavourOpeningEntry';
@@ -71,12 +73,10 @@ import { AdminRoute, User1Route, User12Route, User3Route } from './auth-route-ha
 export default (
 <Route component={ App }>
   <Route path='/' component={ Login } />
-  
   <Route path='/admin' component={ AdminRoute(Admin) } />
   <Route path='/wineryUser' component={ AdminRoute(WineryUser) } />
   <Route path='/exciseOfficer' component={ AdminRoute(ExciseOfficer) } />
   <Route path='/changePassword' component={ AdminRoute(ChangePassword) } />
-
   <Route path='/home' component={ User1Route(Summary) } />
   <Route path='/profile' component={ User1Route(EditProfile) } />
   <Route path='/tankmaster' component={ User1Route(TankMaster) } />
@@ -93,7 +93,8 @@ export default (
   <Route path='/createSpirit' component={ User1Route(CreateSpirit) } />
   <Route path='/vintage' component={ User1Route(Vintage) } />
   <Route path='/createVintage' component={ User1Route(CreateVintage) } />
-  
+  <Route path='/grapesSupplier' component={ User1Route(GrapesSupplier) } />
+  <Route path='/createGrapesSupplier' component={ User1Route(CreateGrapesSupplier) } />
   <Route path='/register1' component={ User12Route(Register1) } />
   <Route path='/register2' component={ User12Route(Register2) } />
   <Route path='/register3' component={ User12Route(Register3) } />
@@ -112,7 +113,6 @@ export default (
   <Route path='/register7Summary' component={ User12Route(Register7Summary) } />
   <Route path='/register8Summary' component={ User12Route(Register8Summary) } />
   <Route path='/register9Summary' component={ User12Route(Register9Summary) } />
-  
   <Route path='/openingBalance' component={ User12Route(OpeningBalance) } />
   <Route path='/flavourDetails' component={ User12Route(FlavourOpeningEntry) } />
   <Route path='/createFlavourOpening' component={ User12Route(CreateFlavourOpeningEntry) } />
@@ -122,7 +122,7 @@ export default (
   <Route path='/createGrapesOpening' component={ User12Route(CreateGrapesOpeningEntry) } />
   <Route path='/crushedJuiceDetails' component={ User12Route(CrushedJuiceOpeningEntry) } />
   <Route path='/createCrushedJuiceOpening' component={ User12Route(CreateCrushedJuiceOpeningEntry) } />
-  <Route path='/fermentedWineDetails' component={ User12Route(FermentedWineOpeningEntry) } />
+  <Route path='/bulkWineDetails' component={ User12Route(FermentedWineOpeningEntry) } />
   <Route path='/createFermentedWineOpening' component={ User12Route(CreateFermentedWineOpeningEntry) } />
   <Route path='/bottledWineDetails' component={ User12Route(BottledWineOpeningEntry) } />
   <Route path='/createBottledWineOpening' component={ User12Route(CreateBottledWineOpeningEntry) } />
@@ -138,7 +138,6 @@ export default (
   <Route path='/Masters' component={ User12Route(Masters) } />
   <Route path='/Uploads' component={ User12Route(Uploads) } />
   <Route path='/Utilities' component={ User12Route(Utilities) } />
-
   <Route path="*" component={ RouteNotFound } />
 </Route>
 );

@@ -1,16 +1,17 @@
 import React from 'react';
 import { Link, browserHistory } from 'react-router';
-import { sideBarList, searchType } from '../../utils/Constants';
+import { sideBarList } from '../../utils/Constants';
 import { getAllRecords } from '../../utils/Functions';
+import rp from 'request-promise';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 import ReactTable from "react-table";
 import matchSorter from 'match-sorter';
 
-class FermentedWineOpeningEntry extends Authentication {
+class GrapesSupplier extends Authentication {
     constructor(props) {
         super(props);
-        this.modelName = "FermentedDetails";
+        this.modelName = "GrapesSupplierMaster";
         this.viewName = `${this.modelName}Summary`;
         this.goBack = this.goBack.bind(this);
         this.redirectToCreate = this.redirectToCreate.bind(this);
@@ -19,13 +20,13 @@ class FermentedWineOpeningEntry extends Authentication {
 
     redirectToCreate() {
         let currProps = this.props;
-        browserHistory.push("/createFermentedWineOpening");
+        browserHistory.push("/createGrapesSupplier");
     }
 
     redirectToEdit(currId) {
       let currProps = this.props;
       browserHistory.push({
-        pathname: "/createFermentedWineOpening",
+        pathname: "/createGrapesSupplier",
         state: {
           upsertAction: "update",
           id: currId
@@ -35,7 +36,7 @@ class FermentedWineOpeningEntry extends Authentication {
 
     goBack() {
         let currProps = this.props;
-        browserHistory.goBack();
+        browserHistory.push("/home");
     }
 
     componentDidMount(){
@@ -60,43 +61,35 @@ class FermentedWineOpeningEntry extends Authentication {
           </span>
         )
       },{
-        Header: 'Tank',
-        accessor: 'tank', // String-based value accessors!
+        Header: 'Name',
+        accessor: 'supplierName', // String-based value accessors!
         filterMethod: (filter, rows) =>
-          matchSorter(rows, filter.value, { keys: ["tank"] }),
+          matchSorter(rows, filter.value, { keys: ["supplierName"] }),
         filterAll: true
       },{
-        Header: 'Variety',
-        accessor: 'variety', // String-based value accessors!
+        Header: 'District',
+        accessor: 'district', // String-based value accessors!
         filterMethod: (filter, rows) =>
-          matchSorter(rows, filter.value, { keys: ["variety"] }),
+          matchSorter(rows, filter.value, { keys: ["district"] }),
         filterAll: true
-      }, {
-        id: 'quantity', // Required because our accessor is not a string
-        Header: 'Quantity',
-        accessor: d => d.quantity, // Custom value accessors!
+      },{
+        Header: 'Village',
+        accessor: 'village', // String-based value accessors!
         filterMethod: (filter, rows) =>
-          matchSorter(rows, filter.value, { keys: ["quantity"] }),
+          matchSorter(rows, filter.value, { keys: ["village"] }),
         filterAll: true
-      }, {
-        Header: 'Verify',
-        accessor: 'verified', // String-based value accessors!
-        Cell: row => (
-          <span style={{
-            color: row.value == true ? '#008000'
-              : '#FF0000'
-          }}>{
-            row.value == true ? 'Verified'
-            : 'Unverified'
-          }
-          </span>
-        )
+      },{
+        Header: 'Contact No.',
+        accessor: 'contactNumber', // String-based value accessors!
+        filterMethod: (filter, rows) =>
+          matchSorter(rows, filter.value, { keys: ["contactNumber"] }),
+        filterAll: true
       }]
 
         return (
             <div className="container">
-              <div className="register-heading">Bulk Wine Details</div>
-              <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
+              <div className="register-heading">Grapes Supplier</div>
+              <div className="text-right"><a onClick={ thisVar.goBack } type="button">Back</a></div>
               <Form onSubmit={ (values) => {
                                    console.log('s');
                                } } validate={ (values) => {
@@ -108,41 +101,41 @@ class FermentedWineOpeningEntry extends Authentication {
                       let errorMessage = null;
                   
                       return (
-                        <div className="row">
-                        <div className="col-lg-12 col-md-12 col-sm-12">
-                          <form onSubmit={ submitForm } id="tankmaster">
-                            <div className="row">
-                              <div className="col-lg-12 col-md-12 col-sm-12">
-                                <div className="search-section">
-                                  <div>
-                                    <button type="button" className="btn btn-default" onClick={ this.redirectToCreate }>
-                                      Add New
-                                    </button>
+                          <div className="row">
+                            <div className="col-lg-12 col-md-12 col-sm-12">
+                              <form onSubmit={ submitForm } id="tankmaster">
+                                <div className="row">
+                                  <div className="col-lg-12 col-md-12 col-sm-12">
+                                    <div className="search-section">
+                                      <div>
+                                        <button type="button" className="btn btn-default" onClick={ thisVar.redirectToCreate }>
+                                          Add New
+                                        </button>
+                                      </div>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
+                              </form>
                             </div>
-                          </form>
-                        </div>
-                      </div>
+                          </div>
                       )
                   } }
               </Form>
               <div>
                 { currRecords ? 
-                    <ReactTable
-                      data={currRecords}
-                      filterable
-                      defaultFilterMethod={(filter, row) =>
-                        String(row[filter.id]) === filter.value}
-                      columns={columns}
-                      defaultPageSize={10}
-                      className="-striped -highlight"
-                    /> : ""}
+                  <ReactTable
+                    data={currRecords}
+                    filterable
+                    defaultFilterMethod={(filter, row) =>
+                      String(row[filter.id]) === filter.value}
+                    columns={columns}
+                    defaultPageSize={10}
+                    className="-striped -highlight"
+                  /> : ""}
               </div>
             </div>
             );
     }
 }
 
-export default FermentedWineOpeningEntry
+export default GrapesSupplier

@@ -60,16 +60,16 @@ class Vintage extends Authentication {
           </span>
         )
       },{
-        Header: 'Name',
-        accessor: 'name', // String-based value accessors!
+        Header: 'Harvest Year',
+        accessor: 'harvestYear', // String-based value accessors!
         filterMethod: (filter, rows) =>
-          matchSorter(rows, filter.value, { keys: ["name"] }),
+          matchSorter(rows, filter.value, { keys: ["harvestYear"] }),
         filterAll: true
       },{
-        Header: 'Brand',
-        accessor: 'brand', // String-based value accessors!
+        Header: 'Variety',
+        accessor: 'variety', // String-based value accessors!
         filterMethod: (filter, rows) =>
-          matchSorter(rows, filter.value, { keys: ["brand"] }),
+          matchSorter(rows, filter.value, { keys: ["variety"] }),
         filterAll: true
       }]
 

@@ -43,7 +43,7 @@ class CreateFermentedWineOpeningEntry extends Authentication {
       let tankList = (currState && currState["tankmaster"]) ? currState["tankmaster"] : [];
         return (
             <div className="container">
-              <div className="register-heading">Fermented Wine Details</div>
+              <div className="register-heading">Bulk Wine Details</div>
               <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
               <Form defaultValues = {currRecord} onSubmit={ (values) => {
                                    let data = values;
@@ -84,6 +84,15 @@ class CreateFermentedWineOpeningEntry extends Authentication {
                                     <div className="form-group">
                                       <label>Quantity</label>
                                       <Text field='quantity' placeholder='Quantity' className="form-control" />
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-lg-4 col-md-4 col-sm-12"></div>
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <div className="form-group">
+                                      <label>Variety</label>
+                                      <Text field='variety' placeholder='Variety' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
