@@ -12,6 +12,7 @@ import Register6 from './components/registers/Register6';
 import Register7 from './components/registers/Register7';
 import Register8 from './components/registers/Register8';
 import Register9 from './components/registers/Register9';
+import Register10 from './components/registers/Register10';
 import Register1Summary from './components/registers/Register1Summary';
 import Register2Summary from './components/registers/Register2Summary';
 import Register3Summary from './components/registers/Register3Summary';
@@ -21,6 +22,7 @@ import Register6Summary from './components/registers/Register6Summary';
 import Register7Summary from './components/registers/Register7Summary';
 import Register8Summary from './components/registers/Register8Summary';
 import Register9Summary from './components/registers/Register9Summary';
+import Register10Summary from './components/registers/Register10Summary';
 import LiscenseeProfile from './components/masters/LiscenseeProfile';
 import Transactions from './components/Transactions';
 import PendingRequests from './components/PendingRequests';
@@ -104,6 +106,7 @@ export default (
   <Route path='/register7' component={ User12Route(Register7) } />
   <Route path='/register8' component={ User12Route(Register8) } />
   <Route path='/register9' component={ User12Route(Register9) } />
+  <Route path='/register10' component={ User12Route(Register10) } />
   <Route path='/register1Summary' component={ User12Route(Register1Summary) } />
   <Route path='/register2Summary' component={ User12Route(Register2Summary) } />
   <Route path='/register3Summary' component={ User12Route(Register3Summary) } />
@@ -113,6 +116,7 @@ export default (
   <Route path='/register7Summary' component={ User12Route(Register7Summary) } />
   <Route path='/register8Summary' component={ User12Route(Register8Summary) } />
   <Route path='/register9Summary' component={ User12Route(Register9Summary) } />
+  <Route path='/register10Summary' component={ User12Route(Register10Summary) } />
   <Route path='/openingBalance' component={ User12Route(OpeningBalance) } />
   <Route path='/flavourDetails' component={ User12Route(FlavourOpeningEntry) } />
   <Route path='/createFlavourOpening' component={ User12Route(CreateFlavourOpeningEntry) } />

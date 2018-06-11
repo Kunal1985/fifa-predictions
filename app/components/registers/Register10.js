@@ -5,10 +5,10 @@ import { getCurrRecord, upsertRecord, validateForm, getRecordsByQuery, setOpenin
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
 
-class Register3 extends Authentication {
+class Register10 extends Authentication {
     constructor(props) {
         super(props);
-        this.modelName = "Register3";
+        this.modelName = "Register10";
         this.viewName = `${this.modelName}Form`;
         this.state = {
             tanks: ['tank-0'],
@@ -53,7 +53,7 @@ class Register3 extends Authentication {
         let tankList = (currState && currState["tankmaster"]) ? currState["tankmaster"] : [];
         return (
             <div className="container">
-              <div className="register-heading">Fermentation</div>
+              <div className="register-heading">Racking</div>
               <div className="text-right"><a onClick={ thisVar.goBack } type="button">Back</a></div>
               <Form defaultValues={ currRecord } onSubmit={ (values) => {
                                                                 let data = values;
@@ -68,7 +68,7 @@ class Register3 extends Authentication {
                       return (
                           <div className="row">
                             <div className="col-lg-12 col-md-12 col-sm-12">
-                              <form onSubmit={ submitForm } id="register3">
+                              <form onSubmit={ submitForm } id="Register10">
                                 <div className="row">
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
@@ -98,8 +98,8 @@ class Register3 extends Authentication {
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
-                                      <label>Fermentation Loss</label>
-                                      <Text field='fermentationLoss' placeholder='Fermentation Loss' className="form-control" />
+                                      <label>Racking Loss</label>
+                                      <Text field='rackingLoss' placeholder='Racking Loss' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
@@ -174,4 +174,4 @@ class Register3 extends Authentication {
     }
 }
 
-export default Register3;
+export default Register10;

@@ -112,43 +112,6 @@ class Register1 extends Authentication {
                                     </div>
                                   </div>
                                 </div>
-                                <div>
-                                  <div className="form-label-headings">Address of Grape Supplier</div>
-                                  <div className="row">
-                                    <div className="col-lg-4 col-md-4 col-sm-12">
-                                      <div className="form-group">
-                                        <label>State</label>
-                                        <Select className="form-control" field="state" id="state" value={ stateInDB } options={ stateList } />
-                                      </div>
-                                    </div>
-                                    <div className="col-lg-4 col-md-4 col-sm-12">
-                                      <div className="form-group">
-                                        <label>District</label>
-                                        <Select className="form-control" field="district" id="district" value={ districtInDB } options={ districtList } />
-                                      </div>
-                                    </div>
-                                    <div className="col-lg-4 col-md-4 col-sm-12">
-                                      <div className="form-group">
-                                        <label>Taluka/Tahsil</label>
-                                        <Select className="form-control" field="taluka" id="taluka" value={ subDistrictInDB } options={ subDistrictList } />
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div className="row">
-                                    <div className="col-lg-4 col-md-4 col-sm-12">
-                                      <div className="form-group">
-                                        <label>Village</label>
-                                        <Select className="form-control" field="village" id="village" value={ villageInDB } options={ villageList } />
-                                      </div>
-                                    </div>
-                                    <div className="col-lg-4 col-md-4 col-sm-12">
-                                      <div className="form-group">
-                                        <label>Gat/ Survey No.</label>
-                                        <Text field='gatNumber' placeholder='Gat/ Survey No.' className="form-control" />
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
                                 <div className="row">
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
@@ -160,6 +123,12 @@ class Register1 extends Authentication {
                                     <div className="form-group">
                                       <label>Quantity of Grapes/Fruit Crushed in Kg.</label>
                                       <Text field='qtyCrushed' placeholder='KG' className="form-control" />
+                                    </div>
+                                  </div>
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <div className="form-group">
+                                      <label>Yield</label>
+                                      <Text field='yield' placeholder='Yield' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
@@ -174,8 +143,8 @@ class Register1 extends Authentication {
                                     </div>
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
-                                        <label>Press</label>
-                                          <Text field='press' placeholder='Press' className="form-control" />
+                                        <label>Quantity in Bulk Litres</label>
+                                          <Text field='qtyBulkLts' placeholder='Quantity in Bulk Litres' className="form-control" />
                                       </div>
                                     </div>
                                   </div>

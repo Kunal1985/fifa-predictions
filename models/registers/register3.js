@@ -7,7 +7,7 @@ var register3Schema = mongoose.Schema({
     date: String,
     tankNumber: String,
     openingBalance: Number,
-    rackingLoss: Number,
+    fermentationLoss: Number,
     baseWineObtained: Number,
     transferredQty: Number,
     closingBalance: Number,

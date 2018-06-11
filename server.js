@@ -64,6 +64,7 @@ require('./server/routes/registers/register6')(app, passport);
 require('./server/routes/registers/register7')(app, passport);
 require('./server/routes/registers/register8')(app, passport);
 require('./server/routes/registers/register9')(app, passport);
+require('./server/routes/registers/register10')(app, passport);
 
 // Server-side Routes for Masters
 require('./server/routes/masters/brand')(app, passport);

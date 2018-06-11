@@ -98,6 +98,11 @@ const sideBarList = [{
     title2: "Fermentation",
     allowedRoles: [1,2]
 }, {
+    url: "/register10Summary",
+    title1: "Register10",
+    title2: "Racking",
+    allowedRoles: [1,2]
+}, {
     url: "/register4Summary",
     title1: "Register4",
     title2: "Fortification",

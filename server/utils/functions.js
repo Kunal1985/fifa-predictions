@@ -11,6 +11,7 @@ var Register6 = require('../../models/registers/register6');
 var Register7 = require('../../models/registers/register7');
 var Register8 = require('../../models/registers/register8');
 var Register9 = require('../../models/registers/register9');
+var Register10 = require('../../models/registers/register10');
 
 // Imports for Masters' Models
 var TankMaster = require('../../models/masters/tankMaster');
@@ -75,6 +76,7 @@ var getModelObject = function(modelName){
     case "Register7": modelObj = Register7; break;
     case "Register8": modelObj = Register8; break;
     case "Register9": modelObj = Register9; break;
+    case "Register10": modelObj = Register9; break;
     case "TankMaster": modelObj = TankMaster; break;
     case "WineTypeMaster": modelObj = WineTypeMaster; break;
     case "GrapeVarietyMaster": modelObj = GrapeVarietyMaster; break;

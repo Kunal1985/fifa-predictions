@@ -6,10 +6,10 @@ import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, 
 import ReactTable from "react-table";
 import matchSorter from 'match-sorter';
 
-class Register3Summary extends Authentication {
+class Register10Summary extends Authentication {
     constructor(props) {
         super(props);
-        this.modelName = "Register3";
+        this.modelName = "Register10";
         this.viewName = `${this.modelName}Summary`;
         this.goBack = this.goBack.bind(this);
         this.redirectToCreate = this.redirectToCreate.bind(this);
@@ -18,13 +18,13 @@ class Register3Summary extends Authentication {
 
     redirectToCreate() {
         let currProps = this.props;
-        browserHistory.push("/register3");
+        browserHistory.push("/register10");
     }
 
     redirectToEdit(currId) {
         let currProps = this.props;
         browserHistory.push({
-            pathname: "/register3",
+            pathname: "/register10",
             state: {
                 upsertAction: "update",
                 id: currId
@@ -82,11 +82,11 @@ class Register3Summary extends Authentication {
             }),
             filterAll: true
         }, {
-            id: 'fermentationLoss', // Required because our accessor is not a string
-            Header: 'Fermentation Loss',
-            accessor: d => d.fermentationLoss, // Custom value accessors!
+            id: 'rackingLoss', // Required because our accessor is not a string
+            Header: 'Racking Loss',
+            accessor: d => d.rackingLoss, // Custom value accessors!
             filterMethod: (filter, rows) => matchSorter(rows, filter.value, {
-                keys: ["fermentationLoss"]
+                keys: ["rackingLoss"]
             }),
             filterAll: true
         }, {
@@ -104,7 +104,7 @@ class Register3Summary extends Authentication {
 
         return (
             <div className="container">
-              <div className="register-heading">Fermentation</div>
+              <div className="register-heading">Racking</div>
               <div className="text-right"><a onClick={ thisVar.goBack } type="button">Back</a></div>
               <div className="row">
                 <div className="col-lg-12 col-md-12 col-sm-12">
@@ -127,4 +127,4 @@ class Register3Summary extends Authentication {
     }
 }
 
-export default Register3Summary
+export default Register10Summary
