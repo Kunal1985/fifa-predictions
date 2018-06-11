@@ -60,6 +60,10 @@ import FermentedWineOpeningEntry from './components/opening-balance/FermentedWin
 import CreateFermentedWineOpeningEntry from './components/opening-balance/CreateFermentedWineOpeningEntry';
 import BottledWineOpeningEntry from './components/opening-balance/BottledWineOpeningEntry';
 import CreateBottledWineOpeningEntry from './components/opening-balance/CreateBottledWineOpeningEntry';
+import TirageOpeningEntry from './components/opening-balance/TirageOpeningEntry';
+import CreateTirageOpeningEntry from './components/opening-balance/CreateTirageOpeningEntry';
+import DisgorgedOpeningEntry from './components/opening-balance/DisgorgedOpeningEntry';
+import CreateDisgorgedOpeningEntry from './components/opening-balance/CreateDisgorgedOpeningEntry';
 import LabelledBottleOpeningEntry from './components/opening-balance/LabelledBottleOpeningEntry';
 import CreateLabelledBottleOpeningEntry from './components/opening-balance/CreateLabelledBottleOpeningEntry';
 import FinishedGoodsOpeningEntry from './components/opening-balance/FinishedGoodsOpeningEntry';
@@ -130,6 +134,10 @@ export default (
   <Route path='/createFermentedWineOpening' component={ User12Route(CreateFermentedWineOpeningEntry) } />
   <Route path='/bottledWineDetails' component={ User12Route(BottledWineOpeningEntry) } />
   <Route path='/createBottledWineOpening' component={ User12Route(CreateBottledWineOpeningEntry) } />
+  <Route path='/tirageDetails' component={ User12Route(TirageOpeningEntry) } />
+  <Route path='/createTirageOpening' component={ User12Route(CreateTirageOpeningEntry) } />
+  <Route path='/disgorgedDetails' component={ User12Route(DisgorgedOpeningEntry) } />
+  <Route path='/createDisgorgedOpening' component={ User12Route(CreateDisgorgedOpeningEntry) } />
   <Route path='/labelledBottleDetails' component={ User12Route(LabelledBottleOpeningEntry) } />
   <Route path='/createLabelledBottleOpening' component={ User12Route(CreateLabelledBottleOpeningEntry) } />
   <Route path='/finishedGoodsDetails' component={ User12Route(FinishedGoodsOpeningEntry) } />

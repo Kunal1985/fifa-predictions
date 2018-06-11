@@ -139,6 +139,12 @@ class Register6 extends Authentication {
                                         <Text field='closingBalance' placeholder='Closing Balance' className="form-control" />
                                       </div>
                                     </div>
+                                    <div className="col-lg-4 col-md-4 col-sm-12">
+                                      <div className="form-group">
+                                        <label>Batch No.</label>
+                                        <Text field='batchNumber' placeholder='Batch No.' className="form-control" />
+                                      </div>
+                                    </div>
                                   </div>
                                 </div>
                                 <div className="row">

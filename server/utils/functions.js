@@ -30,7 +30,8 @@ var GrapesDetails = require('../../models/opening-balance/grapesDetails');
 var CrushedJuiceDetails = require('../../models/opening-balance/crushedJuiceDetails');
 var FermentedDetails = require('../../models/opening-balance/fermentedDetails');
 var BottledDetails = require('../../models/opening-balance/bottledDetails');
-var TirageDisgorgedDetails = require('../../models/opening-balance/tirageDisgorgedDetails');
+var TirageDetails = require('../../models/opening-balance/tirageDetails');
+var DisgorgedDetails = require('../../models/opening-balance/disgorgedDetails');
 var LabelledDetails = require('../../models/opening-balance/labelledDetails');
 var FinishedGoodsDetails = require('../../models/opening-balance/finishedGoodsDetails');
 
@@ -97,7 +98,8 @@ var getModelObject = function(modelName){
     case "CrushedJuiceDetails": modelObj = CrushedJuiceDetails; break;
     case "FermentedDetails": modelObj = FermentedDetails; break;
     case "BottledDetails": modelObj = BottledDetails; break;
-    case "TirageDisgorgedDetails": modelObj = TirageDisgorgedDetails; break;
+    case "TirageDetails": modelObj = TirageDetails; break;
+    case "DisgorgedDetails": modelObj = DisgorgedDetails; break;
     case "LabelledDetails": modelObj = LabelledDetails; break;
     case "FinishedGoodsDetails": modelObj = FinishedGoodsDetails; break;
     default: break;

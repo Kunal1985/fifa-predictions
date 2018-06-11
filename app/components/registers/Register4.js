@@ -60,7 +60,7 @@ class Register4 extends Authentication {
                                     </div>
                                   </div>
                                 </div>
-                                <div className="form-label-headings">Fermented Wine</div>
+                                <div className="form-label-headings">Bulk Wine</div>
                                 <div className="row">
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">

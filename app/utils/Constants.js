@@ -70,9 +70,13 @@ const sideBarList = [{
         title1: "Bottled Details",
         title2: "Bottled Details",
     }, {
-        url: "/tirageDisgorgedStock",
-        title1: "Tirage/Disgorged Details",
-        title2: "Tirage/Disgorged Details",
+        url: "/tirageDetails",
+        title1: "Tirage Details",
+        title2: "Tirage Details",
+    }, {
+        url: "/disgorgedDetails",
+        title1: "Disgorged Details",
+        title2: "Disgorged Details",
     }, {
         url: "/labelledBottleDetails",
         title1: "Labelled Details",
@@ -110,7 +114,7 @@ const sideBarList = [{
 }, {
     url: "/register5Summary",
     title1: "Register5",
-    title2: "Bulk Transfer",
+    title2: "Bulk Transfer/Sale",
     allowedRoles: [1,2]
 }, {
     url: "/register6Summary",
@@ -244,7 +248,7 @@ const tankType = [{
 
 const reg9TransferType = [{
     value: "1",
-    label: "Own State"
+    label: "Within State"
 }, {
     value: "2",
     label: "Other State"

@@ -135,24 +135,18 @@ class Register9 extends Authentication {
                                     </div>
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
-                                        <label>T.P/E.P</label>
-                                        <Text field='tpEpNumber' placeholder='T.P/E.P' className="form-control" />
-                                      </div>
-                                    </div>
-                                    <div className="col-lg-4 col-md-4 col-sm-12">
-                                      <div className="form-group">
                                         <label>Vend/Export Fee</label>
                                         <Text field='vendExportFee' placeholder='Vend/Export Fee' className="form-control" />
                                       </div>
                                     </div>
-                                  </div>
-                                  <div className="row">
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Excise Duty</label>
                                         <Text field='exciseDuty' placeholder='Excise Duty' className="form-control" />
                                       </div>
                                     </div>
+                                  </div>
+                                  <div className="row">
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Total Amount</label>
@@ -165,14 +159,14 @@ class Register9 extends Authentication {
                                         <Text field='chalanNumber' placeholder='Chalan Number' className="form-control" />
                                       </div>
                                     </div>
-                                  </div>
-                                  <div className="row">
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Chalan Date</label>
                                         <Text field='chalanDate' placeholder='Chalan Date' className="form-control" type="date" />
                                       </div>
                                     </div>
+                                  </div>
+                                  <div className="row">
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Mfg. Cost</label>

@@ -83,9 +83,10 @@ require('./server/routes/opening-balance/grapes-details')(app, passport);
 require('./server/routes/opening-balance/crushed-juice-details')(app, passport);
 require('./server/routes/opening-balance/fermented-details')(app, passport);
 require('./server/routes/opening-balance/bottled-details')(app, passport);
-require('./server/routes/opening-balance/tirage-disgorged-details')(app, passport);
 require('./server/routes/opening-balance/labelled-details')(app, passport);
 require('./server/routes/opening-balance/finished-goods-details')(app, passport);
+require('./server/routes/opening-balance/tirage-details')(app, passport);
+require('./server/routes/opening-balance/disgorged-details')(app, passport);
 
 // Server-side Routes for Geography
 require('./server/routes/geography')(app, passport);

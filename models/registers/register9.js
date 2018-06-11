@@ -18,7 +18,6 @@ var register9Schema = mongoose.Schema({
     liscenseType: String,
     dispatchedSize: Number,
     dispatchedBottleQty: Number,
-    tpEpNumber: String,
     vendExportFee: Number,
     exciseDuty: Number,
     totalAmount: Number,

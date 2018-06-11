@@ -3,11 +3,11 @@ require('mongoose-long')(mongoose);
 var Long = mongoose.Schema.Types.Long;
 
 // define the schema for our user model
-var tirageDisgorgedDetailsSchema = mongoose.Schema({
+var tirageDetailsSchema = mongoose.Schema({
     date: String,
-    tankNumber: String,
-    spiritType: String,
+    bottleSize: Number,
     quantity: Number,
+    brand: String,
     verified: Boolean,
     wineryId: String,
     created_at: Long,
@@ -16,4 +16,4 @@ var tirageDisgorgedDetailsSchema = mongoose.Schema({
 });
 
 // create the model for users and expose it to our app
-module.exports = mongoose.model('TirageDisgorgedDetails', tirageDisgorgedDetailsSchema);
+module.exports = mongoose.model('TirageDetails', tirageDetailsSchema);

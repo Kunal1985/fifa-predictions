@@ -104,7 +104,7 @@ class Register5Summary extends Authentication {
 
         return (
             <div className="container">
-              <div className="register-heading">Bulk Transfer</div>
+              <div className="register-heading">Bulk Transfer/Sale</div>
               <div className="text-right"><a onClick={ thisVar.goBack } type="button">Back</a></div>
               <div className="row">
                 <div className="col-lg-12 col-md-12 col-sm-12">

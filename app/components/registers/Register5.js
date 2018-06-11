@@ -61,7 +61,7 @@ class Register5 extends Authentication {
         let wineVarietyList = (currState && currState["winetypemaster"]) ? currState["winetypemaster"] : [];
         return (
             <div className="container">
-              <div className="register-heading">Bulk Transfer</div>
+              <div className="register-heading">Bulk Transfer/Sale</div>
               <div className="text-right"><a onClick={ thisVar.goBack } type="button">Back</a></div>
               <div className="container">
                 <Form defaultValues={ currRecord } onSubmit={ (values) => {

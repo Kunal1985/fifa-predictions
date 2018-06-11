@@ -15,6 +15,7 @@ var register6Schema = mongoose.Schema({
     qtyInLitres: Number,
     bottlingLoss: Number,
     closingBalance: Number,
+    batchNumber: String,
     remarks: String,
     verified: Boolean,
     wineryId: String,
