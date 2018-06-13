@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, browserHistory } from 'react-router';
+import { getCurrRecord, upsertRecord, validateForm, getRecordsByQuery } from '../../utils/Functions';
 import { sideBarList } from '../../utils/Constants';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
@@ -8,7 +9,13 @@ class EditProfile extends Authentication {
 
     constructor(props) {
         super(props);
+        this.modelName = "UserProfile";
+        this.viewName = `${this.modelName}Form`;
         this.goBack = this.goBack.bind(this);
+        this.state = {
+          owners: ['owner-0'],
+          addresses: ['address-0']
+      };
     }
 
     onClear() {
@@ -20,7 +27,29 @@ class EditProfile extends Authentication {
         browserHistory.push("/home");
     }
 
+    appendInput() {
+      var newOwner = `owner-${this.state.owners.length}`;
+      var newAddress = `address-${this.state.addresses.length}`;
+      this.setState({
+          owners: this.state.owners.concat([newOwner]),
+          addresses: this.state.addresses.concat([newAddress])
+      });
+    }
+
+    componentDidMount() {
+      console.log(this.viewName, "componentDidMount");
+      let queryParams = this.props.location.state;
+      getCurrRecord(queryParams, this, this.modelName);
+    }
+
+    componentDidUpdate() {
+        console.log(this.viewName, "componentDidUpdate");
+    }
+
     render() {
+        let thisVar = this;
+        let currState = thisVar.state;
+        let currRecord = currState ? currState.currRecord : null;
         return (
             <div className="container">
               <div className="register-heading">Liscensee Profile</div>
@@ -62,6 +91,48 @@ class EditProfile extends Authentication {
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
+                                      <label>Date of Grant</label>
+                                      <Text field='editProfileDateofGrant' placeholder='Date of Grant' className="form-control" type="date" />
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <div className="form-group">
+                                      <label>Liscense Capacity</label>
+                                      <Text field='editProfileLiscenseNumber' placeholder='Liscense Number' className="form-control" />
+                                    </div>
+                                  </div>
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <div className="form-group">
+                                      <label>Last Renewal Date</label>
+                                      <Text field='editProfileLiscenseNumber' placeholder='Liscense Number' className="form-control" type="date"/>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <div className="form-group">
+                                      <label>Liscence Valid upto</label>
+                                      <Text field='editProfileLiscenseNumber' placeholder='Liscense Number' className="form-control" type="date"/>
+                                    </div>
+                                  </div>
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <div className="form-group">
+                                      <label>FSSAI Number</label>
+                                      <Text field='editProfileLiscenseNumber' placeholder='Liscense Number' className="form-control" />
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <div className="form-group">
+                                      <label>FSSAI Valid till</label>
+                                      <Text field='editProfileLiscenseNumber' placeholder='Liscense Number' className="form-control" type="date"/>
+                                    </div>
+                                  </div>
+                                  <div className="col-lg-4 col-md-4 col-sm-12">
+                                    <div className="form-group">
                                       <label>District</label>
                                       <select className="form-control"></select>
                                     </div>
@@ -69,44 +140,23 @@ class EditProfile extends Authentication {
                                 </div>
                                 <div className="row">
                                   <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
-                                      <label>Owner Name 1</label>
-                                      <Text field='editProfileOwnerName1' placeholder='Winery Name' className="form-control" />
+                                    <div id="dynamicOwnerNameInput" className="form-group">
+                                      <label>Owner Name</label>
+                                      { this.state.owners.map((input, index) => <Text placeholder='Owner Name' className="form-control" field={ input } key={index} />) }
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
+                                    <div id="dynamicOwnerAddressInput" className="form-group">
                                       <label>Address</label>
-                                      <Text field='editProfileOwner1Address' placeholder='Address' className="form-control" />
+                                      { this.state.addresses.map((input, index) => <Text placeholder='Address' className="form-control" field={ input } key={index} />) }
                                     </div>
                                   </div>
                                 </div>
                                 <div className="row">
                                   <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
-                                      <label>Owner Name 2</label>
-                                      <Text field='editProfileOwnerName2' placeholder='Winery Name' className="form-control" />
-                                    </div>
-                                  </div>
-                                  <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
-                                      <label>Address</label>
-                                      <Text field='editProfileOwner2Address' placeholder='Address' className="form-control" />
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="row">
-                                  <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
-                                      <label>Owner Name 3</label>
-                                      <Text field='editProfileOwnerName3' placeholder='Winery Name' className="form-control" />
-                                    </div>
-                                  </div>
-                                  <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
-                                      <label>Address</label>
-                                      <Text field='editProfileOwner3Address' placeholder='Address' className="form-control" />
-                                    </div>
+                                    <button type="button" className="btn btn-default" onClick={ () => thisVar.appendInput() } type="button">
+                                      Add Tank
+                                    </button>
                                   </div>
                                 </div>
                                 <div className="row">
@@ -144,14 +194,6 @@ class EditProfile extends Authentication {
                                     <div className="form-group">
                                       <label>Website</label>
                                       <Text field='editProfileWebAdd' placeholder='Website' className="form-control"/>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="row">
-                                  <div className="col-lg-4 col-md-4 col-sm-12">
-                                    <div className="form-group">
-                                      <label>Date of Grant</label>
-                                      <Text field='editProfileDateofGrant' placeholder='Date of Grant' className="form-control" type="date" />
                                     </div>
                                   </div>
                                 </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, browserHistory } from 'react-router';
-import { sideBarList } from '../../utils/Constants';
+import { sideBarList, bottleSize } from '../../utils/Constants';
 import { getCurrRecord, upsertRecord, validateForm, getRecordsByQuery } from '../../utils/Functions';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
@@ -83,7 +83,7 @@ class CreateFinishedGoodsOpeningEntry extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Bottle Size</label>
-                                      <select className="form-control" field="bottleSize" id="bottleSize"></select>
+                                      <Select className="form-control" field="bottleSize" id="bottleSize" options={bottleSize} ></Select>
                                     </div>
                                   </div>
                                 </div>

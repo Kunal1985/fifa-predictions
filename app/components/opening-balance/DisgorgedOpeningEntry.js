@@ -60,10 +60,10 @@ class DisgorgedOpeningEntry extends Authentication {
           </span>
         )
       },{
-        Header: 'Type',
-        accessor: 'type', // String-based value accessors!
+        Header: 'Brand',
+        accessor: 'brand', // String-based value accessors!
         filterMethod: (filter, rows) =>
-          matchSorter(rows, filter.value, { keys: ["type"] }),
+          matchSorter(rows, filter.value, { keys: ["brand"] }),
         filterAll: true
       }, {
         id: 'bottleSize', // Required because our accessor is not a string

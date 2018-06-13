@@ -167,14 +167,20 @@ const sizeInML = [{
 }]
 
 const bottleSize = [{
-    label: "Bottle Size 'S'",
-    value: "Bottle Size 'S'"
+    label: "187 ML",
+    value: "187"
 }, {
-    label: "Bottle Size 'M'",
-    value: "Bottle Size 'M'"
+    label: "375 ML",
+    value: "375"
 }, {
-    label: "Bottle Size 'L'",
-    value: "Bottle Size 'L'"
+    label: "750 ML",
+    value: "750"
+}, {
+    label: "1.5 L",
+    value: "1500"
+}, {
+    label: "3 L",
+    value: "3000"
 }]
 
 const wineType = [{
