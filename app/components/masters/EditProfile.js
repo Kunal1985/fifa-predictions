@@ -1,25 +1,23 @@
 import React from 'react';
+import _ from 'underscore';
 import { Link, browserHistory } from 'react-router';
-import { getCurrRecord, upsertRecord, validateForm, getRecordsByQuery } from '../../utils/Functions';
+import { getCurrRecord, upsertRecord, validateForm, getRecordsByQuery, getAllRecords } from '../../utils/Functions';
 import { sideBarList } from '../../utils/Constants';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
+import { getCurrUserName } from '../../utils/TokenUtils';
 
 class EditProfile extends Authentication {
 
     constructor(props) {
         super(props);
-        this.modelName = "UserProfile";
+        this.modelName = "WineryUser";
         this.viewName = `${this.modelName}Form`;
         this.goBack = this.goBack.bind(this);
         this.state = {
           owners: ['owner-0'],
           addresses: ['address-0']
       };
-    }
-
-    onClear() {
-        document.getElementById("editForm").reset();
     }
 
     goBack() {
@@ -38,8 +36,7 @@ class EditProfile extends Authentication {
 
     componentDidMount() {
       console.log(this.viewName, "componentDidMount");
-      let queryParams = this.props.location.state;
-      getCurrRecord(queryParams, this, this.modelName);
+      getAllRecords(this, this.modelName);
     }
 
     componentDidUpdate() {
@@ -49,18 +46,21 @@ class EditProfile extends Authentication {
     render() {
         let thisVar = this;
         let currState = thisVar.state;
+        currState.currRecord = _.findWhere(currState.records, {email: getCurrUserName()});
         let currRecord = currState ? currState.currRecord : null;
         return (
             <div className="container">
               <div className="register-heading">Liscensee Profile</div>
               <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
-              <Form onSubmit={ (values) => {
-                                   console.log('s');
+              <Form  defaultValues = {currRecord} onSubmit={ (values) => {
+                                   let data = values;
+                                   if(currState && currState.currRecord)
+                                     data._id = currState.currRecord._id;
+                                     upsertRecord(data, thisVar, thisVar.modelName);
                                } } validate={ (values) => {
-                                                                                                                                                      return {
-                                                                                                                                                  
-                                                                                                                                                      }
-                                                                                                                                                  } }>
+                                    return validateForm(values, thisVar.modelName);
+                                  
+                              } }>
                 { ({submitForm}) => {
                       let errorMessage = null;
                   
@@ -72,13 +72,13 @@ class EditProfile extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Name</label>
-                                      <Text field='editProfileWineryName' placeholder='Winery Name' className="form-control" />
+                                      <Text field='name' placeholder='Winery Name' className="form-control" />
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Liscense Number</label>
-                                      <Text field='editProfileLiscenseNumber' placeholder='Liscense Number' className="form-control" />
+                                      <Text field='liscenseNumber' placeholder='Liscense Number' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
@@ -92,7 +92,7 @@ class EditProfile extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Date of Grant</label>
-                                      <Text field='editProfileDateofGrant' placeholder='Date of Grant' className="form-control" type="date" />
+                                      <Text field='dateofGrant' placeholder='Date of Grant' className="form-control" type="date" />
                                     </div>
                                   </div>
                                 </div>
@@ -100,13 +100,13 @@ class EditProfile extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Liscense Capacity</label>
-                                      <Text field='editProfileLiscenseNumber' placeholder='Liscense Number' className="form-control" />
+                                      <Text field='liscenseCapacity' placeholder='Liscense Capacity' className="form-control" />
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Last Renewal Date</label>
-                                      <Text field='editProfileLiscenseNumber' placeholder='Liscense Number' className="form-control" type="date"/>
+                                      <Text field='lastRenewalDate' placeholder='Last Renewal Date' className="form-control" type="date"/>
                                     </div>
                                   </div>
                                 </div>
@@ -114,13 +114,13 @@ class EditProfile extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Liscence Valid upto</label>
-                                      <Text field='editProfileLiscenseNumber' placeholder='Liscense Number' className="form-control" type="date"/>
+                                      <Text field='liscenseValidUpto' placeholder='Liscence Valid upto' className="form-control" type="date"/>
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>FSSAI Number</label>
-                                      <Text field='editProfileLiscenseNumber' placeholder='Liscense Number' className="form-control" />
+                                      <Text field='fssaiNo' placeholder='FSSAI Number' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
@@ -128,7 +128,7 @@ class EditProfile extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>FSSAI Valid till</label>
-                                      <Text field='editProfileLiscenseNumber' placeholder='Liscense Number' className="form-control" type="date"/>
+                                      <Text field='fssaiValidTill' placeholder='FSSAI Valid till' className="form-control" type="date"/>
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
@@ -163,13 +163,13 @@ class EditProfile extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Telephone Number</label>
-                                      <Text field='editProfileTel' placeholder='Telephone Number' className="form-control" />
+                                      <Text field='telephoneNumber' placeholder='Telephone Number' className="form-control" />
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Email</label>
-                                      <Text field='editProfileEmail' placeholder='Email' className="form-control" />
+                                      <Text field='email' placeholder='Email' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
@@ -178,14 +178,14 @@ class EditProfile extends Authentication {
                                     <div className="form-group">
                                       <label className="text-area-labels">
                                         Address:
-                                        <textarea field='editProfileAddress' placeholder='Address' className="form-control" />
+                                        <textarea field='address' placeholder='Address' className="form-control" />
                                       </label>
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Pin code</label>
-                                      <Text field='editProfilePinCode' placeholder='Pin code' className="form-control" />
+                                      <Text field='pinCode' placeholder='Pin code' className="form-control" />
                                     </div>
                                   </div>
                                 </div>
@@ -193,7 +193,7 @@ class EditProfile extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Website</label>
-                                      <Text field='editProfileWebAdd' placeholder='Website' className="form-control"/>
+                                      <Text field='webAdd' placeholder='Website' className="form-control"/>
                                     </div>
                                   </div>
                                 </div>
