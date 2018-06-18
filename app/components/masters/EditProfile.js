@@ -169,7 +169,7 @@ class EditProfile extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Email</label>
-                                      <Text field='email' placeholder='Email' className="form-control" />
+                                      <Text field='email' placeholder='Email' disabled="disabled" className="form-control" />
                                     </div>
                                   </div>
                                 </div>
