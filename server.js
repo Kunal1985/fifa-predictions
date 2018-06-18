@@ -53,6 +53,7 @@ app.use(require('express-session')({ secret: 'keyboard cat', resave: false, save
 // Passport related imports
 require('./server/passport')(passport);
 require('./server/routes/auth')(app, passport);
+require('./server/routes/reset-password')(app, passport);
 
 // Server-side Routes for Registers 
 require('./server/routes/registers/register1')(app, passport);

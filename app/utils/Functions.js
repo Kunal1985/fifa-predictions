@@ -61,6 +61,29 @@ exports.logoutUser = function (currObj) {
     });
 }
 
+exports.changePassword = function (data, currObj, userName) {
+  let options = {
+    method: 'POST',
+    uri: 'http://localhost:3000/resetPassword',
+    body: {
+      userName: userName,
+      password: data.oldPassword,
+      newPassword: data.newPassword,
+      confirmPassword: data.confirmPassword
+    },
+    json: true
+  };
+  return rp(options)
+    .then(function (body) {
+      currObj.setState({ changePasswordStatus: body });
+      return body;
+    })
+    .catch(function (err) {
+      console.log("Error Logout", err);
+      return null;
+    });
+}
+
 exports.getUserDetailsRP = function (currObj) {
   return rp("http://localhost:3000/userDetails");
 }

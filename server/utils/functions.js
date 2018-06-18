@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 var ObjectId = mongoose.Types.ObjectId;
 
+var User = require('../../models/user');
+
 // Imports for Registers' Models
 var Register1 = require('../../models/registers/register1');
 var Register2 = require('../../models/registers/register2');
@@ -234,4 +236,31 @@ module.exports.getRecordByUserName = function(req, res, next, modelName){
   } else{
     throw new Error("Model not found!");
   }
+}
+
+/**
+ * Method to reset password.
+ * 
+ */
+module.exports.changePassword = function(req, res, next, modelName){
+  var reqBody = req.body;
+  console.log("changePassword", reqBody)
+  var currPassword = reqBody.password;
+  User.findOne({username: reqBody.userName}, function(err, doc) {
+    if (err) { throw err; }
+    console.log(modelName, "record found", doc);
+    if(!doc.validPassword(currPassword)) {
+      res.json({ error: "Your current password do not match" });
+    } else if(reqBody.newPassword != reqBody.confirmPassword) {
+      res.json({ error: "Your new password do not match" });
+    } else {
+      var currRecordId = doc._id;
+      var newPassword = doc.generateHash(reqBody.newPassword);
+
+      doc.update({password: newPassword}, function(err, modelRecord) {
+        if (err) return next(err);
+        res.json({ recordUpdated: true });
+      });
+      }
+  });
 }

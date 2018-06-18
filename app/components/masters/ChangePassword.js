@@ -2,12 +2,16 @@ import React from 'react';
 import { Link, browserHistory } from 'react-router';
 import { sideBarList } from '../../utils/Constants';
 import Authentication from '../Authentication';
+import { changePassword } from '../../utils/Functions';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
+import { getCurrUserName } from '../../utils/TokenUtils';
 
 class ChangePassword extends Authentication {
 
     constructor(props) {
         super(props);
+        this.modelName = "ChangePassword";
+        this.viewName = `${this.modelName}Form`;
         this.onCancel = this.onCancel.bind(this);
     }
 
@@ -16,17 +20,28 @@ class ChangePassword extends Authentication {
         browserHistory.goBack()
     }
 
+    componentDidMount(){
+      console.log(this.viewName, "componentDidMount");
+    }
+
+    componentDidUpdate(){
+      console.log(this.viewName, "componentDidUpdate");
+    }
+
     render() {
+      let thisVar = this;
+      let currState = thisVar.state;
         return (
             <div className="container">
               <div className="register-heading">Change Password</div>
               <Form onSubmit={ (values) => {
-                                   console.log('s');
-                               } } validate={ (values) => {
-                                                                                                                                                      return {
-                                                                                                                                                  
-                                                                                                                                                      }
-                                                                                                                                                  } }>
+                    let data = values;
+                    changePassword(data, thisVar, getCurrUserName());
+                  } } validate={ (values) => {
+                    return {
+                
+                    }
+                } }>
                 { ({submitForm}) => {
                       let errorMessage = null;
                   
@@ -57,6 +72,15 @@ class ChangePassword extends Authentication {
                                   <div className="col-lg-6 col-md-6 col-sm-8">
                                     <div className="form-group">
                                       <Text field='confirmPassword' placeholder='Confirm Password*' className="form-control" type="password" />
+                                    </div>
+                                  </div>
+                                  <div className="col-lg-3 col-md-3 col-sm-2"></div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-lg-3 col-md-3 col-sm-2"></div>
+                                  <div className="col-lg-6 col-md-6 col-sm-8">
+                                    <div>
+                                      {currState && currState.changePasswordStatus && currState.changePasswordStatus.error ? <div className="text-danger">{currState.changePasswordStatus.error}</div> : <div>"Password changed successfully"</div>}
                                     </div>
                                   </div>
                                   <div className="col-lg-3 col-md-3 col-sm-2"></div>
