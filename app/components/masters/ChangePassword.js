@@ -80,7 +80,8 @@ class ChangePassword extends Authentication {
                                   <div className="col-lg-3 col-md-3 col-sm-2"></div>
                                   <div className="col-lg-6 col-md-6 col-sm-8">
                                     <div>
-                                      {currState && currState.changePasswordStatus && currState.changePasswordStatus.error ? <div className="text-danger">{currState.changePasswordStatus.error}</div> : <div>"Password changed successfully"</div>}
+                                      {currState && currState.changePasswordStatus && currState.changePasswordStatus.error ? <div className="text-danger text-center">{currState.changePasswordStatus.error}</div> : <div></div>}
+                                      {currState && currState.changePasswordStatus && !currState.changePasswordStatus.error ? <div className="text-center">Password changed successfully</div> : <div></div>}
                                     </div>
                                   </div>
                                   <div className="col-lg-3 col-md-3 col-sm-2"></div>

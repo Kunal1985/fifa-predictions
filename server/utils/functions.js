@@ -252,7 +252,7 @@ module.exports.changePassword = function(req, res, next, modelName){
     if(!doc.validPassword(currPassword)) {
       res.json({ error: "Your current password do not match" });
     } else if(reqBody.newPassword != reqBody.confirmPassword) {
-      res.json({ error: "Your new password do not match" });
+      res.json({ error: "Your new passwords do not match" });
     } else {
       var currRecordId = doc._id;
       var newPassword = doc.generateHash(reqBody.newPassword);
