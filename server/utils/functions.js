@@ -216,3 +216,22 @@ module.exports.getRecordById = function(req, res, next, modelName){
     throw new Error("Model not found!");
   }
 }
+
+/**
+ * Method to fetch Current User.
+ * 
+ */
+module.exports.getRecordByUserName = function(req, res, next, modelName){
+  var reqBody = req.body;
+  var modelObj = getModelObject(modelName);
+  if(modelObj){
+    console.log("getRecordByUserName for", modelName, reqBody);
+    modelObj.findOne({email: reqBody.email}, function(err, doc) {
+      if (err) { throw err; }
+      console.log(modelName, "record found", doc);
+      res.json(doc);
+    });
+  } else{
+    throw new Error("Model not found!");
+  }
+}

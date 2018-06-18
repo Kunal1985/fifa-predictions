@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'underscore';
 import { Link, browserHistory } from 'react-router';
-import { getCurrRecord, upsertRecord, validateForm, getRecordsByQuery, getAllRecords } from '../../utils/Functions';
+import { getCurrRecord, upsertRecord, validateForm, getRecordsByQuery, getAllRecords, getRecordByUserName } from '../../utils/Functions';
 import { sideBarList } from '../../utils/Constants';
 import Authentication from '../Authentication';
 import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form';
@@ -36,7 +36,8 @@ class EditProfile extends Authentication {
 
     componentDidMount() {
       console.log(this.viewName, "componentDidMount");
-      getAllRecords(this, this.modelName);
+      let currUserName = getCurrUserName();
+      getRecordByUserName(this, this.modelName,currUserName);
     }
 
     componentDidUpdate() {
@@ -46,7 +47,6 @@ class EditProfile extends Authentication {
     render() {
         let thisVar = this;
         let currState = thisVar.state;
-        currState.currRecord = _.findWhere(currState.records, {email: getCurrUserName()});
         let currRecord = currState ? currState.currRecord : null;
         return (
             <div className="container">

@@ -104,6 +104,34 @@ exports.getAllRecords = function (currObj, modelName) {
     });
 }
 
+exports.getRecordByUserName = function (currObj, modelName, userName) {
+  if (userName) {
+    var options = {
+      method: 'POST',
+      uri: `http://localhost:3000/getCurrent${modelName}Record`,
+      body: {
+        email: userName
+      },
+      headers: {
+        'authorization': 'Bearer ' + getByKey("authToken")
+      },
+      json: true
+    };
+    return rp(options)
+      .then(function (body) {
+        console.log("getCurrUser Response for", modelName, body);
+        if (!currObj.state || !currObj.state.currRecord)
+          currObj.setState({ currRecord: body });
+        return body;
+      })
+      .catch(function (err) {
+        console.log("Error", err);
+        handleTokenTampering(err);
+        return null;
+      });
+  }
+}
+
 exports.getRecordsByQuery = function (currObj, modelName, query) {
   console.log("getRecordsByQuery for", modelName);
   var enpointUrl;
