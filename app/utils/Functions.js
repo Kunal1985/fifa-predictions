@@ -50,7 +50,8 @@ exports.logoutUser = function (currObj) {
       removeToken();
       browserHistory.push("/");
       currObj.setState({
-        currUser: null
+        currUser: null,
+        currRecord: null
       });
       return body;
     })
