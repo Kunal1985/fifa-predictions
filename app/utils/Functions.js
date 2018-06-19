@@ -144,7 +144,7 @@ exports.getRecordByUserName = function (currObj, modelName, userName) {
     return rp(options)
       .then(function (body) {
         console.log("getCurrUser Response for", modelName, body);
-        if (!currObj.state || !currObj.state.currRecord)
+        if (body && (!currObj.state || !currObj.state.currRecord))
           currObj.setState({ currRecord: body });
         return body;
       })
