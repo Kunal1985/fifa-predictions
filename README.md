@@ -15,7 +15,7 @@ Mongo DB
 `npm install gulp -g`  
 
 ### Install Bower Packages
-`bower install`
+`bower install`  
 `sudo bower install --allow-root`
 
 ## Running the Application

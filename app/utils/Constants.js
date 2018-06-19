@@ -1,3 +1,5 @@
+const BASE_URL = 'http://159.65.159.100:3000';
+
 const sideBarList = [{
     url: "/home",
     title1: "Home",
@@ -317,7 +319,7 @@ const disgorgingTypeList = [{
     value: "otherUnitTransfer"
 }]
 
-export { 
+export { BASE_URL,
     sideBarList, grapeVariety, sizeInML, bottleSize, 
     wineType, licenseType, purchaseType, saleType, 
     tankType, reg9TransferType, disgorgingTypeList,

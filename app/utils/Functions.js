@@ -1,5 +1,5 @@
 import rp from 'request-promise';
-import { sideBarList } from './Constants';
+import { BASE_URL, sideBarList } from './Constants';
 import { browserHistory } from 'react-router';
 import { storeToken, removeToken, getByKey } from './TokenUtils';
 import {_} from 'underscore';
@@ -16,7 +16,7 @@ exports.authenticateUser = function (values, currObj) {
   var actionType = currObj.state.submitType.toLowerCase();
   let options = {
     method: 'POST',
-    uri: 'http://localhost:3000/' + actionType,
+    uri: `${BASE_URL}/${actionType}`,
     body: values,
     json: true
   };
@@ -41,7 +41,7 @@ exports.logoutUser = function (currObj) {
   let currProps = currObj.props;
   let options = {
     method: 'POST',
-    uri: 'http://localhost:3000/logout',
+    uri: `${BASE_URL}/logout`,
     json: true
   };
   return rp(options)
@@ -64,7 +64,7 @@ exports.logoutUser = function (currObj) {
 exports.changePassword = function (data, currObj, userName) {
   let options = {
     method: 'POST',
-    uri: 'http://localhost:3000/resetPassword',
+    uri: `${BASE_URL}/resetPassword`,
     body: {
       userName: userName,
       password: data.oldPassword,
@@ -85,11 +85,11 @@ exports.changePassword = function (data, currObj, userName) {
 }
 
 exports.getUserDetailsRP = function (currObj) {
-  return rp("http://localhost:3000/userDetails");
+  return rp(`${BASE_URL}/userDetails`);
 }
 
 exports.getUserDetails = function (currObj) {
-  return rp("http://localhost:3000/userDetails")
+  return rp(`${BASE_URL}/userDetails`)
     .then(function (body) {
       currObj.setState({
         currUser: JSON.parse(body)
@@ -105,7 +105,7 @@ exports.getAllRecords = function (currObj, modelName) {
   console.log("getAllRecords for", modelName);
   var options = {
     method: 'GET',
-    uri: `http://localhost:3000/get${modelName}`,
+    uri: `${BASE_URL}/get${modelName}`,
     headers: {
       'authorization': 'Bearer ' + getByKey("authToken")
     },
@@ -132,7 +132,7 @@ exports.getRecordByUserName = function (currObj, modelName, userName) {
   if (userName) {
     var options = {
       method: 'POST',
-      uri: `http://localhost:3000/getCurrent${modelName}Record`,
+      uri: `${BASE_URL}/getCurrent${modelName}Record`,
       body: {
         email: userName
       },
@@ -161,10 +161,10 @@ exports.getRecordsByQuery = function (currObj, modelName, query) {
   var enpointUrl;
   var httpMethod;
   if (["States", "Districts", "SubDistricts", "Villages"].indexOf(modelName) != -1) {
-    enpointUrl = `http://localhost:3000/get${modelName}ByQuery`;
+    enpointUrl = `${BASE_URL}/get${modelName}ByQuery`;
     httpMethod = "POST";
   } else {
-    enpointUrl = `http://localhost:3000/get${modelName}`;
+    enpointUrl = `${BASE_URL}/get${modelName}`;
     httpMethod = "GET";
   }
   var options = {
@@ -266,7 +266,7 @@ exports.getCurrRecord = function (queryParams, currObj, modelName) {
   if (queryParams && queryParams.upsertAction === 'update' && queryParams.id) {
     var options = {
       method: 'POST',
-      uri: `http://localhost:3000/get${modelName}Record`,
+      uri: `${BASE_URL}/get${modelName}Record`,
       body: {
         _id: queryParams.id
       },
@@ -293,7 +293,7 @@ exports.getCurrRecord = function (queryParams, currObj, modelName) {
 exports.upsertRecord = function (data, thisVar, modelName) {
   let options = {
     method: 'POST',
-    uri: `http://localhost:3000/upsert${modelName}`,
+    uri: `${BASE_URL}/upsert${modelName}`,
     headers: {
       'authorization': 'Bearer ' + getByKey("authToken")
     },
