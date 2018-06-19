@@ -326,12 +326,12 @@ exports.checkTankBalance = function(index,tankList) {
   console.log("checkTankBalance" + tankList);
 }
 
-var checkForTankValidation = function(values, tankList) {
-  if(!values.quantity) {
+var checkForTankValidation = function(quantity, values, tankList) {
+  if(!quantity) {
     return 'Please enter the quantity.'
-  } else if(values.quantity && values.tankNumber && tankList && tankList.length > 0) {
+  } else if(quantity && values.tankNumber && tankList && tankList.length > 0) {
       var tankBalance = _.where(tankList, {value: values.tankNumber});
-      return (values.quantity > tankBalance[0].balance) ? "Quantity greater than Tank Balance" : undefined;
+      return (quantity > tankBalance[0].balance) ? "Quantity greater than Tank Balance" : undefined;
   }
 }
 
@@ -345,11 +345,9 @@ exports.validateForm = function (values, modelName, tankList) {
         qtyCrushed: !values.qtyCrushed ? 'Please enter Quantity of Fruit/Grapes Crushed in Kg.' : undefined,
         qtyReceived: !values.qtyReceived ? 'Please enter Quantity of Fruit/Grapes Received in Kg.' : undefined,
         supplierName: !values.supplierName ? 'Please select the Grape/Fruit Supplier' : undefined,
-        gatNumber: !values.gatNumber ? 'Please enter a valid GAT/Survey No.' : undefined,
-        state: !values.state ? 'Please select a State.' : undefined,
-        district: !values.district ? 'Please select a District.' : undefined,
-        taluka: !values.taluka ? 'Please select a Taluka.' : undefined,
-        village: !values.village ? 'Please select a Village.' : undefined
+        yield: !values.yield ? 'Please Enter Yield' : undefined,
+        tankNumber: !values.tankNumber ? 'Please select a Tank' : undefined,
+        qtyBulkLts: checkForTankValidation(values.qtyBulkLts, values, tankList)
       };
       break;
     case "Register2":
@@ -478,14 +476,14 @@ exports.validateForm = function (values, modelName, tankList) {
         date: !values.date ? 'Please Select a Date' : undefined,
         tankNumber: !values.tankNumber ? 'Please Select a Tank' : undefined,
         grapeVariety: !values.grapeVariety ? 'Please select grape variety.' : undefined,
-        quantity: checkForTankValidation(values, tankList)
+        quantity: checkForTankValidation(values.quantity, values, tankList)
       };
       break;
       case "FermentedDetails":
       validators = {
         date: !values.date ? 'Please Select a Date' : undefined,
         tankNumber: !values.tankNumber ? 'Please Select a Tank' : undefined,
-        quantity: checkForTankValidation(values, tankList)
+        quantity: checkForTankValidation(values.quantity, values, tankList)
       };
       break;
       case "FinishedGoodsDetails":
@@ -501,7 +499,7 @@ exports.validateForm = function (values, modelName, tankList) {
         date: !values.date ? 'Please Select a Date' : undefined,
         tankNumber: !values.tankNumber ? 'Please Select a Tank' : undefined,
         flavour: !values.flavour ? 'Please select a flavour.' : undefined,
-        quantity: checkForTankValidation(values, tankList)
+        quantity: checkForTankValidation(values.quantity, values, tankList)
       };
       break;
       case "GrapesDetails":
@@ -524,7 +522,7 @@ exports.validateForm = function (values, modelName, tankList) {
         date: !values.date ? 'Please Select a Date' : undefined,
         tankNumber: !values.tankNumber ? 'Please Select a Tank' : undefined,
         spiritType: !values.spiritType ? 'Please select Spirit Type.' : undefined,
-        quantity: checkForTankValidation(values, tankList),
+        quantity: checkForTankValidation(values.quantity, values, tankList),
         strength: !values.strength ? 'Please enter strength.' : undefined,
         pl: !values.pl ? 'Please enter PL.' : undefined
       };

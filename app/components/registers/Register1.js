@@ -84,7 +84,7 @@ class Register1 extends Authentication {
                             subDistrictCode: parseInt(currSubDistrict)
                         });
                     }
-                    return validateForm(values, thisVar.modelName);
+                    return validateForm(values, thisVar.modelName, tankList);
                 } }>
                 { ({submitForm}) => {
                       let errorMessage = null;
@@ -108,7 +108,7 @@ class Register1 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Quantity of Fruit/Grapes Received in Kg.</label>
-                                      <Text field='qtyReceived' placeholder='KG' className="form-control" />
+                                      <Text field='qtyReceived' placeholder='KG' className="form-control" type="number" />
                                     </div>
                                   </div>
                                 </div>
@@ -122,7 +122,7 @@ class Register1 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Quantity of Grapes/Fruit Crushed in Kg.</label>
-                                      <Text field='qtyCrushed' placeholder='KG' className="form-control" />
+                                      <Text field='qtyCrushed' placeholder='KG' className="form-control" type="number"/>
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
@@ -138,13 +138,13 @@ class Register1 extends Authentication {
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Tank</label>
-                                        <Select className="form-control" field="tank" id="tank" options={ tankList } />
+                                        <Select className="form-control" field="tankNumber" id="tankNumber" options={ tankList } />
                                       </div>
                                     </div>
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Quantity in Bulk Litres</label>
-                                          <Text field='qtyBulkLts' placeholder='Quantity in Bulk Litres' className="form-control" />
+                                          <Text field='qtyBulkLts' placeholder='Quantity in Bulk Litres' className="form-control" type="number" />
                                       </div>
                                     </div>
                                   </div>

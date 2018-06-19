@@ -13,8 +13,8 @@ var register1Schema = mongoose.Schema({
     remarks: String,
     verified: Boolean,
     wineryId: String,
-    tank: Number,
-    qtyBulkLts: String,
+    tankNumber: Number,
+    qtyBulkLts: Number,
     created_at: Long,
     updated_at: Long,
     created_by: String

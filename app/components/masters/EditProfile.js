@@ -193,7 +193,7 @@ class EditProfile extends Authentication {
                                     <div className="form-group">
                                       <label className="text-area-labels">
                                         Address:
-                                        <textarea field='address' placeholder='Address' className="form-control" />
+                                        <Textarea field='address' placeholder='Address' className="form-control" />
                                       </label>
                                     </div>
                                   </div>

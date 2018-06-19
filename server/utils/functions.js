@@ -155,12 +155,17 @@ module.exports.upsertRecord = function(req, res, next, modelName){
         modelObj.update({_id: ObjectId(currRecordId)}, data, function(err, modelRecord) {
           if (err) return next(err);
           console.log("Record Updated for", modelName, modelRecord);
+          if (["CrushedJuiceDetails", "FermentedDetails", "FlavourDetails", "SpiritDetails", "TirageDisgorgedDetails"].indexOf(modelName) != -1) {
             if(doc.quantity != data.quantity) {
               var quan = parseInt(data.quantity) - parseInt(doc.quantity);
-              if (["CrushedJuiceDetails", "FermentedDetails", "FlavourDetails", "SpiritDetails", "TirageDisgorgedDetails"].indexOf(modelName) != -1) {
                 updateTankBalance(data.tankNumber, quan, res, "TankMaster");
-              }
             }
+          } else if(["Register1"].indexOf(modelName) != -1) {
+            if(doc.qtyBulkLts != data.qtyBulkLts) {
+              var quan = parseInt(data.qtyBulkLts) - parseInt(doc.qtyBulkLts);
+                updateTankBalance(data.tankNumber, quan, res, "TankMaster");
+            }
+          }
           res.json({ recordUpdated: true });
         });
       });
@@ -172,6 +177,8 @@ module.exports.upsertRecord = function(req, res, next, modelName){
         if (["CrushedJuiceDetails", "FermentedDetails", "FlavourDetails", "SpiritDetails", "TirageDisgorgedDetails"].indexOf(modelName) != -1) {
           updateTankBalance(data.tankNumber, data.quantity, res, "TankMaster");
           console.log("Inside data:"+ data);
+        } else if(["Register1"].indexOf(modelName) != -1) {
+          updateTankBalance(data.tankNumber, data.qtyBulkLts, res, "TankMaster");
         }
         res.json({ recordCreated: true });
       });
