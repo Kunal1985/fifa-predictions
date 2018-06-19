@@ -16,6 +16,7 @@ Mongo DB
 
 ### Install Bower Packages
 `bower install`
+`sudo bower install --allow-root`
 
 ## Running the Application
 ### Start the Mongo DB Server
