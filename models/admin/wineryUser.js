@@ -13,6 +13,10 @@ var wineryUserSchema = mongoose.Schema({
     telephoneNumber: Number,
     state: String,
     district: String,
+    ownerList: [{
+        ownerName: String,
+        address: Number
+    }],
     taluka: String,
     village: String,
     gatNumber: String,

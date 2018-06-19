@@ -49,6 +49,15 @@ class Register2 extends Authentication {
         let currRecord = currState ? currState.currRecord : null;
         let tankList = (currState && currState["tankmaster"]) ? currState["tankmaster"] : [];
         let grapeVarietyList = (currState && currState["grapevarietymaster"]) ? currState["grapevarietymaster"] : [];
+        let tankListArray = [];
+
+        if(currRecord && currRecord.tankList) {
+          for(let i=0; i < currRecord.tankList.length; i++) {
+            currRecord['tank-' + i] = currRecord.tankList[i].tankNumber;
+            currRecord['quantity-' + i] = currRecord.tankList[i].transferredQty;
+          }
+        }
+        
         return (
             <div className="container">
               <div className="register-heading">Crushing/Juice Processing</div>
@@ -57,6 +66,14 @@ class Register2 extends Authentication {
                                                                 let data = values;
                                                                 if (currState && currState.currRecord)
                                                                     data._id = currState.currRecord._id;
+
+                                                                    for(let i=0; i<currState.tanks.length;i++) {
+                                                                      let list = {tankNumber: data[currState.tanks[i]],
+                                                                        transferredQty: data[currState.quantities[i]]};
+                                                                        tankListArray.push(list);
+                                                                    }
+                                                                    data.tankList = tankListArray;
+
                                                                 upsertRecord(data, thisVar, thisVar.modelName);
                                                             } } validate={ (values) => {
                                                               return validateForm(values, thisVar.modelName);

@@ -51,6 +51,16 @@ class Register10 extends Authentication {
         let currState = thisVar.state;
         let currRecord = currState ? currState.currRecord : null;
         let tankList = (currState && currState["tankmaster"]) ? currState["tankmaster"] : [];
+        let tankListArray = [];
+        
+        if(currRecord && currRecord.tankList) {
+          for(let i=0; i < currRecord.tankList.length; i++) {
+            currRecord['tank-' + i] = currRecord.tankList[i].tankNumber;
+            currRecord['opening-' + i] = currRecord.tankList[i].openingBalance;
+            currRecord['quantity-' + i] = currRecord.tankList[i].transferredQty;
+          }
+        }
+        
         return (
             <div className="container">
               <div className="register-heading">Racking</div>
@@ -59,6 +69,15 @@ class Register10 extends Authentication {
                                                                 let data = values;
                                                                 if (currState && currState.currRecord)
                                                                     data._id = currState.currRecord._id;
+
+                                                                    for(let i=0; i<currState.tanks.length;i++) {
+                                                                      let list = {tankNumber: data[currState.tanks[i]],
+                                                                        openingBalance: data[currState.openings[i]],
+                                                                        transferredQty: data[currState.quantities[i]]};
+                                                                        tankListArray.push(list);
+                                                                    }
+                                                                    data.tankList = tankListArray;
+
                                                                 upsertRecord(data, thisVar, thisVar.modelName);
                                                             } } validate={ (values) => {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  return validateForm(values, thisVar.modelName);

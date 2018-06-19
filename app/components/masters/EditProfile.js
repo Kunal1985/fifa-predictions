@@ -48,6 +48,14 @@ class EditProfile extends Authentication {
         let thisVar = this;
         let currState = thisVar.state;
         let currRecord = currState ? currState.currRecord : null;
+        let ownerList = [];
+
+        if(currRecord) {
+          for(let i=0; i < currRecord.ownerList.length; i++) {
+            currRecord['owner-' + i] = currRecord.ownerList[i].ownerName;
+            currRecord['address-' + i] = currRecord.ownerList[i].address;
+          }
+        }
         return (
             <div className="container">
               <div className="register-heading">Liscensee Profile</div>
@@ -56,6 +64,13 @@ class EditProfile extends Authentication {
                                    let data = values;
                                    if(currState && currState.currRecord)
                                      data._id = currState.currRecord._id;
+
+                                     for(let i=0; i<currState.addresses.length;i++) {
+                                      let list = {ownerName: data[currState.owners[i]],
+                                      address: data[currState.addresses[i]]};
+                                      ownerList.push(list);
+                                    }
+                                    data.ownerList = ownerList;
                                      upsertRecord(data, thisVar, thisVar.modelName);
                                } } validate={ (values) => {
                                     return validateForm(values, thisVar.modelName);
@@ -155,7 +170,7 @@ class EditProfile extends Authentication {
                                 <div className="row">
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <button type="button" className="btn btn-default" onClick={ () => thisVar.appendInput() } type="button">
-                                      Add Tank
+                                      Add Owner
                                     </button>
                                   </div>
                                 </div>

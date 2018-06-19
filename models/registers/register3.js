@@ -10,6 +10,11 @@ var register3Schema = mongoose.Schema({
     fermentationLoss: Number,
     baseWineObtained: Number,
     transferredQty: Number,
+    tankList: [{
+        tankNumber: String,
+        openingBalance: Number,
+        transferredQty: Number
+    }],
     closingBalance: Number,
     transferLoss: Number,
     remarks: String,
