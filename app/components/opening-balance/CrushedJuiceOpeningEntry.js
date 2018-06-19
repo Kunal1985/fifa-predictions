@@ -61,9 +61,9 @@ class CrushedJuiceOpeningEntry extends Authentication {
         )
       }, {
         Header: 'Tank',
-        accessor: 'tank', // String-based value accessors!
+        accessor: 'tankNumber', // String-based value accessors!
         filterMethod: (filter, rows) =>
-          matchSorter(rows, filter.value, { keys: ["tank"] }),
+          matchSorter(rows, filter.value, { keys: ["tankNumber"] }),
         filterAll: true
       }, {
         Header: 'Grape Variety',

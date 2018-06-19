@@ -122,9 +122,10 @@ var updateTankBalance = function(tank, quantity, res, modelName){
       var docBalance = doc.closingBalance;
       if(!docBalance || isNaN(docBalance))
         docBalance = 0;
-      var updatedBalance = docBalance - quantity;
+      var updatedClosingBalance = parseInt(docBalance) - parseInt(quantity);
+      var updatedOpeningBalance = parseInt(doc.openingBalance) + parseInt(quantity);
 
-      modelObj.update({number: tank}, {closingBalance: updatedBalance}, function(err, modelRecord) {
+      modelObj.update({number: tank}, {closingBalance: updatedClosingBalance, openingBalance: updatedOpeningBalance}, function(err, modelRecord) {
         if (err) { throw err; }
         console.log("Record Updated for", modelName, modelRecord);
   
@@ -155,9 +156,9 @@ module.exports.upsertRecord = function(req, res, next, modelName){
           if (err) return next(err);
           console.log("Record Updated for", modelName, modelRecord);
             if(doc.quantity != data.quantity) {
-              var quan = data.quantity - doc.quantity;
+              var quan = parseInt(data.quantity) - parseInt(doc.quantity);
               if (["CrushedJuiceDetails", "FermentedDetails", "FlavourDetails", "SpiritDetails", "TirageDisgorgedDetails"].indexOf(modelName) != -1) {
-                updateTankBalance(data.tank, quan, res, "TankMaster");
+                updateTankBalance(data.tankNumber, quan, res, "TankMaster");
               }
             }
           res.json({ recordUpdated: true });
@@ -169,7 +170,7 @@ module.exports.upsertRecord = function(req, res, next, modelName){
         if (err) return next(err);
         console.log("New Record Created for", modelName, modelRecord);
         if (["CrushedJuiceDetails", "FermentedDetails", "FlavourDetails", "SpiritDetails", "TirageDisgorgedDetails"].indexOf(modelName) != -1) {
-          updateTankBalance(data.tank, data.quantity, res, "TankMaster");
+          updateTankBalance(data.tankNumber, data.quantity, res, "TankMaster");
           console.log("Inside data:"+ data);
         }
         res.json({ recordCreated: true });

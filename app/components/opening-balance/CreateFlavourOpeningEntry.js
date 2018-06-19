@@ -48,13 +48,13 @@ class CreateFlavourOpeningEntry extends Authentication {
               <div className="register-heading">Flavour</div>
               <div className="text-right"><a onClick={ this.goBack }>Back</a></div>
               <Form defaultValues={ currRecord } onSubmit={ (values) => {
-                                                                let data = values;
-                                                                if (currState && currState.currRecord)
-                                                                    data._id = currState.currRecord._id;
-                                                                upsertRecord(data, thisVar, thisVar.modelName);
-                                                            } } validate={ (values) => {
-                                                                return validateForm(values, thisVar.modelName, tankList);
-                                                            } }>
+                    let data = values;
+                    if (currState && currState.currRecord)
+                        data._id = currState.currRecord._id;
+                    upsertRecord(data, thisVar, thisVar.modelName);
+                } } validate={ (values) => {
+                    return validateForm(values, thisVar.modelName, tankList);
+                } }>
                 { ({submitForm}) => {
                       let errorMessage = null;
                   
@@ -76,7 +76,7 @@ class CreateFlavourOpeningEntry extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Tank</label>
-                                      <Select className="form-control" field="tank" id="tank" options={ tankList } />
+                                      <Select className="form-control" field="tankNumber" id="tankNumber" options={ tankList } />
                                     </div>
                                   </div>
                                 </div>
@@ -94,7 +94,7 @@ class CreateFlavourOpeningEntry extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Quantity</label>
-                                      <Text field='quantity' placeholder='Quantity' className="form-control" />
+                                      <Text field='quantity' placeholder='Quantity' className="form-control" type="number" />
                                     </div>
                                   </div>
                                 </div>

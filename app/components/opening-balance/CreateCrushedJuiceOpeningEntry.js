@@ -76,7 +76,7 @@ class CreateCrushedJuiceOpeningEntry extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Tank</label>
-                                      <Select className="form-control" field="tank" id="tank" options={ tankList }/>
+                                      <Select className="form-control" field="tankNumber" id="tankNumber" options={ tankList }/>
                                     </div>
                                   </div>
                                 </div>

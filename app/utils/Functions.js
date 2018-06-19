@@ -205,7 +205,7 @@ exports.getRecordsByQuery = function (currObj, modelName, query) {
             label: currRecord.number,
             value: currRecord.number,
             selected: true,
-            balance: currRecord.capacity
+            balance: currRecord.closingBalance
           }
             break;
           case "ExciseOfficer": return {
@@ -329,8 +329,8 @@ exports.checkTankBalance = function(index,tankList) {
 var checkForTankValidation = function(values, tankList) {
   if(!values.quantity) {
     return 'Please enter the quantity.'
-  } else if(values.quantity && values.tank && tankList && tankList.length > 0) {
-      var tankBalance = _.where(tankList, {value: values.tank});
+  } else if(values.quantity && values.tankNumber && tankList && tankList.length > 0) {
+      var tankBalance = _.where(tankList, {value: values.tankNumber});
       return (values.quantity > tankBalance[0].balance) ? "Quantity greater than Tank Balance" : undefined;
   }
 }
@@ -476,7 +476,7 @@ exports.validateForm = function (values, modelName, tankList) {
       case "CrushedJuiceDetails":
       validators = {
         date: !values.date ? 'Please Select a Date' : undefined,
-        tank: !values.tank ? 'Please Select a Tank' : undefined,
+        tankNumber: !values.tankNumber ? 'Please Select a Tank' : undefined,
         grapeVariety: !values.grapeVariety ? 'Please select grape variety.' : undefined,
         quantity: checkForTankValidation(values, tankList)
       };
@@ -484,7 +484,7 @@ exports.validateForm = function (values, modelName, tankList) {
       case "FermentedDetails":
       validators = {
         date: !values.date ? 'Please Select a Date' : undefined,
-        tank: !values.tank ? 'Please Select a Tank' : undefined,
+        tankNumber: !values.tankNumber ? 'Please Select a Tank' : undefined,
         quantity: checkForTankValidation(values, tankList)
       };
       break;
@@ -499,7 +499,7 @@ exports.validateForm = function (values, modelName, tankList) {
       case "FlavourDetails":
       validators = {
         date: !values.date ? 'Please Select a Date' : undefined,
-        tank: !values.tank ? 'Please Select a Tank' : undefined,
+        tankNumber: !values.tankNumber ? 'Please Select a Tank' : undefined,
         flavour: !values.flavour ? 'Please select a flavour.' : undefined,
         quantity: checkForTankValidation(values, tankList)
       };

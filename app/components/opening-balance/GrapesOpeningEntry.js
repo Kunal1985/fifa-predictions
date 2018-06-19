@@ -94,10 +94,10 @@ class GrapesOpeningEntry extends Authentication {
               <Form onSubmit={ (values) => {
                                    console.log('s');
                                } } validate={ (values) => {
-                                                                                                                                                      return {
-                                                                                                                                                  
-                                                                                                                                                      }
-                                                                                                                                                  } }>
+                                                                                                                                  return {
+                                                                                                                              
+                                                                                                                                  }
+                                                                                                                              } }>
                 { ({submitForm}) => {
                       let errorMessage = null;
                   

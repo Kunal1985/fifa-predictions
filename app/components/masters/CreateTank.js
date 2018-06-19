@@ -99,7 +99,7 @@ class CreateTank extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Capacity(Bulk Litres)</label>
-                                      <Text field='capacity' placeholder='Capacity' className="form-control" />
+                                      <Text field='capacity' placeholder='Capacity' className="form-control" type="number" />
                                       <Text field='closingBalance' placeholder='Capacity' type="hidden" className="form-control" />
                                     </div>
                                   </div>

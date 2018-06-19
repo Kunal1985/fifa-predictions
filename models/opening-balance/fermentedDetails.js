@@ -5,7 +5,7 @@ var Long = mongoose.Schema.Types.Long;
 // define the schema for our user model
 var fermentedDetailsSchema = mongoose.Schema({
     date: String,
-    tank: String,
+    tankNumber: String,
     quantity: Number,
     variety: String,
     verified: Boolean,
