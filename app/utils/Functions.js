@@ -337,32 +337,46 @@ exports.checkTankBalance = function(index,tankList) {
 var setOpeningBalance = function(values,tankList) {
   if(values && values.tankNumber && tankList&& tankList.length > 0) {
     var tankBalance = _.where(tankList, {value: values.tankNumber});
-    values.openingBalance = tankBalance[0].openingBalance;
-    return undefined;
+    if(tankBalance.length > 0) {
+      values.openingBalance = tankBalance[0].openingBalance;
+      return undefined;
+    }
   }
 }
 
-var setClosingBalance = function(values,tankList,actionType) {
-  if(values && values.tankNumber && values.quantity && tankList&& tankList.length > 0) {
+var setClosingBalance = function(values,tankList,actionType,modelName) {
+  if(values && values.tankNumber && (values.quantity || (values.ownUnit && values.ownUnit.quantityReceived)) && tankList && tankList.length > 0) {
     var tankBalance = _.where(tankList, {value: values.tankNumber});
-    var openingBalance = values.openingBalance ? values.openingBalance : tankBalance[0].openingBalance;
-    var loss = values.fortificationLoss ? parseInt(values.fortificationLoss) : 0;
-    if(actionType == 'reduce') {
-      var closingBalance = parseInt(openingBalance) - parseInt(values.quantity) - loss;
-    } else {
-      var closingBalance = parseInt(values.quantity) - loss;
+    if(tankBalance.length > 0) {
+      var openingBalance = values.openingBalance ? values.openingBalance : tankBalance[0].openingBalance;
+      var loss = values.fortificationLoss ? parseInt(values.fortificationLoss) : 0;
+      if(actionType == 'reduce') {
+        var closingBalance = parseInt(openingBalance) - parseInt(values.quantity) - loss;
+      } else if (modelName == 'Register4' && actionType == 'add') {
+        var closingBalance = parseInt(values.quantity) - loss;
+      } else if (modelName == 'Register5' && actionType == 'add' && values.transferType == 1) {
+        var closingBalance = parseInt(openingBalance) + parseInt(values.ownUnit.quantityReceived);
+      }
+      values.closingBalance = closingBalance;
+      
+      return (closingBalance > tankBalance[0].balance) ? "Quantity greater than Tank Balance" : undefined;
+  
     }
-    values.closingBalance = closingBalance;
-    
-    return (closingBalance > tankBalance[0].balance) ? "Quantity greater than Tank Balance" : undefined;
   }
 }
 
 var setQuantity = function(values,tankList) {
-  if(values && values.fortifiedWine && values.fortifiedWine.tankNumbe && tankList && tankList.length > 0) {
+  if(values && values.fortifiedWine && values.fortifiedWine.tankNumber && tankList && tankList.length > 0) {
     var tankBalance = _.where(tankList, {value: values.fortifiedWine.tankNumber});
     var totalQuantity = parseInt(values.fermentedWine.quantity) + parseInt(values.spirit.quantity);
     values.fortifiedWine.quantity = totalQuantity;
+    return undefined;
+  }
+}
+
+var setLoss = function(values) {
+  if(values && values.quantityIssued && values.quantityReceived) {
+    values.loss = parseInt(values.quantityIssued) - parseInt(values.quantityReceived);
     return undefined;
   }
 }
@@ -372,7 +386,9 @@ var checkForTankValidation = function(quantity, values, tankList) {
     return 'Please enter the quantity.'
   } else if(quantity && values.tankNumber && tankList && tankList.length > 0) {
       var tankBalance = _.where(tankList, {value: values.tankNumber});
-      return (quantity > tankBalance[0].balance) ? "Quantity greater than Tank Balance" : undefined;
+      if(tankBalance.length > 0) {
+        return (quantity > tankBalance[0].closingBalance) ? "Quantity greater than Tank Balance" : undefined;
+    }
   }
 }
 
@@ -430,10 +446,19 @@ exports.validateForm = function (values, modelName, tankList) {
     case "Register5":
       validators = {
         date: !values.date ? 'Please select the Date' : undefined,
+        tankNumber: !values.tankNumber ? 'Please select a Tank' : undefined,
+        openingBalance: setOpeningBalance(values, tankList),
         transferType: !values.transferType ? "You have not selected the 'Bulk Wine transactions'" : undefined,
         otherUnitBulkTransactionType:
           (values.transferType === "2" && (!values.otherUnit || (values.otherUnit && !values.otherUnit.bulkTransactionType))) ?
-            "You have not selected the 'Bulk Transaction Type'" : undefined
+            "You have not selected the 'Bulk Transaction Type'" : undefined,
+        "ownUnitTankNumber": !values.ownUnit || !values.ownUnit.tankNumber ? "Please select a Tank" : undefined,
+        "ownUnitOpeningBalance": setOpeningBalance(values.ownUnit, tankList),
+        "ownUnitWineVariety" : !values.ownUnit || !values.ownUnit.wineVariety ? "Please select Wine Variety" : undefined,
+        "ownUnitQuantityIssued" : !values.ownUnit || !values.ownUnit.quantityIssued ? 'Please enter the Quantity Taken' : checkForTankValidation(values.ownUnit.quantityIssued, values.ownUnit, tankList),
+        "ownUnitQuantityReceived" : !values.ownUnit || !values.ownUnit.quantityReceived ? "Please enter quantity Received" : undefined,
+        "ownUnitLoss" : setLoss(values.ownUnit),
+        closingBalance: setClosingBalance(values, tankList, 'add', modelName),
       };
       break;
     case "Register6":

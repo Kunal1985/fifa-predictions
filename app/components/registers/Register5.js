@@ -90,7 +90,7 @@ class Register5 extends Authentication {
                                   bulkOtherUnitValue: parseInt(currBulkTransactionType)
                               });
                       }
-                      return validateForm(values, thisVar.modelName);
+                      return validateForm(values, thisVar.modelName, tankList);
                   } }>
                   { ({submitForm}) => {
                         let errorMessage = null;
@@ -108,13 +108,13 @@ class Register5 extends Authentication {
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Tank Number</label>
-                                        <Select className="form-control" field="tankNumber" id="tankNumber" options={ tankList } />
+                                        <Select className="form-control" field="tankNumber" id="tankNumber" options={ tankList } type="number" />
                                       </div>
                                     </div>
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Opening Balance</label>
-                                        <Text field='openingBalance' placeholder='Opening Balance' className="form-control" />
+                                        <Text field='openingBalance' placeholder='Opening Balance' className="form-control" type="number" disabled="disabled" />
                                       </div>
                                     </div>
                                   </div>
@@ -139,7 +139,7 @@ class Register5 extends Authentication {
                                           <div className="col-lg-4 col-md-4 col-sm-12">
                                             <div className="form-group">
                                               <label>Opening Balance</label>
-                                              <Text field='ownUnit.openingBalance' placeholder='Opening Balance' className="form-control" />
+                                              <Text field='ownUnit.openingBalance' placeholder='Opening Balance' className="form-control" type="number" disabled="disabled" />
                                               <Text field='ownUnitOpeningBalance' type='hidden' className="form-control" />
                                             </div>
                                           </div>
@@ -155,21 +155,21 @@ class Register5 extends Authentication {
                                           <div className="col-lg-4 col-md-4 col-sm-12">
                                             <div className="form-group">
                                               <label>Quantity Issued</label>
-                                              <Text field='ownUnit.quantityIssued' placeholder='Quantity Issued' className="form-control" />
+                                              <Text field='ownUnit.quantityIssued' placeholder='Quantity Issued' className="form-control" type="number" />
                                               <Text field='ownUnitQuantityIssued' type='hidden' className="form-control" />
                                             </div>
                                           </div>
                                           <div className="col-lg-4 col-md-4 col-sm-12">
                                             <div className="form-group">
                                               <label>Quantity Received</label>
-                                              <Text field='ownUnit.quantityReceived' placeholder='Quantity Received' className="form-control" />
+                                              <Text field='ownUnit.quantityReceived' placeholder='Quantity Received' className="form-control" type="number" />
                                               <Text field='ownUnitQuantityReceived' type='hidden' className="form-control" />
                                             </div>
                                           </div>
                                           <div className="col-lg-4 col-md-4 col-sm-12">
                                             <div className="form-group">
                                               <label>Losses</label>
-                                              <Text field='ownUnit.loss' placeholder='Losses' className="form-control" />
+                                              <Text field='ownUnit.loss' placeholder='Losses' className="form-control" type="number" disabled="disabled" />
                                               <Text field='ownUnitLoss' type='hidden' className="form-control" />
                                             </div>
                                           </div>
@@ -240,7 +240,7 @@ class Register5 extends Authentication {
                                               <div className="col-lg-4 col-md-4 col-sm-12">
                                                 <div className="form-group">
                                                   <label>Quantity in Litres</label>
-                                                  <Text field='qtyInLitres' placeholder='Quantity in Litres' className="form-control" />
+                                                  <Text field='qtyInLitres' placeholder='Quantity in Litres' className="form-control" type="number" />
                                                 </div>
                                               </div>
                                               { currState.bulkOtherUnitValue == 3 ?
@@ -285,7 +285,7 @@ class Register5 extends Authentication {
                                               <div className="col-lg-4 col-md-4 col-sm-12">
                                                 <div className="form-group">
                                                   <label>Losses</label>
-                                                  <Text field='otherUnit.losses' placeholder='Losses' className="form-control" />
+                                                  <Text field='otherUnit.losses' placeholder='Losses' className="form-control" type="number" />
                                                   <Text field='otherUnitLosses' type='hidden' className="form-control" />
                                                 </div>
                                               </div>
@@ -300,7 +300,7 @@ class Register5 extends Authentication {
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Closing Balance</label>
-                                        <Text field='closingBalance' placeholder='Closing Balance' className="form-control" />
+                                        <Text field='closingBalance' placeholder='Closing Balance' className="form-control" type="number" disabled="disabled" />
                                       </div>
                                     </div>
                                   </div>
