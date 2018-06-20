@@ -164,6 +164,17 @@ module.exports.upsertRecord = function(req, res, next, modelName){
             if(doc.qtyBulkLts != data.qtyBulkLts) {
               var quan = parseInt(data.qtyBulkLts) - parseInt(doc.qtyBulkLts);
                 updateTankBalance(data.tankNumber, quan, res, "TankMaster");
+            } else if(["Register4"].indexOf(modelName) != -1) {
+              if(doc.fermentedWine.quantity != data.fermentedWine.quantity) {
+                var quan = parseInt(data.fermentedWine.quantity) - parseInt(doc.fermentedWine.quantity);
+                  updateTankBalance(data.fermentedWine.tankNumber, quan, res, "TankMaster");
+              } else if(doc.spirit.quantity != data.spirit.quantity) {
+                var quan = parseInt(data.spirit.quantity) - parseInt(doc.spirit.quantity);
+                  updateTankBalance(data.spirit.tankNumber, quan, res, "TankMaster");
+              } else if(doc.fortifiedWine.closingBalance != data.fortifiedWine.closingBalance) {
+                var quan = parseInt(data.fortifiedWine.closingBalance) - parseInt(doc.fortifiedWine.closingBalance);
+                  updateTankBalance(data.fortifiedWine.tankNumber, quan, res, "TankMaster");
+              }
             }
           }
           res.json({ recordUpdated: true });
@@ -179,6 +190,11 @@ module.exports.upsertRecord = function(req, res, next, modelName){
           console.log("Inside data:"+ data);
         } else if(["Register1"].indexOf(modelName) != -1) {
           updateTankBalance(data.tankNumber, data.qtyBulkLts, res, "TankMaster");
+        } else if(["Register4"].indexOf(modelName) != -1) {
+          console.log('Register4 data '+ data)
+          updateTankBalance(data.fermentedWine.tankNumber, data.fermentedWine.quantity, res, "TankMaster");
+          updateTankBalance(data.spirit.tankNumber, data.spirit.quantity, res, "TankMaster");
+          updateTankBalance(data.fortifiedWine.tankNumber, data.fortifiedWine.closingBalance, res, "TankMaster");  
         }
         res.json({ recordCreated: true });
       });

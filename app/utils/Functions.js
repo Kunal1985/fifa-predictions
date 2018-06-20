@@ -205,7 +205,8 @@ exports.getRecordsByQuery = function (currObj, modelName, query) {
             label: currRecord.number,
             value: currRecord.number,
             selected: true,
-            balance: currRecord.closingBalance
+            balance: currRecord.closingBalance,
+            openingBalance: currRecord.openingBalance
           }
             break;
           case "ExciseOfficer": return {
@@ -318,12 +319,52 @@ exports.getSideBarList = function(currUser){
   return sideBarList.filter(u => currUser ? (u.allowedRoles.indexOf(currUser.role) != -1) : false);
 }
 
-exports.setOpeningBalance = function(tankList) {
-  console.log(tankList);
+var checkTransferredWQuantity = function(values, tankList) {
+  for(let i = 0; i < values.tankList.length; i++) {
+    if(!values.tankList[i].transferredQty) {
+      return 'Please enter the quantity.'
+    } else if(values.tankList[i].transferredQty && values.tankList[i].tankNumber && tankList && tankList.length > 0) {
+        var tankBalance = _.where(tankList, {value: values.tankList[i].tankNumber});
+        return (values.tankList[i].transferredQty > tankBalance[0].balance) ? "Quantity greater than Tank Balance" : undefined;
+    }
+  }
 }
 
 exports.checkTankBalance = function(index,tankList) {
   console.log("checkTankBalance" + tankList);
+}
+
+var setOpeningBalance = function(values,tankList) {
+  if(values && values.tankNumber && tankList&& tankList.length > 0) {
+    var tankBalance = _.where(tankList, {value: values.tankNumber});
+    values.openingBalance = tankBalance[0].openingBalance;
+    return undefined;
+  }
+}
+
+var setClosingBalance = function(values,tankList,actionType) {
+  if(values && values.tankNumber && values.quantity && tankList&& tankList.length > 0) {
+    var tankBalance = _.where(tankList, {value: values.tankNumber});
+    var openingBalance = values.openingBalance ? values.openingBalance : tankBalance[0].openingBalance;
+    var loss = values.fortificationLoss ? parseInt(values.fortificationLoss) : 0;
+    if(actionType == 'reduce') {
+      var closingBalance = parseInt(openingBalance) - parseInt(values.quantity) - loss;
+    } else {
+      var closingBalance = parseInt(values.quantity) - loss;
+    }
+    values.closingBalance = closingBalance;
+    
+    return (closingBalance > tankBalance[0].balance) ? "Quantity greater than Tank Balance" : undefined;
+  }
+}
+
+var setQuantity = function(values,tankList) {
+  if(values && values.fortifiedWine && values.fortifiedWine.tankNumbe && tankList && tankList.length > 0) {
+    var tankBalance = _.where(tankList, {value: values.fortifiedWine.tankNumber});
+    var totalQuantity = parseInt(values.fermentedWine.quantity) + parseInt(values.spirit.quantity);
+    values.fortifiedWine.quantity = totalQuantity;
+    return undefined;
+  }
 }
 
 var checkForTankValidation = function(quantity, values, tankList) {
@@ -369,20 +410,20 @@ exports.validateForm = function (values, modelName, tankList) {
       break;
     case "Register4":
       validators = {
-        date: !values.date ? 'Please select the Date' : undefined,
+        "date": !values.date ? 'Please select the Date' : undefined,
         "fermentedWineTankNumber": !values.fermentedWine || !values.fermentedWine.tankNumber ? 'Please select the Tank Number' : undefined,
-        "fermentedWineOpeningBalance": !values.fermentedWine || !values.fermentedWine.openingBalance ? 'Please enter the Opening Balance' : undefined,
+        "fermentedWineOpeningBalance": setOpeningBalance(values.fermentedWine, tankList),
         "fermentedWineQuantity": !values.fermentedWine || !values.fermentedWine.quantity ? 'Please enter the Quantity Taken' : undefined,
-        "fermentedWineClosingBalance": !values.fermentedWine || !values.fermentedWine.closingBalance ? 'Please enter the Closing Balance' : undefined,
+        "fermentedWineClosingBalance": setClosingBalance(values.fermentedWine, tankList, 'reduce'),
         "spiritTankNumber": !values.spirit || !values.spirit.tankNumber ? 'Please select the Tank Number' : undefined,
-        "spiritOpeningBalance": !values.spirit || !values.spirit.openingBalance ? 'Please enter the Opening Balance' : undefined,
+        "spiritOpeningBalance": setOpeningBalance(values.spirit, tankList),
         "spiritStrength": !values.spirit || !values.spirit.strength ? 'Please enter the Strength' : undefined,
         "spiritQuantity": !values.spirit || !values.spirit.quantity ? 'Please enter the Quantity Taken' : undefined,
-        "spiritClosingBalance": !values.spirit || !values.spirit.closingBalance ? 'Please enter the Closing Balance' : undefined,
+        "spiritClosingBalance": setClosingBalance(values.spirit, tankList, 'reduce'),
         "fortifiedWineTankNumber": !values.fortifiedWine || !values.fortifiedWine.tankNumber ? 'Please select the Tank Number' : undefined,
-        "fortifiedWineQuantity": !values.fortifiedWine || !values.fortifiedWine.quantity ? 'Please enter the Quantity in Litres' : undefined,
+        "fortifiedWineQuantity": setQuantity(values, tankList),
         "fortifiedWineAlcoholPercentage": !values.fortifiedWine || !values.fortifiedWine.alcoholPercentage ? 'Please enter the Alcohol%' : undefined,
-        "fortifiedWineClosingBalance": !values.fortifiedWine || !values.fortifiedWine.closingBalance ? 'Please enter the Closing Balance' : undefined,
+        "fortifiedWineClosingBalance": setClosingBalance(values.fortifiedWine, tankList, 'add'),
         "fortifiedWineFortificationLoss": !values.fortifiedWine || !values.fortifiedWine.fortificationLoss ? 'Please enter the Fortification Loss' : undefined,
       };
       break;
