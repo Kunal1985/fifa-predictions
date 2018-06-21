@@ -354,7 +354,7 @@ var setDynamicOpeningBalance = function(values,index,tankList) {
 }
 
 var setClosingBalance = function(values,tankList,actionType,modelName) {
-  if(values && values.tankNumber && (values.quantity || (values.ownUnit && values.ownUnit.quantityReceived)) && tankList && tankList.length > 0) {
+  if(values && values.tankNumber && (values.quantity || (values.ownUnit && values.ownUnit.quantityReceived || values.qtyInLitres)) && tankList && tankList.length > 0) {
     var tankBalance = _.where(tankList, {value: values.tankNumber});
     if(tankBalance.length > 0) {
       var openingBalance = values.openingBalance ? values.openingBalance : tankBalance[0].openingBalance;
@@ -365,6 +365,9 @@ var setClosingBalance = function(values,tankList,actionType,modelName) {
         var closingBalance = parseInt(values.quantity) - loss;
       } else if (modelName == 'Register5' && actionType == 'add' && values.transferType == 1) {
         var closingBalance = parseInt(openingBalance) + parseInt(values.ownUnit.quantityReceived);
+      } else if (modelName == 'Register6' && actionType == 'add') {
+        let bottlingLoss = values.bottlingLoss ? parseInt(values.bottlingLoss) : 0;
+        var closingBalance = parseInt(openingBalance) + parseInt(values.qtyInLitres) - parseInt(bottlingLoss);
       }
       values.closingBalance = closingBalance;
       
@@ -383,9 +386,30 @@ var setQuantity = function(values,tankList) {
   }
 }
 
-var setLoss = function(values) {
-  if(values && values.quantityIssued && values.quantityReceived) {
-    values.loss = parseInt(values.quantityIssued) - parseInt(values.quantityReceived);
+var setLoss = function(values, Issued, Received, modelName) {
+  if(values && Issued && Received) {
+    if(["Register3"].indexOf(modelName) != -1) {
+      values.fermentationLoss = parseInt(Issued) - parseInt(Received);
+    } else if(["Register10"].indexOf(modelName) != -1) {
+      values.rackingLoss = parseInt(Issued) - parseInt(Received);
+    } else if (["Register5"].indexOf(modelName) != -1) {
+      values.loss = parseInt(Issued) - parseInt(Received);
+    }
+    
+    return undefined;
+  }
+}
+
+var setDynamicLoss = function(values, currState, modelName) {
+  if(values) {
+    if(["Register3", "Register10"].indexOf(modelName) != -1) {
+      let totalQuantity = 0;
+      for(let i=0; i < currState.tanks.length;i++) {
+        totalQuantity = parseInt(totalQuantity) + parseInt((values['quantity-' + i]));
+      }
+      values.transferLoss = parseInt(values.baseWineObtained) - parseInt(totalQuantity);
+    }
+    
     return undefined;
   }
 }
@@ -445,7 +469,8 @@ exports.validateForm = function (values, modelName, tankList, currState) {
         date: !values.date ? 'Please select the Date' : undefined,
         openingBalance: setOpeningBalance(values, tankList),
         baseWineObtained: !values.baseWineObtained ? 'Please enter Base Wine obtained.' : undefined,
-        rackingLoss: !values.rackingLoss ? 'Please Racking Loss.' : undefined
+        fermentationLoss: setLoss(values, values.openingBalance, values.baseWineObtained, 'Register3'),
+        transferLoss: setDynamicLoss(values, currState, 'Register3')
       };
       for(let i=0; i<currState.tanks.length;i++) {
         validators["tank-" + i] = !values["tank-" + i] ? 'Please select the Tank' : undefined
@@ -458,7 +483,8 @@ exports.validateForm = function (values, modelName, tankList, currState) {
         date: !values.date ? 'Please select the Date' : undefined,
         openingBalance: setOpeningBalance(values, tankList),
         baseWineObtained: !values.baseWineObtained ? 'Please enter Base Wine obtained.' : undefined,
-        rackingLoss: !values.rackingLoss ? 'Please Racking Loss.' : undefined
+        rackingLoss: setLoss(values, values.openingBalance, values.baseWineObtained, 'Register10'),
+        transferLoss: setDynamicLoss(values, currState, 'Register10')
       };
       for(let i=0; i<currState.tanks.length;i++) {
         validators["tank-" + i] = !values["tank-" + i] ? 'Please select the Tank' : undefined
@@ -502,7 +528,7 @@ exports.validateForm = function (values, modelName, tankList, currState) {
         "ownUnitWineVariety" : !values.ownUnit || !values.ownUnit.wineVariety ? "Please select Wine Variety" : undefined,
         "ownUnitQuantityIssued" : !values.ownUnit || !values.ownUnit.quantityIssued ? 'Please enter the Quantity Taken' : checkForTankValidation(values.ownUnit.quantityIssued, values.ownUnit, tankList),
         "ownUnitQuantityReceived" : !values.ownUnit || !values.ownUnit.quantityReceived ? "Please enter quantity Received" : undefined,
-        "ownUnitLoss" : setLoss(values.ownUnit),
+        "ownUnitLoss" : setLoss(values, values.ownUnit.quantityIssued && values.ownUnit.quantityReceived, 'Register5'),
         closingBalance: setClosingBalance(values, tankList, 'add', modelName),
       };
       break;
@@ -511,14 +537,14 @@ exports.validateForm = function (values, modelName, tankList, currState) {
         date: !values.date ? 'Please select the Date' : undefined,
         tankNumber: !values.tankNumber ? 'Please select the Tank Number' : undefined,
         wineVariety: !values.wineVariety ? 'Please select the Wine Variety.' : undefined,
-        openingBalance: !values.openingBalance ? 'Please enter the Opening Balance' : undefined,
+        openingBalance: setOpeningBalance(values, tankList),
         wineType: !values.wineType ? 'Please select the Type of Wine.' : undefined,
         brandName: !values.brandName ? 'Please select the Name of Brand.' : undefined,
         bottleSize: !values.bottleSize ? 'Please select the Bottle Size.' : undefined,
         bottleQty: !values.bottleQty ? 'Please enter the Number of Bottles.' : undefined,
         qtyInLitres: !values.qtyInLitres ? 'Please enter the Quantity of Litres.' : undefined,
         bottlingLoss: !values.bottlingLoss ? 'Please enter the Bottling Loss.' : undefined,
-        closingBalance: !values.closingBalance ? 'Please enter the Closing Balance' : undefined,
+        closingBalance: setClosingBalance(values, tankList, 'add', modelName),
       };
       break;
     case "Register7":

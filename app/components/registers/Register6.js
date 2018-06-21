@@ -48,7 +48,7 @@ class Register6 extends Authentication {
                       data._id = currState.currRecord._id;
                   upsertRecord(data, thisVar, thisVar.modelName);
               } } validate={ (values) => {
-                  return validateForm(values, thisVar.modelName);
+                  return validateForm(values, thisVar.modelName, tankList);
               } }>
                 { ({submitForm}) => {
                       let errorMessage = null;
@@ -80,7 +80,7 @@ class Register6 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Opening Balance</label>
-                                      <Text field='openingBalance' placeholder='Opening Balance' className="form-control" />
+                                      <Text field='openingBalance' placeholder='Opening Balance' className="form-control" type="number"  disabled="disabled"/>
                                     </div>
                                   </div>
                                 </div>
@@ -116,7 +116,7 @@ class Register6 extends Authentication {
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Quantity in Litres</label>
-                                        <Text field='qtyInLitres' placeholder='Quantity in Litres' className="form-control" />
+                                        <Text field='qtyInLitres' placeholder='Quantity in Litres' className="form-control" type="number" />
                                       </div>
                                     </div>
                                     <div className="col-lg-4 col-md-4 col-sm-12">
@@ -136,7 +136,7 @@ class Register6 extends Authentication {
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Closing Balance</label>
-                                        <Text field='closingBalance' placeholder='Closing Balance' className="form-control" />
+                                        <Text field='closingBalance' placeholder='Closing Balance' className="form-control" type="number" disabled="disabled"/>
                                       </div>
                                     </div>
                                     <div className="col-lg-4 col-md-4 col-sm-12">

@@ -172,6 +172,13 @@ module.exports.upsertRecord = function(req, res, next, modelName){
                 updateTankBalance(data.tankList[i].tankNumber, quan, res, "TankMaster");
               }
             }
+          } else if(["Register3", "Register10"].indexOf(modelName) != -1) {
+            for(let i=0; i < data.tankList.length; i++) {
+              if(doc.tankList[i].transferredQty != data.tankList[i].transferredQty) {
+                var quan = parseInt(data.tankList[i].transferredQty) - parseInt(doc.tankList[i].transferredQty);
+                updateTankBalance(data.tankList[i].tankNumber, quan, res, "TankMaster");
+              }
+            }
           } else if(["Register4"].indexOf(modelName) != -1) {
             if(doc.fermentedWine.quantity != data.fermentedWine.quantity) {
               var quan = parseInt(data.fermentedWine.quantity) - parseInt(doc.fermentedWine.quantity);
@@ -198,6 +205,10 @@ module.exports.upsertRecord = function(req, res, next, modelName){
         } else if(["Register1"].indexOf(modelName) != -1) {
           updateTankBalance(data.tankNumber, data.qtyBulkLts, res, "TankMaster");
         } else if(["Register2"].indexOf(modelName) != -1) {
+          for(let i=0; i < data.tankList.length; i++) {
+            updateTankBalance(data.tankList[i].tankNumber, data.tankList[i].transferredQty, res, "TankMaster");
+          }
+        } else if(["Register3", "Register10"].indexOf(modelName) != -1) {
           for(let i=0; i < data.tankList.length; i++) {
             updateTankBalance(data.tankList[i].tankNumber, data.tankList[i].transferredQty, res, "TankMaster");
           }

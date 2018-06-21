@@ -108,7 +108,7 @@ class Register5 extends Authentication {
                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                       <div className="form-group">
                                         <label>Tank Number</label>
-                                        <Select className="form-control" field="tankNumber" id="tankNumber" options={ tankList } type="number" />
+                                        <Select className="form-control" field="tankNumber" id="tankNumber" options={ tankList } />
                                       </div>
                                     </div>
                                     <div className="col-lg-4 col-md-4 col-sm-12">
