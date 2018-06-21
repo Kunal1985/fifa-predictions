@@ -113,7 +113,7 @@ var getModelObject = function(modelName){
  * Method to update Tank Balance.
  * 
  */
-var updateTankBalance = function(tank, quantity, res, modelName){
+var updateTankBalance = function(tank, quantity, res, modelName, transactionType){
   var modelObj = getModelObject(modelName);
   if(modelObj){
     modelObj.findOne({number: tank}, function(err, doc) {
@@ -122,8 +122,13 @@ var updateTankBalance = function(tank, quantity, res, modelName){
       var docBalance = doc.closingBalance;
       if(!docBalance || isNaN(docBalance))
         docBalance = 0;
-      var updatedClosingBalance = parseInt(docBalance) - parseInt(quantity);
-      var updatedOpeningBalance = parseInt(doc.openingBalance) + parseInt(quantity);
+      if(transactionType == 'deduct') {
+        var updatedClosingBalance = parseInt(docBalance) + parseInt(quantity);
+        var updatedOpeningBalance = parseInt(doc.openingBalance) - parseInt(quantity);
+      } else {
+        var updatedClosingBalance = parseInt(docBalance) - parseInt(quantity);
+        var updatedOpeningBalance = parseInt(doc.openingBalance) + parseInt(quantity);
+      }
 
       modelObj.update({number: tank}, {closingBalance: updatedClosingBalance, openingBalance: updatedOpeningBalance}, function(err, modelRecord) {
         if (err) { throw err; }
@@ -173,6 +178,10 @@ module.exports.upsertRecord = function(req, res, next, modelName){
               }
             }
           } else if(["Register3", "Register10"].indexOf(modelName) != -1) {
+            if(doc.baseWineObtained != data.baseWineObtained) {
+              var quan = parseInt(data.baseWineObtained) - parseInt(doc.baseWineObtained);
+              updateTankBalance(data.tankNumber,quan, res, "TankMaster", "deduct");
+            }
             for(let i=0; i < data.tankList.length; i++) {
               if(doc.tankList[i].transferredQty != data.tankList[i].transferredQty) {
                 var quan = parseInt(data.tankList[i].transferredQty) - parseInt(doc.tankList[i].transferredQty);
@@ -209,6 +218,7 @@ module.exports.upsertRecord = function(req, res, next, modelName){
             updateTankBalance(data.tankList[i].tankNumber, data.tankList[i].transferredQty, res, "TankMaster");
           }
         } else if(["Register3", "Register10"].indexOf(modelName) != -1) {
+          updateTankBalance(data.tankNumber, data.openingBalance, res, "TankMaster", "deduct");
           for(let i=0; i < data.tankList.length; i++) {
             updateTankBalance(data.tankList[i].tankNumber, data.tankList[i].transferredQty, res, "TankMaster");
           }
