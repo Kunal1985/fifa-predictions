@@ -66,22 +66,22 @@ class Register10 extends Authentication {
               <div className="register-heading">Racking</div>
               <div className="text-right"><a onClick={ thisVar.goBack } type="button">Back</a></div>
               <Form defaultValues={ currRecord } onSubmit={ (values) => {
-                                                                let data = values;
-                                                                if (currState && currState.currRecord)
-                                                                    data._id = currState.currRecord._id;
+                    let data = values;
+                    if (currState && currState.currRecord)
+                        data._id = currState.currRecord._id;
 
-                                                                    for(let i=0; i<currState.tanks.length;i++) {
-                                                                      let list = {tankNumber: data[currState.tanks[i]],
-                                                                        openingBalance: data[currState.openings[i]],
-                                                                        transferredQty: data[currState.quantities[i]]};
-                                                                        tankListArray.push(list);
-                                                                    }
-                                                                    data.tankList = tankListArray;
+                        for(let i=0; i<currState.tanks.length;i++) {
+                          let list = {tankNumber: data[currState.tanks[i]],
+                            openingBalance: data[currState.openings[i]],
+                            transferredQty: data[currState.quantities[i]]};
+                            tankListArray.push(list);
+                        }
+                        data.tankList = tankListArray;
 
-                                                                upsertRecord(data, thisVar, thisVar.modelName);
-                                                            } } validate={ (values) => {
-                                                                return validateForm(values, thisVar.modelName);
-                                                            } }>
+                    upsertRecord(data, thisVar, thisVar.modelName);
+                } } validate={ (values) => {
+                  return validateForm(values, thisVar.modelName, tankList, currState);
+                } }>
                 { ({submitForm}) => {
                       let errorMessage = null;
                       return (
@@ -104,7 +104,7 @@ class Register10 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Opening Balance</label>
-                                      <Text field='openingBalance' placeholder='Opening Balance' className="form-control" />
+                                      <Text field='openingBalance' placeholder='Opening Balance' className="form-control" type="number" disabled="disabled" />
                                     </div>
                                   </div>
                                 </div>
@@ -112,13 +112,13 @@ class Register10 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Base Wine obtained</label>
-                                      <Text field='baseWineObtained' placeholder='Base Wine obtained' className="form-control" />
+                                      <Text field='baseWineObtained' placeholder='Base Wine obtained' className="form-control" type="number" />
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Racking Loss</label>
-                                      <Text field='rackingLoss' placeholder='Racking Loss' className="form-control" />
+                                      <Text field='rackingLoss' placeholder='Racking Loss' className="form-control" type="number" />
                                     </div>
                                   </div>
                                 </div>
@@ -133,13 +133,13 @@ class Register10 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div id="dynamicOpeningInput" className="form-group">
                                       <label>Opening Balance</label>
-                                      { currState.openings.map(input => <Text placeholder='Opening Balance' className="form-control" field={ input } />) }
+                                      { currState.openings.map(input => <Text placeholder='Opening Balance' className="form-control" field={ input } type="number" disabled="disabled" />) }
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div id="dynamicTransferQuantityInput" className="form-group">
                                       <label>Transferred Quantity</label>
-                                      { currState.quantities.map(input => <Text placeholder='Transferred Quantity' className="form-control" field={ input } />) }
+                                      { currState.quantities.map(input => <Text placeholder='Transferred Quantity' className="form-control" field={ input } type="number" />) }
                                     </div>
                                   </div>
                                 </div>
@@ -154,7 +154,7 @@ class Register10 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Transfer Loss</label>
-                                      <Text field='transferLoss' placeholder='Transfer Loss' className="form-control" />
+                                      <Text field='transferLoss' placeholder='Transfer Loss' className="form-control" type="number" />
                                     </div>
                                   </div>
                                 </div>

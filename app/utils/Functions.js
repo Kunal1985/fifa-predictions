@@ -335,10 +335,19 @@ exports.checkTankBalance = function(index,tankList) {
 }
 
 var setOpeningBalance = function(values,tankList) {
-  if(values && values.tankNumber && tankList&& tankList.length > 0) {
+  if(values && values.tankNumber && tankList && tankList.length > 0) {
     var tankBalance = _.where(tankList, {value: values.tankNumber});
     if(tankBalance.length > 0) {
       values.openingBalance = tankBalance[0].openingBalance;
+      return undefined;
+    }
+  }
+}
+var setDynamicOpeningBalance = function(values,index,tankList) {
+  if(values["tank-" + index] && tankList && tankList.length > 0) {
+    var tankBalance = _.where(tankList, {value: values["tank-" + index]});
+    if(tankBalance.length > 0) {
+      values["opening-" + index] = tankBalance[0].openingBalance;
       return undefined;
     }
   }
@@ -434,18 +443,28 @@ exports.validateForm = function (values, modelName, tankList, currState) {
     case "Register3":
       validators = {
         date: !values.date ? 'Please select the Date' : undefined,
-        openingBalance: !values.openingBalance ? 'Please enter the Opening Balance' : undefined,
+        openingBalance: setOpeningBalance(values, tankList),
         baseWineObtained: !values.baseWineObtained ? 'Please enter Base Wine obtained.' : undefined,
         rackingLoss: !values.rackingLoss ? 'Please Racking Loss.' : undefined
       };
+      for(let i=0; i<currState.tanks.length;i++) {
+        validators["tank-" + i] = !values["tank-" + i] ? 'Please select the Tank' : undefined
+        validators["quantity-" + i] = checkForDynamicTankValidation(values["quantity-" + i], values["tank-" + i], tankList),
+        validators["opening-" + i] = setDynamicOpeningBalance(values, i, tankList)
+      }
       break;
     case "Register10":
       validators = {
         date: !values.date ? 'Please select the Date' : undefined,
-        openingBalance: !values.openingBalance ? 'Please enter the Opening Balance' : undefined,
+        openingBalance: setOpeningBalance(values, tankList),
         baseWineObtained: !values.baseWineObtained ? 'Please enter Base Wine obtained.' : undefined,
         rackingLoss: !values.rackingLoss ? 'Please Racking Loss.' : undefined
       };
+      for(let i=0; i<currState.tanks.length;i++) {
+        validators["tank-" + i] = !values["tank-" + i] ? 'Please select the Tank' : undefined
+        validators["quantity-" + i] = checkForDynamicTankValidation(values["quantity-" + i], values["tank-" + i], tankList),
+        validators["opening-" + i] = setDynamicOpeningBalance(values, i, tankList)
+      }
       break;
     case "Register4":
       validators = {

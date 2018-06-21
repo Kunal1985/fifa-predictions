@@ -93,6 +93,20 @@ class TankMaster extends Authentication {
         filterMethod: (filter, rows) =>
           matchSorter(rows, filter.value, { keys: ["installationDate"] }),
         filterAll: true
+      }, {
+        id: 'openingBalance', // Required because our accessor is not a string
+        Header: 'Opening Balance',
+        accessor: d => d.openingBalance, // Custom value accessors!
+        filterMethod: (filter, rows) =>
+          matchSorter(rows, filter.value, { keys: ["openingBalance"] }),
+        filterAll: true
+      }, {
+        id: 'closingBalance', // Required because our accessor is not a string
+        Header: 'Closing Balance',
+        accessor: d => d.closingBalance, // Custom value accessors!
+        filterMethod: (filter, rows) =>
+          matchSorter(rows, filter.value, { keys: ["closingBalance"] }),
+        filterAll: true
       }]
 
         return (
