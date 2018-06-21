@@ -387,12 +387,23 @@ var checkForTankValidation = function(quantity, values, tankList) {
   } else if(quantity && values.tankNumber && tankList && tankList.length > 0) {
       var tankBalance = _.where(tankList, {value: values.tankNumber});
       if(tankBalance.length > 0) {
-        return (quantity > tankBalance[0].closingBalance) ? "Quantity greater than Tank Balance" : undefined;
+        return (quantity > tankBalance[0].balance) ? "Quantity greater than Tank Balance" : undefined;
     }
   }
 }
 
-exports.validateForm = function (values, modelName, tankList) {
+var checkForDynamicTankValidation = function(quantity, tankNumber, tankList) {
+  if(!quantity) {
+    return 'Please enter the quantity.'
+  } else if(quantity && tankNumber && tankList && tankList.length > 0) {
+      var tankBalance = _.where(tankList, {value: tankNumber});
+      if(tankBalance.length > 0) {
+        return (quantity > tankBalance[0].balance) ? "Quantity greater than Tank Balance" : undefined;
+    }
+  }
+}
+
+exports.validateForm = function (values, modelName, tankList, currState) {
   var validators = {};
   switch (modelName) {
     case "Register1":
@@ -415,8 +426,20 @@ exports.validateForm = function (values, modelName, tankList) {
         juiceObtained: !values.juiceObtained ? 'Please enter Must/Juice Obtained from Fruits/Grapes.' : undefined,
         clarificationLoss: !values.clarificationLoss ? 'Please enter the Clarification Losses' : undefined
       };
+      for(let i=0; i<currState.tanks.length;i++) {
+        validators["tank-" + i] = !values["tank-" + i] ? 'Please select the Tank' : undefined
+        validators["quantity-" + i] = checkForDynamicTankValidation(values["quantity-" + i], values["tank-" + i], tankList)
+      }
       break;
     case "Register3":
+      validators = {
+        date: !values.date ? 'Please select the Date' : undefined,
+        openingBalance: !values.openingBalance ? 'Please enter the Opening Balance' : undefined,
+        baseWineObtained: !values.baseWineObtained ? 'Please enter Base Wine obtained.' : undefined,
+        rackingLoss: !values.rackingLoss ? 'Please Racking Loss.' : undefined
+      };
+      break;
+    case "Register10":
       validators = {
         date: !values.date ? 'Please select the Date' : undefined,
         openingBalance: !values.openingBalance ? 'Please enter the Opening Balance' : undefined,
@@ -442,6 +465,9 @@ exports.validateForm = function (values, modelName, tankList) {
         "fortifiedWineClosingBalance": setClosingBalance(values.fortifiedWine, tankList, 'add'),
         "fortifiedWineFortificationLoss": !values.fortifiedWine || !values.fortifiedWine.fortificationLoss ? 'Please enter the Fortification Loss' : undefined,
       };
+      for(let i=0; i<values.tankList.length; i++){
+        validators["tank-" + index] = !values.tankList || !values.tankList.tankNumber ? 'Please select the Tank' : undefined
+      }
       break;
     case "Register5":
       validators = {

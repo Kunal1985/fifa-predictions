@@ -76,7 +76,7 @@ class Register2 extends Authentication {
 
                                                                 upsertRecord(data, thisVar, thisVar.modelName);
                                                             } } validate={ (values) => {
-                                                              return validateForm(values, thisVar.modelName, tankList);
+                                                              return validateForm(values, thisVar.modelName, tankList, currState);
                                                           } }>
                 { ({submitForm}) => {
                       let errorMessage = null;
@@ -100,7 +100,7 @@ class Register2 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Quantity of Fruit/Grapes Crushed in Kg.</label>
-                                      <Text field='quantity' placeholder='KG' className="form-control" />
+                                      <Text field='quantity' placeholder='KG' className="form-control" type="number" />
                                     </div>
                                   </div>
                                 </div>
@@ -108,13 +108,13 @@ class Register2 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Must/Juice Obtained from Fruits/Grapes</label>
-                                      <Text field='juiceObtained' placeholder='Litres' className="form-control" />
+                                      <Text field='juiceObtained' placeholder='Litres' className="form-control" type="number" />
                                     </div>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div className="form-group">
                                       <label>Clarification Losses</label>
-                                      <Text field='clarificationLoss' placeholder='Clarification Losses' className="form-control" />
+                                      <Text field='clarificationLoss' placeholder='Clarification Losses' className="form-control" type="number" />
                                     </div>
                                   </div>
                                 </div>
@@ -128,7 +128,7 @@ class Register2 extends Authentication {
                                   <div className="col-lg-4 col-md-4 col-sm-12">
                                     <div id="dynamicQuantityInput" className="form-group">
                                       <label>Transferred Quantity</label>
-                                      { this.state.quantities.map((input, index) => <Text placeholder='Transferred Quantity' className="form-control" field={ input } key={index} />) }
+                                      { this.state.quantities.map((input, index) => <Text placeholder='Transferred Quantity' className="form-control" field={ input } key={index} type="number" />) }
                                     </div>
                                   </div>
                                 </div>

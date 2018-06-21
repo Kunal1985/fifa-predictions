@@ -80,8 +80,8 @@ class Register10 extends Authentication {
 
                                                                 upsertRecord(data, thisVar, thisVar.modelName);
                                                             } } validate={ (values) => {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 return validateForm(values, thisVar.modelName);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             } }>
+                                                                return validateForm(values, thisVar.modelName);
+                                                            } }>
                 { ({submitForm}) => {
                       let errorMessage = null;
                       return (

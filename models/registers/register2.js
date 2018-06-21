@@ -8,7 +8,7 @@ var register2Schema = mongoose.Schema({
     grapeVariety: String,
     quantity: Number,
     juiceObtained: Number,
-    clarificationLoss: String,
+    clarificationLoss: Number,
     tankList: [{
         tankNumber: String,
         transferredQty: Number
@@ -20,12 +20,6 @@ var register2Schema = mongoose.Schema({
     updated_at: Long,
     created_by: String
 });
-
-
-var tankSchema = mongoose.Schema({
-    tankNumber: String,
-    transferredQty: Number
-})
 
 // create the model for users and expose it to our app
 module.exports = mongoose.model('Register2', register2Schema);

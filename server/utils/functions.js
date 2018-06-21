@@ -164,17 +164,24 @@ module.exports.upsertRecord = function(req, res, next, modelName){
             if(doc.qtyBulkLts != data.qtyBulkLts) {
               var quan = parseInt(data.qtyBulkLts) - parseInt(doc.qtyBulkLts);
                 updateTankBalance(data.tankNumber, quan, res, "TankMaster");
-            } else if(["Register4"].indexOf(modelName) != -1) {
-              if(doc.fermentedWine.quantity != data.fermentedWine.quantity) {
-                var quan = parseInt(data.fermentedWine.quantity) - parseInt(doc.fermentedWine.quantity);
-                  updateTankBalance(data.fermentedWine.tankNumber, quan, res, "TankMaster");
-              } else if(doc.spirit.quantity != data.spirit.quantity) {
-                var quan = parseInt(data.spirit.quantity) - parseInt(doc.spirit.quantity);
-                  updateTankBalance(data.spirit.tankNumber, quan, res, "TankMaster");
-              } else if(doc.fortifiedWine.closingBalance != data.fortifiedWine.closingBalance) {
-                var quan = parseInt(data.fortifiedWine.closingBalance) - parseInt(doc.fortifiedWine.closingBalance);
-                  updateTankBalance(data.fortifiedWine.tankNumber, quan, res, "TankMaster");
+            }
+          } else if(["Register2"].indexOf(modelName) != -1) {
+            for(let i=0; i < data.tankList.length; i++) {
+              if(doc.tankList[i].transferredQty != data.tankList[i].transferredQty) {
+                var quan = parseInt(data.tankList[i].transferredQty) - parseInt(doc.tankList[i].transferredQty);
+                updateTankBalance(data.tankList[i].tankNumber, quan, res, "TankMaster");
               }
+            }
+          } else if(["Register4"].indexOf(modelName) != -1) {
+            if(doc.fermentedWine.quantity != data.fermentedWine.quantity) {
+              var quan = parseInt(data.fermentedWine.quantity) - parseInt(doc.fermentedWine.quantity);
+                updateTankBalance(data.fermentedWine.tankNumber, quan, res, "TankMaster");
+            } else if(doc.spirit.quantity != data.spirit.quantity) {
+              var quan = parseInt(data.spirit.quantity) - parseInt(doc.spirit.quantity);
+                updateTankBalance(data.spirit.tankNumber, quan, res, "TankMaster");
+            } else if(doc.fortifiedWine.closingBalance != data.fortifiedWine.closingBalance) {
+              var quan = parseInt(data.fortifiedWine.closingBalance) - parseInt(doc.fortifiedWine.closingBalance);
+                updateTankBalance(data.fortifiedWine.tankNumber, quan, res, "TankMaster");
             }
           }
           res.json({ recordUpdated: true });
@@ -190,6 +197,10 @@ module.exports.upsertRecord = function(req, res, next, modelName){
           console.log("Inside data:"+ data);
         } else if(["Register1"].indexOf(modelName) != -1) {
           updateTankBalance(data.tankNumber, data.qtyBulkLts, res, "TankMaster");
+        } else if(["Register2"].indexOf(modelName) != -1) {
+          for(let i=0; i < data.tankList.length; i++) {
+            updateTankBalance(data.tankList[i].tankNumber, data.tankList[i].transferredQty, res, "TankMaster");
+          }
         } else if(["Register4"].indexOf(modelName) != -1) {
           console.log('Register4 data '+ data)
           updateTankBalance(data.fermentedWine.tankNumber, data.fermentedWine.quantity, res, "TankMaster");
