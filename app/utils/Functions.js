@@ -365,6 +365,12 @@ var setClosingBalance = function(values,tankList,actionType,modelName) {
         var closingBalance = parseInt(values.quantity) - loss;
       } else if (modelName == 'Register5' && actionType == 'add' && values.transferType == 1) {
         var closingBalance = parseInt(openingBalance) + parseInt(values.ownUnit.quantityReceived);
+      } else if (modelName == 'Register5' && actionType == 'add' && values.otherUnit) {
+        if(values.otherUnit.bulkTransactionType == 1 || values.otherUnit.bulkTransactionType == 2 || values.otherUnit.bulkTransactionType == 3) {
+          var closingBalance = parseInt(openingBalance) + parseInt(values.qtyInLitres);
+        } else if(values.otherUnit.bulkTransactionType == 4 || values.otherUnit.bulkTransactionType == 5 || values.otherUnit.bulkTransactionType == 6) {
+          var closingBalance = parseInt(openingBalance) - parseInt(values.qtyInLitres);
+        }
       } else if (modelName == 'Register6' && actionType == 'add') {
         let bottlingLoss = values.bottlingLoss ? parseInt(values.bottlingLoss) : 0;
         var closingBalance = parseInt(openingBalance) + parseInt(values.qtyInLitres) - parseInt(bottlingLoss);
@@ -394,6 +400,8 @@ var setLoss = function(values, modelName) {
       values.rackingLoss = parseInt(values.openingBalance) - parseInt(values.baseWineObtained);
     } else if (["Register5"].indexOf(modelName) != -1 && values.ownUnit && values.ownUnit.quantityIssued && values.ownUnit.quantityReceived) {
       values.ownUnit.loss = parseInt(values.ownUnit.quantityIssued) - parseInt(values.ownUnit.quantityReceived);
+    } else if (["Register5"].indexOf(modelName) != -1 && values.otherUnit && values.openingBalance && values.qtyInLitres) {
+      values.otherUnit.losses = parseInt(values.openingBalance) - parseInt(values.qtyInLitres);
     }
     
     return undefined;
@@ -530,6 +538,17 @@ exports.validateForm = function (values, modelName, tankList, currState) {
         "ownUnitQuantityReceived" : !values.ownUnit || !values.ownUnit.quantityReceived ? "Please enter quantity Received" : undefined,
         "ownUnitLoss" : setLoss(values, 'Register5'),
         closingBalance: setClosingBalance(values, tankList, 'add', modelName),
+        "otherUnitPartyName": !values.otherUnit || !values.otherUnit.partyName ? "Please Enter Party Name" : undefined,
+        "otherUnitPartyAddress": !values.otherUnit || !values.otherUnit.partyAddress ? "Please Enter Party Address" : undefined,
+        "otherUnitTpepipNumber": !values.otherUnit || !values.otherUnit.tpepipNumber ? "Please Enter T.P/E.P/I.P No" : undefined,
+        "otherUnitLiscenseType": !values.otherUnit || !values.otherUnit.liscenseType ? "Please Enter Liscense Type" : undefined,
+        "otherUnitWineVariety": !values.otherUnit || !values.otherUnit.liscenseType ? "Please Enter Liscense Type" : undefined,
+        qtyInLitres: !values.qtyInLitres ? "Please Enter Quantity" : undefined,
+        "otherUnitImportExportFeePaid": !values.otherUnit || !values.otherUnit.importExportFeePaid ? "Please Enter Import/Export Fee" : undefined,
+        "otherUnitVendFeePaid": !values.otherUnit || !values.otherUnit.vendFeePaid ? "Please Enter Vend Fee" : undefined,
+        "otherUnitExciseDutyPaid": !values.otherUnit || !values.otherUnit.exciseDutyPaid ? "Please Enter Excide Duty Paid" : undefined,
+        "otherUnitSpecialFeePaid": !values.otherUnit || !values.otherUnit.specialFeePaid ? "Please Enter Special Fee" : undefined,
+        "otherUnitLosses": setLoss(values, 'Register5'),
       };
       break;
     case "Register6":
