@@ -1,5 +1,5 @@
 # Project-FIFPRE
-An application developed and maintained for ESDS Administration.
+An application developed and maintained for FIFA World Cup 2018 Predictions.
 
 ## Pre-Requisites
 Node JS  
