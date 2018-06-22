@@ -36,7 +36,7 @@ mongoose.connection.on('error', function() {
   console.info('Error: Could not connect to MongoDB. Did you forget to run `mongod`?'.red);
 });
 
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 5000);
 app.use(compression());
 app.use(logger('dev'));
 
@@ -53,49 +53,10 @@ app.use(require('express-session')({ secret: 'keyboard cat', resave: false, save
 // Passport related imports
 require('./server/passport')(passport);
 require('./server/routes/auth')(app, passport);
-require('./server/routes/reset-password')(app, passport);
+require('./server/routes/reset-password')(app);
 
-// Server-side Routes for Registers 
-require('./server/routes/registers/register1')(app, passport);
-require('./server/routes/registers/register2')(app, passport);
-require('./server/routes/registers/register3')(app, passport);
-require('./server/routes/registers/register4')(app, passport);
-require('./server/routes/registers/register5')(app, passport);
-require('./server/routes/registers/register6')(app, passport);
-require('./server/routes/registers/register7')(app, passport);
-require('./server/routes/registers/register8')(app, passport);
-require('./server/routes/registers/register9')(app, passport);
-require('./server/routes/registers/register10')(app, passport);
-
-// Server-side Routes for Masters
-require('./server/routes/masters/brand')(app, passport);
-require('./server/routes/masters/flavour')(app, passport);
-require('./server/routes/masters/grape-variety')(app, passport);
-require('./server/routes/masters/spirit')(app, passport);
-require('./server/routes/masters/tank')(app, passport);
-require('./server/routes/masters/wine-type')(app, passport);
-require('./server/routes/masters/vintage')(app, passport);
-require('./server/routes/masters/grapes-supplier')(app, passport);
-require('./server/routes/masters/edit-profile')(app, passport);
-
-// Server-side Routes for Opening Balance
-require('./server/routes/opening-balance/flavour-details')(app, passport);
-require('./server/routes/opening-balance/spirit-details')(app, passport);
-require('./server/routes/opening-balance/grapes-details')(app, passport);
-require('./server/routes/opening-balance/crushed-juice-details')(app, passport);
-require('./server/routes/opening-balance/fermented-details')(app, passport);
-require('./server/routes/opening-balance/bottled-details')(app, passport);
-require('./server/routes/opening-balance/labelled-details')(app, passport);
-require('./server/routes/opening-balance/finished-goods-details')(app, passport);
-require('./server/routes/opening-balance/tirage-details')(app, passport);
-require('./server/routes/opening-balance/disgorged-details')(app, passport);
-
-// Server-side Routes for Geography
-require('./server/routes/geography')(app, passport);
-
-// Server-side Routes for Admin
-require('./server/routes/admin/wineryUser')(app, passport);
-require('./server/routes/admin/exciseOfficer')(app, passport);
+// Server-side Routes for the application 
+require('./server/routes/app-routes')(app);
 
 app.use(function(req, res) {
   res.header("Access-Control-Allow-Origin", "*"); 

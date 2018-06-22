@@ -1,147 +1,24 @@
-const BASE_URL = 'http://159.65.159.100:3000';
+const BASE_URL = 'http://localhost:5000';
 
 const sideBarList = [{
-    url: "/home",
-    title1: "Home",
-    title2: "Masters",
-    allowedRoles: [1],
-    subSectionList: [{
-        url: "/profile",
-        title1: "Liscencee Profile",
-        title2: "Liscencee Profile",
-    }, {
-        url: "/tankmaster",
-        title1: "Tank Master",
-        title2: "Tank Master",
-    }, {
-        url: "/wineType",
-        title1: "Type of Wine Master",
-        title2: "Type of Wine Master",
-    }, {
-        url: "/variety",
-        title1: "Variety of Fruit Master",
-        title2: "Variety of Fruit Master",
-    }, {
-        url: "/brand",
-        title1: "Brand Master",
-        title2: "Brand Master",
-    }, {
-        url: "/flavour",
-        title1: "Flavour Master",
-        title2: "Flavour Master",
-    }, {
-        url: "/spirit",
-        title1: "Spirit Master",
-        title2: "Spirit Master",
-    }, {
-        url: "/vintage",
-        title1: "Vintage Master",
-        title2: "Vintage Master",
-    }, {
-        url: "/grapesSupplier",
-        title1: "Grape Supplier Master",
-        title2: "Grape Supplier Master",
-    }]
+    url: "/myaccount",
+    title1: "My Account",
+    title2: "My Account",
+    allowedRoles: [0]
 }, {
-    url: "/openingBalance",
-    title1: "Opening Balance",
-    title2: "Opening Balance",
-    allowedRoles: [1,2],
-    subSectionList: [{
-        url: "/flavourDetails",
-        title1: "Flavour Details",
-        title2: "Flavour Details",
-    }, {
-        url: "/spiritDetails",
-        title1: "Spirit Details",
-        title2: "Spirit Details",
-    }, {
-        url: "/grapesDetails",
-        title1: "Grapes Details",
-        title2: "Grapes Details",
-    }, {
-        url: "/crushedJuiceDetails",
-        title1: "Juice Details",
-        title2: "Juice Details",
-    }, {
-        url: "/bulkWineDetails",
-        title1: "Bulk Wine Details",
-        title2: "Bulk Wine Details",
-    }, {
-        url: "/bottledWineDetails",
-        title1: "Bottled Details",
-        title2: "Bottled Details",
-    }, {
-        url: "/tirageDetails",
-        title1: "Tirage Details",
-        title2: "Tirage Details",
-    }, {
-        url: "/disgorgedDetails",
-        title1: "Disgorged Details",
-        title2: "Disgorged Details",
-    }, {
-        url: "/labelledBottleDetails",
-        title1: "Labelled Details",
-        title2: "Labelled Details",
-    }, {
-        url: "/finishedGoodsDetails",
-        title1: "Finished Goods Details",
-        title2: "Finished Goods Details",
-    }]
+    url: "/predictions",
+    title1: "Predictions",
+    title2: "Predictions Page",
+    allowedRoles: [0]
 }, {
-    url: "/register1Summary",
-    title1: "Register1",
-    title2: "Grape/Fruit Receipt Transactions",
-    allowedRoles: [1,2]
+    url: "/results",
+    title1: "Results",
+    title2: "Results Page",
+    allowedRoles: [0]
 }, {
-    url: "/register2Summary",
-    title1: "Register2",
-    title2: "Juice Processing",
-    allowedRoles: [1,2]
-}, {
-    url: "/register3Summary",
-    title1: "Register3",
-    title2: "Fermentation",
-    allowedRoles: [1,2]
-}, {
-    url: "/register10Summary",
-    title1: "Register10",
-    title2: "Racking",
-    allowedRoles: [1,2]
-}, {
-    url: "/register4Summary",
-    title1: "Register4",
-    title2: "Fortification",
-    allowedRoles: [1,2]
-}, {
-    url: "/register5Summary",
-    title1: "Register5",
-    title2: "Bulk Transfer/Sale",
-    allowedRoles: [1,2]
-}, {
-    url: "/register6Summary",
-    title1: "Register6",
-    title2: "Bottling",
-    allowedRoles: [1,2]
-}, {
-    url: "/register7Summary",
-    title1: "Register7",
-    title2: "Tirage/Disgorging",
-    allowedRoles: [1,2]
-}, {
-    url: "/register8Summary",
-    title1: "Register8",
-    title2: "Labelling",
-    allowedRoles: [1,2]
-}, {
-    url: "/register9Summary",
-    title1: "Register9",
-    title2: "Finished Goods/Dispatch",
-    allowedRoles: [1,2]
-}, {
-    url: "/admin",
-    title1: "Admin",
-    title2: "Admin",
+    url: "/rules",
+    title1: "Rules",
+    title2: "Rules Page",
     allowedRoles: [0]
 }]
 

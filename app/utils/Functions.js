@@ -25,10 +25,7 @@ exports.authenticateUser = function (values, currObj) {
       console.log("SUCCESS during", actionType, body);
       storeToken(body);
       let redirectUrl = body.redirectUrl;
-      if(redirectUrl)
-        browserHistory.push(redirectUrl);
-      else
-        browserHistory.push("/admin");
+      browserHistory.push("/myaccount");
       return body;
     })
     .catch(function (err) {
@@ -315,7 +312,6 @@ exports.upsertRecord = function (data, thisVar, modelName) {
 }
 
 exports.getSideBarList = function(currUser){
-  console.log("getSideBarList", currUser);
   return sideBarList.filter(u => currUser ? (u.allowedRoles.indexOf(currUser.role) != -1) : false);
 }
 

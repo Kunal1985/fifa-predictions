@@ -11,6 +11,7 @@ exports.getToken = function () {
 
 exports.getCurrUserName = function () {
   return localStorage.getItem("currUserName");
+  // return "Dhuhh"
 }
 
 exports.getCurrUserRole = function () {
