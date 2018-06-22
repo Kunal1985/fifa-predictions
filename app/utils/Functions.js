@@ -359,7 +359,7 @@ var setClosingBalance = function(values,tankList,actionType,modelName) {
     if(tankBalance.length > 0) {
       var openingBalance = values.openingBalance ? values.openingBalance : tankBalance[0].openingBalance;
       var loss = values.fortificationLoss ? parseInt(values.fortificationLoss) : 0;
-      if(actionType == 'reduce') {
+      if(actionType == 'deduct') {
         var closingBalance = parseInt(openingBalance) - parseInt(values.quantity) - loss;
       } else if (modelName == 'Register4' && actionType == 'add') {
         var closingBalance = parseInt(values.quantity) - loss;
@@ -386,14 +386,14 @@ var setQuantity = function(values,tankList) {
   }
 }
 
-var setLoss = function(values, Issued, Received, modelName) {
-  if(values && Issued && Received) {
-    if(["Register3"].indexOf(modelName) != -1) {
-      values.fermentationLoss = parseInt(Issued) - parseInt(Received);
-    } else if(["Register10"].indexOf(modelName) != -1) {
-      values.rackingLoss = parseInt(Issued) - parseInt(Received);
-    } else if (["Register5"].indexOf(modelName) != -1) {
-      values.loss = parseInt(Issued) - parseInt(Received);
+var setLoss = function(values, modelName) {
+  if(values) {
+    if(["Register3"].indexOf(modelName) != -1 && values.openingBalance && values.baseWineObtained) {
+      values.fermentationLoss = parseInt(values.openingBalance) - parseInt(values.baseWineObtained);
+    } else if(["Register10"].indexOf(modelName) != -1 && values.openingBalance && values.baseWineObtained) {
+      values.rackingLoss = parseInt(values.openingBalance) - parseInt(values.baseWineObtained);
+    } else if (["Register5"].indexOf(modelName) != -1 && values.ownUnit && values.ownUnit.quantityIssued && values.ownUnit.quantityReceived) {
+      values.ownUnit.loss = parseInt(values.ownUnit.quantityIssued) - parseInt(values.ownUnit.quantityReceived);
     }
     
     return undefined;
@@ -469,7 +469,7 @@ exports.validateForm = function (values, modelName, tankList, currState) {
         date: !values.date ? 'Please select the Date' : undefined,
         openingBalance: setOpeningBalance(values, tankList),
         baseWineObtained: !values.baseWineObtained ? 'Please enter Base Wine obtained.' : undefined,
-        fermentationLoss: setLoss(values, values.openingBalance, values.baseWineObtained, 'Register3'),
+        fermentationLoss: setLoss(values, 'Register3'),
         transferLoss: setDynamicLoss(values, currState, 'Register3')
       };
       for(let i=0; i<currState.tanks.length;i++) {
@@ -483,7 +483,7 @@ exports.validateForm = function (values, modelName, tankList, currState) {
         date: !values.date ? 'Please select the Date' : undefined,
         openingBalance: setOpeningBalance(values, tankList),
         baseWineObtained: !values.baseWineObtained ? 'Please enter Base Wine obtained.' : undefined,
-        rackingLoss: setLoss(values, values.openingBalance, values.baseWineObtained, 'Register10'),
+        rackingLoss: setLoss(values, 'Register10'),
         transferLoss: setDynamicLoss(values, currState, 'Register10')
       };
       for(let i=0; i<currState.tanks.length;i++) {
@@ -498,12 +498,12 @@ exports.validateForm = function (values, modelName, tankList, currState) {
         "fermentedWineTankNumber": !values.fermentedWine || !values.fermentedWine.tankNumber ? 'Please select the Tank Number' : undefined,
         "fermentedWineOpeningBalance": setOpeningBalance(values.fermentedWine, tankList),
         "fermentedWineQuantity": !values.fermentedWine || !values.fermentedWine.quantity ? 'Please enter the Quantity Taken' : undefined,
-        "fermentedWineClosingBalance": setClosingBalance(values.fermentedWine, tankList, 'reduce'),
+        "fermentedWineClosingBalance": setClosingBalance(values.fermentedWine, tankList, 'deduct'),
         "spiritTankNumber": !values.spirit || !values.spirit.tankNumber ? 'Please select the Tank Number' : undefined,
         "spiritOpeningBalance": setOpeningBalance(values.spirit, tankList),
         "spiritStrength": !values.spirit || !values.spirit.strength ? 'Please enter the Strength' : undefined,
         "spiritQuantity": !values.spirit || !values.spirit.quantity ? 'Please enter the Quantity Taken' : undefined,
-        "spiritClosingBalance": setClosingBalance(values.spirit, tankList, 'reduce'),
+        "spiritClosingBalance": setClosingBalance(values.spirit, tankList, 'deduct'),
         "fortifiedWineTankNumber": !values.fortifiedWine || !values.fortifiedWine.tankNumber ? 'Please select the Tank Number' : undefined,
         "fortifiedWineQuantity": setQuantity(values, tankList),
         "fortifiedWineAlcoholPercentage": !values.fortifiedWine || !values.fortifiedWine.alcoholPercentage ? 'Please enter the Alcohol%' : undefined,
@@ -528,7 +528,7 @@ exports.validateForm = function (values, modelName, tankList, currState) {
         "ownUnitWineVariety" : !values.ownUnit || !values.ownUnit.wineVariety ? "Please select Wine Variety" : undefined,
         "ownUnitQuantityIssued" : !values.ownUnit || !values.ownUnit.quantityIssued ? 'Please enter the Quantity Taken' : checkForTankValidation(values.ownUnit.quantityIssued, values.ownUnit, tankList),
         "ownUnitQuantityReceived" : !values.ownUnit || !values.ownUnit.quantityReceived ? "Please enter quantity Received" : undefined,
-        "ownUnitLoss" : setLoss(values, values.ownUnit.quantityIssued && values.ownUnit.quantityReceived, 'Register5'),
+        "ownUnitLoss" : setLoss(values, 'Register5'),
         closingBalance: setClosingBalance(values, tankList, 'add', modelName),
       };
       break;
